@@ -7,8 +7,8 @@ Primeira versão em uGUI, baseada nas três referências visuais fornecidas: mol
 1. Abra `AstroLabUnity` no Unity **6000.6.9f1**.
 2. Abra `Assets/Treinamentos/CapacetePedro.unity` e entre em Play.
 3. Caminhe com WASD, olhe com o mouse e aproxime-se de um objeto reparável.
-4. Mire a até 4 metros de um objeto preparado para exploração. O visor mostra seu nome, a distância e **E — INSPECIONAR**.
-5. Pressione E para abrir sua descrição e charada. Feche com o botão ou Esc.
+4. Na cena completa com scanner, mire a até 18 metros e mantenha o botão esquerdo pressionado por 3 segundos. Consulte `MaosEScanner.md`.
+5. A descrição abre ao completar o scan. Feche com o botão ou Esc. O prefab isolado do HUD continua disponível para integração com outros controles.
 
 A cena de demonstração é uma cópia própria do mapa com os objetos originais referenciados. `Lua.unity`, `SampleScene.unity`, o FBX, as texturas e os materiais originais não fazem parte da implementação do HUD.
 

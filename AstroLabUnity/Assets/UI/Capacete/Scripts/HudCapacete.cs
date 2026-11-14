@@ -22,6 +22,8 @@ namespace AstroLab.Capacete
         public Behaviour controleMovimento;
         public float alcanceInteracao = 4;
         public LayerMask camadasInteracao = ~0;
+        public bool scannerAtivo;
+        public bool FichaAberta => aberto;
 
         AlvoExploracao alvoAtual;
         bool aberto, movimentoAnterior;
@@ -43,6 +45,7 @@ namespace AstroLab.Capacete
                 distanciaTexto.text = Mathf.RoundToInt(Vector3.Distance(cameraJogador.transform.position, baseReferencia.position)) + " <size=60%>m</size>";
             var kb = Keyboard.current;
             if(aberto) { if(kb != null && kb.escapeKey.wasPressedThisFrame)FecharDescoberta(); return; }
+            if(scannerAtivo)return;
             AlvoExploracao candidato=null;float distancia=0;
             if(cameraJogador && Physics.Raycast(cameraJogador.transform.position,cameraJogador.transform.forward,out var hit,alcanceInteracao,camadasInteracao,QueryTriggerInteraction.Collide))
             { candidato=hit.collider.GetComponentInParent<AlvoExploracao>();distancia=hit.distance; }

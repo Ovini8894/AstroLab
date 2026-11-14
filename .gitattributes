@@ -1,0 +1,16 @@
+# Arquivos binários (não tentar fazer merge de texto)
+*.fbx   binary
+*.blend binary
+*.bak   binary
+*.png   binary
+*.jpg   binary
+*.wav   binary
+*.mp3   binary
+
+# Arquivos YAML do Unity: finais de linha consistentes
+*.unity  text eol=lf
+*.prefab text eol=lf
+*.mat    text eol=lf
+*.asset  text eol=lf
+*.meta   text eol=lf
+*.cs     text eol=lf

@@ -49,8 +49,30 @@ public static class BaseLunarSetup
         if (n == "Terreno_Lua") return true;
         if (n.StartsWith("Rocha_")) return b.size.magnitude > 1.5f;
         if (n.StartsWith("Detrito_") || n.StartsWith("Usina_Cabos") || n.StartsWith("Rampa_Corrimao")) return false;
-        if (n.Contains("Rotulo") || n == "Terra_Ceu" || n == "Hub_Torre_Vidros" || n.StartsWith("Antena_Pedaco")) return false;
+        if (n.Contains("Rotulo") || n.StartsWith("Terra_") || n == "Hub_Torre_Vidros" || n.StartsWith("Antena_Pedaco")) return false;
         return true;   // cascos, corredores, móveis, painéis, REPAIR_*, portas...
+    }
+
+    // Depois de reexportar o FBX com objetos NOVOS: põe colisor/flags só neles, sem recriar a cena.
+    [MenuItem("Missão Lunar/3. Atualizar colisores da cena aberta")]
+    public static void AtualizarColisores()
+    {
+        var baseGo = GameObject.Find("BaseLunar");
+        if (baseGo == null) { Debug.LogWarning("[Missão Lunar] Abra a cena com o objeto BaseLunar."); return; }
+        int novos = 0;
+        foreach (var mf in baseGo.GetComponentsInChildren<MeshFilter>(true))
+        {
+            var go = mf.gameObject;
+            var r = go.GetComponent<Renderer>();
+            if (go.GetComponent<MeshCollider>() == null && NeedsCollider(go.name, r ? r.bounds : new Bounds()))
+            {
+                go.AddComponent<MeshCollider>().sharedMesh = mf.sharedMesh;
+                novos++;
+            }
+            if (r && go.name.StartsWith("Terra_")) r.shadowCastingMode = ShadowCastingMode.Off;
+        }
+        EditorSceneManager.MarkSceneDirty(baseGo.scene);
+        Debug.Log($"[Missão Lunar] {novos} colisores novos.");
     }
 
     [MenuItem("Missão Lunar/2. Montar cena da Lua")]
@@ -76,7 +98,7 @@ public static class BaseLunarSetup
             }
             bool dynamic = go.name.StartsWith("REPAIR_") || go.name.StartsWith("Porta_");
             GameObjectUtility.SetStaticEditorFlags(go, dynamic ? 0 : (StaticEditorFlags.BatchingStatic | StaticEditorFlags.OccluderStatic | StaticEditorFlags.OccludeeStatic | StaticEditorFlags.ReflectionProbeStatic));
-            if (r && go.name == "Terra_Ceu") r.shadowCastingMode = ShadowCastingMode.Off;
+            if (r && go.name.StartsWith("Terra_")) r.shadowCastingMode = ShadowCastingMode.Off;
         }
 
         // Sol baixo (sombras longas) + luz fraca da Terra

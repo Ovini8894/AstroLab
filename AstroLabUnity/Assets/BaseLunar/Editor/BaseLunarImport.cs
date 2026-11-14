@@ -11,7 +11,10 @@ public class BaseLunarImport : AssetPostprocessor
         if (assetPath.EndsWith("_Normal.png")) ti.textureType = TextureImporterType.NormalMap;
         ti.wrapMode = TextureWrapMode.Repeat;
         ti.anisoLevel = 4;
-        ti.maxTextureSize = assetPath.Contains("Ceu_") ? 4096 : 1024;
+        ti.maxTextureSize = assetPath.Contains("Ceu_Estrelas_Blender") ? 2048      // cubemap: tamanho por face
+                          : assetPath.Contains("Ceu_") ? 4096
+                          : assetPath.Contains("T_Terra") ? 2048                      // planeta Terra (Blender)
+                          : 1024;
     }
 
     void OnPreprocessModel()

@@ -67,6 +67,14 @@ public static class EstiloCartoon
 
     public static void ConfigurarMaterial(Material m, string nome)
     {
+        if (nome == "M_Terra_Atmosfera")                                   // halo da Terra: shader próprio
+        {
+            m.shader = Shader.Find("AstroLab/Atmosfera");
+            m.SetColor("_Cor", Hdr(Hx("#7FD4FF"), 1.6f));
+            m.SetFloat("_Potencia", 2.5f); m.SetFloat("_Suavidade", 0.3f); m.SetFloat("_Forca", 1.2f);
+            EditorUtility.SetDirty(m);
+            return;
+        }
         var toon = Shader.Find("AstroLab/Toon");
         if (toon == null) { Debug.LogError("[Estilo Cartoon] Shader AstroLab/Toon não encontrado."); return; }
         m.shader = toon;
@@ -75,7 +83,10 @@ public static class EstiloCartoon
         m.SetColor("_BaseColor", Color.white);
         m.SetColor("_EmissionColor", Color.black);
         m.SetFloat("_EmissaoUsaTextura", 0f);
-        m.SetFloat("_SemNevoa", nome == "M_Terra" ? 1f : 0f);              // a Terra no céu não some na neblina
+        m.SetFloat("_SemNevoa", nome.StartsWith("M_Terra") && nome != "M_Terra_Vaso" ? 1f : 0f);   // a Terra no céu não some na neblina
+        // chão da Lua: o chão plano (sol a 32°, N·L≈0,53) fica na luz, mas paredes de cratera inclinadas
+        // ~10° para longe do sol já caem no meio-tom — o relevo aparece mesmo visto de perto
+        m.SetFloat("_FaixaDesloc", nome == "M_Regolito" ? 0.1f : 0f);
         m.SetFloat("_RimForca", 0.3f);
         m.SetFloat("_RimLargura", 0.25f);
         m.SetFloat("_BrilhoTamanho", 0f);
@@ -99,11 +110,11 @@ public static class EstiloCartoon
             case "M_Faixa_Azul": Tex("T_Faixa_Toon", PaletaLua.Faixa); break;
             case "M_Regolito":
                 Tex("T_Regolito_Toon", PaletaLua.Regolito); m.SetFloat("_RimForca", 0.12f);
-                m.SetTextureScale("_BaseMap", new Vector2(0.35f, 0.35f));   // crateras maiores e mais raras (chão tem ~6 m por repetição)
+                m.SetTextureScale("_BaseMap", new Vector2(0.5f, 0.5f));     // manchas largas (chão tem ~6 m por repetição)
                 break;
             case "M_Rocha": Tex("T_Rocha_Toon", PaletaLua.Rocha); m.SetFloat("_RimForca", 0.2f); break;
             case "M_Tecido": Tex("T_Tecido_Toon", PaletaLua.Tecido); break;
-            case "M_Painel_Solar": Tex("T_PainelSolar_Toon", Color.white); Brilho(0.06f, 0.9f); break;
+            case "M_Painel_Solar": Tex("T_PainelSolar_Toon", Color.white); Brilho(0.025f, 0.35f); break;
             case "M_Painel_Quebrado": Tex("T_PainelQuebrado_Toon", Color.white); break;
             case "M_Terra_Vaso": Cor(PaletaLua.TerraVaso); break;
             case "M_Planta_Morta": Cor(PaletaLua.PlantaMorta); break;
@@ -117,7 +128,18 @@ public static class EstiloCartoon
             case "M_Luz_Verde": Luz(PaletaLua.LuzVerde, 4f); break;
             case "M_Luz_Branca": Luz(PaletaLua.LuzBranca, 3.5f); break;
             case "M_Luz_Apagada": Cor(new Color(0.42f, 0.4f, 0.47f)); break;
-            case "M_Terra": Cor(PaletaLua.Planeta); m.SetColor("_EmissionColor", Hdr(PaletaLua.Planeta, 0.9f)); m.SetFloat("_RimForca", 0.8f); m.SetFloat("_RimLargura", 0.35f); break;
+            case "M_Terra":                                                  // textura pintada no Blender (crateras_e_terra.py)
+                if (T("T_Terra_Toon") != null)
+                {
+                    Tex("T_Terra_Toon", Color.white);
+                    m.SetColor("_EmissionColor", Hdr(Color.white, 0.35f)); m.SetFloat("_EmissaoUsaTextura", 1f);
+                }
+                else { Cor(PaletaLua.Planeta); m.SetColor("_EmissionColor", Hdr(PaletaLua.Planeta, 0.9f)); }
+                m.SetFloat("_RimForca", 0.6f); m.SetFloat("_RimLargura", 0.3f); break;
+            case "M_Terra_Nuvens":
+                Tex("T_TerraNuvens_Toon", Color.white);
+                m.SetColor("_EmissionColor", Hdr(Color.white, 0.25f)); m.SetFloat("_RimForca", 0f);
+                Transparente(m); m.SetFloat("_Cull", (float)CullMode.Back); break;
             case "M_Vidro":
                 Cor(new Color(PaletaLua.Vidro.r, PaletaLua.Vidro.g, PaletaLua.Vidro.b, 0.25f));
                 Brilho(0.08f, 1.2f); m.SetFloat("_RimForca", 0.6f); Transparente(m); break;
@@ -152,6 +174,34 @@ public static class EstiloCartoon
     // ================================================================== céu
     public static Material MaterialCeu()
     {
+        // 1º: céu renderizado no Blender (Blender~/ceu_estrelas.py) como cubemap — estrelas redondas, Via Láctea, nebulosas
+        string ceuBlender = $"{TexDir}/Ceu_Estrelas_Blender.png";
+        if (File.Exists(ceuBlender))
+        {
+            var ci = (TextureImporter)AssetImporter.GetAtPath(ceuBlender);
+            if (ci != null)
+            {
+                ci.textureShape = TextureImporterShape.TextureCube;
+                ci.generateCubemap = TextureImporterGenerateCubemap.Cylindrical;
+                ci.maxTextureSize = 2048;                                     // por face do cubo
+                ci.mipmapEnabled = false;
+                ci.textureCompression = TextureImporterCompression.CompressedHQ;
+                ci.SaveAndReimport();
+            }
+            string matCeu = $"{MatDirs}/Ceu_Estrelas.mat";
+            var mc = AssetDatabase.LoadAssetAtPath<Material>(matCeu);
+            if (mc == null) { mc = new Material(Shader.Find("Skybox/Cubemap")); AssetDatabase.CreateAsset(mc, matCeu); }
+            mc.shader = Shader.Find("Skybox/Cubemap");
+            mc.SetTexture("_Tex", AssetDatabase.LoadAssetAtPath<Cubemap>(ceuBlender));
+            mc.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f));
+            mc.SetFloat("_Exposure", 1.25f);                                  // as estrelas mais fortes passam do limiar do bloom
+            mc.SetFloat("_Rotation", 40f);
+            EditorUtility.SetDirty(mc);
+            AssetDatabase.SaveAssetIfDirty(mc);
+            return mc;
+        }
+
+        // 2º (reserva): céu desenhado por código
         string texPath = $"{TexDir}/Ceu_Cartoon.png";
         int w = 2048, h = 1024;
         var px = new Color[w * h];
@@ -513,18 +563,12 @@ public static class EstiloCartoon
         t.Ret(-2, 30, S + 2, 40, Cinza(1f)); t.Ret(-2, 472, S + 2, 482, Cinza(1f));
         t.Salvar("T_Faixa_Toon");
 
-        // ---- regolito: crateras de desenho (lua crescente clara/escura) + pedrinhas
+        // ---- regolito: as crateras agora são relevo de verdade (Blender~/crateras_e_terra.py);
+        //      a textura só tem manchas suaves de tom e pedrinhas
         var rnd = new Random(3);
         t = new Tela(Cinza(1f));
-        for (int k = 0; k < 160; k++) t.Circ(rnd.Next(S), rnd.Next(S), 1.5f + (float)rnd.NextDouble() * 2.5f, Cinza(0.88f + (float)rnd.NextDouble() * 0.06f));
-        for (int k = 0; k < 4; k++)
-        {
-            float cx = rnd.Next(S), cy = rnd.Next(S), r = 22 + rnd.Next(50);
-            t.Circ(cx, cy, r, Cinza(0.92f));
-            t.Arco(cx, cy, r, Mathf.Max(3, r * 0.13f), 200, 340, Cinza(0.8f));      // borda de sombra
-            t.Arco(cx, cy, r, Mathf.Max(3, r * 0.11f), 20, 160, Cinza(1f));        // borda iluminada
-            t.Circ(cx + r * 0.25f, cy - r * 0.2f, r * 0.35f, Cinza(0.89f));
-        }
+        for (int k = 0; k < 170; k++) t.Circ(rnd.Next(S), rnd.Next(S), 1.5f + (float)rnd.NextDouble() * 2.5f, Cinza(0.86f + (float)rnd.NextDouble() * 0.07f));
+        for (int k = 0; k < 40; k++) { float x = rnd.Next(S), y = rnd.Next(S); t.Circ(x + 1, y - 1, 3.5f, Cinza(0.8f)); t.Circ(x, y, 3f, Cinza(0.96f)); }
         t.Salvar("T_Regolito_Toon");
 
         // ---- rocha: manchas em 2 tons + rachaduras

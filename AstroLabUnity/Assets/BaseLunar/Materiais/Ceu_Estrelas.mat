@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ceu_Estrelas
-  m_Shader: {fileID: 108, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -28,14 +28,18 @@ Material:
         m_Texture: {fileID: 2800000, guid: 8fde8c270cfdc6e48b3fdc26952bd37d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Tex:
+        m_Texture: {fileID: 8900000, guid: c90af203a3bf4934da414159e8e2513e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Exposure: 1
+    - _Exposure: 1.25
     - _ImageType: 0
     - _Layout: 0
     - _Mapping: 1
     - _MirrorOnBack: 0
-    - _Rotation: 0
+    - _Rotation: 40
     m_Colors:
     - _Tint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_BuildTextureStacks: []

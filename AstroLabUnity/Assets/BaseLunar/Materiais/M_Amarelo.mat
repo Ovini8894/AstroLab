@@ -102,6 +102,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EmissaoUsaTextura: 0
     - _EnvironmentReflections: 1
+    - _FaixaDesloc: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

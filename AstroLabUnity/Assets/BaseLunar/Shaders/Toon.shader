@@ -16,6 +16,7 @@ Shader "AstroLab/Toon"
         [HDR] _EmissionColor ("Emissão", Color) = (0, 0, 0, 1)
         [Toggle] _EmissaoUsaTextura ("Emissão usa a textura (telas)", Float) = 0
         [Toggle] _SemNevoa ("Ignorar neblina (objetos do céu)", Float) = 0
+        _FaixaDesloc ("Deslocar faixas (relevo suave pega meio-tom antes)", Range(0, 0.5)) = 0
 
         [HideInInspector] _SrcBlend ("__src", Float) = 1
         [HideInInspector] _DstBlend ("__dst", Float) = 0
@@ -42,6 +43,7 @@ Shader "AstroLab/Toon"
             half4 _EmissionColor;
             half _EmissaoUsaTextura;
             half _SemNevoa;
+            half _FaixaDesloc;
             half _ZWrite;
         CBUFFER_END
         ENDHLSL
@@ -155,7 +157,7 @@ Shader "AstroLab/Toon"
                 float4 shadowCoord = TransformWorldToShadowCoord(i.positionWS);
                 Light sol = GetMainLight(shadowCoord, i.positionWS, half4(1, 1, 1, 1));
                 half ndl = dot(N, sol.direction);
-                half x = min(ndl, lerp(-1.0, 1.0, sol.shadowAttenuation));
+                half x = min(ndl - _FaixaDesloc, lerp(-1.0, 1.0, sol.shadowAttenuation));
                 half emLuz = smoothstep(lMeio - s, lMeio + s, x);
                 half foraSombra = smoothstep(lSombra - s, lSombra + s, x);
                 half3 rampa = lerp(sombra, lerp(meio, 1.0.xxx, emLuz), foraSombra);

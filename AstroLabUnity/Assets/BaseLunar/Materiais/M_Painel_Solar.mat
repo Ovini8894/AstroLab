@@ -89,8 +89,8 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _BrilhoForca: 0.9
-    - _BrilhoTamanho: 0.06
+    - _BrilhoForca: 0.35
+    - _BrilhoTamanho: 0.025
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -102,6 +102,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EmissaoUsaTextura: 0
     - _EnvironmentReflections: 1
+    - _FaixaDesloc: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

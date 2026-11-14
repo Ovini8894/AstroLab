@@ -17,114 +17,29 @@ public static class BaseLunarSetup
     const string TexDir = Root + "/Texturas";
     const string ScenePath = Root + "/Cenas/Lua.unity";
 
-    // material do Blender -> (textura, rugosidade)
-    static readonly Dictionary<string, (string tex, float rough)> Textured = new()
-    {
-        { "M_Casco", ("T_Casco", 0.7f) }, { "M_Casco_Escuro", ("T_Casco_Escuro", 0.55f) },
-        { "M_Piso", ("T_Piso", 0.6f) }, { "M_Metal", ("T_Metal", 0.4f) },
-        { "M_Amarelo", ("T_Amarelo", 0.6f) }, { "M_Faixa_Azul", ("T_Faixa_Azul", 0.65f) },
-        { "M_Regolito", ("T_Regolito", 0.97f) }, { "M_Rocha", ("T_Rocha", 0.9f) },
-        { "M_Tecido", ("T_Tecido", 0.95f) }, { "M_Painel_Solar", ("T_Painel_Solar", 0.15f) },
-        { "M_Painel_Quebrado", ("T_Painel_Quebrado", 0.35f) }, { "M_Metal_Enferrujado", ("T_Metal_Enferrujado", 0.85f) },
-        { "M_Casco_Queimado", ("T_Casco_Queimado", 0.9f) }, { "M_Terra_Vaso", ("T_Regolito", 1f) },
-    };
-
-    // cores lineares (iguais às do Blender)
-    static readonly Dictionary<string, Color> Plain = new()
-    {
-        { "M_Luz_Apagada", new Color(0.35f, 0.33f, 0.30f) }, { "M_Tela_Quebrada", new Color(0.02f, 0.02f, 0.02f) },
-        { "M_Planta_Morta", new Color(0.33f, 0.24f, 0.10f) }, { "M_Vermelho", new Color(0.6f, 0.05f, 0.04f) },
-        { "M_Branco", new Color(0.8f, 0.8f, 0.78f) }, { "M_Terra", new Color(0.08f, 0.25f, 0.55f) },
-    };
-
-    static readonly Dictionary<string, (Color c, float intensity)> Emissive = new()
-    {
-        { "M_Luz_Laranja", (new Color(1f, 0.45f, 0.05f), 6f) },
-        { "M_Luz_Ambar", (new Color(1f, 0.55f, 0.15f), 2f) },
-        { "M_Tela", (new Color(0.1f, 0.7f, 0.85f), 1.5f) },
-        { "M_Terra", (new Color(0.15f, 0.35f, 0.7f), 0.6f) },
-    };
-
+    // Os materiais seguem o estilo cartoon (shader AstroLab/Toon): receitas em EstiloCartoon.ConfigurarMaterial,
+    // cores em PaletaLua. As texturas realistas antigas (T_*_Cor / T_*_Normal) não são mais usadas.
     [MenuItem("Missão Lunar/1. Criar materiais URP")]
     public static void CreateMaterials()
     {
         Directory.CreateDirectory(MatDir);
-        var lit = Shader.Find("Universal Render Pipeline/Lit");
+        EstiloCartoon.GerarTexturas();
+        var toon = Shader.Find("AstroLab/Toon");
         var importer = (ModelImporter)AssetImporter.GetAtPath(Fbx);
-        var names = AssetDatabase.LoadAllAssetsAtPath(Fbx).OfType<Material>().Select(m => m.name).Distinct().ToList();
+        var names = AssetDatabase.LoadAllAssetsAtPath(Fbx).OfType<Material>().Select(m => m.name)
+            .Concat(importer.GetExternalObjectMap().Keys.Where(k => k.type == typeof(Material)).Select(k => k.name))
+            .Distinct().ToList();
         foreach (var name in names)
         {
             string path = $"{MatDir}/{name}.mat";
             var m = AssetDatabase.LoadAssetAtPath<Material>(path);
-            if (m == null) { m = new Material(lit); AssetDatabase.CreateAsset(m, path); }
-            m.shader = lit;
-            Configure(m, name);
-            EditorUtility.SetDirty(m);
+            if (m == null) { m = new Material(toon); AssetDatabase.CreateAsset(m, path); }
+            EstiloCartoon.ConfigurarMaterial(m, name);
+            AssetDatabase.SaveAssetIfDirty(m);
             importer.AddRemap(new AssetImporter.SourceAssetIdentifier(typeof(Material), name), m);
         }
-        AssetDatabase.SaveAssets();
         importer.SaveAndReimport();
-        Debug.Log($"[Missão Lunar] {names.Count} materiais URP criados em {MatDir}");
-    }
-
-    static Texture2D Tex(string n) => AssetDatabase.LoadAssetAtPath<Texture2D>($"{TexDir}/{n}.png");
-
-    static void Configure(Material m, string name)
-    {
-        m.SetColor("_BaseColor", Color.white);
-        m.SetTexture("_BaseMap", null);
-        m.SetTexture("_BumpMap", null);
-        m.DisableKeyword("_NORMALMAP");
-        m.DisableKeyword("_EMISSION");
-        SetOpaque(m);
-
-        if (Textured.TryGetValue(name, out var t))
-        {
-            m.SetTexture("_BaseMap", Tex(t.tex + "_Cor"));
-            var n = Tex(t.tex + "_Normal");
-            if (n) { m.SetTexture("_BumpMap", n); m.SetFloat("_BumpScale", 1f); m.EnableKeyword("_NORMALMAP"); }
-            m.SetFloat("_Smoothness", 1f - t.rough);
-            m.SetFloat("_Metallic", name.Contains("Metal") ? 0.8f : 0f);
-            if (name == "M_Terra_Vaso") m.SetColor("_BaseColor", new Color(0.35f, 0.28f, 0.22f).gamma);
-        }
-        else if (name.StartsWith("M_Vidro"))
-        {
-            bool cracked = name.Contains("Rachado");
-            m.SetColor("_BaseColor", new Color(0.55f, 0.65f, 0.7f, cracked ? 0.5f : 0.2f));
-            m.SetFloat("_Smoothness", cracked ? 0.6f : 0.95f);
-            SetTransparent(m);
-        }
-        else if (Plain.TryGetValue(name, out var c))
-        {
-            m.SetColor("_BaseColor", c.gamma);
-            m.SetFloat("_Smoothness", 0.4f);
-        }
-        else if (name == "M_Painel_Solar") { }
-        if (Emissive.TryGetValue(name, out var e))
-        {
-            if (!Plain.ContainsKey(name)) m.SetColor("_BaseColor", e.c.gamma);
-            m.EnableKeyword("_EMISSION");
-            m.SetColor("_EmissionColor", e.c * e.intensity);
-            m.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
-        }
-    }
-
-    static void SetOpaque(Material m)
-    {
-        m.SetFloat("_Surface", 0); m.SetOverrideTag("RenderType", "Opaque");
-        m.SetFloat("_SrcBlend", (float)BlendMode.One); m.SetFloat("_DstBlend", (float)BlendMode.Zero);
-        m.SetFloat("_ZWrite", 1); m.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
-        m.renderQueue = (int)RenderQueue.Geometry;
-    }
-
-    static void SetTransparent(Material m)
-    {
-        m.SetFloat("_Surface", 1); m.SetFloat("_Blend", 0); m.SetOverrideTag("RenderType", "Transparent");
-        m.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha); m.SetFloat("_DstBlend", (float)BlendMode.OneMinusSrcAlpha);
-        m.SetFloat("_SrcBlendAlpha", (float)BlendMode.One); m.SetFloat("_DstBlendAlpha", (float)BlendMode.OneMinusSrcAlpha);
-        m.SetFloat("_ZWrite", 0); m.SetFloat("_Cull", 0);
-        m.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-        m.renderQueue = (int)RenderQueue.Transparent;
+        Debug.Log($"[Missão Lunar] {names.Count} materiais cartoon criados em {MatDir}");
     }
 
     // ---------------------------------------------------------------- cena
@@ -216,6 +131,12 @@ public static class BaseLunarSetup
         cam.AddComponent<AudioListener>();
         var data = cam.AddComponent<UniversalAdditionalCameraData>();
         data.renderPostProcessing = true;
+
+        // estilo cartoon: céu, pós, contorno e luzes (sobrescreve os valores acima)
+        EstiloCartoon.MaterialCeu();
+        EstiloCartoon.ConfigurarPosProcessamento(vol.sharedProfile);
+        EstiloCartoon.InstalarContorno();
+        EstiloCartoon.AplicarIluminacaoNaCena();
 
         EditorSceneManager.SaveScene(scene, ScenePath);
         var list = EditorBuildSettings.scenes.ToList();

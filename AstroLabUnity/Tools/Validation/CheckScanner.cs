@@ -11,6 +11,7 @@ public static class CheckScanner
     static void Check(bool ok,string message){if(!ok)throw new Exception(message);}
     public static async Task<Dictionary<string,object>> Run()
     {
+        
         var s=UnityEngine.Object.FindAnyObjectByType<ScannerPrimeiraPessoa>();var h=s.visor;
         bool auto=s.lerMouseAutomaticamente,movement=h.controleMovimento.enabled;float timeScale=Time.timeScale;
         var player=h.controleMovimento.transform;var pos=player.position;var rot=player.rotation;var cameraRot=s.cameraMira.transform.localRotation;

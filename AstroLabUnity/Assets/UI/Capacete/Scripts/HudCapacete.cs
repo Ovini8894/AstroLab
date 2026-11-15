@@ -24,11 +24,17 @@ namespace AstroLab.Capacete
         public float alcanceInteracao = 4;
         public LayerMask camadasInteracao = ~0;
         public bool scannerAtivo;
+        [Header("Layout Compacto e Dicas")]
+        public GameObject dicaPainel;
+        [Min(0f)] public float tempoExibicaoDica = 8f;
+        [Range(0.5f, 1f)] public float escalaCompacta = 0.85f;
         public bool FichaAberta => aberto;
 
         AlvoExploracao alvoAtual;
-        bool aberto, movimentoAnterior, orientacaoExploracaoConcluida, modoGuiaEclusa;
+        bool aberto, movimentoAnterior, orientacaoExploracaoConcluida, modoGuiaEclusa, dicaConcluida;
         bool? ultimoModoScanner;
+        float tempoRestanteDica;
+        ScannerPrimeiraPessoa scannerVinculado;
         Transform baseReferenciaPadrao, eclusaReferencia;
         TMP_Text distanciaRotulo, distanciaSinal;
         string distanciaSinalPadrao;
@@ -61,6 +67,8 @@ namespace AstroLab.Capacete
             if(!exploracaoAjuda && exploracaoPainel){var t=exploracaoPainel.transform.Find("Ajuda");if(t)exploracaoAjuda=t.GetComponent<TMP_Text>();}
             if(interacaoPainel)interacaoPainel.SetActive(false);
             if(descobertaPainel)descobertaPainel.SetActive(false);
+            AplicarLayoutCompacto();
+            InicializarDica();
             ConfigurarBarraEnergia();
             ConfigurarRotulosBarras();
             LimparTextosPermanentes();
@@ -163,6 +171,7 @@ namespace AstroLab.Capacete
         void Update()
         {
             AtualizarRecursos();
+            AtualizarTemporizadorDica(Time.deltaTime);
             if(!orientacaoExploracaoConcluida && ultimoModoScanner != scannerAtivo) AtualizarOrientacaoExploracao();
             Transform alvoDistancia = (modoGuiaEclusa && eclusaReferencia) ? eclusaReferencia : baseReferencia;
             if(alvoDistancia && cameraJogador && distanciaTexto)
@@ -278,13 +287,15 @@ namespace AstroLab.Capacete
         public void ConcluirOrientacaoExploracao()
         {
             orientacaoExploracaoConcluida = true;
+            dicaConcluida = true;
             if (exploracaoPainel) exploracaoPainel.SetActive(false);
+            if (dicaPainel) dicaPainel.SetActive(false);
         }
 
         void AtualizarOrientacaoExploracao()
         {
             ultimoModoScanner = scannerAtivo;
-            if (orientacaoExploracaoConcluida)
+            if (orientacaoExploracaoConcluida || dicaConcluida)
             {
                 if (exploracaoPainel) exploracaoPainel.SetActive(false);
                 return;
@@ -305,6 +316,7 @@ namespace AstroLab.Capacete
         public void MostrarDescoberta(string titulo,string descricao,string charada,string categoria="EXPLORAÇÃO")
         {
             ConcluirOrientacaoExploracao();
+            ConcluirDica();
             if(!descobertaPainel)return;
             if(!aberto)
             {
@@ -326,5 +338,53 @@ namespace AstroLab.Capacete
             Cursor.lockState=cursorAnterior;Cursor.visible=cursorVisivelAnterior;
         }
         void OnDisable(){FecharDescoberta();}
+        void OnDestroy(){if(scannerVinculado)scannerVinculado.aoConcluir.RemoveListener(AoConcluirScan);}
+
+        void AplicarLayoutCompacto()
+        {
+            var instrumentos=transform.Find("Instrumentos");
+            if(!instrumentos)return;
+
+            CompactarPainel(instrumentos,"Oxigenio",new Vector2(48f,-42f));
+            CompactarPainel(instrumentos,"Energia",new Vector2(0f,-52f));
+            CompactarPainel(instrumentos,"DistanciaBase",new Vector2(-48f,-42f));
+            CompactarPainel(instrumentos,"Identidade",new Vector2(0f,-20f));
+            CompactarPainel(instrumentos,"Missao",new Vector2(48f,66f));
+            CompactarPainel(instrumentos,"Rodape",new Vector2(52f,34f));
+            CompactarPainel(instrumentos,"Exploracao",new Vector2(-48f,56f));
+            CompactarPainel(instrumentos,"Interacao",new Vector2(0f,82f));
+        }
+
+        void CompactarPainel(Transform raiz,string nome,Vector2 novaPosicao)
+        {
+            var filho=raiz.Find(nome) as RectTransform;
+            if(!filho)return;
+            filho.localScale=Vector3.one*escalaCompacta;
+            filho.anchoredPosition=novaPosicao;
+        }
+
+        void InicializarDica()
+        {
+            if(!dicaPainel)dicaPainel=transform.Find("Instrumentos/Exploracao")?.gameObject;
+            scannerVinculado=Object.FindAnyObjectByType<ScannerPrimeiraPessoa>();
+            if(scannerVinculado)scannerVinculado.aoConcluir.AddListener(AoConcluirScan);
+            tempoRestanteDica=tempoExibicaoDica;
+            if(dicaConcluida && dicaPainel)dicaPainel.SetActive(false);
+        }
+
+        void AtualizarTemporizadorDica(float dt)
+        {
+            if(dicaConcluida || !dicaPainel || !dicaPainel.activeSelf)return;
+            tempoRestanteDica-=Mathf.Max(0f,dt);
+            if(tempoRestanteDica<=0f)ConcluirDica();
+        }
+
+        void AoConcluirScan(GameObject _)=>ConcluirDica();
+
+        public void ConcluirDica()
+        {
+            dicaConcluida=true;
+            if(dicaPainel)dicaPainel.SetActive(false);
+        }
     }
 }

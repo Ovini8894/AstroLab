@@ -124,8 +124,9 @@ namespace AstroLab.Capacete
             if(nomeAlvo)nomeAlvo.text=temAlvo?dados.titulo:"SEM ALVO";
             if(instrucao)
             {
-                instrucao.gameObject.SetActive(ScansConcluidos==0);
-                if(instrucao.gameObject.activeSelf)
+                bool mostrarInstrucao=ScansConcluidos==0 || Escaneando;
+                instrucao.gameObject.SetActive(mostrarInstrucao);
+                if(mostrarInstrucao)
                     instrucao.text=Escaneando?"MANTENHA A MIRA NO ALVO ATÉ 100%":"SEGURE [E] OU BOTÃO ESQUERDO PARA ESCANEAR (1,35 s)";
             }
             if(percentual)percentual.text=Mathf.FloorToInt(Progresso*100)+"%";

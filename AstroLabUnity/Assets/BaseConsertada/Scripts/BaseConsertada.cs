@@ -147,7 +147,10 @@ public class BaseConsertada : MonoBehaviour
     void Aplicar(PecasDaBase.Peca p, bool consertar)
     {
         foreach (var nome in p.quebrados)
+        {
             if (objetosBase.TryGetValue(nome, out var q)) q.SetActive(!consertar);
+            if (objetosBase.TryGetValue(nome + "_Rotulo", out var label)) label.SetActive(!consertar);
+        }
 
         if (objetosOk.TryGetValue(p.objetoOk, out var ok)) ok.SetActive(consertar);
         else Debug.LogWarning($"[BaseConsertada] Objeto {p.objetoOk} não está no prefab (reimporte o BaseConsertada.fbx).", this);

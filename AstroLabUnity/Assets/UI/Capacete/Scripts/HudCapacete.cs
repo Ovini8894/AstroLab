@@ -71,6 +71,7 @@ namespace AstroLab.Capacete
             InicializarDica();
             ConfigurarBarraEnergia();
             ConfigurarRotulosBarras();
+            AplicarLayoutCompacto();
             LimparTextosPermanentes();
             ConfigurarDestaquesInterativos();
             AtualizarRecursos();
@@ -190,6 +191,9 @@ namespace AstroLab.Capacete
             AlvoExploracao candidato=null;float distancia=0;
             if(cameraJogador && Physics.Raycast(cameraJogador.transform.position,cameraJogador.transform.forward,out var hit,alcanceInteracao,camadasInteracao,QueryTriggerInteraction.Collide))
             { candidato=hit.collider.GetComponentInParent<AlvoExploracao>();distancia=hit.distance; }
+            if (!interacaoMissaoCache) interacaoMissaoCache=Object.FindAnyObjectByType<AstroLab.Nicholas.MissionPlayerInteraction>();
+            // Repairable systems use the mission inspector, avoiding two modals on the same E press.
+            if (interacaoMissaoCache && interacaoMissaoCache.AimedEquipment) candidato=null;
             alvoAtual=candidato;
 
             // Suporte contextual a alvos de exploração e interação da missão
@@ -203,6 +207,7 @@ namespace AstroLab.Capacete
             }
 
             bool temInteracao = candidato != null || !string.IsNullOrEmpty(promptMissao);
+            if (Object.FindAnyObjectByType<AstroLab.Gameplay.BaseResourceDashboard>()) temInteracao = false;
             if(interacaoPainel) interacaoPainel.SetActive(temInteracao);
             if(mira) mira.color = TemaCapacete.Alpha(TemaCapacete.Ciano, temInteracao ? .95f : .35f);
 
@@ -253,7 +258,7 @@ namespace AstroLab.Capacete
             {
                 alertaTexto.color = Color.Lerp(TemaCapacete.Alerta, Color.white, pulso * 0.25f);
                 if (oxCritico && enCritica)
-                    alertaTexto.text = "ALERTA CRÍTICO // RECURSOS BAIXOS - RETORNE À BASE";
+                    alertaTexto.text = modoGuiaEclusa ? "TRAJE CRÍTICO · RETORNE À ECLUSA" : "TRAJE BAIXO · RECARREGUE EM [Tab]";
                 else if (oxCritico)
                     alertaTexto.text = "OXIGÊNIO BAIXO // RETORNE À BASE";
                 else
@@ -269,7 +274,7 @@ namespace AstroLab.Capacete
             eclusaReferencia = eclusaAlvo;
             baseReferencia = modoGuiaEclusa ? eclusaAlvo : (baseReferenciaPadrao ? baseReferenciaPadrao : baseReferencia);
             if (distanciaRotulo)
-                distanciaRotulo.text = modoGuiaEclusa ? "ECLUSA [L]" : "BASE LUNAR";
+                distanciaRotulo.text = modoGuiaEclusa ? "DISTÂNCIA À ECLUSA" : "DISTÂNCIA AO HUB";
             if (!modoGuiaEclusa && distanciaSinal && !string.IsNullOrEmpty(distanciaSinalPadrao))
                 distanciaSinal.text = distanciaSinalPadrao;
         }
@@ -344,23 +349,61 @@ namespace AstroLab.Capacete
         {
             var instrumentos=transform.Find("Instrumentos");
             if(!instrumentos)return;
-
-            CompactarPainel(instrumentos,"Oxigenio",new Vector2(48f,-42f));
-            CompactarPainel(instrumentos,"Energia",new Vector2(0f,-52f));
-            CompactarPainel(instrumentos,"DistanciaBase",new Vector2(-48f,-42f));
-            CompactarPainel(instrumentos,"Identidade",new Vector2(0f,-20f));
-            CompactarPainel(instrumentos,"Missao",new Vector2(48f,66f));
-            CompactarPainel(instrumentos,"Rodape",new Vector2(52f,34f));
-            CompactarPainel(instrumentos,"Exploracao",new Vector2(-48f,56f));
-            CompactarPainel(instrumentos,"Interacao",new Vector2(0f,82f));
+            PainelVisor(instrumentos,"Oxigenio", .10f,.79f,.32f,.88f);
+            PainelVisor(instrumentos,"Energia", .39f,.79f,.61f,.88f);
+            PainelVisor(instrumentos,"DistanciaBase", .68f,.79f,.90f,.88f);
+            PainelVisor(instrumentos,"Missao", .08f,.47f,.31f,.74f);
+            PainelVisor(instrumentos,"Interacao", .32f,.18f,.67f,.28f);
+            PainelVisor(instrumentos,"Alerta", .34f,.68f,.66f,.76f);
+            PainelVisor(instrumentos,"Exploracao", .34f,.29f,.66f,.35f);
+            PrepararIndicador(instrumentos.Find("Oxigenio"), oxigenioTexto);
+            PrepararIndicador(instrumentos.Find("Energia"), energiaTexto);
+            PrepararIndicador(instrumentos.Find("DistanciaBase"), distanciaTexto);
+            var staticLabel=instrumentos.Find("Missao/Rotulo");if(staticLabel)staticLabel.gameObject.SetActive(false);
+            PosicionarTexto(missaoTitulo, .06f,.77f,.74f,.95f, 20);
+            PosicionarTexto(missaoProgresso, .76f,.78f,.96f,.94f, 17);
+            PosicionarTexto(missaoEtapa, .06f,.08f,.95f,.74f, 22);
+            PosicionarTexto(interacaoTitulo, .04f,.1f,.96f,.9f, 17);
+            if(interacaoDistancia)interacaoDistancia.gameObject.SetActive(false);
+            var tecla=interacaoPainel ? interacaoPainel.transform.Find("Tecla") : null;
+            if(tecla)tecla.gameObject.SetActive(false);
+            PosicionarTexto(alertaTexto,.04f,.1f,.96f,.9f,16);
         }
 
-        void CompactarPainel(Transform raiz,string nome,Vector2 novaPosicao)
+        static void PainelVisor(Transform root,string name,float x0,float y0,float x1,float y1)
         {
-            var filho=raiz.Find(nome) as RectTransform;
-            if(!filho)return;
-            filho.localScale=Vector3.one*escalaCompacta;
-            filho.anchoredPosition=novaPosicao;
+            var r=root.Find(name) as RectTransform;
+            if(!r)return;
+            r.localScale=Vector3.one;
+            r.anchorMin=new Vector2(x0,y0);r.anchorMax=new Vector2(x1,y1);
+            r.offsetMin=r.offsetMax=Vector2.zero;
+        }
+        static void PosicionarTexto(TMP_Text text,float x0,float y0,float x1,float y1,float size)
+        {
+            if(!text)return;
+            text.gameObject.SetActive(true);text.enabled=true;
+            var r=text.rectTransform;r.localScale=Vector3.one;
+            r.anchorMin=new Vector2(x0,y0);r.anchorMax=new Vector2(x1,y1);
+            r.offsetMin=r.offsetMax=Vector2.zero;
+            text.fontSize=size;text.enableAutoSizing=true;text.fontSizeMin=size-2;text.fontSizeMax=size;
+            text.textWrappingMode=TextWrappingModes.Normal;text.overflowMode=TextOverflowModes.Truncate;
+            text.alignment=TextAlignmentOptions.TopLeft;text.color=TemaCapacete.Hex("F4E9D4");
+        }
+        void PrepararIndicador(Transform panel,TMP_Text value)
+        {
+            if(!panel)return;
+            var label=panel.Find("Rotulo")?.GetComponent<TMP_Text>();
+            PosicionarTexto(label,.14f,.64f,.96f,.92f,16);
+            PosicionarTexto(value,.14f,.26f,.96f,.63f,27);
+            var icon=panel.Find("Icone") as RectTransform;
+            if(icon){icon.anchorMin=new Vector2(.03f,.36f);icon.anchorMax=new Vector2(.12f,.75f);icon.offsetMin=icon.offsetMax=Vector2.zero;}
+            foreach(var name in new[]{"Trilho","Carga","Reserva"})
+            {
+                var bar=panel.Find(name) as RectTransform;
+                if(bar){bar.anchorMin=new Vector2(.14f,.15f);bar.anchorMax=new Vector2(.94f,.21f);bar.offsetMin=bar.offsetMax=Vector2.zero;}
+            }
+            var signal=panel.Find("Sinal")?.GetComponent<TMP_Text>();
+            PosicionarTexto(signal,.14f,.06f,.96f,.25f,12);
         }
 
         void InicializarDica()

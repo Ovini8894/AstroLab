@@ -203,6 +203,7 @@ namespace AstroLab.Nicholas
         private void CreateSparkParticles(GameObject host, float burstRadius)
         {
             ParticleSystem ps = host.AddComponent<ParticleSystem>();
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             ParticleSystemRenderer psr = host.GetComponent<ParticleSystemRenderer>();
             if (psr && sparkMaterial)
             {
@@ -212,6 +213,7 @@ namespace AstroLab.Nicholas
             }
 
             ParticleSystem.MainModule main = ps.main;
+            main.playOnAwake = false;
             main.duration = 0.6f;
             main.loop = false;
             main.startLifetime = new ParticleSystem.MinMaxCurve(0.65f, 1.20f);

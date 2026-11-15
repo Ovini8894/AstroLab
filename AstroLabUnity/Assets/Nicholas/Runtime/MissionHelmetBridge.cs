@@ -38,8 +38,9 @@ namespace AstroLab.Nicholas
             if (mission.Engine.IsPowered(EquipmentId.LifeSupport)) complete++;
             if (mission.Engine.IsRepaired(EquipmentId.RadiationShelter)) complete++;
             if (mission.Engine.IsPowered(EquipmentId.Greenhouse)) complete++;
-            string objective = state.Outcome == MissionOutcome.Running ? "Turno " + state.Turn + "/3 — Restaurar base" : state.OutcomeReason;
-            setMission.Invoke(helmet, new object[] { "Reativar a Base Lunar", objective, complete, 4 });
+            string objective = AstroLab.Gameplay.MissionGuidance.Next(mission.Engine);
+            if (mission.TargetMarkers) mission.TargetMarkers.SetTutorialTarget(AstroLab.Gameplay.MissionGuidance.Focus(mission.Engine));
+            setMission.Invoke(helmet, new object[] { "OBJETIVO · TURNO " + state.Turn + "/3", objective, complete, 4 });
         }
     }
 }

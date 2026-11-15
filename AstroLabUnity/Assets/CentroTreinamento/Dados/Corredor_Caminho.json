@@ -1,0 +1,607 @@
+{
+ "modulos": [
+  {
+   "i": 0,
+   "tipo": "Seg_A",
+   "pos": [
+    -15.3,
+    -20.0,
+    -16.2
+   ],
+   "rumoBlender": 0.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 1,
+   "tipo": "Seg_B",
+   "pos": [
+    -19.3,
+    -20.0,
+    -16.2
+   ],
+   "rumoBlender": 0.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 2,
+   "tipo": "Seg_A",
+   "pos": [
+    -23.3,
+    -20.0,
+    -16.2
+   ],
+   "rumoBlender": 3.75,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 3,
+   "tipo": "Seg_C",
+   "pos": [
+    -27.2914,
+    -20.0,
+    -16.4616
+   ],
+   "rumoBlender": 11.25,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 4,
+   "tipo": "Seg_Porta",
+   "pos": [
+    -31.2146,
+    -20.0,
+    -17.242
+   ],
+   "rumoBlender": 18.75,
+   "lado": 1,
+   "sala": "Medico"
+  },
+  {
+   "i": 5,
+   "tipo": "Seg_B",
+   "pos": [
+    -35.0023,
+    -20.0,
+    -18.5277
+   ],
+   "rumoBlender": 26.25,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 6,
+   "tipo": "Seg_A",
+   "pos": [
+    -38.5898,
+    -20.0,
+    -20.2969
+   ],
+   "rumoBlender": 33.75,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 7,
+   "tipo": "Seg_C",
+   "pos": [
+    -41.9157,
+    -20.0,
+    -22.5192
+   ],
+   "rumoBlender": 41.25,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 8,
+   "tipo": "Seg_A",
+   "pos": [
+    -44.923,
+    -20.0,
+    -25.1565
+   ],
+   "rumoBlender": 48.75,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 9,
+   "tipo": "Seg_B",
+   "pos": [
+    -47.5604,
+    -20.0,
+    -28.1639
+   ],
+   "rumoBlender": 56.25,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 10,
+   "tipo": "Seg_A",
+   "pos": [
+    -49.7827,
+    -20.0,
+    -31.4898
+   ],
+   "rumoBlender": 63.75,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 11,
+   "tipo": "Seg_Porta",
+   "pos": [
+    -51.5518,
+    -20.0,
+    -35.0773
+   ],
+   "rumoBlender": 71.25,
+   "lado": -1,
+   "sala": "Centrifuga"
+  },
+  {
+   "i": 12,
+   "tipo": "Seg_A",
+   "pos": [
+    -52.8376,
+    -20.0,
+    -38.865
+   ],
+   "rumoBlender": 78.75,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 13,
+   "tipo": "Seg_B",
+   "pos": [
+    -53.618,
+    -20.0,
+    -42.7881
+   ],
+   "rumoBlender": 86.25,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 14,
+   "tipo": "Seg_A",
+   "pos": [
+    -53.8796,
+    -20.0,
+    -46.7796
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 15,
+   "tipo": "Seg_Janela",
+   "pos": [
+    -53.8796,
+    -20.0,
+    -50.7796
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 16,
+   "tipo": "Seg_A",
+   "pos": [
+    -53.8796,
+    -20.0,
+    -54.7796
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 17,
+   "tipo": "Seg_B",
+   "pos": [
+    -53.8796,
+    -20.0,
+    -58.7796
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 18,
+   "tipo": "Seg_Porta",
+   "pos": [
+    -53.8796,
+    -20.0,
+    -62.7796
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": "RealidadeVirtual"
+  },
+  {
+   "i": 19,
+   "tipo": "Seg_C",
+   "pos": [
+    -53.8796,
+    -20.0,
+    -66.7796
+   ],
+   "rumoBlender": 93.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 20,
+   "tipo": "Seg_A",
+   "pos": [
+    -53.6702,
+    -20.0,
+    -70.7741
+   ],
+   "rumoBlender": 99.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 21,
+   "tipo": "Seg_B",
+   "pos": [
+    -53.0445,
+    -20.0,
+    -74.7248
+   ],
+   "rumoBlender": 105.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 22,
+   "tipo": "Seg_A",
+   "pos": [
+    -52.0092,
+    -20.0,
+    -78.5885
+   ],
+   "rumoBlender": 111.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 23,
+   "tipo": "Seg_C",
+   "pos": [
+    -50.5757,
+    -20.0,
+    -82.3229
+   ],
+   "rumoBlender": 117.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 24,
+   "tipo": "Seg_A",
+   "pos": [
+    -48.7598,
+    -20.0,
+    -85.8869
+   ],
+   "rumoBlender": 120.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 25,
+   "tipo": "Seg_Porta",
+   "pos": [
+    -46.7598,
+    -20.0,
+    -89.351
+   ],
+   "rumoBlender": 120.0,
+   "lado": -1,
+   "sala": "NBL"
+  },
+  {
+   "i": 26,
+   "tipo": "Seg_A",
+   "pos": [
+    -44.7598,
+    -20.0,
+    -92.8151
+   ],
+   "rumoBlender": 117.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 27,
+   "tipo": "Seg_C",
+   "pos": [
+    -42.9438,
+    -20.0,
+    -96.3791
+   ],
+   "rumoBlender": 111.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 28,
+   "tipo": "Seg_A",
+   "pos": [
+    -41.5103,
+    -20.0,
+    -100.1134
+   ],
+   "rumoBlender": 105.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 29,
+   "tipo": "Seg_Janela",
+   "pos": [
+    -40.4751,
+    -20.0,
+    -103.9771
+   ],
+   "rumoBlender": 99.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 30,
+   "tipo": "Seg_A",
+   "pos": [
+    -39.8493,
+    -20.0,
+    -107.9279
+   ],
+   "rumoBlender": 93.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 31,
+   "tipo": "Seg_C",
+   "pos": [
+    -39.64,
+    -20.0,
+    -111.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 32,
+   "tipo": "Seg_A",
+   "pos": [
+    -39.64,
+    -20.0,
+    -115.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 33,
+   "tipo": "Seg_Porta",
+   "pos": [
+    -39.64,
+    -20.0,
+    -119.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": "ARGOS"
+  },
+  {
+   "i": 34,
+   "tipo": "Seg_A",
+   "pos": [
+    -39.64,
+    -20.0,
+    -123.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 35,
+   "tipo": "Seg_C",
+   "pos": [
+    -39.64,
+    -20.0,
+    -127.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 36,
+   "tipo": "Seg_A",
+   "pos": [
+    -39.64,
+    -20.0,
+    -131.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 37,
+   "tipo": "Seg_B",
+   "pos": [
+    -39.64,
+    -20.0,
+    -135.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 38,
+   "tipo": "Seg_A",
+   "pos": [
+    -39.64,
+    -20.0,
+    -139.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 39,
+   "tipo": "Seg_C",
+   "pos": [
+    -39.64,
+    -20.0,
+    -143.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 40,
+   "tipo": "Seg_Porta",
+   "pos": [
+    -39.64,
+    -20.0,
+    -147.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": -1,
+   "sala": "Trajes"
+  },
+  {
+   "i": 41,
+   "tipo": "Seg_B",
+   "pos": [
+    -39.64,
+    -20.0,
+    -151.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 42,
+   "tipo": "Seg_A",
+   "pos": [
+    -39.64,
+    -20.0,
+    -155.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 43,
+   "tipo": "Seg_C",
+   "pos": [
+    -39.64,
+    -20.0,
+    -159.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 44,
+   "tipo": "Seg_A",
+   "pos": [
+    -39.64,
+    -20.0,
+    -163.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 45,
+   "tipo": "Seg_B",
+   "pos": [
+    -39.64,
+    -20.0,
+    -167.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 46,
+   "tipo": "Seg_A",
+   "pos": [
+    -39.64,
+    -20.0,
+    -171.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 47,
+   "tipo": "Seg_C",
+   "pos": [
+    -39.64,
+    -20.0,
+    -175.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 48,
+   "tipo": "Seg_A",
+   "pos": [
+    -39.64,
+    -20.0,
+    -179.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 49,
+   "tipo": "Seg_Fim",
+   "pos": [
+    -39.64,
+    -20.0,
+    -183.9224
+   ],
+   "rumoBlender": 90.0,
+   "lado": 1,
+   "sala": ""
+  }
+ ],
+ "comprimento": 4.0,
+ "raio": 3.0,
+ "eixo": 2.0
+}

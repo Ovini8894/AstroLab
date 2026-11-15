@@ -1,0 +1,236 @@
+{
+  "itens": [
+    {
+      "chave": "menu.subtitulo",
+      "texto": "Lunar Base Mission"
+    },
+    {
+      "chave": "menu.iniciar",
+      "texto": "Start"
+    },
+    {
+      "chave": "menu.opcoes",
+      "texto": "Options"
+    },
+    {
+      "chave": "menu.creditos",
+      "texto": "Credits"
+    },
+    {
+      "chave": "menu.sair",
+      "texto": "Quit"
+    },
+    {
+      "chave": "menu.voltar",
+      "texto": "Back"
+    },
+    {
+      "chave": "menu.dica_voltar",
+      "texto": "[Esc] Back"
+    },
+    {
+      "chave": "menu.lancando",
+      "texto": "Launch initiated..."
+    },
+    {
+      "chave": "menu.cena_ausente",
+      "texto": "The game scene is not ready yet."
+    },
+    {
+      "chave": "menu.versao",
+      "texto": "Version {0}"
+    },
+    {
+      "chave": "opcoes.titulo",
+      "texto": "Options"
+    },
+    {
+      "chave": "opcoes.aba.graficos",
+      "texto": "Graphics"
+    },
+    {
+      "chave": "opcoes.aba.audio",
+      "texto": "Audio"
+    },
+    {
+      "chave": "opcoes.aba.controles",
+      "texto": "Controls"
+    },
+    {
+      "chave": "opcoes.aba.jogo",
+      "texto": "Game"
+    },
+    {
+      "chave": "opcoes.modo_tela",
+      "texto": "Display mode"
+    },
+    {
+      "chave": "opcoes.tela.cheia",
+      "texto": "Fullscreen"
+    },
+    {
+      "chave": "opcoes.tela.exclusiva",
+      "texto": "Exclusive fullscreen"
+    },
+    {
+      "chave": "opcoes.tela.janela",
+      "texto": "Windowed"
+    },
+    {
+      "chave": "opcoes.resolucao",
+      "texto": "Resolution"
+    },
+    {
+      "chave": "opcoes.resolucao.nativa",
+      "texto": "Native ({0})"
+    },
+    {
+      "chave": "opcoes.qualidade",
+      "texto": "Graphics quality"
+    },
+    {
+      "chave": "qualidade.Mobile",
+      "texto": "Performance"
+    },
+    {
+      "chave": "qualidade.PC",
+      "texto": "High"
+    },
+    {
+      "chave": "opcoes.vsync",
+      "texto": "Vertical sync (VSync)"
+    },
+    {
+      "chave": "opcoes.limite_fps",
+      "texto": "FPS limit"
+    },
+    {
+      "chave": "opcoes.sem_limite",
+      "texto": "Unlimited"
+    },
+    {
+      "chave": "opcoes.antialiasing",
+      "texto": "Anti-aliasing"
+    },
+    {
+      "chave": "opcoes.brilho",
+      "texto": "Brightness"
+    },
+    {
+      "chave": "opcoes.desligado",
+      "texto": "Off"
+    },
+    {
+      "chave": "opcoes.ligado",
+      "texto": "On"
+    },
+    {
+      "chave": "opcoes.volume_geral",
+      "texto": "Master volume"
+    },
+    {
+      "chave": "opcoes.volume_musica",
+      "texto": "Music"
+    },
+    {
+      "chave": "opcoes.volume_efeitos",
+      "texto": "Sound effects"
+    },
+    {
+      "chave": "opcoes.sensibilidade",
+      "texto": "Mouse sensitivity"
+    },
+    {
+      "chave": "opcoes.inverter_y",
+      "texto": "Invert Y axis"
+    },
+    {
+      "chave": "opcoes.fov",
+      "texto": "Field of view"
+    },
+    {
+      "chave": "opcoes.teclas",
+      "texto": "Key bindings"
+    },
+    {
+      "chave": "opcoes.idioma",
+      "texto": "Language"
+    },
+    {
+      "chave": "opcoes.mostrar_fps",
+      "texto": "Show FPS"
+    },
+    {
+      "chave": "opcoes.restaurar",
+      "texto": "Reset to defaults"
+    },
+    {
+      "chave": "tecla.mover",
+      "texto": "Move"
+    },
+    {
+      "chave": "tecla.olhar",
+      "texto": "Look around"
+    },
+    {
+      "chave": "tecla.correr",
+      "texto": "Sprint"
+    },
+    {
+      "chave": "tecla.pular",
+      "texto": "Jump"
+    },
+    {
+      "chave": "tecla.interagir",
+      "texto": "Interact"
+    },
+    {
+      "chave": "tecla.pausa",
+      "texto": "Pause / menu"
+    },
+    {
+      "chave": "tecla.espaco",
+      "texto": "Space"
+    },
+    {
+      "chave": "tecla.mouse",
+      "texto": "Mouse"
+    },
+    {
+      "chave": "creditos.titulo",
+      "texto": "Credits"
+    },
+    {
+      "chave": "creditos.equipe",
+      "texto": "Team"
+    },
+    {
+      "chave": "creditos.agradecimentos",
+      "texto": "Special thanks"
+    },
+    {
+      "chave": "creditos.recursos",
+      "texto": "Third-party assets"
+    },
+    {
+      "chave": "creditos.funcao.dev_modelador",
+      "texto": "Developer & 3D Modeler"
+    },
+    {
+      "chave": "creditos.funcao.dev",
+      "texto": "Developer"
+    },
+    {
+      "chave": "creditos.funcao.professor",
+      "texto": "Professor — Uniube"
+    },
+    {
+      "chave": "creditos.funcao.fontes",
+      "texto": "Orbitron and Exo 2 fonts (SIL Open Font License)"
+    },
+    {
+      "chave": "creditos.funcao.nasa",
+      "texto": "Earth map based on NASA Blue Marble"
+    }
+  ]
+}

@@ -1,0 +1,341 @@
+fileFormatVersion: 2
+guid: a5ebd926ee33914478f71b3a770ef9cf
+ModelImporter:
+  serializedVersion: 24600
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Agua
+    second: {fileID: 2100000, guid: 856d2a18933b9024086b05fffc600179, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Amarelo
+    second: {fileID: 2100000, guid: 71b65fabd9e263042804b1400dbb2769, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Asfalto
+    second: {fileID: 2100000, guid: 60d47316f28c04f41b42c0fbeb09e4ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Azul_Escuro
+    second: {fileID: 2100000, guid: ed0c7c6f1021be84897aaa707d14ced1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Azul_NASA
+    second: {fileID: 2100000, guid: 706f1889c2ae1634ba963aaae2a7ce6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Azulejo
+    second: {fileID: 2100000, guid: e3ea6f9d4fa6f864da70e6c912ce511e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Borracha
+    second: {fileID: 2100000, guid: 5693719bf3f29d14484bc8694696570e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Branco
+    second: {fileID: 2100000, guid: b6b2cbac0f43a4249a85b6680b8cc5f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Calcada
+    second: {fileID: 2100000, guid: e6d0d8108d4a35143bd602bc91bd4767, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Console
+    second: {fileID: 2100000, guid: 58b228d64d3e7ae4e9e4a0f2d414b461, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Estrutura
+    second: {fileID: 2100000, guid: b305b7d03911ec046bc63d1786a437b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Folha
+    second: {fileID: 2100000, guid: f41eaa0abca0b0b4984f8a348f22b9d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Folha_Clara
+    second: {fileID: 2100000, guid: da7622dfe02e0f94c9e244a907ba4356, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Foto_Missao
+    second: {fileID: 2100000, guid: 471e708288b280f4e93b095a28d786e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Grama
+    second: {fileID: 2100000, guid: 394eb122cdd619c4fb996a35d197de4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Laranja
+    second: {fileID: 2100000, guid: 12f99a8aadbfd6f4e9b92ed5530f8c3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Logo_NASA
+    second: {fileID: 2100000, guid: 94043a8267d271e418ce77b4a31592d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Luz
+    second: {fileID: 2100000, guid: be733e1a1990c2d4dbf8fdebf1103106, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Luz_Ambar
+    second: {fileID: 2100000, guid: 82b2dd1ee3629ce4e8bb92bdbb9bfb8a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Luz_Verde
+    second: {fileID: 2100000, guid: f8c27b6465721b44dbe34e37fb082351, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Luz_Vermelha
+    second: {fileID: 2100000, guid: 77b65c23f48fefc468c988a2afea2add, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Madeira
+    second: {fileID: 2100000, guid: 78845c82f189cdc4591beb88f9a55b82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Madeira_Clara
+    second: {fileID: 2100000, guid: bdbc173e7391ada45b44a2bca0d905b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Metal
+    second: {fileID: 2100000, guid: 6c75b950e97d92a48a8db385d6e5058f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Painel_Liso
+    second: {fileID: 2100000, guid: cf5fdc216d0580142b003491675ff776, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Parede
+    second: {fileID: 2100000, guid: 00aaec7fa1fa38145be0b3ed3eaac5e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Parede_Interna
+    second: {fileID: 2100000, guid: 588ef61095bf9a74b944ff3969fb782c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Piso_Hangar
+    second: {fileID: 2100000, guid: 0239d2904a6b5bc45b1fc08503edee50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Regolito
+    second: {fileID: 2100000, guid: 53ee8e70d0f37ad428829635b2e6a5ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Rocha
+    second: {fileID: 2100000, guid: b2b007d3b87f89f448e0ac6fe3691184, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Sofa
+    second: {fileID: 2100000, guid: 3ef82f9d9f7cf3a49995acbc86e2ccbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Tapete_Azul
+    second: {fileID: 2100000, guid: 91025a7c462975343860bc537a231f71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Tecido_Azul
+    second: {fileID: 2100000, guid: 9b7e4c55b5cd61747ac387d0f4499f9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Tela
+    second: {fileID: 2100000, guid: a76522b4d02944f44a0a0413ca30f250, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Tela_ECG
+    second: {fileID: 2100000, guid: b19d32ba3019d624384016c50014d8df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Tela_VR
+    second: {fileID: 2100000, guid: 3a9c97e9f978bcc4182df01e04e7ff8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Texto_Branco
+    second: {fileID: 2100000, guid: bfdbf25775fe5b6488eb8303ecc077c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Texto_Escuro
+    second: {fileID: 2100000, guid: d682bad6f6c768a419ddf0029d8a88d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Tronco
+    second: {fileID: 2100000, guid: 4a04796fce285d44ea538058586dddbe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Verde_Bandeira
+    second: {fileID: 2100000, guid: 49ebeaf25bdb0ef44aaaabc7a2ca5b6e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Vermelho_NASA
+    second: {fileID: 2100000, guid: 887bd1d8fce77b241be778faa92a9a89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CT_Vidro
+    second: {fileID: 2100000, guid: e63b3d26a6974694d93e913015cfca4c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 087784b788705874aa719d7f4ff39304, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OR_Concreto
+    second: {fileID: 2100000, guid: 1c40e49cbb9e65c478d69ef6ed949467, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OR_Grade
+    second: {fileID: 2100000, guid: b8726ba231c475d4baa3cf7c76269041, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+    searchTexturesGlobally: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    preBakeConvexCollisionMesh: 0
+    preBakeTriangleCollisionMesh: 0
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    importUVs: -1
+    importVertexColors: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 2
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+    calculateBlendshapeNormalsDeltaFromImportedNormals: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 0
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

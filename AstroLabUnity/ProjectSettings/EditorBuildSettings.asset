@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/MenuInicial/Cenas/MenuInicial.unity
+    guid: f94b20fdcbe53f24cacf17d787c8b506
+  - enabled: 1
+    path: Assets/CentroTreinamento/Cenas/CentroTreinamento.unity
+    guid: 1577edd10c31c7e4dbf176e21096f297
+  - enabled: 1
     path: Assets/BaseLunar/Cenas/Lua.unity
     guid: d811bfe21a09d4b44850860a35478cdd
   - enabled: 1

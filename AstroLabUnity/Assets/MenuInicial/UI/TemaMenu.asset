@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1235fa585961674e9e7e62b2860fd14, type: 3}
+  m_Name: TemaMenu
+  m_EditorClassIdentifier: AstroLab.Menu::AstroLab.Menu.TemaMenu
+  fonteTitulo: {fileID: 11400000, guid: b87a902bf1eba154ea040f8a420ed0ff, type: 2}
+  fonteTexto: {fileID: 11400000, guid: 7764964996b36994f905f1eee2a8cb9e, type: 2}
+  arredondado: {fileID: 21300000, guid: 94bff61a22a332a43b56e9d8f571bb42, type: 3}
+  borda: {fileID: 21300000, guid: f9a1cd7e105847e499816c982deff191, type: 3}
+  brilho: {fileID: 21300000, guid: d0e402919ca5390498067d32821251d1, type: 3}
+  seta: {fileID: 21300000, guid: 4b1488cb627acbb48ac42cf0d12bce05, type: 3}
+  faixaBrilho: {fileID: 21300000, guid: 8789be31c805a58419097232235e5fd4, type: 3}
+  fundo: {r: 0.1, g: 0.36, b: 0.78, a: 0.24}
+  fundoHover: {r: 0.16, g: 0.5, b: 0.95, a: 0.46}
+  fundoPressionado: {r: 0.3, g: 0.7, b: 1, a: 0.62}
+  bordaCor: {r: 0.5, g: 0.8, b: 1, a: 0.75}
+  bordaHover: {r: 0.55, g: 0.95, b: 1, a: 1}
+  brilhoHover: {r: 0.28, g: 0.85, b: 1, a: 0.55}
+  texto: {r: 0.92, g: 0.97, b: 1, a: 0.95}
+  textoHover: {r: 1, g: 1, b: 1, a: 1}
+  textoSecundario: {r: 0.68, g: 0.82, b: 0.98, a: 0.85}
+  destaque: {r: 0.28, g: 0.9, b: 1, a: 1}
+  painel: {r: 0.03, g: 0.08, b: 0.2, a: 0.72}
+  painelBorda: {r: 0.45, g: 0.75, b: 1, a: 0.55}
+  sombra: {r: 0.07, g: 0.06, b: 0.2, a: 0.85}

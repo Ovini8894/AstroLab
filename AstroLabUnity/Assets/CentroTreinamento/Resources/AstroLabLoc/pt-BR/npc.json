@@ -1,0 +1,392 @@
+{
+ "itens": [
+  {
+   "chave": "npc.nome",
+   "texto": "Instrutora Lima"
+  },
+  {
+   "chave": "npc.intro.1",
+   "texto": "Olá! Bem-vindo ao Centro Espacial Johnson, em Houston. Eu sou a instrutora Lima."
+  },
+  {
+   "chave": "npc.intro.2",
+   "texto": "Antes de qualquer missão, todo astronauta passa por um treinamento completo. É aqui que ele acontece."
+  },
+  {
+   "chave": "npc.intro.3",
+   "texto": "Hoje você vai conhecer as principais estações de treino. Me acompanhe até a recepção."
+  },
+  {
+   "chave": "npc.est0.1",
+   "texto": "Esta é a recepção do Programa de Treinamento de Astronautas."
+  },
+  {
+   "chave": "npc.est0.2",
+   "texto": "Os candidatos treinam por cerca de dois anos antes de serem escalados para um voo."
+  },
+  {
+   "chave": "npc.est0.3",
+   "texto": "Retire sua credencial no balcão: chegue perto e pressione [E]."
+  },
+  {
+   "chave": "npc.est0.fim.1",
+   "texto": "Credencial registrada! Agora vem a parte que pouca gente conhece."
+  },
+  {
+   "chave": "npc.est1.1",
+   "texto": "No espaço, sem a gravidade, os músculos e os ossos enfraquecem e o coração trabalha diferente."
+  },
+  {
+   "chave": "npc.est1.2",
+   "texto": "Por isso os exames médicos e o preparo físico acompanham o astronauta do primeiro dia até depois do voo."
+  },
+  {
+   "chave": "npc.est1.3",
+   "texto": "Faça seu exame no monitor de sinais vitais, ao lado da maca."
+  },
+  {
+   "chave": "npc.est1.fim.1",
+   "texto": "Pressão 12 por 8 e 68 batimentos por minuto. Você está apto para continuar!"
+  },
+  {
+   "chave": "npc.est2.1",
+   "texto": "Esta é a centrífuga humana. O braço gira rápido e a gôndola na ponta simula a força G do lançamento e da reentrada."
+  },
+  {
+   "chave": "npc.est2.2",
+   "texto": "Na decolagem, o corpo chega a sentir cerca de três vezes o próprio peso: 3 G."
+  },
+  {
+   "chave": "npc.est2.3",
+   "texto": "Inicie a simulação pelo painel da sala de controle."
+  },
+  {
+   "chave": "npc.est2.fim.1",
+   "texto": "Muito bem! Respirar fundo e contrair as pernas ajuda o sangue a continuar chegando à cabeça."
+  },
+  {
+   "chave": "npc.est3.1",
+   "texto": "No laboratório de realidade virtual ensaiamos caminhadas espaciais e o uso do SAFER, uma mochila de jatos para emergências."
+  },
+  {
+   "chave": "npc.est3.2",
+   "texto": "Também treinamos o braço robótico e a navegação do lado de fora da estação."
+  },
+  {
+   "chave": "npc.est3.3",
+   "texto": "Sente-se em uma das estações e coloque os óculos de realidade virtual."
+  },
+  {
+   "chave": "npc.est3.fim.1",
+   "texto": "Simulação concluída. Errar aqui é muito mais barato do que errar lá em cima!"
+  },
+  {
+   "chave": "npc.est4.1",
+   "texto": "Esta é a piscina de flutuabilidade neutra. A verdadeira tem 12 metros de profundidade e uma réplica da Estação Espacial Internacional."
+  },
+  {
+   "chave": "npc.est4.2",
+   "texto": "Com pesos e flutuadores, o traje não afunda nem sobe. É o mais perto da microgravidade que conseguimos na Terra."
+  },
+  {
+   "chave": "npc.est4.3",
+   "texto": "Cada hora de caminhada espacial pede várias horas de treino aqui. Vista o traje de treino pelo painel e mergulhe."
+  },
+  {
+   "chave": "npc.est4.fim.1",
+   "texto": "Excelente mergulho! Pode tirar o traje de treino: ele fica aqui na piscina."
+  },
+  {
+   "chave": "npc.est5.1",
+   "texto": "Este é o ARGOS, um sistema de cabos e motores que sustenta parte do seu peso para simular outras gravidades."
+  },
+  {
+   "chave": "npc.est5.2",
+   "texto": "Aqui ele está ajustado para a Lua, onde a gravidade é só um sexto da gravidade da Terra."
+  },
+  {
+   "chave": "npc.est5.3",
+   "texto": "O chão imita o solo lunar, com crateras e rochas. Vista o traje de treino no painel e dê três saltos no campo."
+  },
+  {
+   "chave": "npc.est5.fim.1",
+   "texto": "Viu como você vai longe com pouco esforço? Na Lua, andar é quase saltitar. Cuidado para não perder o equilíbrio!"
+  },
+  {
+   "chave": "npc.est6.1",
+   "texto": "Última parada: a sala de trajes. Aqui se veste o traje completo da missão."
+  },
+  {
+   "chave": "npc.est6.2",
+   "texto": "Primeiro a roupa de resfriamento, depois a calça e o torso rígido, e por fim as luvas e o capacete."
+  },
+  {
+   "chave": "npc.est6.3",
+   "texto": "Use a estação de vestir, na parede do fundo."
+  },
+  {
+   "chave": "npc.est6.fim.1",
+   "texto": "Traje verificado e pressurizado. Parabéns, astronauta: seu treinamento básico está concluído!"
+  },
+  {
+   "chave": "npc.est6.fim.2",
+   "texto": "Você foi designado para a sua primeira missão de campo: a reativação da Base Lunar."
+  },
+  {
+   "chave": "npc.est6.fim.3",
+   "texto": "O foguete espera por você na plataforma de lançamento. Saia pela porta norte e siga a estrada. Boa missão!"
+  },
+  {
+   "chave": "treino.est0.nome",
+   "texto": "Recepção"
+  },
+  {
+   "chave": "treino.est0.acao",
+   "texto": "Retirar credencial"
+  },
+  {
+   "chave": "treino.est0.efeito",
+   "texto": "CREDENCIAL EMITIDA"
+  },
+  {
+   "chave": "treino.est0.efeito.sub",
+   "texto": "Candidato a astronauta · Turma 2026"
+  },
+  {
+   "chave": "treino.est1.nome",
+   "texto": "Avaliação médica e preparo físico"
+  },
+  {
+   "chave": "treino.est1.acao",
+   "texto": "Fazer o exame"
+  },
+  {
+   "chave": "treino.est1.bpm",
+   "texto": "FREQUÊNCIA: {0} bpm"
+  },
+  {
+   "chave": "treino.est1.exame",
+   "texto": "Medindo pressão, frequência cardíaca e oxigenação..."
+  },
+  {
+   "chave": "treino.est1.resultado",
+   "texto": "APTO"
+  },
+  {
+   "chave": "treino.est1.resultado.sub",
+   "texto": "Liberado para o treinamento"
+  },
+  {
+   "chave": "treino.est2.nome",
+   "texto": "Centrífuga humana"
+  },
+  {
+   "chave": "treino.est2.acao",
+   "texto": "Iniciar a centrífuga"
+  },
+  {
+   "chave": "treino.forcag",
+   "texto": "FORÇA G: {0} G"
+  },
+  {
+   "chave": "treino.est2.dica",
+   "texto": "Respire fundo e contraia as pernas"
+  },
+  {
+   "chave": "treino.est3.nome",
+   "texto": "Laboratório de realidade virtual"
+  },
+  {
+   "chave": "treino.est3.acao",
+   "texto": "Colocar os óculos de VR"
+  },
+  {
+   "chave": "treino.est3.efeito",
+   "texto": "SIMULAÇÃO: CAMINHADA ESPACIAL"
+  },
+  {
+   "chave": "treino.est3.efeito.sub",
+   "texto": "Use o SAFER para voltar à estação"
+  },
+  {
+   "chave": "treino.est4.nome",
+   "texto": "Piscina de flutuabilidade neutra"
+  },
+  {
+   "chave": "treino.est4.acao",
+   "texto": "Vestir o traje de treino e mergulhar"
+  },
+  {
+   "chave": "treino.est4.profundidade",
+   "texto": "PROFUNDIDADE: {0} m"
+  },
+  {
+   "chave": "treino.est4.efeito.sub",
+   "texto": "Flutuabilidade neutra: nem afunda, nem sobe"
+  },
+  {
+   "chave": "treino.est5.nome",
+   "texto": "Gravidade reduzida e campo lunar"
+  },
+  {
+   "chave": "treino.est5.acao",
+   "texto": "Vestir o traje de treino"
+  },
+  {
+   "chave": "treino.est6.nome",
+   "texto": "Sala de trajes"
+  },
+  {
+   "chave": "treino.est6.acao",
+   "texto": "Vestir o traje da missão"
+  },
+  {
+   "chave": "treino.est6.efeito",
+   "texto": "TRAJE PRESSURIZADO"
+  },
+  {
+   "chave": "treino.est6.efeito.sub",
+   "texto": "Todos os sistemas verificados"
+  },
+  {
+   "chave": "ct.obj.falar",
+   "texto": "Fale com a instrutora Lima na entrada"
+  },
+  {
+   "chave": "ct.obj.seguir",
+   "texto": "Siga a instrutora: {0}"
+  },
+  {
+   "chave": "ct.obj.interagir",
+   "texto": "{0} [E]"
+  },
+  {
+   "chave": "ct.obj.saltos",
+   "texto": "Dê três saltos no campo lunar ({0}/3)"
+  },
+  {
+   "chave": "ct.obj.plataforma",
+   "texto": "Vá até a plataforma de lançamento"
+  },
+  {
+   "chave": "ct.progresso",
+   "texto": "TREINAMENTO · ETAPA {0}/{1}"
+  },
+  {
+   "chave": "ct.progresso.fim",
+   "texto": "TREINAMENTO CONCLUÍDO"
+  },
+  {
+   "chave": "ct.prompt",
+   "texto": "[E] {0}"
+  },
+  {
+   "chave": "ct.interagir",
+   "texto": "Interagir"
+  },
+  {
+   "chave": "ct.continuar",
+   "texto": "[E] continuar"
+  },
+  {
+   "chave": "ct.obj.elevador",
+   "texto": "Suba pelo elevador da torre de serviço"
+  },
+  {
+   "chave": "treino.elevador.acao",
+   "texto": "Acionar o elevador"
+  },
+  {
+   "chave": "ct.obj.braco",
+   "texto": "Atravesse o braço de acesso até a Sala Branca"
+  },
+  {
+   "chave": "ct.escotilha.acao",
+   "texto": "Entrar no ônibus espacial"
+  },
+  {
+   "chave": "ct.obj.sentado",
+   "texto": "Você está na cadeira do comandante. Olhe ao redor da cabine."
+  },
+  {
+   "chave": "ct.progresso.missao",
+   "texto": "MISSÃO 1 · BASE LUNAR"
+  },
+  {
+   "chave": "ct.cabine.titulo",
+   "texto": "BEM-VINDO A BORDO, COMANDANTE"
+  },
+  {
+   "chave": "ct.cabine.sub",
+   "texto": "Contagem regressiva em espera: T-9 minutos"
+  },
+  {
+   "chave": "npc.secreto.1",
+   "texto": "Este painel parece uma parede comum, não é? Os treinos de verdade acontecem lá embaixo."
+  },
+  {
+   "chave": "npc.secreto.2",
+   "texto": "Bem-vindo ao corredor super secreto do programa. Só candidatos credenciados descem aqui."
+  },
+  {
+   "chave": "npc.secreto.3",
+   "texto": "Entre no elevador comigo."
+  },
+  {
+   "chave": "npc.subsolo.1",
+   "texto": "Nível menos um. Cada sala deste corredor guarda um treinamento, e as portas abrem na ordem certa."
+  },
+  {
+   "chave": "npc.subsolo.2",
+   "texto": "Fique perto de mim. A primeira sala é a da avaliação médica."
+  },
+  {
+   "chave": "ct.local.painel",
+   "texto": "Painel da recepção"
+  },
+  {
+   "chave": "ct.obj.elevador_secreto",
+   "texto": "Entre no elevador com a instrutora"
+  },
+  {
+   "chave": "ct.obj.corredor",
+   "texto": "Siga a instrutora pelo corredor"
+  },
+  {
+   "chave": "ct.elevador.terreo",
+   "texto": "TÉRREO"
+  },
+  {
+   "chave": "ct.elevador.descendo",
+   "texto": "DESCENDO"
+  },
+  {
+   "chave": "ct.elevador.subsolo",
+   "texto": "NÍVEL -1"
+  },
+  {
+   "chave": "ct.sala.Medico",
+   "texto": "01 · AVALIAÇÃO MÉDICA"
+  },
+  {
+   "chave": "ct.sala.Centrifuga",
+   "texto": "02 · CENTRÍFUGA HUMANA"
+  },
+  {
+   "chave": "ct.sala.RealidadeVirtual",
+   "texto": "03 · REALIDADE VIRTUAL"
+  },
+  {
+   "chave": "ct.sala.NBL",
+   "texto": "04 · FLUTUABILIDADE NEUTRA"
+  },
+  {
+   "chave": "ct.sala.ARGOS",
+   "texto": "05 · GRAVIDADE REDUZIDA"
+  },
+  {
+   "chave": "ct.sala.Trajes",
+   "texto": "06 · SALA DE TRAJES"
+  }
+ ]
+}

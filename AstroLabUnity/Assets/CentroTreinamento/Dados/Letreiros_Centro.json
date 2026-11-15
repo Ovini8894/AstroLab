@@ -1,0 +1,517 @@
+{
+ "letreiros": [
+  {
+   "nome": "TXT_000",
+   "texto": "CENTRO DE TREINAMENTO DE ASTRONAUTAS",
+   "pos": [
+    -1.2,
+    7.45,
+    0.43
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.62,
+   "cor": "CT_Azul_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_001",
+   "texto": "RECEPÇÃO · NASA",
+   "pos": [
+    -0.0,
+    3.85,
+    6.08
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.26,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_002",
+   "texto": "A TERRA AGORA · ISS",
+   "pos": [
+    14.4,
+    4.05,
+    -9.0
+   ],
+   "direita": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "tam": 0.2,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_003",
+   "texto": "PRÓXIMAS MISSÕES",
+   "pos": [
+    -14.4,
+    4.05,
+    -9.0
+   ],
+   "direita": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "tam": 0.2,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_004",
+   "texto": "PROGRAMA DE TREINAMENTO",
+   "pos": [
+    -1.6,
+    3.9,
+    -19.47
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.55,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_005",
+   "texto": "DE ASTRONAUTAS",
+   "pos": [
+    -1.6,
+    3.15,
+    -19.47
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.55,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_006",
+   "texto": "Houston, Texas",
+   "pos": [
+    -1.6,
+    2.2,
+    -19.47
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.32,
+   "cor": "CT_Amarelo",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_007",
+   "texto": "MAQUETE SATURN · CAPACETE EMU",
+   "pos": [
+    -10.5,
+    0.6,
+    -6.84
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.09,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_008",
+   "texto": "MISSÕES QUE FIZERAM HISTÓRIA",
+   "pos": [
+    14.44,
+    3.05,
+    -4.6
+   ],
+   "direita": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "tam": 0.16,
+   "cor": "CT_Azul_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_009",
+   "texto": "MERCURY 1961",
+   "pos": [
+    -7.5,
+    0.5,
+    -4.18
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.14,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_010",
+   "texto": "CORREDOR DE TREINAMENTO",
+   "pos": [
+    -14.89,
+    -15.5,
+    -16.2
+   ],
+   "direita": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "tam": 0.24,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_011",
+   "texto": "NÍVEL -1 · ACESSO RESTRITO",
+   "pos": [
+    -10.75,
+    -16.3,
+    -20.29
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.22,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_012",
+   "texto": "NASA",
+   "pos": [
+    -1.8,
+    1.45,
+    26.84
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 1.05,
+   "cor": "CT_Azul_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_013",
+   "texto": "CENTRO ESPACIAL JOHNSON",
+   "pos": [
+    -1.8,
+    0.68,
+    26.84
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.5,
+   "cor": "CT_Azul_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_014",
+   "texto": "UNITED STATES",
+   "pos": [
+    -17.0,
+    9.8,
+    32.9
+   ],
+   "direita": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "cima": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.5,
+   "cor": "CT_Vermelho_NASA",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_015",
+   "texto": "MERCURY-REDSTONE",
+   "pos": [
+    -17.0,
+    0.75,
+    34.42
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    0.9553,
+    -0.2955
+   ],
+   "normal": [
+    -0.0,
+    0.2955,
+    0.9553
+   ],
+   "tam": 0.18,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_016",
+   "texto": "1961",
+   "pos": [
+    -17.0,
+    0.45,
+    34.38
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    0.9553,
+    -0.2955
+   ],
+   "normal": [
+    -0.0,
+    0.2955,
+    0.9553
+   ],
+   "tam": 0.16,
+   "cor": "CT_Amarelo",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_017",
+   "texto": "PLATAFORMA 39A",
+   "pos": [
+    -48.5,
+    2.75,
+    -57.95
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.3,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_018",
+   "texto": "↑ 180 m",
+   "pos": [
+    -48.5,
+    2.35,
+    -57.95
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.25,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  }
+ ]
+}

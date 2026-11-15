@@ -1,0 +1,679 @@
+%PDF-1.4
+%âãÏÓ
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R ] /Count 7 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Length 9133 >>
+stream
+0.07 0.14 0.24 rg
+0 809.89 595.28 32 re f
+BT /F2 9 Tf 0.65 0.88 1.00 rg
+42.00 821.89 Td (ASTROLAB - ESPECIFICACAO TECNICA E PLANO DE ACAO \(CLAUDE GUIDE\)) Tj ET
+0.05 0.18 0.32 rg
+42.00 743.89 511.28 56.00 re f
+0.00 0.72 0.88 RG 1.5 w
+42.00 743.89 511.28 56.00 re S
+BT /F2 14 Tf 1 1 1 rg 54.00 777.89 Td (ESPECIFICACAO TECNICA - ASTROLAB \(UNITY 6 URP\)) Tj ET
+BT /F1 9.5 Tf 0.75 0.92 1.0 rg 54.00 759.89 Td (Arquitetura de Arquivos e Plano Detalhado para Alcancar 100% das Metas do Documento) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 719.89 Td (Este documento descreve em detalhes a arquitetura atual do repositório AstroLab \(AstroLabUnity/\), o) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 707.39 Td (mapeamento completo de arquivos e assemblies, e o plano técnico passo a passo para alinhar 100% do jogo às) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 694.89 Td (metas do documento de concepção \("BASE LUNAR - Missão de reativação", TesseractEXE, slides 01 a 11\).) Tj ET
+0.90 0.95 0.99 rg
+42.00 650.39 511.28 20.00 re f
+0.05 0.45 0.72 rg
+42.00 650.39 4 20.00 re f
+BT /F2 11.5 Tf 0.05 0.22 0.40 rg 52.00 655.39 Td (1. Visão Geral da Arquitetura e Organização de Arquivos) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 636.39 Td (O projeto utiliza Unity 6000.6.9f1 \(URP\), Input System \(UnityEngine.InputSystem\) e TextMeshPro / uGUI. O) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 623.89 Td (código está dividido em quatro frentes principais dentro de AstroLabUnity/Assets/:) Tj ET
+0.95 0.96 0.98 rg
+46.00 604.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 607.39 Td (AstroLabUnity/Assets/) Tj ET
+0.95 0.96 0.98 rg
+46.00 592.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 595.89 Td (|-- BaseLunar/                         # Cenário 3D da base quebrada e controle FPS base) Tj ET
+0.95 0.96 0.98 rg
+46.00 581.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 584.39 Td (|   |-- Cenas/Lua.unity                # Cena base do modelador \(NÃO sobrescrever\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 569.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 572.89 Td (|   |-- Modelos/BaseLunar.fbx          # Malha 3D principal \(objetos REPAIR_*, Detrito_*, ) Tj ET
+0.95 0.96 0.98 rg
+46.00 558.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 561.39 Td (Porta_*, INT_*, WP_*\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 546.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 549.89 Td (|   |-- Materiais/ e Texturas/         # Materiais URP e texturas com wrap repeat corrigido) Tj ET
+0.95 0.96 0.98 rg
+46.00 535.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 538.39 Td (|   `-- Scripts/) Tj ET
+0.95 0.96 0.98 rg
+46.00 523.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 526.89 Td (|       |-- JogadorFPS.cs              # Controle FPS \(WASD, Shift, Espaço, gravidade lunar 1.62) Tj ET
+0.95 0.96 0.98 rg
+46.00 512.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 515.39 Td ( m/s²\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 500.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 503.89 Td (|       |-- PegadasLunar.cs            # Sistema de pegadas no regolito \(máx. 10 passos ) Tj ET
+0.95 0.96 0.98 rg
+46.00 489.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 492.39 Td (visíveis\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 477.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 480.89 Td (|       |-- IluminacaoCartoon.cs       # Setup visual da cena) Tj ET
+0.95 0.96 0.98 rg
+46.00 466.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 469.39 Td (|       `-- PaletaLua.cs               # Cores e constantes visuais) Tj ET
+0.95 0.96 0.98 rg
+46.00 454.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 457.89 Td (|) Tj ET
+0.95 0.96 0.98 rg
+46.00 443.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 446.39 Td (|-- BaseConsertada/                    # Sistema de troca visual 3D \(Quebrado -> Consertado\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 431.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 434.89 Td (|   |-- Modelos/BaseConsertada.fbx     # Malhas intactas com prefixo OK_*) Tj ET
+0.95 0.96 0.98 rg
+46.00 420.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 423.39 Td (|   |-- Prefabs/BaseConsertada.prefab  # Prefab que sobrepõe a BaseLunar e gerencia os objetos ) Tj ET
+0.95 0.96 0.98 rg
+46.00 408.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 411.89 Td (OK_*) Tj ET
+0.95 0.96 0.98 rg
+46.00 397.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 400.39 Td (|   `-- Scripts/) Tj ET
+0.95 0.96 0.98 rg
+46.00 385.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 388.89 Td (|       |-- BaseConsertada.cs          # API: Consertar\(id\), ConsertarCategoria\(cat\), ) Tj ET
+0.95 0.96 0.98 rg
+46.00 374.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 377.39 Td (Quebrar\(id\), LimparDetritos\(bool\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 362.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 365.89 Td (|       `-- PecasDaBase.cs             # Catálogo estático das 32 peças em 7 categorias) Tj ET
+0.95 0.96 0.98 rg
+46.00 351.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 354.39 Td (|) Tj ET
+0.95 0.96 0.98 rg
+46.00 339.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 342.89 Td (|-- UI/Capacete/                       # HUD holográfico em 1ª pessoa e Scanner diegético) Tj ET
+0.95 0.96 0.98 rg
+46.00 328.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 331.39 Td (|   |-- Prefabs/) Tj ET
+0.95 0.96 0.98 rg
+46.00 316.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 319.89 Td (|   |   |-- HudCapacete.prefab         # Canvas uGUI do visor \(StatusTopo, Missao, Interacao, ) Tj ET
+0.95 0.96 0.98 rg
+46.00 305.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 308.39 Td (Alerta, Exploracao\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 293.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 296.89 Td (|   |   `-- MaosEScanner.prefab        # Braços em 1ª pessoa e scanner portátil animado) Tj ET
+0.95 0.96 0.98 rg
+46.00 282.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 285.39 Td (|   `-- Scripts/) Tj ET
+0.95 0.96 0.98 rg
+46.00 270.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 273.89 Td (|       |-- HudCapacete.cs             # Controlador principal do HUD \(O2, Energia, Distância, ) Tj ET
+0.95 0.96 0.98 rg
+46.00 259.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 262.39 Td (Missão, Ficha Modal\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 247.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 250.89 Td (|       |-- GraficoCapacete.cs         # Gráficos procedurais do visor \(Anel, Barras, Retículo, ) Tj ET
+0.95 0.96 0.98 rg
+46.00 236.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 239.39 Td (Molduras\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 224.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 227.89 Td (|       |-- DestaqueInterativoUI.cs    # Brilho periódico \(2s, esquerda->direita\) nos elementos ) Tj ET
+0.95 0.96 0.98 rg
+46.00 213.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 216.39 Td (interativos) Tj ET
+0.95 0.96 0.98 rg
+46.00 201.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 204.89 Td (|       |-- ScannerPrimeiraPessoa.cs   # Scanner \(segurar E ou Clique Esquerdo por 1.35s; Tab ) Tj ET
+0.95 0.96 0.98 rg
+46.00 190.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 193.39 Td (guarda/equipa\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 178.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 181.89 Td (|       |-- CatalogoScanner.cs         # Descrições de fallback para objetos do cenário) Tj ET
+0.95 0.96 0.98 rg
+46.00 167.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 170.39 Td (|       `-- AlvoExploracao.cs          # Componente de dados científicos anexado a alvos ) Tj ET
+0.95 0.96 0.98 rg
+46.00 155.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 158.89 Td (escaneáveis) Tj ET
+0.95 0.96 0.98 rg
+46.00 144.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 147.39 Td (|) Tj ET
+0.95 0.96 0.98 rg
+46.00 132.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 135.89 Td (|-- Treinamentos/) Tj ET
+0.95 0.96 0.98 rg
+46.00 121.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 124.39 Td (|   `-- CapacetePedro.unity            # Cena com BaseLunar + JogadorFPS + HudCapacete + ) Tj ET
+0.95 0.96 0.98 rg
+46.00 109.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 112.89 Td (MaosEScanner) Tj ET
+0.95 0.96 0.98 rg
+46.00 98.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 101.39 Td (|) Tj ET
+0.95 0.96 0.98 rg
+46.00 86.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 89.89 Td (`-- Nicholas/                          # Motor de Missão \(3 turnos\), Integração NASA e Cena ) Tj ET
+0.95 0.96 0.98 rg
+46.00 75.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 78.39 Td (Integrada) Tj ET
+0.95 0.96 0.98 rg
+46.00 63.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 66.89 Td (    |-- Cenas/) Tj ET
+0.82 0.86 0.90 RG 0.5 w 42.00 36.00 m 553.28 36.00 l S
+BT /F1 8.5 Tf 0.40 0.45 0.52 rg 42.00 24.00 Td (AstroLab Unity - Guia de Implementacao para o Claude | Pagina 1 de 7) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 9324 >>
+stream
+0.07 0.14 0.24 rg
+0 809.89 595.28 32 re f
+BT /F2 9 Tf 0.65 0.88 1.00 rg
+42.00 821.89 Td (ASTROLAB - ESPECIFICACAO TECNICA E PLANO DE ACAO \(CLAUDE GUIDE\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 786.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 789.89 Td (    |   `-- MissaoNicholas.unity       # CENA PRINCIPAL DO JOGO INTEGRADO \(foco das alterações\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 775.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 778.39 Td (    |-- Core/                          # Assembly isolado: AstroLab.Nicholas.Core.asmdef \(Puro ) Tj ET
+0.95 0.96 0.98 rg
+46.00 763.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 766.89 Td (C#, sem Unity UI\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 752.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 755.39 Td (    |   |-- MissionRuleSet.cs          # Constantes de balanceamento e catálogo dos 7 ) Tj ET
+0.95 0.96 0.98 rg
+46.00 740.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 743.89 Td (equipamentos) Tj ET
+0.95 0.96 0.98 rg
+46.00 729.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 732.39 Td (    |   |-- MissionTypes.cs            # Enums \(EquipmentId, ArtifactId, MissionOutcome\) e ) Tj ET
+0.95 0.96 0.98 rg
+46.00 717.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 720.89 Td (structs) Tj ET
+0.95 0.96 0.98 rg
+46.00 706.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 709.39 Td (    |   |-- MissionSnapshot.cs         # Estado serializável da partida \(para Save/Load JSON\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 694.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 697.89 Td (    |   |-- MissionEngine.cs           # Máquina de estados e regras \(Repair, SetPowered, ) Tj ET
+0.95 0.96 0.98 rg
+46.00 683.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 686.39 Td (StartEva, AdvanceTurn\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 671.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 674.89 Td (    |   |-- Apollo15Trail.cs           # Dados curados dos 5 artefatos históricos da Apollo 15) Tj ET
+0.95 0.96 0.98 rg
+46.00 660.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 663.39 Td (    |   `-- MissionReport.cs           # Gerador de relatório textual de fim de partida) Tj ET
+0.95 0.96 0.98 rg
+46.00 648.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 651.89 Td (    |-- Integrations/) Tj ET
+0.95 0.96 0.98 rg
+46.00 637.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 640.39 Td (    |   `-- NasaImageLibraryClient.cs  # Cliente HTTP para https://images-api.nasa.gov + cache ) Tj ET
+0.95 0.96 0.98 rg
+46.00 625.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 628.89 Td (offline JSON) Tj ET
+0.95 0.96 0.98 rg
+46.00 614.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 617.39 Td (    |-- Runtime/                       # Scripts MonoBehaviour \(Assembly-CSharp - enxerga ) Tj ET
+0.95 0.96 0.98 rg
+46.00 602.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 605.89 Td (BaseConsertada e UI\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 591.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 594.39 Td (    |   |-- MissionController.cs       # Singleton de ponte entre MissionEngine e a cena Unity) Tj ET
+0.95 0.96 0.98 rg
+46.00 579.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 582.89 Td (    |   |-- MissionOverlay.cs          # Painel F2 \(Controle da Missão, Energia, Inspeção, Museu) Tj ET
+0.95 0.96 0.98 rg
+46.00 568.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 571.39 Td ( Apollo 15\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 556.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 559.89 Td (    |   |-- MissionPlayerInteraction.cs# Raycast de interação \(E = Inspecionar, R = Reparar, L =) Tj ET
+0.95 0.96 0.98 rg
+46.00 545.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 548.39 Td ( Eclusa\)) Tj ET
+0.95 0.96 0.98 rg
+46.00 533.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 536.89 Td (    |   |-- MissionHelmetBridge.cs     # Sincroniza dados do MissionEngine com HudCapacete) Tj ET
+0.95 0.96 0.98 rg
+46.00 522.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 525.39 Td (    |   |-- MissionScannerBridge.cs    # Escuta evento aoConcluir do ScannerPrimeiraPessoa) Tj ET
+0.95 0.96 0.98 rg
+46.00 510.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 513.89 Td (    |   |-- MissionEquipmentTarget.cs  # Marcador anexado aos objetos REPAIR_* na cena) Tj ET
+0.95 0.96 0.98 rg
+46.00 499.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 502.39 Td (    |   |-- MissionHistoricalTarget.cs # Marcador anexado às 5 réplicas da Apollo 15) Tj ET
+0.95 0.96 0.98 rg
+46.00 487.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 490.89 Td (    |   `-- OptionalTeamComponents.cs  # Helpers de reflexão) Tj ET
+0.95 0.96 0.98 rg
+46.00 476.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 479.39 Td (    |-- Editor/) Tj ET
+0.95 0.96 0.98 rg
+46.00 464.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 467.89 Td (    |   `-- NicholasMissionSceneBuilder.cs # Script de geração/configuração da cena ) Tj ET
+0.95 0.96 0.98 rg
+46.00 453.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 456.39 Td (MissaoNicholas.unity) Tj ET
+0.95 0.96 0.98 rg
+46.00 441.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 444.89 Td (    `-- Tests/EditMode/) Tj ET
+0.95 0.96 0.98 rg
+46.00 430.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 433.39 Td (        `-- MissionEngineTests.cs      # 9 testes unitários NUnit ) Tj ET
+0.95 0.96 0.98 rg
+46.00 418.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 421.89 Td (\(AstroLab.Nicholas.Core.Tests.asmdef\)) Tj ET
+BT /F2 10.5 Tf 0.06 0.32 0.55 rg 42.00 398.39 Td (Detalhe Crítico sobre Assemblies \(`asmdef`\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 383.39 Td (* Assets/Nicholas/Core/AstroLab.Nicholas.Core.asmdef compila apenas Assets/Nicholas/Core/. Ele não) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 370.89 Td (referencia UnityEngine nem Assembly-CSharp.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 358.39 Td (* Assets/Nicholas/Runtime/, Assets/BaseConsertada/Scripts/ e Assets/UI/Capacete/Scripts/ não possuem) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 345.89 Td (.asmdef próprio e residem todos em Assembly-CSharp. Portanto, MissionController.cs,) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 333.39 Td (MissionPlayerInteraction.cs e MissionScannerBridge.cs podem referenciar diretamente BaseConsertada,) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 320.89 Td (PecasDaBase, HudCapacete e ScannerPrimeiraPessoa sem necessidade de reflexão.) Tj ET
+0.90 0.95 0.99 rg
+42.00 276.39 511.28 20.00 re f
+0.05 0.45 0.72 rg
+42.00 276.39 4 20.00 re f
+BT /F2 11.5 Tf 0.05 0.22 0.40 rg 52.00 281.39 Td (2. Lista Concisa de Tarefas \(Resumo Executivo\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 262.39 Td (1. [ALTA] Conectar BaseConsertada ao MissionController: fazer cada reparo no MissionEngine trocar) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 249.89 Td (imediatamente os modelos 3D quebrados \(REPAIR_ e Detrito_\) pelos modelos consertados \(OK_\) na cena) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 237.39 Td (MissaoNicholas.unity.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 224.89 Td (2. [ALTA] Resolver conflito de input \(E / Clique Esquerdo\) entre Scanner e Inspeção: impedir que) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 212.39 Td (MissionPlayerInteraction abra a janela F2 instantaneamente ao clicar em artefatos da Apollo 15 \(exigir o) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 199.89 Td (scan de 1.35s do ScannerPrimeiraPessoa\), e impedir que o scanner inicie varredura científica ao interagir) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 187.39 Td (com equipamentos técnicos \(MissionEquipmentTarget\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 174.89 Td (3. [ALTA] Rebalancear MissionRuleSet.cs e atualizar MissionEngineTests.cs: ajustar peças iniciais \(16 ->) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 162.39 Td (12\) e consumo do traje em EVA para tornar o Carregador de Trajes \(2 de energia\) realmente necessário,) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 149.89 Td (ativando na prática o dilema energético do Slide 05 \(Estufa vs. Recarga do Traje\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 137.39 Td (4. [MÉDIA] Exibir Checklist de Vitória no Painel F2 e Alerta Prévio de Radiação no Turno 2: mostrar) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 124.89 Td (claramente no MissionOverlay os 7 requisitos de ResolveMission\(\) e emitir aviso de tempestade solar no) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 112.39 Td (início do Turno 2.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 99.89 Td (5. [MÉDIA] Substituir os cubos brancos \(PrimitiveType.Cube\) na cena MissaoNicholas.unity: vincular o) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 87.39 Td (RadiationShelter a uma malha real da base e substituir/estilizar os 5 cubos NICHOLAS_REPLICA_ da trilha) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 74.89 Td (Apollo 15.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 62.39 Td (6. [MÉDIA] Estruturar o MissionReport.cs com as 4 perguntas pedagógicas do Slide 11: responder) Tj ET
+0.82 0.86 0.90 RG 0.5 w 42.00 36.00 m 553.28 36.00 l S
+BT /F1 8.5 Tf 0.40 0.45 0.52 rg 42.00 24.00 Td (AstroLab Unity - Guia de Implementacao para o Claude | Pagina 2 de 7) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 7956 >>
+stream
+0.07 0.14 0.24 rg
+0 809.89 595.28 32 re f
+BT /F2 9 Tf 0.65 0.88 1.00 rg
+42.00 821.89 Td (ASTROLAB - ESPECIFICACAO TECNICA E PLANO DE ACAO \(CLAUDE GUIDE\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 789.89 Td (dinamicamente Para onde foram os recursos?, Qual prioridade funcionou?, O que faltou? e Como melhorar na) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 777.39 Td (próxima tentativa?.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 764.89 Td (7. [BAIXA] Polimento de Save/Load, Transição de Eclusa e Feedback de Áudio: persistir posição do jogador) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 752.39 Td (e estado visual da BaseConsertada ao carregar \(F9\), e suavizar o teleporte da eclusa \(L\).) Tj ET
+0.90 0.95 0.99 rg
+42.00 707.89 511.28 20.00 re f
+0.05 0.45 0.72 rg
+42.00 707.89 4 20.00 re f
+BT /F2 11.5 Tf 0.05 0.22 0.40 rg 52.00 712.89 Td (3. Especificação Detalhada de Cada Tarefa) Tj ET
+BT /F2 10.5 Tf 0.06 0.32 0.55 rg 42.00 689.89 Td (TAREFA 1 [ALTA PRIORIDADE]: Integração Visual 3D de Reparos \(`BaseConsertada` <-> `MissionController`\)) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 668.89 Td (Problema Atual) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 654.89 Td (* Na apresentação \(Slide 06 e Slide 10\), cada reparo deve alterar o estado visual do objeto 3D de) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 642.39 Td (quebrado para consertado.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 629.89 Td (* O projeto já possui Assets/BaseConsertada/Prefabs/BaseConsertada.prefab e BaseConsertada.cs, que) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 617.39 Td (controla 32 peças \(PecasDaBase.cs\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 604.89 Td (* Porém, MissionController.cs não chama BaseConsertada e a cena MissaoNicholas.unity não instancia) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 592.39 Td (BaseConsertada.prefab. Quando o jogador repara um sistema, o texto muda para [Operacional], mas a malha) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 579.89 Td (3D continua quebrada.) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 561.39 Td (Mapeamento Exato \(`EquipmentId` -> `BaseConsertada`\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 547.39 Td (Em PecasDaBase.cs, as peças estão agrupadas em 7 categorias \(Energia, Suporte de Vida, Água, Estufa,) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 534.89 Td (Trajes, Comunicação, Habitação\). O mapeamento exato para EquipmentId é:) Tj ET
+0.95 0.96 0.98 rg
+46.00 515.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 518.39 Td (| EquipmentId \(MissionTypes.cs\) | Estado Inicial | Ação em BaseConsertada quando reparado |) Tj ET
+0.95 0.96 0.98 rg
+46.00 499.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 502.89 Td (| EquipmentId.SolarPanels | Quebrado | baseConsertada.ConsertarCategoria\("Energia"\) \(conserta ) Tj ET
+0.95 0.96 0.98 rg
+46.00 488.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 491.39 Td (Painel_1..4, Cabos_Solares, Caixa_Juncao\) |) Tj ET
+0.95 0.96 0.98 rg
+46.00 472.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 475.89 Td (| EquipmentId.LifeSupport | Quebrado | baseConsertada.ConsertarCategoria\("Suporte de Vida"\) ) Tj ET
+0.95 0.96 0.98 rg
+46.00 461.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 464.39 Td (\(conserta Gerador_O2, Tanque_O2, Filtro_CO2, Ventilacao\) |) Tj ET
+0.95 0.96 0.98 rg
+46.00 445.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 448.89 Td (| EquipmentId.WaterRecycler | Quebrado | baseConsertada.ConsertarCategoria\("Água"\) \(conserta ) Tj ET
+0.95 0.96 0.98 rg
+46.00 434.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 437.39 Td (Reciclador_H2O, Tanque_Agua, Cano_Agua\) |) Tj ET
+0.95 0.96 0.98 rg
+46.00 418.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 421.89 Td (| EquipmentId.Greenhouse | Quebrado | baseConsertada.ConsertarCategoria\("Estufa"\) \(conserta ) Tj ET
+0.95 0.96 0.98 rg
+46.00 407.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 410.39 Td (Estufa_Painel, Luz_Grow_1, Luz_Grow_2, Hidroponia_1..3, Irrigacao\) |) Tj ET
+0.95 0.96 0.98 rg
+46.00 391.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 394.89 Td (| EquipmentId.RadiationShelter | Quebrado | baseConsertada.ConsertarCategoria\("Habitação"\) + ) Tj ET
+0.95 0.96 0.98 rg
+46.00 380.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 383.39 Td (baseConsertada.LimparDetritos\(true\) |) Tj ET
+0.95 0.96 0.98 rg
+46.00 364.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 367.89 Td (| EquipmentId.SuitCharger | Já começa reparado \(StartsRepaired = true\) | ) Tj ET
+0.95 0.96 0.98 rg
+46.00 353.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 356.39 Td (baseConsertada.ConsertarCategoria\("Trajes"\) logo na inicialização |) Tj ET
+0.95 0.96 0.98 rg
+46.00 337.89 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 340.89 Td (| EquipmentId.Communications | Já começa reparado \(StartsRepaired = true\) | ) Tj ET
+0.95 0.96 0.98 rg
+46.00 326.39 503.28 11.5 re f
+BT /F3 8.0 Tf 0.12 0.18 0.28 rg 52.00 329.39 Td (baseConsertada.ConsertarCategoria\("Comunicação"\) logo na inicialização |) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 307.89 Td (O que implementar passo a passo) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 293.89 Td (1. Na cena MissaoNicholas.unity e em NicholasMissionSceneBuilder.cs:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 281.39 Td (- Instanciar o prefab Assets/BaseConsertada/Prefabs/BaseConsertada.prefab na raiz da cena \(ou) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 268.89 Td (localizá-lo em runtime via FindFirstObjectByType<BaseConsertada>\(\)\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 256.39 Td (2. Em Assets/Nicholas/Runtime/MissionController.cs:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 243.89 Td (- Adicionar [SerializeField] private BaseConsertada baseConsertada; e resolvê-lo no Awake\(\) com if) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 231.39 Td (\(!baseConsertada\) baseConsertada = FindFirstObjectByType<BaseConsertada>\(\);.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 218.89 Td (- Criar um método privado SyncVisualBase\(\) que percorre todos os EquipmentId e:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 206.39 Td (- Se Engine.IsRepaired\(id\) for true, chama ConsertarCategoria correspondente \(e LimparDetritos\(true\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 193.89 Td (se RadiationShelter estiver reparado\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 181.39 Td (- Se for false \(ex.: após NewGame\(\) ou LoadGame\(\)\), chama Quebrar\(p.id\) para as peças daquela) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 168.89 Td (categoria e LimparDetritos\(false\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 156.39 Td (- Chamar SyncVisualBase\(\) no final do Start\(\), dentro de Repair\(EquipmentId id\) quando result.Success) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 143.89 Td (== true, em NewGame\(\) e em LoadGame\(\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 131.39 Td (3. Atenção aos Colliders de Interação \(MissionEquipmentTarget\):) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 118.89 Td (- Quando BaseConsertada.Aplicar\(p, true\) roda, os objetos REPAIR_ originais são desativados) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 106.39 Td (\(SetActive\(false\)\) e os objetos OK_ são ativados \(SetActive\(true\)\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 93.89 Td (- Para que o jogador continue podendo inspecionar \(E\) o equipamento depois de consertado \(para ver seu) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 81.39 Td (status ou ligar/desligar energia\), ao ativar os objetos OK_ ou no Start\(\) do MissionController,) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 68.89 Td (garanta que os objetos OK_ equivalentes \(OK_Painel_1..4, OK_Gerador_O2, OK_Reciclador_H2O,) Tj ET
+0.82 0.86 0.90 RG 0.5 w 42.00 36.00 m 553.28 36.00 l S
+BT /F1 8.5 Tf 0.40 0.45 0.52 rg 42.00 24.00 Td (AstroLab Unity - Guia de Implementacao para o Claude | Pagina 3 de 7) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 7427 >>
+stream
+0.07 0.14 0.24 rg
+0 809.89 595.28 32 re f
+BT /F2 9 Tf 0.65 0.88 1.00 rg
+42.00 821.89 Td (ASTROLAB - ESPECIFICACAO TECNICA E PLANO DE ACAO \(CLAUDE GUIDE\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 789.89 Td (OK_Estufa_Painel, OK_Baterias, OK_Antena_Prato\) também recebam Collider e MissionEquipmentTarget) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 777.39 Td (configurados com o mesmo EquipmentId!) Tj ET
+BT /F2 10.5 Tf 0.06 0.32 0.55 rg 42.00 748.89 Td (TAREFA 2 [ALTA PRIORIDADE]: Unificação do Fluxo de Input \(`E` / Clique Esquerdo / Scanner\)) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 727.89 Td (Problema Atual) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 713.89 Td (* Em MissionPlayerInteraction.cs \(linhas 61-80\), pressionar E ou o botão esquerdo do mouse) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 701.39 Td (\(leftButton.wasPressedThisFrame\) abre imediatamente o modal F2 tanto para MissionEquipmentTarget quanto) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 688.89 Td (para MissionHistoricalTarget.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 676.39 Td (* Simultaneamente, ScannerPrimeiraPessoa.cs \(linhas 76-81\) usa eKey.isPressed || leftButton.isPressed) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 663.89 Td (para carregar a barra de ANALISANDO XX% durante 1.35s \(tempoAnalise\) e ao final abrir a ficha do) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 651.39 Td (capacete + disparar aoConcluir.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 638.89 Td (* Resultado: ao tentar escanear um artefato da Apollo 15, o painel F2 abre no primeiro frame \(bloqueando) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 626.39 Td (o cursor e interrompendo o scanner\), ou ambos os modais \(HudCapacete.FichaAberta e) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 613.89 Td (MissionOverlay.IsVisible\) competem na tela.) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 595.39 Td (O que implementar passo a passo) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 581.39 Td (1. Em Assets/Nicholas/Runtime/MissionPlayerInteraction.cs:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 568.89 Td (- Remover mouse.leftButton.wasPressedThisFrame da variável interact para equipamentos técnicos - usar) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 556.39 Td (apenas a tecla E para inspecionar equipamentos \(MissionEquipmentTarget\) e R para reparo rápido.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 543.89 Td (- Quando o raycast atingir um MissionHistoricalTarget \(réplica da Apollo 15\):) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 531.39 Td (- Atualizar CurrentPrompt para: "Segure [E] ou Clique Esquerdo com o Scanner: " + historyTarget.Label.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 518.89 Td (- Não chamar overlay.OpenArtifact\(historyTarget.Artifact\) no clique instantâneo de) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 506.39 Td (MissionPlayerInteraction. Deixar que o ScannerPrimeiraPessoa conclua a leitura de 1.35s.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 493.89 Td (2. Em Assets/UI/Capacete/Scripts/ScannerPrimeiraPessoa.cs:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 481.39 Td (- No método Update\(\), antes de iniciar a contagem de progresso \(linha 84\), verificar se o hit.collider) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 468.89 Td (possui MissionEquipmentTarget no próprio objeto ou nos pais) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 456.39 Td (\(hit.collider.GetComponentInParent<AstroLab.Nicholas.MissionEquipmentTarget>\(\) != null\). Se for um) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 443.89 Td (equipamento de manutenção da base e não tiver MissionHistoricalTarget, o scanner não deve abrir a) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 431.39 Td (ficha genérica no fim do scan, evitando conflito com a inspeção técnica da missão.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 418.89 Td (3. Em Assets/Nicholas/Runtime/MissionScannerBridge.cs e HudCapacete.cs:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 406.39 Td (- Quando ScannerPrimeiraPessoa conclui o scan de um MissionHistoricalTarget, HudCapacete.MostrarFicha) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 393.89 Td (abre a ficha do visor e MissionScannerBridge.Scanned\(\) chama) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 381.39 Td (overlay.SetPendingArtifact\(target.Artifact\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 368.89 Td (- Para evitar duas janelas sobrepostas ao mesmo tempo: em ScannerPrimeiraPessoa.Concluir\(\), se o) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 356.39 Td (objeto escaneado tiver MissionHistoricalTarget e MissionScannerBridge estiver ativo na cena, deixe) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 343.89 Td (apenas o MissionOverlay \(SetPendingArtifact\) abrir a janela completa da Apollo 15 \(que já exibe) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 331.39 Td (história, fonte oficial da NASA, miniatura da API e o quiz da Pena/Martelo\), não abrindo o modal) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 318.89 Td (duplicado do HudCapacete por baixo.) Tj ET
+BT /F2 10.5 Tf 0.06 0.32 0.55 rg 42.00 290.39 Td (TAREFA 3 [ALTA PRIORIDADE]: Rebalanceamento de Recursos e EVA \(`MissionRuleSet.cs` e Testes\)) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 269.39 Td (Problema Atual) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 255.39 Td (1. Peças de reposição sobrando: Os 5 reparos da partida custam 2 + 3 + 2 + 2 + 3 = 12 peças, mas) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 242.89 Td (StartingSpareParts = 16. O jogador nunca precisa priorizar peças \(contradizendo o Slide 04: "O abrigo) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 230.39 Td (precisa estar pronto e compete por peças e tempo"\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 217.89 Td (2. Carregador de Trajes inútil na prática: O dreno de EVA é 0.18%/s \(O2\) e 0.14%/s \(Bateria\), dando mais) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 205.39 Td (de 9 minutos de autonomia em tempo real. Como a usina solar e os artefatos ficam a 15-35m da eclusa, o) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 192.89 Td (jogador faz todas as EVAs do jogo gastando menos de 15% do traje e nunca precisa ligar o SuitCharger \(2) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 58.00 180.39 Td (de energia\), anulando o dilema do Slide 05 \(Estufa 3 pts vs. Recarga do traje 2 pts\).) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 161.89 Td (O que implementar passo a passo) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 147.89 Td (1. Em Assets/Nicholas/Core/MissionRuleSet.cs:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 135.39 Td (- Alterar StartingSpareParts de 16 para 12 \(ou 11 caso queira que o jogador escolha entre consertar o) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 122.89 Td (WaterRecycler ou economizar água desligando a estufa em 1 turno; com 12, o orçamento é exato para) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 110.39 Td (todos os 5 reparos sem sobras\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 97.89 Td (- Ajustar o consumo de EVA para criar pressão real de retorno e recarga:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 85.39 Td (- Aumentar SuitOxygenDrainPerSecond de 0.18f para 0.55f \(~3 minutos de EVA contínua até 0%, entrando) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 72.89 Td (na faixa de alerta < 35% após ~115 segundos\).) Tj ET
+0.82 0.86 0.90 RG 0.5 w 42.00 36.00 m 553.28 36.00 l S
+BT /F1 8.5 Tf 0.40 0.45 0.52 rg 42.00 24.00 Td (AstroLab Unity - Guia de Implementacao para o Claude | Pagina 4 de 7) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 6893 >>
+stream
+0.07 0.14 0.24 rg
+0 809.89 595.28 32 re f
+BT /F2 9 Tf 0.65 0.88 1.00 rg
+42.00 821.89 Td (ASTROLAB - ESPECIFICACAO TECNICA E PLANO DE ACAO \(CLAUDE GUIDE\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 789.89 Td (- Aumentar SuitBatteryDrainPerSecond de 0.14f para 0.50f.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 777.39 Td (- Custo operacional em EVA \(MissionEngine.cs\):) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 764.89 Td (- Em MissionEngine.Repair\(EquipmentId id\): se rule.RequiresEva for true \(ex.: SolarPanels\), deduzir) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 752.39 Td (também 18f de SuitBattery e 12f de SuitOxygen pelo esforço físico/ferramental da manutenção externa) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 739.89 Td (\(verificando antes se há traje suficiente\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 727.39 Td (- Em MissionEngine.RegisterArtifact\(...\): deduzir 10f de SuitBattery e 8f de SuitOxygen por cada) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 714.89 Td (registro científico em campo.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 702.39 Td (- Com isso, consertar os painéis solares + escanear os 5 artefatos + caminhar consumirá mais de) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 689.89 Td (90%-110% de bateria/O2 ao longo da partida, obrigando o jogador a planejar 2 EVAs e ligar o Carregador) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 677.39 Td (de Trajes \(2 de energia\) em pelo menos um momento!) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 664.89 Td (2. Em Assets/Nicholas/Tests/EditMode/MissionEngineTests.cs:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 652.39 Td (- Atualizar os testes unitários afetados:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 639.89 Td (- Em ReparoEAtomicoSemPecasOuTempo\(\): atualizar Assert.AreEqual\(16, ...\) para 12 e Assert.AreEqual\(14,) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 627.39 Td (...\) para 10.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 614.89 Td (- Em EvaConsomeTrajePorTempoENaoPorFrame\(\): atualizar a fórmula esperada para usar) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 602.39 Td (MissionRuleSet.SuitOxygenDrainPerSecond  0.2f em vez do literal 0.18f  0.2f.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 589.89 Td (- Garantir que CaminhoCompletoVenceAoFimDoTerceiroTurno\(\) continue passando 100%.) Tj ET
+BT /F2 10.5 Tf 0.06 0.32 0.55 rg 42.00 561.39 Td (TAREFA 4 [MÉDIA PRIORIDADE]: Checklist Explícito de Vitória e Aviso Prévio da Tempestade Solar) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 540.39 Td (Problema Atual) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 526.39 Td (* As condições exatas verificadas em MissionEngine.ResolveMission\(\) \(linhas 233-250\) só aparecem quando) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 513.89 Td (o jogador já perdeu ou venceu no fim do Turno 3.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 501.39 Td (* O evento de radiação solar ocorre ao avançar do Turno 2 para o Turno 3 \(if \(current == 2\) em) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 488.89 Td (MissionEngine.AdvanceTurn\(\)\), sem aviso explícito no início do Turno 2.) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 470.39 Td (O que implementar passo a passo) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 456.39 Td (1. Em Assets/Nicholas/Core/MissionEngine.cs \(AdvanceTurn\):) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 443.89 Td (- Quando o turno avança de 1 para 2 \(state.Turn == 2\), registrar imediatamente um alerta no histórico) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 431.39 Td (e no feedback:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 418.89 Td (     csharp) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 406.39 Td (     if \(state.Turn == 2 && !IsRepaired\(EquipmentId.RadiationShelter\)\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 393.89 Td (     {) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 381.39 Td (         Record\(MissionEventType.Warning, "ALERTA SOLAR: Tempestade de radiação prevista para o final do) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 368.89 Td (Turno 2. Repare o Abrigo de Radiação antes de encerrar este turno!"\);) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 356.39 Td (     }) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 343.89 Td (2. Em Assets/Nicholas/Runtime/MissionOverlay.cs \(DrawOverview\):) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 331.39 Td (- Adicionar um bloco visual "METAS PARA A PRÓXIMA TRIPULAÇÃO \(FIM DO TURNO 3\)" exibindo em tempo real) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 318.89 Td (o status \([OK] em verde ou [PENDENTE] em amarelo/vermelho\) dos 7 critérios de ResolveMission\(\):) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 306.39 Td (1. Painéis Solares reparados \(engine.IsRepaired\(EquipmentId.SolarPanels\)\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 293.89 Td (2. Suporte de Vida reparado e energizado \(engine.IsPowered\(EquipmentId.LifeSupport\)\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 281.39 Td (3. Estufa Hidropônica reparada e energizada \(engine.IsPowered\(EquipmentId.Greenhouse\)\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 268.89 Td (4. Abrigo de Radiação reparado \(engine.IsRepaired\(EquipmentId.RadiationShelter\)\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 256.39 Td (5. Reserva de Ar >= 30% \(state.HabitatAir >= MissionRuleSet.MinimumEndHabitatAir\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 243.89 Td (6. Estoque de Água >= 1 \(state.Water >= MissionRuleSet.MinimumEndWater\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 231.39 Td (7. Estoque de Alimentos >= 2 \(state.Food >= MissionRuleSet.MinimumEndFood\)) Tj ET
+BT /F2 10.5 Tf 0.06 0.32 0.55 rg 42.00 202.89 Td (TAREFA 5 [MÉDIA PRIORIDADE]: Substituição dos Placeholders Geométricos \(`Cube`\) na Cena) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 181.89 Td (Problema Atual) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 167.89 Td (* Em NicholasMissionSceneBuilder.cs:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 155.39 Td (  - AddRadiationTarget\(\) \(linhas 196-206\) cria um cubo sem material \(sharedMaterial = null\) chamado) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 142.89 Td (Nicholas_Painel_Manutencao_Abrigo.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 130.39 Td (  - AddScienceMarkers\(\) \(linhas 208-240\) cria 5 cubos padrão \(NICHOLAS_REPLICA_Hammer, Feather, Rover,) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 117.89 Td (Retroreflector, FalconDescentStage\).) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 99.39 Td (O que implementar passo a passo) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 85.39 Td (1. Abrigo de Radiação \(RadiationShelter\):) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 72.89 Td (- Na BaseLunar, procurar primeiro os objetos reais do módulo de habitação \(REPAIR_Beliche_1,) Tj ET
+0.82 0.86 0.90 RG 0.5 w 42.00 36.00 m 553.28 36.00 l S
+BT /F1 8.5 Tf 0.40 0.45 0.52 rg 42.00 24.00 Td (AstroLab Unity - Guia de Implementacao para o Claude | Pagina 5 de 7) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Length 7533 >>
+stream
+0.07 0.14 0.24 rg
+0 809.89 595.28 32 re f
+BT /F2 9 Tf 0.65 0.88 1.00 rg
+42.00 821.89 Td (ASTROLAB - ESPECIFICACAO TECNICA E PLANO DE ACAO \(CLAUDE GUIDE\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 789.89 Td (REPAIR_Beliche_2, REPAIR_Mesa ou REPAIR_Armario_1\) e anexar MissionEquipmentTarget) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 777.39 Td (\(EquipmentId.RadiationShelter\) a eles, além de estilizar o Nicholas_Painel_Manutencao_Abrigo com o) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 764.89 Td (material M_Console_Branco.mat / M_Detalhes_Ciano.mat \(Assets/BaseLunar/Materiais/\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 752.39 Td (2. Marcadores da Trilha Apollo 15 \(NICHOLAS_REPLICA_\):) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 739.89 Td (- Criar uma hierarquia visual de pedestal/baliza científica \(base cilíndrica metálica + haste + topo) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 727.39 Td (emissivo ciano usando M_Detalhes_Ciano.mat e M_Metal_Escuro.mat de Assets/BaseLunar/Materiais/\) ou) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 714.89 Td (modelos distintos para cada um dos 5 artefatos na cena MissaoNicholas.unity e no método) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 702.39 Td (AddScienceMarkers\(\) de NicholasMissionSceneBuilder.cs.) Tj ET
+BT /F2 10.5 Tf 0.06 0.32 0.55 rg 42.00 673.89 Td (TAREFA 6 [MÉDIA PRIORIDADE]: Relatório Final Estruturado conforme o Slide 11 \(`MissionReport.cs`\)) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 652.89 Td (Problema Atual) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 638.89 Td (* O Slide 11 especifica que o Relatório da Missão deve responder a 4 perguntas:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 626.39 Td (1. Para onde foram os recursos?) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 613.89 Td (2. Qual prioridade funcionou?) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 601.39 Td (3. O que faltou?) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 588.89 Td (4. Como melhorar na próxima tentativa?) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 576.39 Td (* Atualmente, MissionReport.Build\(\) \(32 linhas\) apenas lista os valores brutos e o log de eventos.) Tj ET
+BT /F2 9.8 Tf 0.15 0.25 0.38 rg 42.00 557.89 Td (O que implementar passo a passo) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 543.89 Td (* Atualizar Assets/Nicholas/Core/MissionReport.cs para incluir as 4 seções explícitas calculadas a) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 531.39 Td (partir de engine.State:) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 518.89 Td (  - 1. PARA ONDE FORAM OS RECURSOS: detalhar quantas peças foram usadas \(12 - state.SpareParts de 12\),) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 506.39 Td (quantos sistemas foram reparados, o uso de potência final \(PowerUsed/PowerCapacity\) e o balanço final de) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 493.89 Td (Ar \(state.HabitatAir%\), Água \(state.Water\) e Alimentos \(state.Food\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 481.39 Td (  - 2. QUAL PRIORIDADE FUNCIONOU: destacar os acertos da partida \(ex.: "Geração solar restabelecida \(+5 de) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 468.89 Td (potência\)", "Suporte de vida manteve a atmosfera segura", "Abrigo protegeu a base durante a tempestade) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 456.39 Td (solar do Turno 2", "Estufa garantiu a produção de alimentos"\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 443.89 Td (  - 3. O QUE FALTOU: listar os itens pendentes \(ou informar "Todos os requisitos vitais da base foram) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 431.39 Td (cumpridos." + quantos artefatos da Apollo 15 faltaram catalogar: 5 - state.NextArtifactIndex\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 418.89 Td (  - 4. COMO MELHORAR NA PRÓXIMA TENTATIVA: gerar recomendações acionáveis específicas baseadas no estado) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 406.39 Td (final \(ex.: se faltou água, recomendar consertar o Reciclador de Água até o Turno 2; se faltou comida,) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 393.89 Td (recomendar energizar a Estufa a partir do Turno 1 ou 2; se perdeu ar no Turno 2, recomendar priorizar o) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 381.39 Td (Abrigo de Radiação antes de encerrar o Turno 2; se venceu sem completar a trilha Apollo 15, sugerir usar o) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 42.00 368.89 Td (Carregador de Trajes no Turno 3 para concluir a exploração científica\).) Tj ET
+BT /F2 10.5 Tf 0.06 0.32 0.55 rg 42.00 340.39 Td (TAREFA 7 [BAIXA PRIORIDADE]: Persistência Completa no Save/Load e Transição de Eclusa) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 321.39 Td (1. Save/Load completo \(MissionSnapshot.cs e MissionController.cs\):) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 308.89 Td (- Adicionar campos serializáveis PlayerPosX, PlayerPosY, PlayerPosZ, PlayerRotY em MissionSnapshot.cs.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 296.39 Td (- Em MissionController.SaveGame\(\) e LoadGame\(\), persistir e restaurar a posição/rotação do jogador) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 283.89 Td (\(permitindo inclusive salvar durante EVA\) e chamar SyncVisualBase\(\) ao carregar para que os modelos) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 271.39 Td (OK_ da BaseConsertada reflitam os equipamentos já reparados no save.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 48.00 258.89 Td (2. Ciclo de Eclusa \(MissionController.ChangeEva\):) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 62.00 246.39 Td (- Ao alternar entre interior e exterior \(L\), exibir mensagem clara de despressurização/pressurização) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 72.00 233.89 Td (no HUD \("Ciclo da eclusa concluído - Modo EVA ativo" / "Eclusa pressurizada - Interior do Habitat"\).) Tj ET
+0.90 0.95 0.99 rg
+42.00 189.39 511.28 20.00 re f
+0.05 0.45 0.72 rg
+42.00 189.39 4 20.00 re f
+BT /F2 11.5 Tf 0.05 0.22 0.40 rg 52.00 194.39 Td (4. Checklist de Validação Pós-Implementação) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 175.39 Td ([ ] Todos os testes em Assets/Nicholas/Tests/EditMode/MissionEngineTests.cs compilam e passam sem erros.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 162.89 Td ([ ] Na cena Assets/Nicholas/Cenas/MissaoNicholas.unity, consertar qualquer equipamento \(R ou botão no) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 150.39 Td (painel F2\) troca imediatamente o modelo 3D quebrado \(REPAIR_\) pelo modelo intacto \(OK_\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 137.89 Td ([ ] Ainda é possível mirar e inspecionar \(E\) um equipamento após ele ter sido consertado \(modelo OK_) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 125.39 Td (possui Collider e MissionEquipmentTarget\).) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 112.89 Td ([ ] Apontar para uma réplica da Apollo 15 e segurar E ou Clique Esquerdo carrega o scanner portátil) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 100.39 Td (\(1.35s\) e abre apenas o modal científico unificado, sem abrir modais duplicados no primeiro frame.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 87.89 Td ([ ] O painel F2 exibe o checklist claro com os 7 critérios de vitória do Turno 3.) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 75.39 Td ([ ] O início do Turno 2 emite alerta claro sobre a tempestade solar caso o Abrigo de Radiação ainda) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 60.00 62.89 Td (esteja quebrado.) Tj ET
+0.82 0.86 0.90 RG 0.5 w 42.00 36.00 m 553.28 36.00 l S
+BT /F1 8.5 Tf 0.40 0.45 0.52 rg 42.00 24.00 Td (AstroLab Unity - Guia de Implementacao para o Claude | Pagina 6 de 7) Tj ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 16 0 R >>
+endobj
+18 0 obj
+<< /Length 486 >>
+stream
+0.07 0.14 0.24 rg
+0 809.89 595.28 32 re f
+BT /F2 9 Tf 0.65 0.88 1.00 rg
+42.00 821.89 Td (ASTROLAB - ESPECIFICACAO TECNICA E PLANO DE ACAO \(CLAUDE GUIDE\)) Tj ET
+BT /F1 9.2 Tf 0.14 0.17 0.22 rg 50.00 789.89 Td ([ ] O relatório final \(MissionReport.Build\) apresenta as 4 seções exigidas no Slide 11.) Tj ET
+0.82 0.86 0.90 RG 0.5 w 42.00 36.00 m 553.28 36.00 l S
+BT /F1 8.5 Tf 0.40 0.45 0.52 rg 42.00 24.00 Td (AstroLab Unity - Guia de Implementacao para o Claude | Pagina 7 de 7) Tj ET
+endstream
+endobj
+19 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 18 0 R >>
+endobj
+xref
+0 20
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000164 00000 n 
+0000000261 00000 n 
+0000000363 00000 n 
+0000000458 00000 n 
+0000009643 00000 n 
+0000009795 00000 n 
+0000019171 00000 n 
+0000019323 00000 n 
+0000027332 00000 n 
+0000027486 00000 n 
+0000034966 00000 n 
+0000035120 00000 n 
+0000042066 00000 n 
+0000042220 00000 n 
+0000049806 00000 n 
+0000049960 00000 n 
+0000050498 00000 n 
+trailer
+<< /Size 20 /Root 1 0 R >>
+startxref
+50652
+%%EOF

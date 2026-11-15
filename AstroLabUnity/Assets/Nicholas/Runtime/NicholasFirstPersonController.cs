@@ -21,6 +21,10 @@ namespace AstroLab.Nicholas
         {
             controller = GetComponent<CharacterController>();
             if (!view) view = GetComponentInChildren<Camera>()?.transform;
+            if (!GetComponent<AstroLab.BaseLunar.PegadasLunar>())
+            {
+                gameObject.AddComponent<AstroLab.BaseLunar.PegadasLunar>();
+            }
         }
         private void OnEnable()
         {

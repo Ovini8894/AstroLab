@@ -71,19 +71,48 @@ namespace AstroLab.Nicholas.Core
         public bool IsRepaired(EquipmentId id) { return Find(id).Repaired; }
         public bool IsPowered(EquipmentId id) { EquipmentProgress e = Find(id); return e.Repaired && e.Powered; }
 
-        public OperationResult Repair(EquipmentId id)
+        public OperationResult CanRepair(EquipmentId id)
         {
             if (state.Outcome != MissionOutcome.Running) return OperationResult.Fail("A missão terminou.");
             EquipmentDefinition d = MissionRuleSet.Find(id);
             EquipmentProgress p = Find(id);
             if (p.Repaired) return OperationResult.Fail("Equipamento já reparado.");
             if (d.NeedsEva != state.IsOutside)
-                return OperationResult.Fail(d.NeedsEva ? "Reparo externo: saia pela eclusa." : "Reparo interno: retorne à base.");
-            if (state.SpareParts < d.RepairParts) return OperationResult.Fail("Peças insuficientes.");
-            if (state.RemainingActionTime < d.RepairTime) return OperationResult.Fail("Tempo do turno insuficiente.");
+                return OperationResult.Fail(d.NeedsEva ? "Saia pela eclusa para consertar lá fora." : "Volte para dentro da base.");
+            if (state.SpareParts < d.RepairParts)
+            {
+                int missing = d.RepairParts - state.SpareParts;
+                return OperationResult.Fail(missing == 1 ? "Falta 1 peça." : "Faltam " + missing + " peças.");
+            }
+            if (state.RemainingActionTime < d.RepairTime)
+            {
+                int missing = d.RepairTime - state.RemainingActionTime;
+                return OperationResult.Fail((missing == 1 ? "Falta 1 tempo." : "Faltam " + missing + " tempos.") + " Termine o turno!");
+            }
+            if (d.NeedsEva)
+            {
+                if (state.SuitBattery < MissionRuleSet.EvaRepairBatteryCost)
+                    return OperationResult.Fail("Bateria do traje insuficiente para reparo externo.");
+                if (state.SuitOxygen < MissionRuleSet.EvaRepairOxygenCost)
+                    return OperationResult.Fail("Oxigênio do traje insuficiente para reparo externo.");
+            }
+            return OperationResult.Ok("Pronto para reparar.");
+        }
+
+        public OperationResult Repair(EquipmentId id)
+        {
+            OperationResult check = CanRepair(id);
+            if (!check.Success) return check;
+            EquipmentDefinition d = MissionRuleSet.Find(id);
+            EquipmentProgress p = Find(id);
 
             state.SpareParts -= d.RepairParts;
             state.RemainingActionTime -= d.RepairTime;
+            if (d.NeedsEva)
+            {
+                state.SuitBattery = Math.Max(0f, state.SuitBattery - MissionRuleSet.EvaRepairBatteryCost);
+                state.SuitOxygen = Math.Max(0f, state.SuitOxygen - MissionRuleSet.EvaRepairOxygenCost);
+            }
             p.Repaired = true;
             Record(MissionEventType.Repair, d.DisplayName + " reparado (-" + d.RepairParts + " peças, -" + d.RepairTime + " tempo)." );
             NotifyChanged();
@@ -154,8 +183,8 @@ namespace AstroLab.Nicholas.Core
             if (float.IsNaN(deltaSeconds) || float.IsInfinity(deltaSeconds) || deltaSeconds <= 0f) return;
             // Limita picos de frame (alt-tab e travamentos) e evita matar o jogador inesperadamente.
             float delta = Math.Min(deltaSeconds, 0.25f);
-            state.SuitOxygen = Math.Max(0f, state.SuitOxygen - 0.18f * delta);
-            state.SuitBattery = Math.Max(0f, state.SuitBattery - 0.14f * delta);
+            state.SuitOxygen = Math.Max(0f, state.SuitOxygen - MissionRuleSet.SuitOxygenDrainPerSecond * delta);
+            state.SuitBattery = Math.Max(0f, state.SuitBattery - MissionRuleSet.SuitBatteryDrainPerSecond * delta);
             state.EvaSecondsRemaining = Math.Max(0f, state.EvaSecondsRemaining - delta);
             if (state.SuitOxygen <= 25f && !oxygenWarningIssued)
             { oxygenWarningIssued = true; Record(MissionEventType.Warning, "Oxigênio do traje baixo: retorne à eclusa."); }
@@ -178,7 +207,13 @@ namespace AstroLab.Nicholas.Core
             if (id == ArtifactId.Feather && !string.Equals((answer ?? "").Trim(), "C", StringComparison.OrdinalIgnoreCase))
                 return OperationResult.Fail("Qual objeto chegou primeiro? Pense na resistência do ar na Lua.");
             if (state.RemainingActionTime < 1) return OperationResult.Fail("Tempo de ação do turno insuficiente para registrar.");
+            if (state.SuitBattery < MissionRuleSet.EvaArtifactBatteryCost)
+                return OperationResult.Fail("Bateria do traje insuficiente para registrar o artefato.");
+            if (state.SuitOxygen < MissionRuleSet.EvaArtifactOxygenCost)
+                return OperationResult.Fail("Oxigênio do traje insuficiente para registrar o artefato.");
             state.RemainingActionTime--;
+            state.SuitBattery = Math.Max(0f, state.SuitBattery - MissionRuleSet.EvaArtifactBatteryCost);
+            state.SuitOxygen = Math.Max(0f, state.SuitOxygen - MissionRuleSet.EvaArtifactOxygenCost);
             state.ScannedArtifacts.Add(id.ToString());
             state.NextArtifactIndex++;
             Record(MissionEventType.Science, "Artefato documentado: " + expected.Name + ". " + expected.History);
@@ -230,16 +265,26 @@ namespace AstroLab.Nicholas.Core
             return OperationResult.Ok("Turno " + state.Turn + " iniciado. Reavalie as prioridades.");
         }
 
+        public VictoryCriterion[] GetVictoryChecklist()
+        {
+            return new[]
+            {
+                new VictoryCriterion("Painéis solares consertados", "painéis solares", IsRepaired(EquipmentId.SolarPanels)),
+                new VictoryCriterion("Suporte de vida consertado e ligado", "suporte de vida energizado", IsPowered(EquipmentId.LifeSupport)),
+                new VictoryCriterion("Abrigo contra radiação consertado", "abrigo de radiação", IsRepaired(EquipmentId.RadiationShelter)),
+                new VictoryCriterion("Estufa de comida consertada e ligada", "estufa operante", IsPowered(EquipmentId.Greenhouse)),
+                new VictoryCriterion("Pelo menos " + MissionRuleSet.MinimumEndFood + " comidas guardadas", "estoque de alimentos", state.Food >= MissionRuleSet.MinimumEndFood),
+                new VictoryCriterion("Pelo menos " + MissionRuleSet.MinimumEndWater + " água guardada", "estoque de água", state.Water >= MissionRuleSet.MinimumEndWater),
+                new VictoryCriterion("Ar da base em pelo menos " + MissionRuleSet.MinimumEndHabitatAir + "%", "reserva atmosférica", state.HabitatAir >= MissionRuleSet.MinimumEndHabitatAir)
+            };
+        }
+
         private void ResolveMission()
         {
+            VictoryCriterion[] checklist = GetVictoryChecklist();
             List<string> pending = new List<string>();
-            if (!IsRepaired(EquipmentId.SolarPanels)) pending.Add("painéis solares");
-            if (!IsPowered(EquipmentId.LifeSupport)) pending.Add("suporte de vida energizado");
-            if (!IsRepaired(EquipmentId.RadiationShelter)) pending.Add("abrigo de radiação");
-            if (!IsPowered(EquipmentId.Greenhouse)) pending.Add("estufa operante");
-            if (state.Food < MissionRuleSet.MinimumEndFood) pending.Add("estoque de alimentos");
-            if (state.Water < MissionRuleSet.MinimumEndWater) pending.Add("estoque de água");
-            if (state.HabitatAir < MissionRuleSet.MinimumEndHabitatAir) pending.Add("reserva atmosférica");
+            for (int i = 0; i < checklist.Length; i++)
+                if (!checklist[i].Met) pending.Add(checklist[i].PendingName);
             if (pending.Count == 0)
             {
                 state.Outcome = MissionOutcome.Success;

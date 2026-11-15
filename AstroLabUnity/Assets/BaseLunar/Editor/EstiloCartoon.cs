@@ -116,7 +116,7 @@ public static class EstiloCartoon
             case "M_Tecido": Tex("T_Tecido_Toon", PaletaLua.Tecido); break;
             case "M_Painel_Solar": Tex("T_PainelSolar_Toon", Color.white); Brilho(0.025f, 0.35f); break;
             case "M_Painel_Quebrado": Tex("T_PainelQuebrado_Toon", Color.white); break;
-            case "M_Terra_Vaso": Cor(PaletaLua.TerraVaso); break;
+            case "M_Terra_Vaso": Tex("T_Regolito_Toon", PaletaLua.TerraVaso); break;
             case "M_Planta_Morta": Cor(PaletaLua.PlantaMorta); break;
             case "M_Planta_Viva": Cor(PaletaLua.PlantaViva); break;
             case "M_Vermelho": Cor(PaletaLua.Vermelho); Brilho(0.04f, 0.4f); break;

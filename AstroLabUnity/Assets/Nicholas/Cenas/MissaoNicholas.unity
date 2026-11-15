@@ -24042,6 +24042,63 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1001 &963247387
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178115028073830288, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_Name
+      value: BaseConsertada
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
 --- !u!64 &964161479
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -50576,6 +50633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionScannerBridge
   scanner: {fileID: 0}
   overlay: {fileID: 0}
+  hideCentralProgressPanel: 1
 --- !u!114 &1778101259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50628,6 +50686,8 @@ MonoBehaviour:
   player: {fileID: 1881960814}
   innerAirlock: {fileID: 1421217641}
   outerAirlock: {fileID: 1421217640}
+  baseConsertada: {fileID: 0}
+  radiationPanel: {fileID: 0}
   returnRadius: 7
   loadExistingSaveOnPlay: 0
 --- !u!4 &1778101263
@@ -75383,6 +75443,7 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 4294967295
+  createTutorialRepairTerminal: 1
 --- !u!64 &1882168841
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -81708,7 +81769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 424647232459833274, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
       propertyPath: m_text
-      value: Revele os detalhes da base.
+      value: Escaneie um objeto da base.
       objectReference: {fileID: 0}
     - target: {fileID: 424647232459833274, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -81886,10 +81947,6 @@ PrefabInstance:
       propertyPath: m_TextStyleHashCode
       value: -1183493901
       objectReference: {fileID: 0}
-    - target: {fileID: 5054512694269512000, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 355
-      objectReference: {fileID: 0}
     - target: {fileID: 5119520281801283141, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4291876151
@@ -81922,13 +81979,9 @@ PrefabInstance:
       propertyPath: m_TextStyleHashCode
       value: -1183493901
       objectReference: {fileID: 0}
-    - target: {fileID: 8106425144539350682, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 355
-      objectReference: {fileID: 0}
     - target: {fileID: 8742773875910848982, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
       propertyPath: m_text
-      value: "Mire e segure o bot\xE3o esquerdo por 3 s."
+      value: "Mire em um objeto e segure o bot\xE3o esquerdo por 3 s para escanear."
       objectReference: {fileID: 0}
     - target: {fileID: 8742773875910848982, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -81996,3 +82049,4 @@ SceneRoots:
   - {fileID: 1671211161}
   - {fileID: 191704897}
   - {fileID: 870785390}
+  - {fileID: 963247387}

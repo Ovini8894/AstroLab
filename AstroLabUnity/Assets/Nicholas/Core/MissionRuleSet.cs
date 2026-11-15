@@ -27,7 +27,13 @@ namespace AstroLab.Nicholas.Core
     {
         public const int MaximumTurns = 3;
         public const int ActionMinutesPerTurn = 6;
-        public const int StartingSpareParts = 16;
+        public const int StartingSpareParts = 12;
+        public const float SuitOxygenDrainPerSecond = 0.55f;
+        public const float SuitBatteryDrainPerSecond = 0.50f;
+        public const float EvaRepairBatteryCost = 18f;
+        public const float EvaRepairOxygenCost = 12f;
+        public const float EvaArtifactBatteryCost = 10f;
+        public const float EvaArtifactOxygenCost = 8f;
         public const int InitialFood = 3;
         public const int InitialWater = 5;
         public const int InitialHabitatAir = 55;

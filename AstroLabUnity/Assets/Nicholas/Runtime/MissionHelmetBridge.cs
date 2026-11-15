@@ -10,7 +10,7 @@ namespace AstroLab.Nicholas
     {
         [SerializeField] private MonoBehaviour helmet;
         private MissionController mission;
-        private MethodInfo setOxygen, setBattery, setMission;
+        private MethodInfo setOxygen, setBattery, setMission, setAirlockGuide;
         private void Start()
         {
             mission = MissionController.Instance;
@@ -21,6 +21,7 @@ namespace AstroLab.Nicholas
                 setOxygen = type.GetMethod("DefinirOxigenio", new[] { typeof(float) });
                 setBattery = type.GetMethod("DefinirEnergia", new[] { typeof(float) });
                 setMission = type.GetMethod("DefinirMissao", new[] { typeof(string), typeof(string), typeof(int), typeof(int) });
+                setAirlockGuide = type.GetMethod("DefinirGuiaEclusa", new[] { typeof(bool), typeof(Transform) });
             }
             if (mission != null) { mission.Updated += Refresh; Refresh(); }
         }
@@ -31,6 +32,7 @@ namespace AstroLab.Nicholas
             MissionSnapshot state = mission.Engine.State;
             setOxygen.Invoke(helmet, new object[] { state.SuitOxygen });
             setBattery.Invoke(helmet, new object[] { state.SuitBattery }); // bateria do TRAJE, não capacidade da base
+            setAirlockGuide?.Invoke(helmet, new object[] { state.IsOutside, mission.OuterAirlock });
             int complete = 0;
             if (mission.Engine.IsRepaired(EquipmentId.SolarPanels)) complete++;
             if (mission.Engine.IsPowered(EquipmentId.LifeSupport)) complete++;

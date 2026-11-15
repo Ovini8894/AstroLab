@@ -18,6 +18,11 @@ namespace AstroLab.Nicholas.Core
         public float EvaSecondsRemaining = 300f;
         public bool IsOutside;
         public bool ReturnReached;
+        public bool HasPlayerPose;
+        public float PlayerPosX;
+        public float PlayerPosY;
+        public float PlayerPosZ;
+        public float PlayerRotY;
         public MissionOutcome Outcome = MissionOutcome.Running;
         public string OutcomeReason = string.Empty;
         public int NextArtifactIndex;

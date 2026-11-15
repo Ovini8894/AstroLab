@@ -17,36 +17,62 @@ namespace AstroLab.Capacete
             var r = rectTransform.rect;
             if (forma == Forma.Painel)
             {
-                var p = new[] { new Vector2(.045f,0),new Vector2(.955f,0),new Vector2(1,.18f),new Vector2(1,.82f),new Vector2(.955f,1),new Vector2(.045f,1),new Vector2(0,.82f),new Vector2(0,.18f) };
-                Polygon(vh, p, TemaCapacete.Alpha(TemaCapacete.Fundo, .86f), r);
-                Path(vh,p,espessura*4,TemaCapacete.Alpha(color,.045f),r,true);
-                Path(vh,p,espessura,color,r,true);
+                // Painel translúcido de ficção científica com cantos chanfrados discretos
+                var p = new[] {
+                    new Vector2(.035f, 0), new Vector2(.965f, 0),
+                    new Vector2(1, .14f), new Vector2(1, .86f),
+                    new Vector2(.965f, 1), new Vector2(.035f, 1),
+                    new Vector2(0, .86f), new Vector2(0, .14f)
+                };
+                Polygon(vh, p, TemaCapacete.Alpha(TemaCapacete.Fundo, .70f), r);
+                Path(vh, p, Mathf.Min(espessura, 1.3f), TemaCapacete.Alpha(color, .40f), r, true);
+
+                // Detalhes geométricos tecnológicos sutis nos cantos
+                float cw = 0.045f;
+                float w = Mathf.Min(espessura, 1.5f);
+                Line(vh, new Vector2(0, .26f), new Vector2(0, .14f), w, color, r);
+                Line(vh, new Vector2(0, .14f), new Vector2(cw, 0), w, color, r);
+                Line(vh, new Vector2(cw, 0), new Vector2(cw + .035f, 0), w, color, r);
+
+                Line(vh, new Vector2(1 - cw - .035f, 1), new Vector2(1 - cw, 1), w, color, r);
+                Line(vh, new Vector2(1 - cw, 1), new Vector2(1, .86f), w, color, r);
+                Line(vh, new Vector2(1, .86f), new Vector2(1, .74f), w, color, r);
                 return;
             }
             if (forma == Forma.Visor)
             {
-                var edge = new[] {new Vector2(0,.20f),new Vector2(.013f,.09f),new Vector2(.058f,.026f),new Vector2(.17f,.008f),new Vector2(.5f,0),new Vector2(.83f,.008f),new Vector2(.942f,.026f),new Vector2(.987f,.09f),new Vector2(1,.20f),new Vector2(1,.80f),new Vector2(.984f,.91f),new Vector2(.936f,.973f),new Vector2(.82f,.995f),new Vector2(.5f,1),new Vector2(.18f,.995f),new Vector2(.064f,.973f),new Vector2(.016f,.91f),new Vector2(0,.80f)};
-                Path(vh,edge,25,TemaCapacete.Alpha(TemaCapacete.Fundo,.86f),r,true);
-                Path(vh,edge,9,TemaCapacete.Alpha(color,.06f),r,true);
-                Path(vh,edge,2,TemaCapacete.Alpha(color,.5f),r,true);
-                Line(vh,new Vector2(.26f,.979f),new Vector2(.41f,.964f),2,color,r);
-                Line(vh,new Vector2(.59f,.964f),new Vector2(.74f,.979f),2,color,r);
-                Line(vh,new Vector2(.49f,.976f),new Vector2(.51f,.976f),3,color,r);
+                // Moldura do visor translúcida e suave para não competir com o cenário
+                var edge = new[] {
+                    new Vector2(0, .20f), new Vector2(.013f, .09f), new Vector2(.058f, .026f),
+                    new Vector2(.17f, .008f), new Vector2(.5f, 0), new Vector2(.83f, .008f),
+                    new Vector2(.942f, .026f), new Vector2(.987f, .09f), new Vector2(1, .20f),
+                    new Vector2(1, .80f), new Vector2(.984f, .91f), new Vector2(.936f, .973f),
+                    new Vector2(.82f, .995f), new Vector2(.5f, 1), new Vector2(.18f, .995f),
+                    new Vector2(.064f, .973f), new Vector2(.016f, .91f), new Vector2(0, .80f)
+                };
+                Path(vh, edge, 12, TemaCapacete.Alpha(TemaCapacete.Fundo, .28f), r, true);
+                Path(vh, edge, 1.2f, TemaCapacete.Alpha(color, .16f), r, true);
+                Line(vh, new Vector2(.26f, .979f), new Vector2(.41f, .964f), 1.2f, TemaCapacete.Alpha(color, .30f), r);
+                Line(vh, new Vector2(.59f, .964f), new Vector2(.74f, .979f), 1.2f, TemaCapacete.Alpha(color, .30f), r);
+                Line(vh, new Vector2(.49f, .976f), new Vector2(.51f, .976f), 1.8f, TemaCapacete.Alpha(color, .40f), r);
                 return;
             }
             if (forma == Forma.Mira)
             {
-                Line(vh,new Vector2(.27f,.5f),new Vector2(.42f,.5f),1.5f,color,r);
-                Line(vh,new Vector2(.58f,.5f),new Vector2(.73f,.5f),1.5f,color,r);
-                Line(vh,new Vector2(.5f,.27f),new Vector2(.5f,.42f),1.5f,color,r);
-                Line(vh,new Vector2(.5f,.58f),new Vector2(.5f,.73f),1.5f,color,r);
+                // Retículo limpo, minimalista e preciso
+                float w = Mathf.Min(espessura, 1.2f);
+                Line(vh, new Vector2(.26f, .5f), new Vector2(.42f, .5f), w, color, r);
+                Line(vh, new Vector2(.58f, .5f), new Vector2(.74f, .5f), w, color, r);
+                Line(vh, new Vector2(.5f, .26f), new Vector2(.5f, .42f), w, color, r);
+                Line(vh, new Vector2(.5f, .58f), new Vector2(.5f, .74f), w, color, r);
+                Line(vh, new Vector2(.485f, .5f), new Vector2(.515f, .5f), w, color, r);
                 return;
             }
             if (forma == Forma.Oxigenio)
             {
-                Path(vh,new[]{new Vector2(.5f,.92f),new Vector2(.5f,.52f),new Vector2(.31f,.30f)},espessura,color,r);
-                Line(vh,new Vector2(.5f,.52f),new Vector2(.69f,.30f),espessura,color,r);
-                var left=new[]{new Vector2(.42f,.74f),new Vector2(.32f,.73f),new Vector2(.22f,.60f),new Vector2(.12f,.37f),new Vector2(.1f,.15f),new Vector2(.17f,.09f),new Vector2(.39f,.17f),new Vector2(.44f,.28f),new Vector2(.42f,.74f)};
+                Path(vh,new[]{new Vector2(.5f,.88f),new Vector2(.5f,.54f),new Vector2(.32f,.33f)},espessura,color,r);
+                Line(vh,new Vector2(.5f,.54f),new Vector2(.68f,.33f),espessura,color,r);
+                var left=new[]{new Vector2(.42f,.70f),new Vector2(.28f,.67f),new Vector2(.18f,.48f),new Vector2(.14f,.20f),new Vector2(.22f,.13f),new Vector2(.42f,.22f),new Vector2(.42f,.70f)};
                 Path(vh,left,espessura,color,r);
                 var right=new Vector2[left.Length]; for(int i=0;i<left.Length;i++)right[i]=new Vector2(1-left[i].x,left[i].y);
                 Path(vh,right,espessura,color,r);
@@ -54,9 +80,10 @@ namespace AstroLab.Capacete
             }
             if (forma == Forma.Bateria)
             {
-                Path(vh,new[]{new Vector2(.08f,.2f),new Vector2(.87f,.2f),new Vector2(.87f,.8f),new Vector2(.08f,.8f)},espessura,color,r,true);
-                Path(vh,new[]{new Vector2(.87f,.4f),new Vector2(.97f,.4f),new Vector2(.97f,.6f),new Vector2(.87f,.6f)},espessura,color,r);
-                for(int i=0;i<4;i++)Line(vh,new Vector2(.22f+i*.16f,.32f),new Vector2(.22f+i*.16f,.68f),r.width*.10f,color,r);
+                Path(vh,new[]{new Vector2(.08f,.22f),new Vector2(.86f,.22f),new Vector2(.86f,.78f),new Vector2(.08f,.78f)},espessura,color,r,true);
+                Path(vh,new[]{new Vector2(.86f,.40f),new Vector2(.95f,.40f),new Vector2(.95f,.60f),new Vector2(.86f,.60f)},espessura,color,r);
+                float barWidth = Mathf.Max(1.2f, espessura * 1.15f);
+                for(int i=0;i<3;i++)Line(vh,new Vector2(.27f+i*.20f,.35f),new Vector2(.27f+i*.20f,.65f),barWidth,color,r);
                 return;
             }
             if(forma == Forma.Localizacao)

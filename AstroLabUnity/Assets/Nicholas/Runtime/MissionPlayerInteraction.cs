@@ -16,9 +16,11 @@ namespace AstroLab.Nicholas
         [SerializeField, Min(1f)] private float distance = 5f;
         [SerializeField] private LayerMask layers = ~0;
         [Header("Somente para validar o loop de reparo em Play")]
-        [SerializeField] private bool createTutorialRepairTerminal = true;
+        [SerializeField] private bool createTutorialRepairTerminal = false;
 
         public string CurrentPrompt { get; private set; }
+        public MissionEquipmentTarget AimedEquipment { get; private set; }
+        public MissionHistoricalTarget AimedHistory { get; private set; }
         private MonoBehaviour helmet;
         private MissionEquipmentTarget tutorialTarget;
 
@@ -35,6 +37,8 @@ namespace AstroLab.Nicholas
         private void Update()
         {
             CurrentPrompt = string.Empty;
+            AimedEquipment = null;
+            AimedHistory = null;
             if (!MissionController.Instance || !playerCamera || !overlay || overlay.IsModalOpen ||
                 OptionalTeamComponents.IsHelmetModalOpen(helmet)) return;
 
@@ -68,14 +72,35 @@ namespace AstroLab.Nicholas
                     equipment = tutorialTarget;
             }
 
-            if (equipment)
-                CurrentPrompt = "[E] INSPECIONAR · " + equipment.Label;
-            else if (history)
-                CurrentPrompt = "[E] REGISTRAR · " + history.Label;
+            AimedEquipment = equipment;
+            AimedHistory = history;
 
-            if (Keyboard.current == null || !Keyboard.current.eKey.wasPressedThisFrame) return;
-            if (equipment) overlay.OpenEquipment(equipment.Equipment, true);
-            else if (history) overlay.OpenArtifact(history.Artifact);
+            if (equipment)
+            {
+                EquipmentDefinition def = MissionRuleSet.Find(equipment.Equipment);
+                if (!MissionController.Instance.Engine.IsRepaired(equipment.Equipment))
+                    CurrentPrompt = "[E] INSPECIONAR · [R] REPARAR (" + def.RepairParts + " peças, " + def.RepairTime + " tempos) · " + equipment.Label;
+                else
+                    CurrentPrompt = "[E] INSPECIONAR · " + equipment.Label;
+            }
+            else if (history)
+                CurrentPrompt = "Segure [E] ou Clique Esquerdo com o Scanner: " + history.Label;
+            else if (MissionController.Instance.Engine != null)
+            {
+                bool outside = MissionController.Instance.Engine.State.IsOutside;
+                Transform anchor = outside ? MissionController.Instance.OuterAirlock : MissionController.Instance.InnerAirlock;
+                if (anchor && Vector3.Distance(transform.position, anchor.position) <= MissionController.Instance.ReturnRadius)
+                    CurrentPrompt = outside ? "[L] ENTRAR NA ECLUSA (Voltar para a base)" : "[L] SAIR PELA ECLUSA (Iniciar EVA)";
+            }
+
+            if (Keyboard.current == null) return;
+            if (equipment && Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                MissionController.Instance.Repair(equipment.Equipment);
+                return;
+            }
+            if (equipment && Keyboard.current.eKey.wasPressedThisFrame)
+                overlay.OpenEquipment(equipment.Equipment, true);
         }
 
         private void CreateTutorialTerminal()

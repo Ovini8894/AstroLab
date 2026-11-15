@@ -359,8 +359,13 @@ namespace AstroLab.Nicholas
                         }
                     }
                     MissionEquipmentTarget target = okObj.GetComponent<MissionEquipmentTarget>();
-                    if (!target) target = okObj.AddComponent<MissionEquipmentTarget>();
-                    target.Configure(entry.Key);
+                    bool architecture = AstroLab.Gameplay.MissionPieceBindings.IsArchitecture(PecasDaBase.Encontrar(pieceId));
+                    if (target && architecture) target.enabled = false;
+                    if (!architecture)
+                    {
+                        if (!target) target = okObj.AddComponent<MissionEquipmentTarget>();
+                        target.Configure(entry.Key);
+                    }
                     if (pieceId == "Porta_SuporteVida" &&
                         !okObj.GetComponent<AstroLab.Gameplay.RestoredSlidingDoor>())
                         okObj.AddComponent<AstroLab.Gameplay.RestoredSlidingDoor>();
@@ -388,11 +393,12 @@ namespace AstroLab.Nicholas
                     bool repaired = Engine.IsRepaired(entry.Key);
                     foreach (string pieceId in entry.Value)
                     {
-                        if (repaired) baseConsertada.Consertar(pieceId);
+                        bool architecture = AstroLab.Gameplay.MissionPieceBindings.IsArchitecture(PecasDaBase.Encontrar(pieceId));
+                        if (repaired || architecture) baseConsertada.Consertar(pieceId);
                         else baseConsertada.Quebrar(pieceId);
                     }
                 }
-                baseConsertada.LimparDetritos(Engine.IsRepaired(EquipmentId.RadiationShelter));
+                baseConsertada.LimparDetritos(true);
             }
             finally
             {

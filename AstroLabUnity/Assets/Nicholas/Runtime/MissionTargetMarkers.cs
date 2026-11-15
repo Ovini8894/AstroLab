@@ -118,7 +118,7 @@ namespace AstroLab.Nicholas
             List<MissionEquipmentTarget> equipmentTargets = new List<MissionEquipmentTarget>();
             foreach (MissionEquipmentTarget t in FindObjectsByType<MissionEquipmentTarget>(FindObjectsSortMode.None))
             {
-                if (t && t.gameObject.activeInHierarchy)
+                if (t && t.isActiveAndEnabled && t.gameObject.activeInHierarchy)
                     equipmentTargets.Add(t);
             }
 

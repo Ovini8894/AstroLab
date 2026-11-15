@@ -35,6 +35,12 @@ namespace AstroLab.Gameplay
             }
         }
 
+        public static bool IsArchitecture(PecasDaBase.Peca piece) => piece != null &&
+            (piece.categoria == PecasDaBase.Categoria.Estrutura ||
+             piece.categoria == PecasDaBase.Categoria.Iluminacao ||
+             piece.categoria == PecasDaBase.Categoria.Portas ||
+             piece.id == "Estufa_Vidros" || piece.id == "Interior_Estufa");
+
         public static Dictionary<EquipmentId, string[]> CreateMap() => PecasDaBase.Todas
             .GroupBy(EquipmentFor).ToDictionary(group => group.Key, group => group.Select(p => p.id).ToArray());
 

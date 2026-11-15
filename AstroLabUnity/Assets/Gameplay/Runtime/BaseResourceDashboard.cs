@@ -20,6 +20,9 @@ namespace AstroLab.Gameplay
         private MissionOverlay overlay;
         private GameObject modal, strip, promptRoot;
         private TMP_Text resources, prompt, top, detail, feedback, forecast, checklist, location;
+        private TMP_Text notice;
+        private GameObject noticeRoot;
+        private float noticeUntil;
         private RectTransform equipmentList;
         private UnityEngine.UI.Button repairButton, powerButton;
         private TMP_Text repairCaption, powerCaption;
@@ -54,7 +57,8 @@ namespace AstroLab.Gameplay
             strip.SetActive(!IsOpen && !otherModal);
             promptRoot.SetActive(!IsOpen && !otherModal);
             if (!IsOpen) prompt.text = interaction && !string.IsNullOrWhiteSpace(interaction.CurrentPrompt)
-                ? interaction.CurrentPrompt : "[Tab] GESTÃO DA BASE   ·   [E] INSPECIONAR   ·   [R] REPARAR   ·   [L] ECLUSA";
+                ? interaction.CurrentPrompt : "Mire em um equipamento para interagir.\n[Tab] Gestão e objetivos   ·   [L] Eclusa";
+            noticeRoot.SetActive(!IsOpen && !otherModal && Time.unscaledTime < noticeUntil);
             if (Time.unscaledTime >= refreshAt) { refreshAt = Time.unscaledTime + .25f; Refresh(); }
         }
         public void Open()
@@ -88,7 +92,12 @@ namespace AstroLab.Gameplay
             if (mission) { mission.Updated -= Refresh; mission.Feedback -= ShowFeedback; }
             BaseKnowledgeCatalog.Changed -= Refresh;
         }
-        private void ShowFeedback(string message) { if (feedback) feedback.text = message; Refresh(); }
+        private void ShowFeedback(string message)
+        {
+            if (feedback) feedback.text = message;
+            if (notice) { notice.text = message; noticeUntil = Time.unscaledTime + 6; }
+            Refresh();
+        }
         private bool CanRepairHere()
         {
             if (!interaction || !interaction.AimedEquipment || interaction.AimedEquipment.Equipment != selected) return false;
@@ -96,7 +105,8 @@ namespace AstroLab.Gameplay
             var target = interaction.AimedEquipment;
             if (!camera || !target.gameObject.activeInHierarchy) return false;
             var collider = target.GetComponent<Collider>();
-            return collider && Vector3.Distance(camera.transform.position, collider.ClosestPoint(camera.transform.position)) <= 5f;
+            // Non-convex model colliders do not support ClosestPoint. Use the same aimed ray as interaction.
+            return collider && collider.Raycast(new Ray(camera.transform.position, camera.transform.forward), out _, 5f);
         }
         private void Repair()
         {
@@ -109,7 +119,7 @@ namespace AstroLab.Gameplay
         {
             if (!resources || !mission || mission.Engine == null) return;
             var state = mission.Engine.State;
-            string summary = "PEÇAS   " + state.SpareParts + "     TEMPO   " + state.RemainingActionTime + "/6\n" +
+            string summary = "PEÇAS   " + state.SpareParts + "     AÇÕES   " + state.RemainingActionTime + "/6\n" +
                 "ENERGIA   " + mission.Engine.PowerUsed + "/" + mission.Engine.PowerCapacity + " em uso\n" +
                 "ÁGUA   " + state.Water + "     ALIMENTOS   " + state.Food + "\nAR DO HABITAT   " + state.HabitatAir + "%";
             resources.text = "ESTOQUE DA BASE  ·  [Tab]\n" + summary;
@@ -124,6 +134,13 @@ namespace AstroLab.Gameplay
                 "\n\n<color=#FFC23A>O QUE MUDA NO JOGO</color>\n" + knowledge?.benefit;
             location.text = "REPARO: " + definition.RepairParts + " peças + " + definition.RepairTime + " tempos   ·   LOCAL: " + (definition.NeedsEva ? "exterior" : "interior") +
                 "\nCONSUMO ELÉTRICO: " + definition.PowerDemand + "   ·   Custos e estoques são unidades da simulação.";
+            if (!repaired)
+            {
+                var availability = mission.Engine.CanRepair(selected);
+                location.text += "\n" + (!availability.Success ? availability.Message : !CanRepairHere()
+                    ? "Para reparar: aproxime-se, mire no equipamento e use [R] ou [E]."
+                    : "Equipamento ao alcance: reparo disponível.");
+            }
             repairCaption.text = repaired ? "Reparo já concluído" : "Reparar (-" + definition.RepairParts + " peças)";
             repairButton.interactable = !repaired && CanRepairHere() && mission.Engine.CanRepair(selected).Success;
             powerCaption.text = definition.PowerDemand == 0 ? "Sistema sem chave elétrica" : powered ? "Desligar sistema" : "Ligar sistema";
@@ -135,7 +152,7 @@ namespace AstroLab.Gameplay
             forecast.text = "PRÓXIMO TURNO\nAlimentos " + Signed(food) + "  ·  Água " + Signed(water) + "  ·  Ar " + Signed(air) +
                 "\n" + (state.IsOutside ? "Retorne à base para avançar o turno." : state.Turn == 2 ? "Evento solar simulado incluído na previsão." : "Produção e consumo ocorrem ao avançar.") +
                 "\n\nMETA FINAL\nÁgua ≥ 1  ·  Alimentos ≥ 2  ·  Ar ≥ 30%";
-            checklist.text = "RESTAURAÇÃO DA BASE\n" + string.Join("\n", mission.Engine.GetVictoryChecklist().Select(c => (c.Met ? "[OK] " : "[ ] ") + c.Label)) +
+            checklist.text = "PRÓXIMA AÇÃO\n" + MissionGuidance.Next(mission.Engine) + "\n\nRESTAURAÇÃO DA BASE\n" + string.Join("\n", mission.Engine.GetVictoryChecklist().Select(c => (c.Met ? "[OK] " : "[ ] ") + c.Label)) +
                 "\n\nAPOLLO 15 · EXTRA OPCIONAL\n" + state.NextArtifactIndex + "/5 registros históricos\nAs réplicas estão no exterior.\nNão são exigidas para restaurar a base.";
             if (state.Outcome != MissionOutcome.Running) feedback.text = state.OutcomeReason;
             DrawEquipmentList();
@@ -149,10 +166,13 @@ namespace AstroLab.Gameplay
             var scale = go.GetComponent<UnityEngine.UI.CanvasScaler>(); scale.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scale.referenceResolution = new Vector2(1440, 900); scale.matchWidthOrHeight = .5f;
             if (!EventSystem.current) new GameObject("BaseEventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
-            strip = Box(go.transform, "Estoques", Ink, .025f, .16f, .285f, .34f).gameObject;
-            resources = Text(strip.transform, "Recursos", "", 18, Cream, .055f, .06f, .945f, .94f);
-            promptRoot = Box(go.transform, "OrientacaoDeManutencao", Ink, .3f, .17f, .86f, .245f).gameObject;
+            strip = Box(go.transform, "Estoques", Ink, .69f, .18f, .92f, .375f).gameObject;
+            resources = Text(strip.transform, "Recursos", "", 17, Cream, .055f, .06f, .945f, .94f);
+            promptRoot = Box(go.transform, "OrientacaoDeManutencao", Ink, .32f, .18f, .67f, .28f).gameObject;
             prompt = Text(promptRoot.transform, "AjudaContextual", "", 16, Cyan, .03f, .05f, .97f, .95f);
+            noticeRoot = Box(go.transform, "RespostaDaAcao", Ink, .32f, .3f, .68f, .40f).gameObject;
+            notice = Text(noticeRoot.transform, "Mensagem", "", 18, Gold, .04f, .08f, .96f, .92f);
+            noticeRoot.SetActive(false);
             modal = Box(go.transform, "GestaoDaBase", Ink, .025f, .035f, .975f, .965f).gameObject;
             Text(modal.transform, "Titulo", "RESTAURAR A BASE", 31, Cream, .025f, .9f, .68f, .975f);
             Button(modal.transform, "Fechar [Tab / Esc]", Close, .8f, .91f, .975f, .975f);
@@ -161,7 +181,7 @@ namespace AstroLab.Gameplay
             var centre = Box(modal.transform, "Inspecao", Panel, .25f, .235f, .66f, .79f);
             detail = Text(centre, "Conhecimento", "", 17, Cream, .045f, .03f, .955f, .97f);
             var right = Box(modal.transform, "Objetivos", Panel, .675f, .235f, .975f, .79f);
-            checklist = Text(right, "Metas", "", 17, Cream, .055f, .33f, .945f, .97f);
+            checklist = Text(right, "Metas", "", 15, Cream, .055f, .33f, .945f, .97f);
             forecast = Text(right, "Previsao", "", 15, Gold, .055f, .025f, .945f, .34f);
             location = Text(modal.transform, "Custos", "", 16, Gold, .025f, .15f, .65f, .225f);
             repairButton = Button(modal.transform, "Reparar", Repair, .025f, .085f, .23f, .15f); repairCaption = repairButton.GetComponentInChildren<TMP_Text>();

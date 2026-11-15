@@ -239,6 +239,8 @@ namespace AstroLab.Nicholas.Editor
                 if (!AstroLab.Gameplay.MissionPieceBindings.TryGetEquipment(name, out id)) continue;
                 MissionEquipmentTarget target = node.GetComponent<MissionEquipmentTarget>();
                 if (!target) target = node.gameObject.AddComponent<MissionEquipmentTarget>();
+                bool architecture = AstroLab.Gameplay.MissionPieceBindings.IsArchitecture(PecasDaBase.Encontrar(name));
+                target.enabled = !architecture;
                 target.Configure(id);
                 if (!node.GetComponent<Collider>())
                 {

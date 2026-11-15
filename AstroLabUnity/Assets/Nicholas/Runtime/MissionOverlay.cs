@@ -273,9 +273,9 @@ namespace AstroLab.Nicholas
             MissionSnapshot s = mission.Engine.State;
             // O HUD do colega já mostra O2, bateria e objetivo. Evite desenhar tudo por cima.
             if (!teamHelmet || !teamHelmet.isActiveAndEnabled) DrawStatus(s);
-            if (Time.unscaledTime < feedbackTimeout)
+            if (!teamHelmet && Time.unscaledTime < feedbackTimeout)
                 GUI.Box(new Rect(340, 12, 595, 42), feedbackMessage);
-            DrawTutorialHud(s);
+            if (!teamHelmet) DrawTutorialHud(s);
             if (!IsModalOpen)
             {
                 // Se o HUD do capacete estiver ativo, ele já renderiza a interação na uGUI

@@ -18,12 +18,12 @@ namespace AstroLab.Nicholas.Tests
         {
             MissionEngine game = new MissionEngine();
             Assert.IsFalse(game.Repair(EquipmentId.SolarPanels).Success); // exige EVA
-            Assert.AreEqual(16, game.State.SpareParts);
+            Assert.AreEqual(12, game.State.SpareParts);
             Assert.IsFalse(game.IsRepaired(EquipmentId.SolarPanels));
             Assert.IsTrue(game.StartEva().Success);
             Assert.IsTrue(game.Repair(EquipmentId.SolarPanels).Success);
             Assert.IsFalse(game.Repair(EquipmentId.SolarPanels).Success); // não cobra duas vezes
-            Assert.AreEqual(14, game.State.SpareParts);
+            Assert.AreEqual(10, game.State.SpareParts);
         }
 
         [Test] public void NaoPermiteExcederACapacidadeDeEnergia()
@@ -61,7 +61,8 @@ namespace AstroLab.Nicholas.Tests
             game.Tick(0.2f);
             Assert.Less(game.State.SuitOxygen, 100f);
             Assert.Less(game.State.SuitBattery, 100f);
-            Assert.AreEqual(100f - 0.18f * 0.2f, game.State.SuitOxygen, .00001f);
+            Assert.AreEqual(100f - MissionRuleSet.SuitOxygenDrainPerSecond * 0.2f, game.State.SuitOxygen, .00001f);
+            Assert.AreEqual(100f - MissionRuleSet.SuitBatteryDrainPerSecond * 0.2f, game.State.SuitBattery, .00001f);
         }
 
         [Test] public void CaminhoCompletoVenceAoFimDoTerceiroTurno()
@@ -95,6 +96,143 @@ namespace AstroLab.Nicholas.Tests
             Assert.AreEqual(3, game.State.Food);
             MissionEngine restored = MissionEngine.Restore(game.State);
             Assert.AreEqual(game.State.Food, restored.State.Food);
+        }
+
+        [Test] public void ReparoEmEvaConsomeTrajeEEhAtomicoQuandoInsuficiente()
+        {
+            MissionEngine game = new MissionEngine();
+            Assert.IsTrue(game.StartEva().Success);
+            // Drena bateria abaixo do custo de reparo (18%) mantendo acima de 0%
+            for (int i = 0; i < 700; i++) game.Tick(0.25f);
+            // 700 * 0.25s = 175s => bateria = 100 - 175 * 0.50 = 12.5%, O2 = 100 - 175 * 0.55 = 3.75%
+            float batAntes = game.State.SuitBattery;
+            float oxAntes = game.State.SuitOxygen;
+            int pecasAntes = game.State.SpareParts;
+            int tempoAntes = game.State.RemainingActionTime;
+
+            OperationResult res = game.Repair(EquipmentId.SolarPanels);
+            Assert.IsFalse(res.Success);
+            Assert.IsFalse(game.IsRepaired(EquipmentId.SolarPanels));
+            Assert.AreEqual(batAntes, game.State.SuitBattery, .0001f);
+            Assert.AreEqual(oxAntes, game.State.SuitOxygen, .0001f);
+            Assert.AreEqual(pecasAntes, game.State.SpareParts);
+            Assert.AreEqual(tempoAntes, game.State.RemainingActionTime);
+        }
+
+        [Test] public void RegistroDeArtefatoConsomeTrajeEEhAtomicoQuandoInsuficiente()
+        {
+            MissionEngine game = new MissionEngine();
+            Assert.IsTrue(game.StartEva().Success);
+            // Drena bateria para ~7.5% (abaixo de 10%) usando 185s: 100 - 185*0.50 = 7.5% (mas O2 iria a 0 em 181.8s).
+            // Vamos drenar 170s: O2 = 6.5% (< 8%), bateria = 15% (> 10%). Testa atomicidade por O2 insuficiente.
+            for (int i = 0; i < 680; i++) game.Tick(0.25f);
+            float batAntes = game.State.SuitBattery;
+            float oxAntes = game.State.SuitOxygen;
+            int tempoAntes = game.State.RemainingActionTime;
+
+            OperationResult res = game.RegisterArtifact(ArtifactId.Hammer);
+            Assert.IsFalse(res.Success);
+            Assert.AreEqual(0, game.State.NextArtifactIndex);
+            Assert.AreEqual(batAntes, game.State.SuitBattery, .0001f);
+            Assert.AreEqual(oxAntes, game.State.SuitOxygen, .0001f);
+            Assert.AreEqual(tempoAntes, game.State.RemainingActionTime);
+        }
+
+        [Test] public void RecargaRestauraTrajeQuandoSuporteDeVidaERecargaEstaoLigados()
+        {
+            MissionEngine game = new MissionEngine();
+            Assert.IsTrue(game.StartEva().Success);
+            Assert.IsTrue(game.Repair(EquipmentId.SolarPanels).Success);
+            Assert.AreEqual(100f - MissionRuleSet.EvaRepairBatteryCost, game.State.SuitBattery, .0001f);
+            Assert.AreEqual(100f - MissionRuleSet.EvaRepairOxygenCost, game.State.SuitOxygen, .0001f);
+            Assert.IsTrue(game.FinishEva().Success);
+
+            Assert.IsFalse(game.RechargeSuit().Success); // Suporte de vida e recarga ainda desligados
+            Assert.IsTrue(game.Repair(EquipmentId.LifeSupport).Success);
+            Assert.IsTrue(game.SetPowered(EquipmentId.LifeSupport, true).Success);
+            Assert.IsTrue(game.SetPowered(EquipmentId.SuitCharger, true).Success); // 1 + 4 + 2 = 7/8
+            Assert.IsTrue(game.RechargeSuit().Success);
+            Assert.AreEqual(100f, game.State.SuitBattery, .0001f);
+            Assert.AreEqual(100f, game.State.SuitOxygen, .0001f);
+        }
+
+        [Test] public void ChecklistDeVitoriaRefleteEstadoAtualECoincideComResolveMission()
+        {
+            MissionEngine game = new MissionEngine();
+            VictoryCriterion[] inicio = game.GetVictoryChecklist();
+            Assert.AreEqual(7, inicio.Length);
+            Assert.IsFalse(inicio[0].Met); // Painéis solares
+            Assert.IsFalse(inicio[1].Met); // Suporte de vida ligado
+            Assert.IsFalse(inicio[2].Met); // Abrigo
+            Assert.IsFalse(inicio[3].Met); // Estufa ligada
+            Assert.IsTrue(inicio[4].Met);  // Comida inicial 3 >= 2
+            Assert.IsTrue(inicio[5].Met);  // Água inicial 5 >= 1
+            Assert.IsTrue(inicio[6].Met);  // Ar inicial 55 >= 30
+
+            game.StartEva(); Assert.IsTrue(game.Repair(EquipmentId.SolarPanels).Success); game.FinishEva();
+            Assert.IsTrue(game.Repair(EquipmentId.LifeSupport).Success);
+            Assert.IsTrue(game.Repair(EquipmentId.Greenhouse).Success);
+            Assert.IsTrue(game.SetPowered(EquipmentId.LifeSupport, true).Success);
+            Assert.IsTrue(game.SetPowered(EquipmentId.Greenhouse, true).Success);
+            Assert.IsTrue(game.AdvanceTurn().Success);
+            Assert.IsTrue(game.Repair(EquipmentId.RadiationShelter).Success);
+            Assert.IsTrue(game.Repair(EquipmentId.WaterRecycler).Success);
+            Assert.IsTrue(game.AdvanceTurn().Success);
+            Assert.IsTrue(game.AdvanceTurn().Success);
+
+            Assert.AreEqual(MissionOutcome.Success, game.State.Outcome);
+            VictoryCriterion[] fim = game.GetVictoryChecklist();
+            Assert.AreEqual(7, fim.Length);
+            for (int i = 0; i < fim.Length; i++) Assert.IsTrue(fim[i].Met);
+        }
+
+        [Test] public void SnapshotPreservaPoseEmEvaERestauraSaveAntigoSemPose()
+        {
+            MissionEngine game = new MissionEngine();
+            game.StartEva();
+            MissionSnapshot comPose = game.State;
+            comPose.HasPlayerPose = true;
+            comPose.PlayerPosX = 12.5f;
+            comPose.PlayerPosY = 1.2f;
+            comPose.PlayerPosZ = -8.4f;
+            comPose.PlayerRotY = 145f;
+
+            MissionEngine restaurado = MissionEngine.Restore(comPose);
+            MissionSnapshot lido = restaurado.State;
+            Assert.IsTrue(lido.IsOutside);
+            Assert.IsTrue(lido.HasPlayerPose);
+            Assert.AreEqual(12.5f, lido.PlayerPosX, .0001f);
+            Assert.AreEqual(1.2f, lido.PlayerPosY, .0001f);
+            Assert.AreEqual(-8.4f, lido.PlayerPosZ, .0001f);
+            Assert.AreEqual(145f, lido.PlayerRotY, .0001f);
+
+            MissionSnapshot saveAntigo = new MissionEngine().State;
+            saveAntigo.HasPlayerPose = false;
+            MissionEngine antigoRestaurado = MissionEngine.Restore(saveAntigo);
+            Assert.IsFalse(antigoRestaurado.State.HasPlayerPose);
+        }
+
+        [Test] public void CanRepairDevolveMotivoCurtoQuandoTempoOuLocalImpedem()
+        {
+            MissionEngine game = new MissionEngine();
+            OperationResult foraBase = game.CanRepair(EquipmentId.SolarPanels);
+            Assert.IsFalse(foraBase.Success);
+            Assert.IsTrue(foraBase.Message.Contains("eclusa"));
+
+            game.StartEva();
+            OperationResult dentroBase = game.CanRepair(EquipmentId.LifeSupport);
+            Assert.IsFalse(dentroBase.Success);
+            Assert.AreEqual("Volte para dentro da base.", dentroBase.Message);
+            game.FinishEva();
+
+            Assert.IsTrue(game.Repair(EquipmentId.LifeSupport).Success);      // 4 restantes
+            Assert.IsTrue(game.Repair(EquipmentId.Greenhouse).Success);       // 2 restantes
+            Assert.IsTrue(game.Repair(EquipmentId.WaterRecycler).Success);    // 0 restantes
+
+            OperationResult semTempo = game.CanRepair(EquipmentId.RadiationShelter);
+            Assert.IsFalse(semTempo.Success);
+            Assert.AreEqual("Faltam 2 tempos. Termine o turno!", semTempo.Message);
+            Assert.AreEqual(semTempo.Message, game.Repair(EquipmentId.RadiationShelter).Message);
         }
     }
 }

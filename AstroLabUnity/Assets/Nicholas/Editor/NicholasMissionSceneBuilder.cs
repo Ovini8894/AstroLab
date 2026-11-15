@@ -22,6 +22,7 @@ namespace AstroLab.Nicholas.Editor
         private const string SourceBruno = "Assets/BrunoLaboratorio/Scenes/BaseLunarBruno.unity";
         private const string SourceSample = "Assets/Scenes/SampleScene.unity";
         private const string Destination = "Assets/Nicholas/Cenas/MissaoNicholas.unity";
+        private const string BaseConsertadaPrefabPath = "Assets/BaseConsertada/Prefabs/BaseConsertada.prefab";
 
         [MenuItem("AstroLab/Nicholas/1 - Criar cena de missão (cópia segura)")]
         public static void CreateMissionScene()
@@ -89,6 +90,7 @@ namespace AstroLab.Nicholas.Editor
             if (!eclusa) eclusa = CreateAnchor("Nicholas_INT_Eclusa", new Vector3(0, 1, 5));
             if (!externo) externo = CreateAnchor("Nicholas_WP_Rampa_Eclusa", new Vector3(0, 1, 15));
             mission.Configure(player.transform, eclusa, externo);
+            EnsureBaseConsertadaInScene(scene);
             int assigned = BindRepairTargets();
             if (assigned == 0) assigned += CreateFallbackStations();
             AddRadiationTarget();
@@ -113,6 +115,73 @@ namespace AstroLab.Nicholas.Editor
             }
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
             EditorSceneManager.OpenScene(Destination, OpenSceneMode.Single);
+        }
+
+        [MenuItem("AstroLab/Nicholas/Validar âncoras da eclusa")]
+        public static void ValidateAirlockAnchorsInCurrentScene()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            if (!scene.IsValid() || scene.path != Destination)
+            {
+                EditorUtility.DisplayDialog("Cena incorreta",
+                    "Abra primeiro a cena " + Destination + " para validar as âncoras da eclusa.", "OK");
+                return;
+            }
+            MissionController mission = UnityEngine.Object.FindFirstObjectByType<MissionController>();
+            Transform intEclusa = Find("INT_Eclusa");
+            Transform extEclusa = Find("WP_Rampa_Eclusa");
+            if (!mission || !intEclusa || !extEclusa)
+            {
+                EditorUtility.DisplayDialog("Âncoras ausentes",
+                    "Verifique se MissionController, INT_Eclusa e WP_Rampa_Eclusa existem na cena.", "OK");
+                return;
+            }
+            bool changed = mission.InnerAirlock != intEclusa || mission.OuterAirlock != extEclusa;
+            if (changed)
+            {
+                mission.Configure(mission.PlayerTransform, intEclusa, extEclusa);
+                EditorUtility.SetDirty(mission);
+                EditorSceneManager.MarkSceneDirty(scene);
+            }
+            EditorUtility.DisplayDialog("AstroLab / Nicholas",
+                changed ? "Âncoras da eclusa religadas a INT_Eclusa e WP_Rampa_Eclusa. Salve a cena."
+                        : "Âncoras da eclusa já apontam para INT_Eclusa e WP_Rampa_Eclusa da BaseLunar.", "OK");
+        }
+
+        [MenuItem("AstroLab/Nicholas/Adicionar BaseConsertada à cena existente")]
+        public static void AddBaseConsertadaToCurrentScene()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            if (!scene.IsValid() || scene.path != Destination)
+            {
+                EditorUtility.DisplayDialog("Cena incorreta",
+                    "Abra primeiro a cena " + Destination + " para adicionar a BaseConsertada.", "OK");
+                return;
+            }
+            if (EnsureBaseConsertadaInScene(scene))
+            {
+                EditorSceneManager.MarkSceneDirty(scene);
+                EditorUtility.DisplayDialog("AstroLab / Nicholas",
+                    "BaseConsertada.prefab instanciado em " + Destination + ". Salve a cena (Ctrl+S).", "OK");
+            }
+            else
+            {
+                EditorUtility.DisplayDialog("AstroLab / Nicholas",
+                    "A cena já possui uma instância de BaseConsertada (ou o prefab não foi encontrado).", "OK");
+            }
+        }
+
+        private static bool EnsureBaseConsertadaInScene(Scene scene)
+        {
+            if (UnityEngine.Object.FindFirstObjectByType<BaseConsertada>()) return false;
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(BaseConsertadaPrefabPath);
+            if (!prefab)
+            {
+                Debug.LogWarning("[Nicholas] Prefab não encontrado em " + BaseConsertadaPrefabPath);
+                return false;
+            }
+            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab, scene);
+            return instance != null;
         }
 
         private static Transform CreateAnchor(string name, Vector3 at)
@@ -193,16 +262,83 @@ namespace AstroLab.Nicholas.Editor
             return count;
         }
 
+        [MenuItem("AstroLab/Nicholas/Atualizar visuais de abrigo e réplicas Apollo 15")]
+        public static void RefreshMissionVisualsInCurrentScene()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            if (!scene.IsValid() || scene.path != Destination)
+            {
+                EditorUtility.DisplayDialog("Cena incorreta",
+                    "Abra primeiro a cena " + Destination + " para atualizar os visuais.", "OK");
+                return;
+            }
+            AddRadiationTarget();
+            int artifacts = AddScienceMarkers();
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorUtility.DisplayDialog("AstroLab / Nicholas",
+                "Painel do abrigo e " + artifacts + " balizas Apollo 15 atualizados em " + Destination + ". Salve a cena (Ctrl+S).", "OK");
+        }
+
+        private static Material LoadFirstMaterial(params string[] paths)
+        {
+            foreach (string path in paths)
+            {
+                Material mat = AssetDatabase.LoadAssetAtPath<Material>(path);
+                if (mat != null) return mat;
+            }
+            return null;
+        }
+
         private static void AddRadiationTarget()
         {
-            Transform location = Find("INT_Abrigo");
-            if (!location) location = Find("INT_Controle");
+            Transform existing = Find("Nicholas_Painel_Manutencao_Abrigo");
+            Vector3 pos;
+            Quaternion rot = Quaternion.identity;
+            if (existing)
+            {
+                pos = existing.position;
+                rot = existing.rotation;
+                UnityEngine.Object.DestroyImmediate(existing.gameObject);
+            }
+            else
+            {
+                Transform location = Find("INT_Abrigo");
+                if (!location) location = Find("INT_Controle");
+                pos = location ? location.position + new Vector3(0, 1.2f, 0) : new Vector3(-2, 1.2f, 5);
+            }
+
+            Material bodyMat = LoadFirstMaterial(
+                "Assets/BaseLunar/Materiais/M_Console_Branco.mat",
+                "Assets/BaseLunar/Materiais/M_Branco.mat",
+                "Assets/BaseLunar/Materiais/M_Casco.mat");
+            Material brokenMat = LoadFirstMaterial(
+                "Assets/BaseLunar/Materiais/M_Vermelho.mat",
+                "Assets/BaseLunar/Materiais/M_Luz_Laranja.mat");
+            Material repairedMat = LoadFirstMaterial(
+                "Assets/BaseLunar/Materiais/M_Detalhes_Ciano.mat",
+                "Assets/Personagem/PrimeiraPessoa/Materiais/LuzCiano.mat",
+                "Assets/BaseLunar/Materiais/M_Faixa_Azul.mat");
+
             GameObject panel = GameObject.CreatePrimitive(PrimitiveType.Cube);
             panel.name = "Nicholas_Painel_Manutencao_Abrigo";
-            panel.transform.position = location ? location.position + new Vector3(0, 1.2f, 0) : new Vector3(-2, 1.2f, 5);
+            panel.transform.SetPositionAndRotation(pos, rot);
             panel.transform.localScale = new Vector3(0.7f, 0.55f, 0.13f);
-            panel.GetComponent<Renderer>().sharedMaterial = null;
+            if (bodyMat) panel.GetComponent<Renderer>().sharedMaterial = bodyMat;
             panel.AddComponent<MissionEquipmentTarget>().Configure(EquipmentId.RadiationShelter);
+
+            GameObject indicator = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            indicator.name = "Indicador_Estado";
+            indicator.transform.SetParent(panel.transform, false);
+            indicator.transform.localPosition = new Vector3(0f, 0.12f, 0.52f);
+            indicator.transform.localScale = new Vector3(0.75f, 0.38f, 0.12f);
+            Collider indCol = indicator.GetComponent<Collider>();
+            if (indCol) UnityEngine.Object.DestroyImmediate(indCol);
+            Renderer indRenderer = indicator.GetComponent<Renderer>();
+            if (brokenMat) indRenderer.sharedMaterial = brokenMat;
+
+            RadiationPanelVisual visual = panel.AddComponent<RadiationPanelVisual>();
+            visual.Configure(indRenderer, brokenMat, repairedMat);
+            visual.SetRepaired(false);
         }
 
         private static int AddScienceMarkers()
@@ -210,26 +346,101 @@ namespace AstroLab.Nicholas.Editor
             Transform anchor = Find("WP_Usina_Solar") ?? Find("WP_Antena") ??
                                Find("WP_Rampa_Eclusa") ?? Find("Nicholas_WP_Rampa_Eclusa");
             if (!anchor) anchor = CreateAnchor("Nicholas_ScienceAnchor", new Vector3(0, 1, 15));
-            // Posições de gameplay FICTÍCIAS, não coordenadas históricas. O modelador pode substituir os cubos.
+            // Posições de gameplay FICTÍCIAS, não coordenadas históricas.
             Vector3[] offsets =
             {
-                new Vector3(7, 1.1f, 1), new Vector3(10, 1.1f, 3), new Vector3(13, 1.1f, 1),
-                new Vector3(15, 1.1f, 4), new Vector3(18, 1.1f, 1)
+                new Vector3(7, 0f, 1), new Vector3(10, 0f, 3), new Vector3(13, 0f, 1),
+                new Vector3(15, 0f, 4), new Vector3(18, 0f, 1)
             };
+
+            Material darkMetal = LoadFirstMaterial(
+                "Assets/BaseLunar/Materiais/M_Metal_Escuro.mat",
+                "Assets/BaseLunar/Materiais/M_Casco_Escuro.mat",
+                "Assets/BaseLunar/Materiais/M_Metal.mat");
+            Material cyanAccent = LoadFirstMaterial(
+                "Assets/BaseLunar/Materiais/M_Detalhes_Ciano.mat",
+                "Assets/Personagem/PrimeiraPessoa/Materiais/LuzCiano.mat",
+                "Assets/BaseLunar/Materiais/M_Faixa_Azul.mat");
+
             for (int i = 0; i < Apollo15Trail.Items.Length; i++)
             {
                 Apollo15Trail.Artifact item = Apollo15Trail.Items[i];
-                GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                marker.name = "NICHOLAS_REPLICA_" + item.Id;
-                marker.transform.position = anchor.position + offsets[i];
-                marker.transform.localScale = new Vector3(0.7f, 0.8f, 0.7f);
-                MissionHistoricalTarget target = marker.AddComponent<MissionHistoricalTarget>();
+                string markerName = "NICHOLAS_REPLICA_" + item.Id;
+                Transform existing = Find(markerName);
+                Vector3 pos = existing ? existing.position : anchor.position + offsets[i];
+                if (existing) UnityEngine.Object.DestroyImmediate(existing.gameObject);
+
+                GameObject root = new GameObject(markerName);
+                root.transform.position = pos;
+
+                BoxCollider rootCollider = root.AddComponent<BoxCollider>();
+                rootCollider.center = new Vector3(0f, 0.85f, 0f);
+                rootCollider.size = new Vector3(0.85f, 1.7f, 0.85f);
+
+                // Base cilíndrica
+                GameObject baseCyl = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+                baseCyl.name = "Base";
+                baseCyl.transform.SetParent(root.transform, false);
+                baseCyl.transform.localPosition = new Vector3(0f, 0.1f, 0f);
+                baseCyl.transform.localScale = new Vector3(0.75f, 0.1f, 0.75f);
+                UnityEngine.Object.DestroyImmediate(baseCyl.GetComponent<Collider>());
+                if (darkMetal) baseCyl.GetComponent<Renderer>().sharedMaterial = darkMetal;
+
+                // Haste
+                GameObject stem = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+                stem.name = "Haste";
+                stem.transform.SetParent(root.transform, false);
+                stem.transform.localPosition = new Vector3(0f, 0.65f, 0f);
+                stem.transform.localScale = new Vector3(0.14f, 0.5f, 0.14f);
+                UnityEngine.Object.DestroyImmediate(stem.GetComponent<Collider>());
+                if (darkMetal) stem.GetComponent<Renderer>().sharedMaterial = darkMetal;
+
+                // Topo emissivo ciano com forma distinta por artefato
+                PrimitiveType topShape = PrimitiveType.Sphere;
+                Vector3 topScale = new Vector3(0.32f, 0.32f, 0.32f);
+                Vector3 topEuler = Vector3.zero;
+                switch (item.Id)
+                {
+                    case ArtifactId.Hammer:
+                        topShape = PrimitiveType.Cube;
+                        topScale = new Vector3(0.42f, 0.16f, 0.16f);
+                        topEuler = new Vector3(0f, 25f, 15f);
+                        break;
+                    case ArtifactId.Feather:
+                        topShape = PrimitiveType.Capsule;
+                        topScale = new Vector3(0.14f, 0.28f, 0.14f);
+                        topEuler = new Vector3(0f, 0f, 35f);
+                        break;
+                    case ArtifactId.Rover:
+                        topShape = PrimitiveType.Cube;
+                        topScale = new Vector3(0.46f, 0.20f, 0.32f);
+                        break;
+                    case ArtifactId.Retroreflector:
+                        topShape = PrimitiveType.Cube;
+                        topScale = new Vector3(0.36f, 0.08f, 0.36f);
+                        topEuler = new Vector3(-28f, 0f, 0f);
+                        break;
+                    case ArtifactId.FalconDescentStage:
+                        topShape = PrimitiveType.Cylinder;
+                        topScale = new Vector3(0.44f, 0.14f, 0.44f);
+                        break;
+                }
+                GameObject top = GameObject.CreatePrimitive(topShape);
+                top.name = "Topo_Emissivo";
+                top.transform.SetParent(root.transform, false);
+                top.transform.localPosition = new Vector3(0f, 1.28f, 0f);
+                top.transform.localScale = topScale;
+                top.transform.localEulerAngles = topEuler;
+                UnityEngine.Object.DestroyImmediate(top.GetComponent<Collider>());
+                if (cyanAccent) top.GetComponent<Renderer>().sharedMaterial = cyanAccent;
+
+                MissionHistoricalTarget target = root.AddComponent<MissionHistoricalTarget>();
                 target.Configure(item.Id);
-                // AlvoExploracao está em outra branch; adicione por reflexão quando ela existir.
+
                 Type infoType = Type.GetType("AstroLab.Capacete.AlvoExploracao, Assembly-CSharp");
                 if (infoType != null)
                 {
-                    Component info = marker.AddComponent(infoType);
+                    Component info = root.AddComponent(infoType);
                     infoType.GetField("titulo")?.SetValue(info, item.Name + " [RÉPLICA DIDÁTICA]");
                     infoType.GetField("categoria")?.SetValue(info, "APOLLO 15 · NASA");
                     infoType.GetField("descricao")?.SetValue(info, item.History);

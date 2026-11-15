@@ -32,4 +32,18 @@ namespace AstroLab.Nicholas.Core
         public bool Repaired;
         public bool Powered;
     }
+
+    public readonly struct VictoryCriterion
+    {
+        public readonly string Label;
+        public readonly string PendingName;
+        public readonly bool Met;
+
+        public VictoryCriterion(string label, string pendingName, bool met)
+        {
+            Label = label;
+            PendingName = pendingName;
+            Met = met;
+        }
+    }
 }

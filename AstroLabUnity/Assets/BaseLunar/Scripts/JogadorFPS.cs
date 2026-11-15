@@ -23,6 +23,10 @@ public class JogadorFPS : MonoBehaviour
         cam = GetComponentInChildren<Camera>().transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        if (!GetComponent<AstroLab.BaseLunar.PegadasLunar>())
+        {
+            gameObject.AddComponent<AstroLab.BaseLunar.PegadasLunar>();
+        }
     }
 
     void Update()

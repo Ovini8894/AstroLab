@@ -80223,7 +80223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 424647232459833274, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
       propertyPath: m_text
-      value: Revele os detalhes da base.
+      value: Escaneie um objeto da base.
       objectReference: {fileID: 0}
     - target: {fileID: 424647232459833274, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -80401,10 +80401,6 @@ PrefabInstance:
       propertyPath: m_TextStyleHashCode
       value: -1183493901
       objectReference: {fileID: 0}
-    - target: {fileID: 5054512694269512000, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 355
-      objectReference: {fileID: 0}
     - target: {fileID: 5119520281801283141, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4291876151
@@ -80437,13 +80433,9 @@ PrefabInstance:
       propertyPath: m_TextStyleHashCode
       value: -1183493901
       objectReference: {fileID: 0}
-    - target: {fileID: 8106425144539350682, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 355
-      objectReference: {fileID: 0}
     - target: {fileID: 8742773875910848982, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
       propertyPath: m_text
-      value: "Mire e segure o bot\xE3o esquerdo por 3 s."
+      value: "Mire em um objeto e segure o bot\xE3o esquerdo por 3 s para escanear."
       objectReference: {fileID: 0}
     - target: {fileID: 8742773875910848982, guid: 5ff3eb05d27eab148a552f89411d4506, type: 3}
       propertyPath: m_fontColor32.rgba

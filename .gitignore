@@ -1,2 +1,40 @@
-/unity-validation.log
+# ==========================================
+# ASTROLAB - GITIGNORE
+# ==========================================
 
+# Logs
+/unity-validation.log
+/*.log
+
+# Repositorio duplicado/aninhado
+/AstroLab/
+
+# Arquivos temporarios
+*.tmp
+*.swp
+*.orig
+*.rej
+
+# Cache e arquivos locais
+/.cache/
+/.vs/
+/.idea/
+/TestResults/
+/artifacts/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# UNITY
+# ==========================================
+# As regras especificas do Unity estao em:
+# AstroLabUnity/.gitignore
+#
+# NAO ignorar:
+# Assets/
+# Packages/
+# ProjectSettings/
+# *.meta
+# AstroLabUnity/.vscode/

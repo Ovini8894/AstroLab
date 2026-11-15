@@ -26,26 +26,7 @@ namespace AstroLab.Nicholas
         [SerializeField] private float returnRadius = 7f;
         [SerializeField] private bool loadExistingSaveOnPlay;
 
-        private static readonly Dictionary<EquipmentId, string[]> VisualPiecesMap = new Dictionary<EquipmentId, string[]>
-        {
-            {
-                EquipmentId.SolarPanels, new[]
-                {
-                    "Painel_R1_C2", "Painel_R1_C3", "Painel_R1_C6", "Painel_R1_C8",
-                    "Painel_R2_C1", "Painel_R2_C3", "Painel_R2_C4", "Painel_R2_C7", "Painel_R2_C8", "Painel_R2_C9",
-                    "Painel_R3_C3", "Painel_R3_C5", "Painel_R3_C6", "Painel_R3_C7", "Painel_R3_C8",
-                    "Painel_R4_C1", "Painel_R4_C3", "Painel_R4_C4", "Painel_R4_C7",
-                    "Painel_R5_C7", "Painel_R5_C9",
-                    "Painel_R6_C5", "Painel_R6_C9",
-                    "Inversor_1", "Inversor_2", "Inversor_3"
-                }
-            },
-            { EquipmentId.LifeSupport, new[] { "Gerador_O2", "Cano_Tanque_O2" } },
-            { EquipmentId.WaterRecycler, new[] { "Reciclador_H2O" } },
-            { EquipmentId.Greenhouse, new[] { "Estufa_Painel", "Estufa_Vidros", "Interior_Estufa" } },
-            { EquipmentId.SuitCharger, new[] { "Baterias" } },
-            { EquipmentId.Communications, new[] { "Antena_Prato", "Console_Controle" } }
-        };
+        private static readonly Dictionary<EquipmentId, string[]> VisualPiecesMap = AstroLab.Gameplay.MissionPieceBindings.CreateMap();
 
         private float hudDelay;
         private MissionOverlay overlay;
@@ -380,6 +361,9 @@ namespace AstroLab.Nicholas
                     MissionEquipmentTarget target = okObj.GetComponent<MissionEquipmentTarget>();
                     if (!target) target = okObj.AddComponent<MissionEquipmentTarget>();
                     target.Configure(entry.Key);
+                    if (pieceId == "Porta_SuporteVida" &&
+                        !okObj.GetComponent<AstroLab.Gameplay.RestoredSlidingDoor>())
+                        okObj.AddComponent<AstroLab.Gameplay.RestoredSlidingDoor>();
                 }
             }
         }
@@ -421,15 +405,8 @@ namespace AstroLab.Nicholas
         {
             if (suppressPieceEffects || !repairEffects || !baseConsertada || string.IsNullOrEmpty(pieceId)) return;
 
-            string groupKey = pieceId;
-            if (pieceId.StartsWith("Painel_", StringComparison.Ordinal) || pieceId.StartsWith("Inversor_", StringComparison.Ordinal))
-                groupKey = "SolarPanels";
-            else if (pieceId == "Gerador_O2" || pieceId == "Cano_Tanque_O2")
-                groupKey = "LifeSupport";
-            else if (pieceId == "Estufa_Painel" || pieceId == "Estufa_Vidros" || pieceId == "Interior_Estufa")
-                groupKey = "Greenhouse";
-            else if (pieceId == "Antena_Prato" || pieceId == "Console_Controle")
-                groupKey = "Communications";
+            string groupKey = AstroLab.Gameplay.MissionPieceBindings.TryGetEquipment(pieceId, out EquipmentId group)
+                ? group.ToString() : pieceId;
 
             int frame = Time.frameCount;
             if (lastRepairEffectFrame.TryGetValue(groupKey, out int lastFrame) && lastFrame == frame)

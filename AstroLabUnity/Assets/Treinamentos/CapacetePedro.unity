@@ -361,6 +361,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &9861741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3052422746665338948, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9861746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9861741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &9975208
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1040,6 +1058,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &41931896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 41931897}
+  - component: {fileID: 41931899}
+  - component: {fileID: 41931898}
+  m_Layer: 0
+  m_Name: Topo_Emissivo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &41931897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41931896}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.2419219, y: 0, z: 0, w: 0.9702957}
+  m_LocalPosition: {x: 0, y: 1.28, z: 0}
+  m_LocalScale: {x: 0.36, y: 0.08, z: 0.36}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 653346941}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &41931898
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41931896}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5854830fecaf49943996e65aed1807b1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &41931899
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41931896}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &42021650
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1986,6 +2094,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &81079526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2326942440173439964, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &81079531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81079526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &81827764
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2049,6 +2175,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &86854966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 86854967}
+  - component: {fileID: 86854969}
+  - component: {fileID: 86854968}
+  m_Layer: 0
+  m_Name: Haste
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &86854967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86854966}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalScale: {x: 0.14, y: 0.5, z: 0.14}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1413158408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &86854968
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86854966}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 573d84ce9a9904b8687ecc25821e99cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &86854969
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86854966}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &87268353
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3196,6 +3412,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &134888691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5769380564024567514, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &134888696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134888691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &135283461
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3306,6 +3540,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &140398856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9060210357118554962, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &140398861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140398856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &143533638
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3900,6 +4152,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &170374961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &170508160
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3922,6 +4187,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &172403380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7154903699819774017, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &172403385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172403380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &172953776
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4032,6 +4315,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &179230078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &179372889
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5577,6 +5873,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &249209482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3967352054710144639, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &249209487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249209482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 3
 --- !u!64 &250553274
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6765,6 +7079,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &295347542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &295846663
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9223,6 +9550,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &396945746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4422910151138195111, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &396945751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396945746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &397072133
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9311,6 +9656,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!115 &399667184
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: CloudCatalogClient
+  m_Namespace: AstroLab.Gameplay
+  m_AssemblyName: Assembly-CSharp
 --- !u!64 &402251974
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9355,6 +9715,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &403223042 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2716247496959863259, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &403223047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403223042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &404286336
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10557,6 +10935,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &451965352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 451965353}
+  - component: {fileID: 451965355}
+  - component: {fileID: 451965354}
+  m_Layer: 0
+  m_Name: Topo_Emissivo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &451965353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451965352}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.3007058, w: 0.95371693}
+  m_LocalPosition: {x: 0, y: 1.28, z: 0}
+  m_LocalScale: {x: 0.14, y: 0.28, z: 0.14}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 869316506}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &451965354
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451965352}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5854830fecaf49943996e65aed1807b1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &451965355
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451965352}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &454034932
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11129,6 +11597,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &480846311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 3
 --- !u!64 &481683838
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11371,6 +11852,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!4 &496213472 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -274021581719181227, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+  m_PrefabInstance: {fileID: 1788792686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &496318819
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11525,6 +12011,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &504578915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 504578916}
+  - component: {fileID: 504578918}
+  - component: {fileID: 504578917}
+  m_Layer: 0
+  m_Name: Base
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &504578916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504578915}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.1, z: 0.75}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 869316506}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &504578917
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504578915}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 573d84ce9a9904b8687ecc25821e99cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &504578918
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504578915}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &505058676
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12581,6 +13157,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &541175564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &541899329
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12625,6 +13214,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &545333517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 545333518}
+  - component: {fileID: 545333520}
+  - component: {fileID: 545333519}
+  m_Layer: 0
+  m_Name: Topo_Emissivo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &545333518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545333517}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.28, z: 0}
+  m_LocalScale: {x: 0.46, y: 0.2, z: 0.32}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1545728745}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &545333519
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545333517}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5854830fecaf49943996e65aed1807b1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &545333520
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545333517}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &546157387
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13043,6 +13722,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &561213764 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9215065361201339226, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &561213769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561213764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &562219950
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14616,6 +15313,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &617013608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 3
 --- !u!64 &617159144
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15031,6 +15741,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &628518366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &630095115
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15462,6 +16185,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &646223978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &646508248
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15594,6 +16330,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &653346937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 653346941}
+  - component: {fileID: 653346940}
+  - component: {fileID: 653346939}
+  - component: {fileID: 653346938}
+  m_Layer: 0
+  m_Name: NICHOLAS_REPLICA_Retroreflector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &653346938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653346937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb116a9f34736f4da296781f342c7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Capacete.AlvoExploracao
+  titulo: "Retrorefletor laser [R\xC9PLICA DID\xC1TICA]"
+  descricao: "A Apollo 15 instalou um arranjo de refletores usado para medir com precis\xE3o a dist\xE2ncia entre Terra e Lua."
+  charada: Para voltar, os astronautas decolaram, mas parte da nave permaneceu sobre quatro pernas.
+  categoria: "APOLLO 15 \xB7 NASA"
+  aoInspecionar:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &653346939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653346937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5dba78077894b5d8d54d28d8147b243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionHistoricalTarget
+  artifact: 3
+--- !u!65 &653346940
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653346937}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.85, y: 1.7, z: 0.85}
+  m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!4 &653346941
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653346937}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40, y: -0.3047553, z: -24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1883229724}
+  - {fileID: 1842642429}
+  - {fileID: 41931897}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &654272116
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16386,6 +17212,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &684272432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 684272436}
+  - component: {fileID: 684272435}
+  - component: {fileID: 684272434}
+  - component: {fileID: 684272433}
+  m_Layer: 0
+  m_Name: NICHOLAS_REPLICA_Hammer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &684272433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684272432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb116a9f34736f4da296781f342c7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Capacete.AlvoExploracao
+  titulo: "Martelo geol\xF3gico [R\xC9PLICA DID\xC1TICA]"
+  descricao: "David Scott usou um martelo geol\xF3gico em uma demonstra\xE7\xE3o de queda livre na Lua, em 1971."
+  charada: "Participei de uma experi\xEAncia com algo muito mais leve, vindo de uma ave. Quem sou?"
+  categoria: "APOLLO 15 \xB7 NASA"
+  aoInspecionar:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &684272434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684272432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5dba78077894b5d8d54d28d8147b243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionHistoricalTarget
+  artifact: 0
+--- !u!65 &684272435
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684272432}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.85, y: 1.7, z: 0.85}
+  m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!4 &684272436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684272432}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35, y: -0.5527746, z: 36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1258039997}
+  - {fileID: 1315991627}
+  - {fileID: 833450673}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &684877310
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16408,6 +17324,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &684954467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4113061675652868878, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &684954472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684954467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &684969982
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17351,6 +18285,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5251634790932734869, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &720822293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720822294}
+  - component: {fileID: 720822296}
+  - component: {fileID: 720822295}
+  m_Layer: 0
+  m_Name: Base
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &720822294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720822293}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.1, z: 0.75}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1413158408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &720822295
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720822293}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 573d84ce9a9904b8687ecc25821e99cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &720822296
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720822293}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &721027026
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17654,6 +18678,149 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -783978792293770060, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &730663032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 730663038}
+  - component: {fileID: 730663037}
+  - component: {fileID: 730663036}
+  - component: {fileID: 730663035}
+  - component: {fileID: 730663034}
+  - component: {fileID: 730663033}
+  m_Layer: 0
+  m_Name: Nicholas_Painel_Manutencao_Abrigo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &730663033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730663032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da88d38c45eefce4c805f78b4ec77672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.RadiationPanelVisual
+  indicatorRenderer: {fileID: 1903150924}
+  brokenMaterial: {fileID: 2100000, guid: b3a94a2bb154d4fd1b673de82abb4571, type: 2}
+  repairedMaterial: {fileID: 2100000, guid: 5854830fecaf49943996e65aed1807b1, type: 2}
+--- !u!114 &730663034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730663032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
+--- !u!23 &730663035
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730663032}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 62e720b815ec74dce931a889360997a3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &730663036
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730663032}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &730663037
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730663032}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &730663038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730663032}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.85, y: 2.2, z: -14.139999}
+  m_LocalScale: {x: 0.7, y: 0.55, z: 0.13}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1903150926}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &730842564
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18138,6 +19305,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &754175069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &754706216
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19453,6 +20633,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &810216654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6583362132990448909, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &810216659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810216654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 6
 --- !u!64 &810237773
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19915,6 +21113,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &833450672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 833450673}
+  - component: {fileID: 833450675}
+  - component: {fileID: 833450674}
+  m_Layer: 0
+  m_Name: Topo_Emissivo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &833450673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833450672}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.02825104, y: 0.21458796, z: 0.12743221, w: 0.96794367}
+  m_LocalPosition: {x: 0, y: 1.28, z: 0}
+  m_LocalScale: {x: 0.42, y: 0.16, z: 0.16}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 684272436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &833450674
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833450672}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5854830fecaf49943996e65aed1807b1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &833450675
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833450672}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &834525634
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20349,6 +21637,24 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &849449470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7092264191732682617, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &849449475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849449470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 3
 --- !u!64 &850023250
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20415,6 +21721,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &852071103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2651176782612809758, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &852071108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852071103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &852172067
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21014,6 +22338,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &869316502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 869316506}
+  - component: {fileID: 869316505}
+  - component: {fileID: 869316504}
+  - component: {fileID: 869316503}
+  m_Layer: 0
+  m_Name: NICHOLAS_REPLICA_Feather
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &869316503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869316502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb116a9f34736f4da296781f342c7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Capacete.AlvoExploracao
+  titulo: "Pena de falc\xE3o [R\xC9PLICA DID\xC1TICA]"
+  descricao: "Uma pena de falc\xE3o e um martelo ca\xEDram simultaneamente em quase v\xE1cuo, evidenciando a acelera\xE7\xE3o gravitacional independente da massa."
+  charada: "Na demonstra\xE7\xE3o, qual chegou primeiro ao ch\xE3o? [A] Martelo  [B] Pena  [C] Juntos"
+  categoria: "APOLLO 15 \xB7 NASA"
+  aoInspecionar:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &869316504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869316502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5dba78077894b5d8d54d28d8147b243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionHistoricalTarget
+  artifact: 1
+--- !u!65 &869316505
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869316502}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.85, y: 1.7, z: 0.85}
+  m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!4 &869316506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869316502}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40, y: -1.3259875, z: 60}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 504578916}
+  - {fileID: 1356201722}
+  - {fileID: 451965353}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &869515707
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22594,6 +24008,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &934381090 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1065060702609732092, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &934381095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934381090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &934586551
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -23073,6 +24505,42 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &953531163 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6662630809377120907, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &953531168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953531163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
+--- !u!1 &953773492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 267575454014864387, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &953773497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953773492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &954623995
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -23686,6 +25154,32 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &980863248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
+--- !u!114 &983132313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &984323196
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -23994,6 +25488,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &995770108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8507001062562535292, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &995770113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995770108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &995948991
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24060,6 +25572,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &998845365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 3
 --- !u!64 &1001713906
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24104,6 +25629,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1006398093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3416950473550672840, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1006398098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006398093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 3
 --- !u!64 &1007645646
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24280,6 +25823,152 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1011878668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011878677}
+  - component: {fileID: 1011878676}
+  - component: {fileID: 1011878675}
+  - component: {fileID: 1011878674}
+  - component: {fileID: 1011878673}
+  - component: {fileID: 1011878672}
+  - component: {fileID: 1011878671}
+  - component: {fileID: 1011878670}
+  - component: {fileID: 1011878669}
+  m_Layer: 0
+  m_Name: AstroLab_SistemasDaBase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1011878669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011878668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e712e6fb1872674680eab64d2911b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Gameplay.BaseResourceDashboard
+--- !u!114 &1011878670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011878668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 399667184}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Gameplay.CloudCatalogClient
+--- !u!114 &1011878671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011878668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1415539642}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Gameplay.BaseKnowledgeBinder
+--- !u!114 &1011878672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011878668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a891c2f11a4553a2f8dac682eaeaa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionScannerBridge
+  scanner: {fileID: 0}
+  overlay: {fileID: 0}
+  hideCentralProgressPanel: 1
+--- !u!114 &1011878673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011878668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196adc719f4e4b4c9119ecf97d7cc201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionHelmetBridge
+  helmet: {fileID: 0}
+--- !u!114 &1011878674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011878668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54689a8b99047779a5ade4b55a13a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.Integrations.NasaImageLibraryClient
+--- !u!114 &1011878675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011878668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb89c298ecc4c4d8a46d8ffd2df28c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionOverlay
+--- !u!114 &1011878676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011878668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d357cd87634d4dac4003e0096f8ef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionController
+  player: {fileID: 1881960814}
+  innerAirlock: {fileID: 496213472}
+  outerAirlock: {fileID: 1935188852}
+  baseConsertada: {fileID: 0}
+  radiationPanel: {fileID: 0}
+  returnRadius: 7
+  loadExistingSaveOnPlay: 0
+--- !u!4 &1011878677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011878668}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1012360805
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24390,6 +26079,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1014988650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2104075459438459616, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1014988655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014988650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &1015366123
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24841,6 +26548,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1024740646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 175112471250067418, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1024740651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024740646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1026114246
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24863,6 +26588,46 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1027315588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1253077539920221968, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1027315592
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027315588}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1900275566926288318, guid: 574bd72e93005f0438284ab4d76f4f82, type: 3}
+--- !u!114 &1027315593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027315588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &1027393470
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -27506,6 +29271,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1125759282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5987252714737728371, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1125759287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125759282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &1127884911
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -27797,6 +29580,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1140669811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6637251030747517853, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1140669816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140669811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 2
 --- !u!64 &1141132327
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -28895,6 +30696,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175053889}
   m_CullTransparentMesh: 1
+--- !u!1 &1175803930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 423402291577561832, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1175803935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175803930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 6
 --- !u!64 &1177994441
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29354,6 +31173,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1199233623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7340637196009723595, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1199233628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199233623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1199768055
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29464,6 +31301,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1205653867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1208059746
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29847,6 +31697,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1220348292 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8946240445753764457, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1220348297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220348292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1220945154
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30067,6 +31935,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1226375404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2999627973306866250, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1226375409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226375404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &1226855848
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30834,6 +32720,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1258039996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1258039997}
+  - component: {fileID: 1258039999}
+  - component: {fileID: 1258039998}
+  m_Layer: 0
+  m_Name: Base
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1258039997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258039996}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.1, z: 0.75}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 684272436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1258039998
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258039996}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 573d84ce9a9904b8687ecc25821e99cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1258039999
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258039996}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &1258468961
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -31648,6 +33624,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1286944873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1289012340
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32132,6 +34121,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1303532354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1303901367
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32550,6 +34552,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1315991626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1315991627}
+  - component: {fileID: 1315991629}
+  - component: {fileID: 1315991628}
+  m_Layer: 0
+  m_Name: Haste
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1315991627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315991626}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalScale: {x: 0.14, y: 0.5, z: 0.14}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 684272436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1315991628
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315991626}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 573d84ce9a9904b8687ecc25821e99cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1315991629
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315991626}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &1317249444
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33012,6 +35104,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1337176352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788792689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &1338277475
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33625,6 +35730,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1356201721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356201722}
+  - component: {fileID: 1356201724}
+  - component: {fileID: 1356201723}
+  m_Layer: 0
+  m_Name: Haste
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1356201722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356201721}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalScale: {x: 0.14, y: 0.5, z: 0.14}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 869316506}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1356201723
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356201721}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 573d84ce9a9904b8687ecc25821e99cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1356201724
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356201721}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &1357309226
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34587,6 +36782,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1397208985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2101124435020152740, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1397208990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397208985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 3
 --- !u!64 &1399315358
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40099,6 +42312,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8225012012530428448, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1406715687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406715681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 6
 --- !u!64 &1406894427
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40121,6 +42347,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1407095419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1407790042
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40209,6 +42448,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1413158404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1413158408}
+  - component: {fileID: 1413158407}
+  - component: {fileID: 1413158406}
+  - component: {fileID: 1413158405}
+  m_Layer: 0
+  m_Name: NICHOLAS_REPLICA_FalconDescentStage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1413158405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413158404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb116a9f34736f4da296781f342c7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Capacete.AlvoExploracao
+  titulo: "Est\xE1gio de descida Falcon [R\xC9PLICA DID\xC1TICA]"
+  descricao: "O est\xE1gio inferior do m\xF3dulo lunar Falcon permaneceu na Lua. A cabine fazia parte do est\xE1gio superior, que decolou."
+  charada: "Cole\xE7\xE3o Apollo 15 conclu\xEDda. Objetos preservados; miss\xE3o cient\xEDfica registrada."
+  categoria: "APOLLO 15 \xB7 NASA"
+  aoInspecionar:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1413158406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413158404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5dba78077894b5d8d54d28d8147b243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionHistoricalTarget
+  artifact: 4
+--- !u!65 &1413158407
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413158404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.85, y: 1.7, z: 0.85}
+  m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!4 &1413158408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413158404}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12, y: 0.11041165, z: -42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 720822294}
+  - {fileID: 86854967}
+  - {fileID: 1794759278}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1413659348
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40231,6 +42560,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!115 &1415539642
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: BaseKnowledgeBinder
+  m_Namespace: AstroLab.Gameplay
+  m_AssemblyName: Assembly-CSharp
 --- !u!64 &1415911660
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40253,6 +42597,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1419688796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2833908676852000725, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1419688801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419688796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1419880295
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40649,6 +43011,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1436248739 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1002969259642712611, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1436248744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436248739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1436392869
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -41243,6 +43623,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1465070830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3001085824781794924, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1465070835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465070830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &1466527675
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -41265,6 +43663,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6778676599748431023, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1466527679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406715649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 5
 --- !u!64 &1469083847
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -43157,6 +45568,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1535486949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406715647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 2
 --- !u!64 &1536861149
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -43553,6 +45977,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1545728741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1545728745}
+  - component: {fileID: 1545728744}
+  - component: {fileID: 1545728743}
+  - component: {fileID: 1545728742}
+  m_Layer: 0
+  m_Name: NICHOLAS_REPLICA_Rover
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1545728742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545728741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb116a9f34736f4da296781f342c7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Capacete.AlvoExploracao
+  titulo: "Ve\xEDculo Lunar Apollo 15 (LRV) [R\xC9PLICA DID\xC1TICA]"
+  descricao: "O Lunar Roving Vehicle ampliou a dist\xE2ncia que os astronautas podiam percorrer durante a explora\xE7\xE3o cient\xEDfica."
+  charada: "Quatro rodas me levaram longe. O pr\xF3ximo devolve luz \xE0 Terra para medir uma dist\xE2ncia enorme."
+  categoria: "APOLLO 15 \xB7 NASA"
+  aoInspecionar:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1545728743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545728741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5dba78077894b5d8d54d28d8147b243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionHistoricalTarget
+  artifact: 2
+--- !u!65 &1545728744
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545728741}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.85, y: 1.7, z: 0.85}
+  m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!4 &1545728745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545728741}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -110, y: -0.0022873515, z: 15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1622525888}
+  - {fileID: 1853133693}
+  - {fileID: 545333518}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1545853446
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -44188,6 +46702,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1575395259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 6
 --- !u!64 &1576135336
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -44364,6 +46891,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1583316513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3991318893710728385, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1583316518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583316513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 6
 --- !u!64 &1584069600
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -44914,6 +47459,42 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1606421350 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4377929901150148542, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1606421355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606421350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
+--- !u!1 &1606630311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5047465291982920648, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1606630316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606630311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1607418672
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -45156,6 +47737,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1614203484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1614803552
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -45376,6 +47970,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1622525887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1622525888}
+  - component: {fileID: 1622525890}
+  - component: {fileID: 1622525889}
+  m_Layer: 0
+  m_Name: Base
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1622525888
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622525887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.1, z: 0.75}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1545728745}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1622525889
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622525887}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 573d84ce9a9904b8687ecc25821e99cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1622525890
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622525887}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &1626691468
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -45464,6 +48148,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5767738076438891242, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1628741971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406715651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &1629392789
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -46278,6 +48975,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1662557451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
+--- !u!1 &1662950446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5145209417342250873, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1662950451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662950446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 5
 --- !u!64 &1664157368
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -46872,6 +49600,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1687144820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 466615676066931102, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1687144825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687144820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &1687652242
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -47180,6 +49926,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1694387243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1695144908
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -48038,6 +50797,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5852077323708149258, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1726557972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8392844661342134675, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1726557977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726557972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1726870084
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -48170,6 +50947,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1728252927 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4826380299668467019, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1728252932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728252927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
+--- !u!114 &1731318770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1731944493
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -48280,6 +51088,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1733479495 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7473807041237848495, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1733479500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733479495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &1733748552
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -58936,6 +61762,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6621385349471033916, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1406715686}
+    - targetCorrespondingSourceObject: {fileID: -6621385349471033916, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1406715687}
     - targetCorrespondingSourceObject: {fileID: -2225741609553082100, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1788793893}
@@ -58948,9 +61777,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2532864921156128132, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 26962709}
+    - targetCorrespondingSourceObject: {fileID: -2532864921156128132, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 617013608}
     - targetCorrespondingSourceObject: {fileID: -2767061610149333366, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 271692964}
+    - targetCorrespondingSourceObject: {fileID: -2767061610149333366, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 179230078}
     - targetCorrespondingSourceObject: {fileID: -7460238913280186850, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1938179669}
@@ -59050,33 +61885,54 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5103051692556312651, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1817309369}
+    - targetCorrespondingSourceObject: {fileID: 5103051692556312651, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1817309373}
     - targetCorrespondingSourceObject: {fileID: -6690224674515089393, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2076039578}
     - targetCorrespondingSourceObject: {fileID: 4881270093179814432, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1001713906}
+    - targetCorrespondingSourceObject: {fileID: 4881270093179814432, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 170374961}
     - targetCorrespondingSourceObject: {fileID: -3726813416026478042, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1015366123}
     - targetCorrespondingSourceObject: {fileID: 8459159936512932999, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1628741967}
+    - targetCorrespondingSourceObject: {fileID: 8459159936512932999, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1628741971}
     - targetCorrespondingSourceObject: {fileID: -7103260509731876172, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 802620825}
     - targetCorrespondingSourceObject: {fileID: -1192663459180032949, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1907765241}
+    - targetCorrespondingSourceObject: {fileID: -1192663459180032949, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1907765245}
     - targetCorrespondingSourceObject: {fileID: -3441884636656459597, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 292739225}
+    - targetCorrespondingSourceObject: {fileID: -3441884636656459597, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 480846311}
     - targetCorrespondingSourceObject: {fileID: 1974306748811583820, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1036374168}
+    - targetCorrespondingSourceObject: {fileID: 1974306748811583820, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1968927664}
     - targetCorrespondingSourceObject: {fileID: 5318142929980752207, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1361179597}
+    - targetCorrespondingSourceObject: {fileID: 5318142929980752207, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2006901473}
     - targetCorrespondingSourceObject: {fileID: 4955580756090706948, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 99395871}
@@ -59173,9 +62029,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4673141786304454847, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1583000448}
+    - targetCorrespondingSourceObject: {fileID: 4673141786304454847, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1942883697}
     - targetCorrespondingSourceObject: {fileID: -6172230621583625350, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 685748577}
+    - targetCorrespondingSourceObject: {fileID: -6172230621583625350, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 628518366}
     - targetCorrespondingSourceObject: {fileID: -2529938911917940085, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1472466322}
@@ -59185,213 +62047,324 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5408797663483541168, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1871569193}
+    - targetCorrespondingSourceObject: {fileID: 5408797663483541168, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1871569197}
     - targetCorrespondingSourceObject: {fileID: -8142769329059874484, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 58849777}
     - targetCorrespondingSourceObject: {fileID: -8142769329059874484, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1016763409}
+    - targetCorrespondingSourceObject: {fileID: -8142769329059874484, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1912177960}
     - targetCorrespondingSourceObject: {fileID: -8874048370930039112, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1466527675}
+    - targetCorrespondingSourceObject: {fileID: -8874048370930039112, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1466527679}
     - targetCorrespondingSourceObject: {fileID: -2482299096333405531, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1276595334}
     - targetCorrespondingSourceObject: {fileID: -2482299096333405531, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1888934067}
+    - targetCorrespondingSourceObject: {fileID: -2482299096333405531, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1888934071}
     - targetCorrespondingSourceObject: {fileID: -7752644560992525330, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1516744498}
     - targetCorrespondingSourceObject: {fileID: -7752644560992525330, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1384224477}
+    - targetCorrespondingSourceObject: {fileID: -7752644560992525330, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1575395259}
     - targetCorrespondingSourceObject: {fileID: 7452317125220423975, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1345555218}
     - targetCorrespondingSourceObject: {fileID: 7452317125220423975, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1974783501}
+    - targetCorrespondingSourceObject: {fileID: 7452317125220423975, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1974783505}
     - targetCorrespondingSourceObject: {fileID: -7040977325225888594, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1148282128}
     - targetCorrespondingSourceObject: {fileID: -7040977325225888594, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1146163762}
+    - targetCorrespondingSourceObject: {fileID: -7040977325225888594, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 998845365}
     - targetCorrespondingSourceObject: {fileID: -4806067136515666596, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 529608422}
     - targetCorrespondingSourceObject: {fileID: -4806067136515666596, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2054887903}
+    - targetCorrespondingSourceObject: {fileID: -4806067136515666596, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2054887907}
     - targetCorrespondingSourceObject: {fileID: -2037234448135875388, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1057492947}
+    - targetCorrespondingSourceObject: {fileID: -2037234448135875388, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1873832805}
     - targetCorrespondingSourceObject: {fileID: -5697315404588343274, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1222131926}
     - targetCorrespondingSourceObject: {fileID: -5697315404588343274, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 423089314}
+    - targetCorrespondingSourceObject: {fileID: -5697315404588343274, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 646223978}
     - targetCorrespondingSourceObject: {fileID: -593477728478867656, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 785862716}
     - targetCorrespondingSourceObject: {fileID: -593477728478867656, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1016178869}
+    - targetCorrespondingSourceObject: {fileID: -593477728478867656, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1992980114}
     - targetCorrespondingSourceObject: {fileID: 1218286973798512848, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2045004791}
     - targetCorrespondingSourceObject: {fileID: 1218286973798512848, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2045004792}
+    - targetCorrespondingSourceObject: {fileID: 1218286973798512848, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2045004796}
     - targetCorrespondingSourceObject: {fileID: 418844005324616640, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1884612946}
     - targetCorrespondingSourceObject: {fileID: 418844005324616640, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1884612947}
+    - targetCorrespondingSourceObject: {fileID: 418844005324616640, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1884612951}
     - targetCorrespondingSourceObject: {fileID: 6004165589992024878, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 512691420}
     - targetCorrespondingSourceObject: {fileID: 6004165589992024878, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 840007858}
+    - targetCorrespondingSourceObject: {fileID: 6004165589992024878, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1694387243}
     - targetCorrespondingSourceObject: {fileID: 7885437616597315861, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1906624519}
     - targetCorrespondingSourceObject: {fileID: 7885437616597315861, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1906624520}
+    - targetCorrespondingSourceObject: {fileID: 7885437616597315861, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1906624524}
     - targetCorrespondingSourceObject: {fileID: -8353416559619712229, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 261149994}
     - targetCorrespondingSourceObject: {fileID: -8353416559619712229, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1923232186}
+    - targetCorrespondingSourceObject: {fileID: -8353416559619712229, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1923232190}
     - targetCorrespondingSourceObject: {fileID: -7277255474649437544, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 61711132}
     - targetCorrespondingSourceObject: {fileID: -7277255474649437544, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 84148461}
+    - targetCorrespondingSourceObject: {fileID: -7277255474649437544, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 754175069}
     - targetCorrespondingSourceObject: {fileID: -775502022442317440, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1475810929}
     - targetCorrespondingSourceObject: {fileID: -775502022442317440, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1179195637}
+    - targetCorrespondingSourceObject: {fileID: -775502022442317440, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 541175564}
     - targetCorrespondingSourceObject: {fileID: 4207347369753892943, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 708484617}
     - targetCorrespondingSourceObject: {fileID: 4207347369753892943, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2048347280}
+    - targetCorrespondingSourceObject: {fileID: 4207347369753892943, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2048347284}
     - targetCorrespondingSourceObject: {fileID: 4235841836413447576, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1191798532}
     - targetCorrespondingSourceObject: {fileID: 4235841836413447576, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1561675911}
+    - targetCorrespondingSourceObject: {fileID: 4235841836413447576, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1303532354}
     - targetCorrespondingSourceObject: {fileID: -8034108736581604776, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1224978866}
     - targetCorrespondingSourceObject: {fileID: -8034108736581604776, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 616359503}
+    - targetCorrespondingSourceObject: {fileID: -8034108736581604776, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1816428584}
     - targetCorrespondingSourceObject: {fileID: -1011654733477298253, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 408726914}
     - targetCorrespondingSourceObject: {fileID: -1011654733477298253, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1781188894}
+    - targetCorrespondingSourceObject: {fileID: -1011654733477298253, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 980863248}
     - targetCorrespondingSourceObject: {fileID: 2650149698426751832, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1222948675}
     - targetCorrespondingSourceObject: {fileID: 2650149698426751832, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 699519647}
+    - targetCorrespondingSourceObject: {fileID: 2650149698426751832, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2122474371}
     - targetCorrespondingSourceObject: {fileID: -3898442747389906660, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1536861149}
     - targetCorrespondingSourceObject: {fileID: -3898442747389906660, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1933660709}
+    - targetCorrespondingSourceObject: {fileID: -3898442747389906660, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1933660713}
     - targetCorrespondingSourceObject: {fileID: -8225653227927212729, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1334034858}
     - targetCorrespondingSourceObject: {fileID: -8225653227927212729, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 848268014}
+    - targetCorrespondingSourceObject: {fileID: -8225653227927212729, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1205653867}
     - targetCorrespondingSourceObject: {fileID: 2186354388679043849, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1588710182}
     - targetCorrespondingSourceObject: {fileID: 2186354388679043849, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 967794401}
+    - targetCorrespondingSourceObject: {fileID: 2186354388679043849, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1614203484}
     - targetCorrespondingSourceObject: {fileID: 4656233328006046649, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1597606559}
     - targetCorrespondingSourceObject: {fileID: 4656233328006046649, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 310973558}
+    - targetCorrespondingSourceObject: {fileID: 4656233328006046649, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 295347542}
     - targetCorrespondingSourceObject: {fileID: 2099611694952294194, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1736343153}
     - targetCorrespondingSourceObject: {fileID: 2099611694952294194, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1237387723}
+    - targetCorrespondingSourceObject: {fileID: 2099611694952294194, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1950901061}
     - targetCorrespondingSourceObject: {fileID: 4909423677014908546, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 313553512}
     - targetCorrespondingSourceObject: {fileID: 4909423677014908546, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1147795538}
+    - targetCorrespondingSourceObject: {fileID: 4909423677014908546, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1946791374}
     - targetCorrespondingSourceObject: {fileID: 8796223419310431517, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 743816077}
     - targetCorrespondingSourceObject: {fileID: 8796223419310431517, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 627166611}
+    - targetCorrespondingSourceObject: {fileID: 8796223419310431517, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1407095419}
     - targetCorrespondingSourceObject: {fileID: 5191043359419314814, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 21444358}
     - targetCorrespondingSourceObject: {fileID: 5191043359419314814, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 120297218}
+    - targetCorrespondingSourceObject: {fileID: 5191043359419314814, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 983132313}
     - targetCorrespondingSourceObject: {fileID: 653744209646975558, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1989178730}
     - targetCorrespondingSourceObject: {fileID: 653744209646975558, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1989178731}
+    - targetCorrespondingSourceObject: {fileID: 653744209646975558, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1989178735}
     - targetCorrespondingSourceObject: {fileID: -5855695592284619448, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1021331304}
     - targetCorrespondingSourceObject: {fileID: -5855695592284619448, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 356715736}
+    - targetCorrespondingSourceObject: {fileID: -5855695592284619448, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1286944873}
     - targetCorrespondingSourceObject: {fileID: -2983767176685487331, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 271033088}
     - targetCorrespondingSourceObject: {fileID: -2983767176685487331, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 40661173}
+    - targetCorrespondingSourceObject: {fileID: -2983767176685487331, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1662557451}
     - targetCorrespondingSourceObject: {fileID: 7403706127328710528, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1086782674}
     - targetCorrespondingSourceObject: {fileID: 7403706127328710528, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1383994070}
+    - targetCorrespondingSourceObject: {fileID: 7403706127328710528, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1731318770}
     - targetCorrespondingSourceObject: {fileID: -2611905681747061807, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2114357137}
     - targetCorrespondingSourceObject: {fileID: -2611905681747061807, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2114357138}
+    - targetCorrespondingSourceObject: {fileID: -2611905681747061807, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2114357142}
     - targetCorrespondingSourceObject: {fileID: -2342323355481991604, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1033992437}
+    - targetCorrespondingSourceObject: {fileID: -2342323355481991604, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1535486949}
     - targetCorrespondingSourceObject: {fileID: -5545993742521907864, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 750781793}
@@ -65785,6 +68758,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -376221662587862986, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 731932279}
+    - targetCorrespondingSourceObject: {fileID: -376221662587862986, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1337176352}
     - targetCorrespondingSourceObject: {fileID: -5598506605870227934, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 372902302}
@@ -71944,6 +74920,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4360799767882850549, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1788928115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4645628861720016436, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1788928120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788928115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1790936237
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -72076,6 +75070,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1794759277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1794759278}
+  - component: {fileID: 1794759280}
+  - component: {fileID: 1794759279}
+  m_Layer: 0
+  m_Name: Topo_Emissivo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1794759278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794759277}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.28, z: 0}
+  m_LocalScale: {x: 0.44, y: 0.14, z: 0.44}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1413158408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1794759279
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794759277}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5854830fecaf49943996e65aed1807b1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1794759280
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794759277}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &1794919867
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -72186,6 +75270,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1798487940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2504256147754865358, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1798487945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798487940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1799129196
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -72494,6 +75596,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1816428584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1817309369
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -72516,6 +75631,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1531500375265436603, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1817309373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 3
 --- !u!64 &1818003782
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -73066,6 +76194,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1842642428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1842642429}
+  - component: {fileID: 1842642431}
+  - component: {fileID: 1842642430}
+  m_Layer: 0
+  m_Name: Haste
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1842642429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842642428}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalScale: {x: 0.14, y: 0.5, z: 0.14}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 653346941}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1842642430
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842642428}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 573d84ce9a9904b8687ecc25821e99cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1842642431
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842642428}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &1843253270
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -73198,6 +76416,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1853133692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1853133693}
+  - component: {fileID: 1853133695}
+  - component: {fileID: 1853133694}
+  m_Layer: 0
+  m_Name: Haste
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1853133693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853133692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalScale: {x: 0.14, y: 0.5, z: 0.14}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1545728745}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1853133694
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853133692}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 573d84ce9a9904b8687ecc25821e99cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1853133695
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853133692}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &1853955992
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -73767,6 +77075,32 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1871569197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 6
+--- !u!114 &1873832805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406715648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &1874522480
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -73976,6 +77310,7 @@ GameObject:
   - component: {fileID: 1881960814}
   - component: {fileID: 1881960813}
   - component: {fileID: 1881960812}
+  - component: {fileID: 1881960815}
   m_Layer: 0
   m_Name: Jogador
   m_TagString: Untagged
@@ -73997,9 +77332,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JogadorFPS
   velocidade: 3
   velocidadeCorrida: 5.5
+  aceleracaoSolo: 10
+  desaceleracaoSolo: 8
   sensibilidadeMouse: 0.12
   gravidade: 1.62
   alturaPulo: 1.2
+  multiplicadorAlturaPulo: 2.35
+  velocidadeMaximaQueda: 3.4
+  coyoteTime: 0.15
+  jumpBufferTime: 0.12
+  controleAereo: 2.8
+  velocidadeMinimaAjusteAereo: 1.6
 --- !u!143 &1881960813
 CharacterController:
   m_ObjectHideFlags: 0
@@ -74034,13 +77377,32 @@ Transform:
   m_GameObject: {fileID: 1881960811}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  m_LocalPosition: {x: 0, y: 1.1234741, z: 62}
+  m_LocalPosition: {x: 0, y: 1.12, z: 14.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1030719797}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1881960815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881960811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d305f4672a42fcbb40d68f4c130d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionPlayerInteraction
+  playerCamera: {fileID: 0}
+  overlay: {fileID: 0}
+  distance: 5
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  createTutorialRepairTerminal: 0
 --- !u!64 &1882168841
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74085,6 +77447,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1883229723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1883229724}
+  - component: {fileID: 1883229726}
+  - component: {fileID: 1883229725}
+  m_Layer: 0
+  m_Name: Base
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1883229724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883229723}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.1, z: 0.75}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 653346941}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1883229725
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883229723}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 573d84ce9a9904b8687ecc25821e99cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1883229726
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883229723}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &1883280137
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74170,6 +77622,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1884612951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1884639383
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74192,6 +77657,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1886026981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6666585563037962345, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1886026986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886026981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1886246441
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74233,6 +77716,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1888934071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &1891383537
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74431,6 +77927,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1903150923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1903150926}
+  - component: {fileID: 1903150925}
+  - component: {fileID: 1903150924}
+  m_Layer: 0
+  m_Name: Indicador_Estado
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1903150924
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903150923}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b3a94a2bb154d4fd1b673de82abb4571, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1903150925
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903150923}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1903150926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903150923}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.12, z: 0.52}
+  m_LocalScale: {x: 0.75, y: 0.38, z: 0.12}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 730663038}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1903581071
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74538,6 +78124,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1906624524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1907245455
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74582,6 +78181,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3295571946983522317, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1907765245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &1911239897
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74626,6 +78238,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1912177960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 5
 --- !u!64 &1912617859
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -74953,6 +78578,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1923232190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1925269050
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -75214,6 +78852,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1933660713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1934207957
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -75236,6 +78887,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!4 &1935188852 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3222873422008658485, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+  m_PrefabInstance: {fileID: 1788792686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &1935347877
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -75500,6 +79156,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1942883697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &1943580893
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -75588,6 +79257,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6873755113026039323, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1946791374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
+--- !u!1 &1947308441 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4469261709646628572, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1947308446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947308441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1947687445
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -75632,6 +79332,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7059435536078624927, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1950901061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1951087181
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -75918,6 +79631,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3898007444842935841, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1968927664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 4
 --- !u!64 &1968982715
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -76025,6 +79751,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1974783505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 6
 --- !u!64 &1974973254
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -76286,6 +80025,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1989178735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1990097870
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -76374,6 +80126,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3105059495990234963, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &1992980114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1993584785
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -76506,6 +80271,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &1999661182 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2839457830210176998, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1999661187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999661182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &1999732919
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -76770,6 +80553,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4289264102117815441, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!114 &2006901473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &2010112462
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -77625,6 +81421,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2045004796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &2045443964
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -77776,6 +81585,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2048347284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &2048743703
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -77927,6 +81749,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2054887907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 1
 --- !u!64 &2055576921
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -78169,6 +82004,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4674192416517926127, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &2065250066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6590493534537560876, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2065250071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065250066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &2067423920
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -79005,6 +82858,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &2093077371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 192502042369150917, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2093077376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093077371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &2095097280
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -79398,6 +83269,19 @@ MonoBehaviour:
   aoInspecionar:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2114357142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 2
 --- !u!64 &2115441150
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -79420,6 +83304,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1835611962101992175, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1 &2116734521 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3239193825728380858, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+  m_PrefabInstance: {fileID: 2121937359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2116734526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116734521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &2117913595
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -79574,6 +83476,220 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8246736967607532301, guid: a564f47d55b9d42f8a7b4b43e84134c3, type: 3}
+--- !u!1001 &2121937359
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477343127356702585, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178115028073830288, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      propertyPath: m_Name
+      value: BaseConsertada
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 423402291577561832, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1175803935}
+    - targetCorrespondingSourceObject: {fileID: 5145209417342250873, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1662950451}
+    - targetCorrespondingSourceObject: {fileID: 2326942440173439964, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 81079531}
+    - targetCorrespondingSourceObject: {fileID: 4377929901150148542, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1606421355}
+    - targetCorrespondingSourceObject: {fileID: 3991318893710728385, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1583316518}
+    - targetCorrespondingSourceObject: {fileID: 6583362132990448909, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 810216659}
+    - targetCorrespondingSourceObject: {fileID: 3967352054710144639, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 249209487}
+    - targetCorrespondingSourceObject: {fileID: 2999627973306866250, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1226375409}
+    - targetCorrespondingSourceObject: {fileID: 2101124435020152740, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1397208990}
+    - targetCorrespondingSourceObject: {fileID: 7092264191732682617, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 849449475}
+    - targetCorrespondingSourceObject: {fileID: 2104075459438459616, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1014988655}
+    - targetCorrespondingSourceObject: {fileID: 466615676066931102, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1687144825}
+    - targetCorrespondingSourceObject: {fileID: 1253077539920221968, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1027315593}
+    - targetCorrespondingSourceObject: {fileID: 1253077539920221968, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1027315592}
+    - targetCorrespondingSourceObject: {fileID: 5987252714737728371, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1125759287}
+    - targetCorrespondingSourceObject: {fileID: 3416950473550672840, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1006398098}
+    - targetCorrespondingSourceObject: {fileID: 5769380564024567514, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 134888696}
+    - targetCorrespondingSourceObject: {fileID: 2651176782612809758, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 852071108}
+    - targetCorrespondingSourceObject: {fileID: 4469261709646628572, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1947308446}
+    - targetCorrespondingSourceObject: {fileID: 3052422746665338948, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9861746}
+    - targetCorrespondingSourceObject: {fileID: 9215065361201339226, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 561213769}
+    - targetCorrespondingSourceObject: {fileID: 5047465291982920648, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1606630316}
+    - targetCorrespondingSourceObject: {fileID: 2839457830210176998, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1999661187}
+    - targetCorrespondingSourceObject: {fileID: 2833908676852000725, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1419688801}
+    - targetCorrespondingSourceObject: {fileID: 2504256147754865358, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1798487945}
+    - targetCorrespondingSourceObject: {fileID: 3239193825728380858, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2116734526}
+    - targetCorrespondingSourceObject: {fileID: 6666585563037962345, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1886026986}
+    - targetCorrespondingSourceObject: {fileID: 7154903699819774017, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 172403385}
+    - targetCorrespondingSourceObject: {fileID: 6662630809377120907, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 953531168}
+    - targetCorrespondingSourceObject: {fileID: 1002969259642712611, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1436248744}
+    - targetCorrespondingSourceObject: {fileID: 9060210357118554962, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 140398861}
+    - targetCorrespondingSourceObject: {fileID: 6590493534537560876, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2065250071}
+    - targetCorrespondingSourceObject: {fileID: 4645628861720016436, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1788928120}
+    - targetCorrespondingSourceObject: {fileID: 2716247496959863259, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 403223047}
+    - targetCorrespondingSourceObject: {fileID: 267575454014864387, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 953773497}
+    - targetCorrespondingSourceObject: {fileID: 7340637196009723595, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1199233628}
+    - targetCorrespondingSourceObject: {fileID: 192502042369150917, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2093077376}
+    - targetCorrespondingSourceObject: {fileID: 8946240445753764457, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1220348297}
+    - targetCorrespondingSourceObject: {fileID: 4826380299668467019, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1728252932}
+    - targetCorrespondingSourceObject: {fileID: 1065060702609732092, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 934381095}
+    - targetCorrespondingSourceObject: {fileID: 4113061675652868878, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 684954472}
+    - targetCorrespondingSourceObject: {fileID: 8392844661342134675, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1726557977}
+    - targetCorrespondingSourceObject: {fileID: 4422910151138195111, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 396945751}
+    - targetCorrespondingSourceObject: {fileID: 175112471250067418, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1024740651}
+    - targetCorrespondingSourceObject: {fileID: 3001085824781794924, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1465070835}
+    - targetCorrespondingSourceObject: {fileID: 7473807041237848495, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1733479500}
+    - targetCorrespondingSourceObject: {fileID: 6637251030747517853, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1140669816}
+    - targetCorrespondingSourceObject: {fileID: 8507001062562535292, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 995770113}
+  m_SourcePrefab: {fileID: 100100000, guid: a1861e2079ef31f47a3e41d358c27d25, type: 3}
+--- !u!114 &2122474371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788793818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473942eb15064d08a3baa8ced387321e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.Nicholas.MissionEquipmentTarget
+  equipment: 0
 --- !u!64 &2122990115
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -80496,3 +84612,11 @@ SceneRoots:
   - {fileID: 631700356}
   - {fileID: 1218180213}
   - {fileID: 1763826252}
+  - {fileID: 2121937359}
+  - {fileID: 1011878677}
+  - {fileID: 730663038}
+  - {fileID: 684272436}
+  - {fileID: 869316506}
+  - {fileID: 1545728745}
+  - {fileID: 653346941}
+  - {fileID: 1413158408}

@@ -171,7 +171,7 @@ namespace AstroLab.Nicholas.Editor
             }
         }
 
-        private static bool EnsureBaseConsertadaInScene(Scene scene)
+        public static bool EnsureBaseConsertadaInScene(Scene scene)
         {
             if (UnityEngine.Object.FindFirstObjectByType<BaseConsertada>()) return false;
             GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(BaseConsertadaPrefabPath);
@@ -227,7 +227,7 @@ namespace AstroLab.Nicholas.Editor
             return null;
         }
 
-        private static int BindRepairTargets()
+        public static int BindRepairTargets()
         {
             int count = 0;
             Scene scene = SceneManager.GetActiveScene();
@@ -235,15 +235,8 @@ namespace AstroLab.Nicholas.Editor
             foreach (Transform node in root.GetComponentsInChildren<Transform>(true))
             {
                 string name = node.name;
-                if (!name.StartsWith("REPAIR_", StringComparison.Ordinal)) continue;
                 EquipmentId id;
-                if (name.StartsWith("REPAIR_Painel_", StringComparison.Ordinal)) id = EquipmentId.SolarPanels;
-                else if (name.StartsWith("REPAIR_Gerador_O2", StringComparison.Ordinal)) id = EquipmentId.LifeSupport;
-                else if (name.StartsWith("REPAIR_Reciclador_H2O", StringComparison.Ordinal)) id = EquipmentId.WaterRecycler;
-                else if (name.StartsWith("REPAIR_Estufa_Painel", StringComparison.Ordinal)) id = EquipmentId.Greenhouse;
-                else if (name.StartsWith("REPAIR_Baterias", StringComparison.Ordinal)) id = EquipmentId.SuitCharger;
-                else if (name.StartsWith("REPAIR_Antena_Prato", StringComparison.Ordinal)) id = EquipmentId.Communications;
-                else continue;
+                if (!AstroLab.Gameplay.MissionPieceBindings.TryGetEquipment(name, out id)) continue;
                 MissionEquipmentTarget target = node.GetComponent<MissionEquipmentTarget>();
                 if (!target) target = node.gameObject.AddComponent<MissionEquipmentTarget>();
                 target.Configure(id);
@@ -289,7 +282,7 @@ namespace AstroLab.Nicholas.Editor
             return null;
         }
 
-        private static void AddRadiationTarget()
+        public static void AddRadiationTarget()
         {
             Transform existing = Find("Nicholas_Painel_Manutencao_Abrigo");
             Vector3 pos;
@@ -341,7 +334,7 @@ namespace AstroLab.Nicholas.Editor
             visual.SetRepaired(false);
         }
 
-        private static int AddScienceMarkers()
+        public static int AddScienceMarkers()
         {
             Transform anchor = Find("WP_Usina_Solar") ?? Find("WP_Antena") ??
                                Find("WP_Rampa_Eclusa") ?? Find("Nicholas_WP_Rampa_Eclusa");

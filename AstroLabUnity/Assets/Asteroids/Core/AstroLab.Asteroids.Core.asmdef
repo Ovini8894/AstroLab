@@ -1,0 +1,5 @@
+{
+  "name": "AstroLab.Asteroids.Core",
+  "references": ["Unity.Newtonsoft.Json"],
+  "autoReferenced": true
+}

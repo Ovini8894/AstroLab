@@ -1,0 +1,7 @@
+{
+  "name": "AstroLab.Asteroids.Tests",
+  "references": ["AstroLab.Asteroids.Core"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

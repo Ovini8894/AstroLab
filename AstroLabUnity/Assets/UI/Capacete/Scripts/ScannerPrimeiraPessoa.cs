@@ -109,7 +109,12 @@ namespace AstroLab.Capacete
             }
             if(painelProgresso)painelProgresso.SetActive(temAlvo);
             if(nomeAlvo)nomeAlvo.text=temAlvo?dados.titulo:"SEM ALVO";
-            if(instrucao)instrucao.text=Escaneando?"MANTENHA A MIRA  /  ANALISANDO":"SEGURE O BOTÃO ESQUERDO  /  3 s";
+            if(instrucao)
+            {
+                bool mostrarInstrucao=ScansConcluidos==0 || Escaneando;
+                instrucao.gameObject.SetActive(mostrarInstrucao);
+                if(mostrarInstrucao)instrucao.text=Escaneando?"MANTENHA A MIRA  /  ANALISANDO":"SEGURE O BOTÃO ESQUERDO  /  3 s";
+            }
             if(percentual)percentual.text=Mathf.FloorToInt(Progresso*100)+"%";
             if(barra)barra.fillAmount=Progresso;
             if(barraAparelho)barraAparelho.fillAmount=Progresso;

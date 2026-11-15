@@ -25,50 +25,18 @@ public static class BaseConsertadaSetup
     static void CriarMateriais()
     {
         Directory.CreateDirectory(MatDir);
-        var lit = Shader.Find("Universal Render Pipeline/Lit");
+        var toon = Shader.Find("AstroLab/Toon");
 
-        Material Mat(string nome)
+        // materiais novos no mesmo estilo cartoon da BaseLunar (receitas em EstiloCartoon, cores em PaletaLua)
+        foreach (var nome in new[] { "M_Luz_Verde", "M_Luz_Branca", "M_Planta_Viva", "M_Agua" })
         {
             string path = $"{MatDir}/{nome}.mat";
             var m = AssetDatabase.LoadAssetAtPath<Material>(path);
-            if (m == null) { m = new Material(lit); AssetDatabase.CreateAsset(m, path); }
-            m.shader = lit;
-            return m;
+            if (m == null) { m = new Material(toon); AssetDatabase.CreateAsset(m, path); }
+            EstiloCartoon.ConfigurarMaterial(m, nome);
+            // salva SÓ estes materiais (AssetDatabase.SaveAssets() gravaria tudo que estiver pendente no projeto)
+            AssetDatabase.SaveAssetIfDirty(m);
         }
-
-        void Emissivo(Material m, Color c, float intensidade)
-        {
-            m.SetColor("_BaseColor", c.gamma);
-            m.SetFloat("_Smoothness", 0.5f);
-            m.EnableKeyword("_EMISSION");
-            m.SetColor("_EmissionColor", c * intensidade);
-            m.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
-            EditorUtility.SetDirty(m);
-        }
-
-        Emissivo(Mat("M_Luz_Verde"), new Color(0.1f, 1f, 0.25f), 4f);
-        Emissivo(Mat("M_Luz_Branca"), new Color(1f, 0.97f, 0.9f), 5f);
-
-        var planta = Mat("M_Planta_Viva");
-        planta.SetColor("_BaseColor", new Color(0.12f, 0.45f, 0.08f).gamma);
-        planta.SetFloat("_Smoothness", 0.3f);
-        EditorUtility.SetDirty(planta);
-
-        var agua = Mat("M_Agua");
-        agua.SetColor("_BaseColor", new Color(0.1f, 0.45f, 0.8f, 0.75f));
-        agua.SetFloat("_Smoothness", 0.95f);
-        agua.SetFloat("_Surface", 1); agua.SetFloat("_Blend", 0); agua.SetOverrideTag("RenderType", "Transparent");
-        agua.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha); agua.SetFloat("_DstBlend", (float)BlendMode.OneMinusSrcAlpha);
-        agua.SetFloat("_SrcBlendAlpha", (float)BlendMode.One); agua.SetFloat("_DstBlendAlpha", (float)BlendMode.OneMinusSrcAlpha);
-        agua.SetFloat("_ZWrite", 0);
-        agua.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-        agua.renderQueue = (int)RenderQueue.Transparent;
-        agua.EnableKeyword("_EMISSION");
-        agua.SetColor("_EmissionColor", new Color(0.05f, 0.3f, 0.6f) * 0.5f);
-        EditorUtility.SetDirty(agua);
-        // salva SÓ os materiais desta pasta (AssetDatabase.SaveAssets() gravaria também os da BaseLunar, que não podemos alterar)
-        foreach (var nome in new[] { "M_Luz_Verde", "M_Luz_Branca", "M_Planta_Viva", "M_Agua" })
-            AssetDatabase.SaveAssetIfDirty(AssetDatabase.LoadAssetAtPath<Material>($"{MatDir}/{nome}.mat"));
 
         // liga cada material do FBX a um .mat existente: primeiro os da BaseLunar, depois os novos
         var importer = (ModelImporter)AssetImporter.GetAtPath(Fbx);

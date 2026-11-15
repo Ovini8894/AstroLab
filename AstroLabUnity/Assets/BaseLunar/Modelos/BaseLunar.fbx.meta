@@ -112,6 +112,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: M_Terra_Atmosfera
+    second: {fileID: 2100000, guid: 2f0ae417531343e48957d9c774050170, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Terra_Nuvens
+    second: {fileID: 2100000, guid: 5a833559fa74d00449970a80175ca653, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: M_Terra_Vaso
     second: {fileID: 2100000, guid: 322940d69d8f64ba4886107ab943c6b9, type: 2}
   - first:

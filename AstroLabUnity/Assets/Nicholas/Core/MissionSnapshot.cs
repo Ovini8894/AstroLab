@@ -23,6 +23,9 @@ namespace AstroLab.Nicholas.Core
         public float PlayerPosY;
         public float PlayerPosZ;
         public float PlayerRotY;
+        public int WorldLayoutVersion;
+        public bool HasPlayerQuaternion;
+        public float PlayerQX, PlayerQY, PlayerQZ, PlayerQW;
         public MissionOutcome Outcome = MissionOutcome.Running;
         public string OutcomeReason = string.Empty;
         public int NextArtifactIndex;

@@ -36,6 +36,12 @@ namespace AstroLab.Gameplay
             if (candidate.equipment.Select(e => e.id).Distinct().Count() != MissionRuleSet.Definitions.Length) return false;
             if (candidate.environment.Any(e => e == null || string.IsNullOrWhiteSpace(e.match) || string.IsNullOrWhiteSpace(e.description))) return false;
             if (candidate.artifacts.Any(e => e == null || !Enum.TryParse(e.id, out ArtifactId id) || string.IsNullOrWhiteSpace(e.description)) || candidate.artifacts.Select(e => e.id).Distinct().Count() != 5) return false;
+            // Runtime control instructions ship with the current rules; an older cloud catalogue
+            // can still supply science and history without overriding the updated charging interaction.
+            var bundled=Resources.Load<TextAsset>("base_knowledge");
+            var charger=bundled?JsonUtility.FromJson<KnowledgeData>(bundled.text)?.equipment?.FirstOrDefault(e=>e.id==EquipmentId.SuitCharger.ToString()):null;
+            if(charger!=null)
+                for(int i=0;i<candidate.equipment.Length;i++)if(candidate.equipment[i].id==charger.id)candidate.equipment[i]=charger;
             data = candidate; Changed?.Invoke(); return true;
         }
         public static EquipmentKnowledge Find(EquipmentId id) => Data?.equipment.FirstOrDefault(e => e.id == id.ToString());
@@ -66,20 +72,32 @@ namespace AstroLab.Gameplay
                     {
                         var info = artifact.GetComponent<AlvoExploracao>() ?? artifact.gameObject.AddComponent<AlvoExploracao>();
                         info.titulo = knowledge.title + " [RÉPLICA DIDÁTICA]";
-                        info.descricao = knowledge.description + "\nFonte histórica: " + knowledge.source;
+                        info.descricao = knowledge.description;
+                        info.charada = AstroLab.Nicholas.Core.Apollo15Trail.Find(artifact.Artifact).ClueToNext;
                         info.categoria = "APOLLO 15 · EXTRA OPCIONAL";
                     }
                     continue;
                 }
                 var target = node.GetComponentInParent<AstroLab.Nicholas.MissionEquipmentTarget>();
-                if (target)
+                if (target && !target.enabled && MissionPieceBindings.IsArchitecture(PecasDaBase.Encontrar(node.name)))
+                {
+                    var structure=node.GetComponent<AlvoExploracao>();
+                    if(!structure)structure=node.gameObject.AddComponent<AlvoExploracao>();
+                    structure.titulo="Estrutura operacional";structure.categoria="HABITAT / ESTRUTURA";
+                    structure.descricao="Paredes, portas e corredores já estão íntegros. Os reparos da missão são feitos nos equipamentos sinalizados.";
+                    structure.charada="Nenhum reparo necessário. [Tab] Consulte o próximo objetivo.";
+                    continue;
+                }
+                if (target && target.enabled)
                 {
                     var entry = BaseKnowledgeCatalog.Find(target.Equipment);
                     if (entry == null) continue;
                     var info = target.GetComponent<AlvoExploracao>() ?? target.gameObject.AddComponent<AlvoExploracao>();
                     info.titulo = MissionRuleSet.Find(target.Equipment).DisplayName;
                     info.descricao = entry.description + "\n\nSituação: " + entry.fault + "\n\nComo restaurar: " + entry.repair + "\n\nResultado: " + entry.benefit;
-                    info.charada = "[E] Inspecionar manutenção · [R] Reparar junto ao equipamento · [Tab] Gestão da base";
+                    info.charada = target.Equipment==EquipmentId.SuitCharger
+                        ? "[C] Recarregar O2 e bateria dentro da base · custo: 1 ação"
+                        : "[E] Inspecionar manutenção · [R] Reparar junto ao equipamento · [Tab] Gestão da base";
                     info.categoria = "MANUTENÇÃO DA BASE"; registered++;
                 }
                 else if (BaseKnowledgeCatalog.Describe(node.name, out var entry))

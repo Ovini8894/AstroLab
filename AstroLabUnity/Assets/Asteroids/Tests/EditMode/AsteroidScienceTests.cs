@@ -71,6 +71,90 @@ namespace AstroLab.Asteroids.Tests
             Assert.That(AsteroidScience.ParseFeed(json, false), Is.Empty);
         }
 
+        [Test]
+        public void AnalysisCannotSkipEstimateAndOnlyCorrectInterpretationCompletesIt()
+        {
+            var analysis = new AsteroidAnalysis(Record("1", "2026-11-15", false), 0);
+            Assert.That(analysis.Question, Is.Null);
+            Assert.That(analysis.Answer(0), Is.False);
+            Assert.That(analysis.SubmitEstimate(0), Is.False);
+            Assert.That(analysis.SubmitEstimate(4), Is.False);
+            Assert.That(analysis.SubmitEstimate(30), Is.False);
+            Assert.That(analysis.SubmitEstimate(15), Is.True);
+            var question = analysis.Question;
+            Assert.That(analysis.Answer((question.CorrectIndex + 1) % 3), Is.False);
+            Assert.That(analysis.Completed, Is.False);
+            Assert.That(analysis.Answer(question.CorrectIndex), Is.True);
+            Assert.That(analysis.Completed, Is.True);
+            Assert.That(analysis.Answer(question.CorrectIndex), Is.False);
+        }
+
+        [Test]
+        public void EntireEstimatedRangeIsAcceptedWithoutRequiringAFictitiousExactDiameter()
+        {
+            var record = Record("1", "2026-11-15", false);
+            foreach (double guess in new[] { record.MinMetres, 12.5, 17.5, record.MaxMetres })
+                Assert.That(new AsteroidAnalysis(record, 0).SubmitEstimate(guess), Is.True);
+            Assert.That(new AsteroidAnalysis(record, 0).SubmitEstimate(double.NaN), Is.False);
+            Assert.That(new AsteroidAnalysis(record, 0).SubmitEstimate(double.PositiveInfinity), Is.False);
+        }
+
+        [Test]
+        public void ComparisonScaleDoesNotExposeEitherEndOfTheNasaDiameterRange()
+        {
+            var analysis = new AsteroidAnalysis(Record("1", "2026-11-15", false), 0);
+            Assert.That(analysis.ScaleMaximum, Is.GreaterThan(analysis.Record.MaxMetres));
+            Assert.That(analysis.RepresentativeMetres, Is.InRange(analysis.Record.MinMetres, analysis.Record.MaxMetres));
+            Assert.That(analysis.GuessMetres, Is.Zero);
+            Assert.That(analysis.SizeAccepted, Is.False);
+        }
+
+        [Test]
+        public void ReanalysingAnObjectCyclesAllAvailableTopicsAndChangesAnswerPositions()
+        {
+            var record = Record("1", "2026-11-15", false);
+            record.SpeedKmS = 20; record.DistanceKm = AsteroidScience.MeanLunarDistanceKm * 2;
+            var questions = Enumerable.Range(0, 12).Select(round => AsteroidAnalysis.CreateQuestion(record, round)).ToList();
+            Assert.That(questions.Select(q => q.Kind).Distinct().Count(), Is.EqualTo(6));
+            Assert.That(questions.Select(q => q.CorrectIndex).Distinct().Count(), Is.GreaterThan(1));
+            Assert.That(questions.All(q => q.Options.Length == 3 && q.Options.Distinct().Count() == 3), Is.True);
+        }
+
+        [Test]
+        public void MissingSpeedAndDistanceExcludeQuestionsAboutUnknownValues()
+        {
+            var record = Record("no-velocity", "2026-11-15", false);
+            var questions = Enumerable.Range(0, 12).Select(round => AsteroidAnalysis.CreateQuestion(record, round)).ToList();
+            Assert.That(questions.All(q => q.Kind == AsteroidQuestionKind.ModuleScale || q.Kind == AsteroidQuestionKind.AstronautScale || q.Kind == AsteroidQuestionKind.Uncertainty), Is.True);
+            Assert.That(questions.Select(q => q.Kind).Distinct().Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void TravelQuestionUsesSecondsAndLunarDistanceQuestionKeepsEarthReference()
+        {
+            var record = Record("conversion", "2026-11-15", false);
+            record.SpeedKmS = 20; record.DistanceKm = AsteroidScience.MeanLunarDistanceKm * 2;
+            var questions = Enumerable.Range(0, 6).Select(round => AsteroidAnalysis.CreateQuestion(record, round)).ToList();
+            var travel = questions.Single(q => q.Kind == AsteroidQuestionKind.TravelInOneMinute);
+            Assert.That(travel.Options[travel.CorrectIndex], Is.EqualTo("1.200,0 km"));
+            var lunar = questions.Single(q => q.Kind == AsteroidQuestionKind.LunarDistance);
+            Assert.That(lunar.Options[lunar.CorrectIndex], Is.EqualTo("2,0 distâncias Terra–Lua"));
+            Assert.That(lunar.Prompt, Does.Contain("À TERRA"));
+        }
+
+        [Test]
+        public void EveryShippedArchiveObjectOffersDistinctOptionsAndAnAcceptableVisualEstimate()
+        {
+            var records = AsteroidScience.ParseFeed(Resources.Load<TextAsset>("asteroid_archive").text, true);
+            foreach (var record in records.Where(AsteroidScience.CanAnalyse))
+            {
+                var analysis = new AsteroidAnalysis(record, 0);
+                Assert.That(analysis.SubmitEstimate(analysis.RepresentativeMetres), Is.True, record.Id);
+                foreach (int round in Enumerable.Range(0, 6))
+                    Assert.That(AsteroidAnalysis.CreateQuestion(record, round).Options.Distinct().Count(), Is.EqualTo(3), record.Id);
+            }
+        }
+
         private static AsteroidRecord Record(string id, string date, bool history) => new AsteroidRecord {
             Id = id, Name = id, ApproachDate = date, Historical = history, MinMetres = 10, MaxMetres = 20
         };

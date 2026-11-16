@@ -177,11 +177,12 @@ namespace AstroLab.Capacete
             Transform alvoDistancia = (modoGuiaEclusa && eclusaReferencia) ? eclusaReferencia : baseReferencia;
             if(alvoDistancia && cameraJogador && distanciaTexto)
             {
-                int metros = Mathf.RoundToInt(Vector3.Distance(cameraJogador.transform.position, alvoDistancia.position));
+                var world=AstroLab.Gameplay.LunarWorld.Instance;
+                int metros = Mathf.RoundToInt(world && modoGuiaEclusa ? world.Distance(cameraJogador.transform.position,alvoDistancia.position) : Vector3.Distance(cameraJogador.transform.position, alvoDistancia.position));
                 distanciaTexto.text = metros + " <size=60%>m</size>";
                 if (distanciaSinal)
                     distanciaSinal.text = modoGuiaEclusa
-                        ? "Eclusa: " + metros + " m  ·  [L] ENTRAR"
+                        ? (world ? world.Bearing(cameraJogador.transform,alvoDistancia.position) : "ECLUSA") + " · [L] ao chegar"
                         : (string.IsNullOrEmpty(distanciaSinalPadrao) ? "SINAL LOCAL  /  CONECTADO" : distanciaSinalPadrao);
             }
             var kb = Keyboard.current;

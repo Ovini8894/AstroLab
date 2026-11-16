@@ -205,12 +205,12 @@ namespace AstroLab.Nicholas
 
                 Vector3 lookDir = g.Position - viewerPos;
                 if (lookDir.sqrMagnitude > 0.0001f)
-                    g.Root.transform.rotation = Quaternion.LookRotation(lookDir.normalized, Vector3.up);
+                    g.Root.transform.rotation = Quaternion.LookRotation(lookDir.normalized, viewer.up);
 
                 float speedMult = (isAimed || isTutorialFocus) ? 1.45f : 1f;
                 float pulse = 0.5f + 0.5f * Mathf.Sin(time * (pulseSpeed * speedMult) + g.Phase);
                 float bob = (pulse - 0.5f) * ((isAimed || isTutorialFocus) ? 0.12f : 0.06f);
-                g.Root.transform.position = g.Position + Vector3.up * bob;
+                g.Root.transform.position = g.Position + AstroLab.Gameplay.LunarWorld.Up(g.Position) * bob;
 
                 float dist = Mathf.Sqrt(sqrDist);
                 float maxDistFactor = isTutorialFocus ? 3.8f : 1.18f;
@@ -261,7 +261,7 @@ namespace AstroLab.Nicholas
                     if (t.gameObject.name.IndexOf("Painel_", StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         Vector3 p = ComputeTargetAnchorPosition(t.transform, true);
-                        sum += new Vector3(p.x, 0f, p.z);
+                        sum += p;
                         if (p.y > topY) topY = p.y;
                         panelCount++;
                     }
@@ -271,12 +271,14 @@ namespace AstroLab.Nicholas
                     for (int i = 0; i < solarMembers.Count; i++)
                     {
                         Vector3 p = ComputeTargetAnchorPosition(solarMembers[i].transform, true);
-                        sum += new Vector3(p.x, 0f, p.z);
+                        sum += p;
                         if (p.y > topY) topY = p.y;
                         panelCount++;
                     }
                 }
-                solarGroup.Position = new Vector3(sum.x / panelCount, topY + 0.35f, sum.z / panelCount);
+                solarGroup.Position = AstroLab.Gameplay.LunarWorld.Instance
+                    ? sum/panelCount+AstroLab.Gameplay.LunarWorld.Up(sum/panelCount)*.35f
+                    : new Vector3(sum.x / panelCount, topY + 0.35f, sum.z / panelCount);
                 CreateMarkerVisual(solarGroup);
                 groups.Add(solarGroup);
             }
@@ -369,6 +371,17 @@ namespace AstroLab.Nicholas
 
         private static Vector3 ComputeTargetAnchorPosition(Transform tr, bool isSolarPanel)
         {
+            if (AstroLab.Gameplay.LunarWorld.Instance)
+            {
+                var renderer=tr.GetComponentInChildren<Renderer>();
+                if(renderer)
+                {
+                    var up=AstroLab.Gameplay.LunarWorld.Up(renderer.bounds.center);
+                    var e=renderer.bounds.extents;
+                    float extent=Mathf.Abs(up.x)*e.x+Mathf.Abs(up.y)*e.y+Mathf.Abs(up.z)*e.z;
+                    return renderer.bounds.center+up*(extent+.55f);
+                }
+            }
             Renderer[] renderers = tr.GetComponentsInChildren<Renderer>(false);
             if (renderers != null && renderers.Length > 0)
             {

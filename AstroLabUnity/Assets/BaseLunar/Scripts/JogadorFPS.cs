@@ -31,6 +31,7 @@ public class JogadorFPS : MonoBehaviour
     const float LimiarInput = 0.001f;
 
     CharacterController cc;
+    AstroLab.Gameplay.RadialCharacterMotor radial;
     Transform cam;
     float pitch;
     float velY;
@@ -43,6 +44,11 @@ public class JogadorFPS : MonoBehaviour
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        if(AstroLab.Gameplay.LunarWorld.Instance)
+        {
+            radial=GetComponent<AstroLab.Gameplay.RadialCharacterMotor>();
+            if(!radial)radial=gameObject.AddComponent<AstroLab.Gameplay.RadialCharacterMotor>();
+        }
         Camera childCam = GetComponentInChildren<Camera>();
         cam = childCam != null ? childCam.transform : null;
         velocidadeTetoAereo = velocidadeMinimaAjusteAereo;
@@ -73,9 +79,13 @@ public class JogadorFPS : MonoBehaviour
         float dt = Mathf.Min(Time.deltaTime, 0.05f);
         if (dt <= 0f) return;
 
+        Vector3 up=AstroLab.Gameplay.LunarWorld.Up(transform.position);
+        Quaternion transport=Quaternion.FromToRotation(transform.up,up);
+        transform.rotation=transport*transform.rotation;
+        velHorizontal=Vector3.ProjectOnPlane(transport*velHorizontal,up);
         AtualizarCursorECamera(kb, mouse);
 
-        bool noChao = cc.isGrounded;
+        bool noChao = radial ? radial.IsGrounded : cc.isGrounded;
         AtualizarTemporizadoresPulo(kb, noChao, dt);
 
         if (noChao && velY <= 0f) velY = AderenciaSolo;
@@ -99,9 +109,8 @@ public class JogadorFPS : MonoBehaviour
 
         velY = Mathf.Max(velY - gravidade * dt, -velocidadeMaximaQueda);
 
-        Vector3 movimento = velHorizontal;
-        movimento.y = velY;
-        CollisionFlags colisoes = cc.Move(movimento * dt);
+        Vector3 movimento = velHorizontal + transform.up * velY;
+        CollisionFlags colisoes = radial ? radial.Move(movimento * dt) : cc.Move(movimento * dt);
 
         if ((colisoes & CollisionFlags.Above) != 0 && velY > 0f) velY = 0f;
 
@@ -169,7 +178,7 @@ public class JogadorFPS : MonoBehaviour
 
     void RegistrarTetoAereo()
     {
-        float momentoAtual = new Vector3(velHorizontal.x, 0f, velHorizontal.z).magnitude;
+        float momentoAtual = Vector3.ProjectOnPlane(velHorizontal,transform.up).magnitude;
         velocidadeTetoAereo = Mathf.Clamp(momentoAtual, velocidadeMinimaAjusteAereo, velocidadeCorrida);
     }
 

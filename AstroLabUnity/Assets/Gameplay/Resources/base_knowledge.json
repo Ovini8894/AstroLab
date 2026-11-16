@@ -1,33 +1,160 @@
 {
   "schemaVersion": 1,
   "equipment": [
-    {"id":"SolarPanels","description":"Os painéis convertem luz solar em eletricidade. Os inversores e cabos levam essa energia até a base.","fault":"Painéis caídos, suportes danificados e ligações interrompidas.","repair":"Recolocar os módulos nos suportes e substituir as ligações avariadas. Um reparo restaura o conjunto da usina.","benefit":"A capacidade elétrica sobe de 3 para 8 unidades. O reparo acontece no exterior e consome recursos do traje."},
-    {"id":"LifeSupport","description":"O suporte de vida mantém o ar do habitat em condições de uso para a tripulação.","fault":"Gerador de oxigênio e tubulação avariados; a reserva de ar diminui a cada turno sem o sistema ligado.","repair":"Trocar conexões danificadas e vedar a tubulação do módulo de suporte de vida.","benefit":"Depois de reparado E ligado, recupera 5 pontos de ar por turno. Desligado, a base perde 20 pontos. Consome 4 unidades de energia."},
-    {"id":"WaterRecycler","description":"O reciclador recupera parte da água usada. Água potável é um recurso limitado, por isso reduzir perdas ajuda a base a durar mais.","fault":"Circuito de recuperação de água interrompido.","repair":"Substituir o conjunto danificado e restabelecer o circuito de recuperação.","benefit":"Depois de reparado, devolve 2 unidades de água por turno. Nesta simulação funciona sem chave elétrica separada."},
-    {"id":"Greenhouse","description":"A estufa produz alimentos com cultivo controlado. Plantas precisam de água e de condições adequadas de iluminação e temperatura.","fault":"Painel de controle e estrutura da estufa avariados.","repair":"Restaurar o controle da estufa e suas proteções; depois ligar o cultivo no painel de energia.","benefit":"Ligada, produz 2 alimentos e usa 1 água extra por turno. Consome 3 unidades de energia. Produção ocorre ao avançar o turno."},
-    {"id":"RadiationShelter","description":"O abrigo oferece uma área protegida para a tripulação em um evento de radiação solar.","fault":"Painel de manutenção e proteção do abrigo indisponíveis.","repair":"Restabelecer a proteção pelo painel de manutenção no módulo do abrigo.","benefit":"Evita a penalidade do evento solar simulado ao final do segundo turno. É uma proteção passiva, sem chave elétrica."},
-    {"id":"SuitCharger","description":"A estação de recarga repõe o oxigênio e a bateria do traje para uma nova saída.","fault":"A estação já começa reparada, mas só funciona quando recebe energia e o suporte de vida está ligado.","repair":"Não exige peças nesta missão. Ligue a recarga e o suporte de vida, volte para dentro e use Recarregar traje.","benefit":"Recupera oxigênio e bateria do traje para 100%, gastando 1 tempo de ação. A estação ligada consome 2 unidades de energia."},
-    {"id":"Communications","description":"A antena e o console permitem a comunicação da base. A direção da antena e as conexões elétricas ajudam a manter o enlace.","fault":"O sistema de comunicações já começa operacional nesta missão.","repair":"Pode ser ligado e desligado na gestão elétrica. Não requer um novo reparo nem gasta peças.","benefit":"Consome 1 unidade de energia quando ligado. É possível desligar o rádio para liberar energia para outras prioridades."}
+    {
+      "id": "SolarPanels",
+      "description": "Os painéis convertem luz solar em eletricidade. Os inversores e cabos levam essa energia até a base.",
+      "fault": "Painéis caídos, suportes danificados e ligações interrompidas.",
+      "repair": "Recolocar os módulos nos suportes e substituir as ligações avariadas. Um reparo restaura o conjunto da usina.",
+      "benefit": "A capacidade elétrica sobe de 3 para 8 unidades. O reparo acontece no exterior e consome recursos do traje."
+    },
+    {
+      "id": "LifeSupport",
+      "description": "O suporte de vida mantém o ar do habitat em condições de uso para a tripulação.",
+      "fault": "Gerador de oxigênio e tubulação avariados; a reserva de ar diminui a cada turno sem o sistema ligado.",
+      "repair": "Trocar conexões danificadas e vedar a tubulação do módulo de suporte de vida.",
+      "benefit": "Depois de reparado E ligado, recupera 5 pontos de ar por turno. Desligado, a base perde 20 pontos. Consome 4 unidades de energia."
+    },
+    {
+      "id": "WaterRecycler",
+      "description": "O reciclador recupera parte da água usada. Água potável é um recurso limitado, por isso reduzir perdas ajuda a base a durar mais.",
+      "fault": "Circuito de recuperação de água interrompido.",
+      "repair": "Substituir o conjunto danificado e restabelecer o circuito de recuperação.",
+      "benefit": "Depois de reparado, devolve 2 unidades de água por turno. Nesta simulação funciona sem chave elétrica separada."
+    },
+    {
+      "id": "Greenhouse",
+      "description": "A estufa produz alimentos com cultivo controlado. Plantas precisam de água e de condições adequadas de iluminação e temperatura.",
+      "fault": "Painel de controle e estrutura da estufa avariados.",
+      "repair": "Restaurar o controle da estufa e suas proteções; depois ligar o cultivo no painel de energia.",
+      "benefit": "Ligada, produz 2 alimentos e usa 1 água extra por turno. Consome 3 unidades de energia. Produção ocorre ao avançar o turno."
+    },
+    {
+      "id": "RadiationShelter",
+      "description": "O abrigo oferece uma área protegida para a tripulação em um evento de radiação solar.",
+      "fault": "Painel de manutenção e proteção do abrigo indisponíveis.",
+      "repair": "Restabelecer a proteção pelo painel de manutenção no módulo do abrigo.",
+      "benefit": "Evita a penalidade do evento solar simulado ao final do segundo turno. É uma proteção passiva, sem chave elétrica."
+    },
+    {
+      "id": "SuitCharger",
+      "description": "A estação repõe o oxigênio e a bateria do traje para uma nova saída.",
+      "fault": "A estação começa operacional. Estar dentro da base não recarrega o traje automaticamente: é preciso solicitar o abastecimento.",
+      "repair": "Repare e ligue o suporte de vida. Dentro da base, use [C] ou o botão Recarga na gestão. A estação recebe prioridade elétrica durante essa ação; não precisa permanecer ligada entre recargas.",
+      "benefit": "Restaura O2 e bateria para 100%, gastando 1 ação. A prioridade de recarga usa a energia disponível sem deixar a produção da estufa desligada no próximo turno. Não cobra quando o traje já está completo."
+    },
+    {
+      "id": "Communications",
+      "description": "A antena e o console permitem a comunicação da base. A direção da antena e as conexões elétricas ajudam a manter o enlace.",
+      "fault": "O sistema de comunicações já começa operacional nesta missão.",
+      "repair": "Pode ser ligado e desligado na gestão elétrica. Não requer um novo reparo nem gasta peças.",
+      "benefit": "Consome 1 unidade de energia quando ligado. É possível desligar o rádio para liberar energia para outras prioridades."
+    }
   ],
   "artifacts": [
-    {"id":"Hammer","title":"Martelo geológico","description":"David Scott usou um martelo em uma demonstração de queda livre na Lua durante a Apollo 15, em 1971.","source":"https://science.nasa.gov/resource/the-apollo-15-hammer-feather-drop/"},
-    {"id":"Feather","title":"Pena de falcão","description":"Na demonstração de David Scott, uma pena e um martelo chegaram juntos ao chão lunar. A quase ausência de ar torna desprezível a resistência do ar nessa experiência.","source":"https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_15_feather_drop.html"},
-    {"id":"Rover","title":"Veículo Lunar Apollo 15","description":"A Apollo 15 foi a primeira missão a levar um veículo para ampliar a exploração da superfície lunar. No mapa, esta baliza representa uma réplica didática desse registro histórico.","source":"https://www.nasa.gov/history/50-years-ago-apollo-15-on-the-moon-at-hadley-apennine/"},
-    {"id":"Retroreflector","title":"Retrorefletor laser","description":"A Apollo 15 deixou um conjunto de refletores na Lua, utilizado em medições da distância entre a Terra e a Lua por laser.","source":"https://www.nasa.gov/history/50-years-ago-three-weeks-until-launch-of-apollo-15/"},
-    {"id":"FalconDescentStage","title":"Estágio de descida Falcon","description":"O estágio inferior do módulo lunar Falcon permaneceu na Lua; o estágio superior levou os astronautas de volta à órbita. Esta é uma réplica digital para exploração no jogo.","source":"https://www.nasa.gov/wp-content/uploads/2024/02/final-catalogue-of-manmade-material-on-the-moon.pdf"}
+    {
+      "id": "Hammer",
+      "title": "Martelo geológico",
+      "description": "David Scott usou um martelo em uma demonstração de queda livre na Lua durante a Apollo 15, em 1971.",
+      "source": "https://science.nasa.gov/resource/the-apollo-15-hammer-feather-drop/"
+    },
+    {
+      "id": "Feather",
+      "title": "Pena de falcão",
+      "description": "Na demonstração de David Scott, uma pena e um martelo chegaram juntos ao chão lunar. A quase ausência de ar torna desprezível a resistência do ar nessa experiência.",
+      "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_15_feather_drop.html"
+    },
+    {
+      "id": "Rover",
+      "title": "Veículo Lunar Apollo 15",
+      "description": "A Apollo 15 foi a primeira missão a levar um veículo para ampliar a exploração da superfície lunar. No mapa, esta baliza representa uma réplica didática desse registro histórico.",
+      "source": "https://www.nasa.gov/history/50-years-ago-apollo-15-on-the-moon-at-hadley-apennine/"
+    },
+    {
+      "id": "Retroreflector",
+      "title": "Retrorefletor laser",
+      "description": "A Apollo 15 deixou um conjunto de refletores na Lua, utilizado em medições da distância entre a Terra e a Lua por laser.",
+      "source": "https://www.nasa.gov/history/50-years-ago-three-weeks-until-launch-of-apollo-15/"
+    },
+    {
+      "id": "FalconDescentStage",
+      "title": "Estágio de descida Falcon",
+      "description": "O estágio inferior do módulo lunar Falcon permaneceu na Lua; o estágio superior levou os astronautas de volta à órbita. Esta é uma réplica digital para exploração no jogo.",
+      "source": "https://www.nasa.gov/wp-content/uploads/2024/02/final-catalogue-of-manmade-material-on-the-moon.pdf"
+    }
   ],
   "environment": [
-    {"match":"capsula_suprimentos","title":"Cápsula de suprimentos","description":"Ponto de entrega de materiais da base. Nesta missão, as 12 peças iniciais já aparecem no estoque; esta cápsula não concede peças adicionais.","category":"LOGÍSTICA"},
-    {"match":"console_controle","title":"Console de controle","description":"Central de consulta da base. Abra a gestão com Tab para ver estoques, custos dos reparos, energia e previsão do próximo turno.","category":"GESTÃO DA BASE"},
-    {"match":"estufa","title":"Módulo da estufa","description":"Área de cultivo de alimentos. Repare o painel e ligue o sistema para produzir alimentos; a produção usa água e energia a cada turno.","category":"ALIMENTAÇÃO"},
-    {"match":"reciclador","title":"Reciclador de água","description":"Recupera água do circuito da base. Depois do reparo, adiciona 2 unidades ao estoque ao avançar cada turno.","category":"ÁGUA"},
-    {"match":"gerador_o2","title":"Gerador de oxigênio","description":"Integra o suporte de vida. O reparo precisa ser seguido da ativação elétrica para recuperar o ar do habitat.","category":"SUPORTE DE VIDA"},
-    {"match":"abrigo","title":"Abrigo contra radiação","description":"Área de proteção para a tripulação. O painel de manutenção restaura a proteção necessária para o evento solar simulado.","category":"SEGURANÇA"},
-    {"match":"eclusa","title":"Eclusa","description":"Passagem entre a base e o exterior. Use L perto do marcador para entrar ou sair; fora da base, oxigênio e bateria do traje diminuem com o tempo.","category":"ACESSO E TRAJE"},
-    {"match":"inversor","title":"Inversor da usina solar","description":"Equipamento de condicionamento elétrico da usina. Nesta missão é restaurado junto com o conjunto de painéis solares.","category":"ENERGIA"},
-    {"match":"baterias","title":"Estação de energia e recarga","description":"Mantém os sistemas do traje prontos para outra saída. A recarga exige suporte de vida e estação ligados; veja o orçamento de energia antes de ativar.","category":"ENERGIA E TRAJE"},
-    {"match":"tanque_o2","title":"Reservatório de oxigênio","description":"Integra a rede de suporte de vida. O conteúdo e as conexões devem ser identificados; aparência sozinha não informa a pressão nem a quantidade disponível.","category":"SUPORTE DE VIDA"},
-    {"match":"brecha","title":"Brecha no casco","description":"Dano na estrutura representada no mapa. O painel do abrigo é o ponto de manutenção de proteção nesta versão; a brecha não exige uma compra separada de peças.","category":"ESTRUTURA"},
-    {"match":"antena","title":"Antena de comunicações","description":"Transmite e recebe sinais da base. O sistema começa operacional e pode ser desligado na gestão elétrica para redistribuir energia.","category":"COMUNICAÇÕES"}
+    {
+      "match": "capsula_suprimentos",
+      "title": "Cápsula de suprimentos",
+      "description": "Ponto de entrega de materiais da base. Nesta missão, as 12 peças iniciais já aparecem no estoque; esta cápsula não concede peças adicionais.",
+      "category": "LOGÍSTICA"
+    },
+    {
+      "match": "console_controle",
+      "title": "Console de controle",
+      "description": "Central de consulta da base. Abra a gestão com Tab para ver estoques, custos dos reparos, energia e previsão do próximo turno.",
+      "category": "GESTÃO DA BASE"
+    },
+    {
+      "match": "estufa",
+      "title": "Módulo da estufa",
+      "description": "Área de cultivo de alimentos. Repare o painel e ligue o sistema para produzir alimentos; a produção usa água e energia a cada turno.",
+      "category": "ALIMENTAÇÃO"
+    },
+    {
+      "match": "reciclador",
+      "title": "Reciclador de água",
+      "description": "Recupera água do circuito da base. Depois do reparo, adiciona 2 unidades ao estoque ao avançar cada turno.",
+      "category": "ÁGUA"
+    },
+    {
+      "match": "gerador_o2",
+      "title": "Gerador de oxigênio",
+      "description": "Integra o suporte de vida. O reparo precisa ser seguido da ativação elétrica para recuperar o ar do habitat.",
+      "category": "SUPORTE DE VIDA"
+    },
+    {
+      "match": "abrigo",
+      "title": "Abrigo contra radiação",
+      "description": "Área de proteção para a tripulação. O painel de manutenção restaura a proteção necessária para o evento solar simulado.",
+      "category": "SEGURANÇA"
+    },
+    {
+      "match": "eclusa",
+      "title": "Eclusa",
+      "description": "Passagem entre a base e o exterior. Use L perto do marcador para entrar ou sair; fora da base, oxigênio e bateria do traje diminuem com o tempo.",
+      "category": "ACESSO E TRAJE"
+    },
+    {
+      "match": "inversor",
+      "title": "Inversor da usina solar",
+      "description": "Equipamento de condicionamento elétrico da usina. Nesta missão é restaurado junto com o conjunto de painéis solares.",
+      "category": "ENERGIA"
+    },
+    {
+      "match": "baterias",
+      "title": "Estação de energia e recarga",
+      "description": "Mantém os sistemas do traje prontos para outra saída. A recarga exige suporte de vida e estação ligados; veja o orçamento de energia antes de ativar.",
+      "category": "ENERGIA E TRAJE"
+    },
+    {
+      "match": "tanque_o2",
+      "title": "Reservatório de oxigênio",
+      "description": "Integra a rede de suporte de vida. O conteúdo e as conexões devem ser identificados; aparência sozinha não informa a pressão nem a quantidade disponível.",
+      "category": "SUPORTE DE VIDA"
+    },
+    {
+      "match": "brecha",
+      "title": "Brecha no casco",
+      "description": "Dano na estrutura representada no mapa. O painel do abrigo é o ponto de manutenção de proteção nesta versão; a brecha não exige uma compra separada de peças.",
+      "category": "ESTRUTURA"
+    },
+    {
+      "match": "antena",
+      "title": "Antena de comunicações",
+      "description": "Transmite e recebe sinais da base. O sistema começa operacional e pode ser desligado na gestão elétrica para redistribuir energia.",
+      "category": "COMUNICAÇÕES"
+    }
   ]
 }

@@ -739,21 +739,17 @@ namespace AstroLab.Nicholas
             GUILayout.Label(item.Name, heading);
             GUILayout.Label(knowledge != null ? knowledge.description : item.History, body);
             GUILayout.Space(10);
-            GUILayout.Label("Fonte histórica oficial: " + item.OfficialSource, subtitle);
             if (nasaRecord != null)
             {
                 if (thumbnail) GUILayout.Box(thumbnail, GUILayout.Height(138));
-                GUILayout.Label(nasaRecord.LiveFromNasa ? "NASA Images API — metadados recuperados online:" : "Descrição local (modo offline):", subtitle);
-                GUILayout.Label(nasaRecord.Title, body);
-                if (!string.IsNullOrEmpty(nasaRecord.Description)) GUILayout.Label(Trim(nasaRecord.Description, 450), subtitle);
-                if (!string.IsNullOrEmpty(nasaRecord.NasaId)) GUILayout.Label("NASA ID: " + nasaRecord.NasaId, subtitle);
-                if (!string.IsNullOrEmpty(nasaRecord.CatalogUrl)) GUILayout.Label("Biblioteca: " + nasaRecord.CatalogUrl, subtitle);
             }
             GUILayout.Space(8);
+            GUILayout.Label("CHARADA PARA O PRÓXIMO OBJETO", heading);
+            GUILayout.Label(item.ClueToNext, body);
             if (s.NextArtifactIndex >= Apollo15Trail.Items.Length)
                 GUILayout.Label("A coleção inteira já foi registrada.", body);
             else if (Apollo15Trail.Items[s.NextArtifactIndex].Id != id)
-                GUILayout.Label("Não é a próxima pista. Procure: " + Apollo15Trail.Items[s.NextArtifactIndex].Name, body);
+                GUILayout.Label("Você já conhece este objeto ou ainda precisa seguir as pistas anteriores.", body);
             else if (id == ArtifactId.Feather)
             {
                 GUILayout.Label("Pergunta: ao soltar martelo e pena na Lua, quem chegou primeiro?", body);

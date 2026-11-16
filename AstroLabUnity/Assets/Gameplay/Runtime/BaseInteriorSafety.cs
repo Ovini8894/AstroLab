@@ -51,9 +51,10 @@ namespace AstroLab.Gameplay
                 if (!result.Success && hasIndoorPosition)
                 {
                     var controller = player.GetComponent<CharacterController>();
+                    bool controllerWasEnabled=controller&&controller.enabled;
                     if (controller) controller.enabled = false;
                     player.position = lastIndoorPosition;
-                    if (controller) controller.enabled = true;
+                    if (controller) controller.enabled = controllerWasEnabled;
                     Debug.Log("[AstroLab] Saída bloqueada: recarregue o traje antes de explorar.");
                 }
             }

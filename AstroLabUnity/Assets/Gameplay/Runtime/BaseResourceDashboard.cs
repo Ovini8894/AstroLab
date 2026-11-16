@@ -49,6 +49,9 @@ namespace AstroLab.Gameplay
             if (Keyboard.current != null)
             {
                 if (IsOpen && Keyboard.current.escapeKey.wasPressedThisFrame) { Close(); return; }
+                if (!IsOpen && !(FindAnyObjectByType<AstroLab.Asteroids.AsteroidTerminal>()?.IsOpen ?? false) && Keyboard.current.cKey.wasPressedThisFrame && !(overlay && overlay.IsModalOpen) &&
+                    !OptionalTeamComponents.IsHelmetModalOpen(OptionalTeamComponents.FindByName("HudCapacete")))
+                    mission.Recharge();
                 if (Keyboard.current.tabKey.wasPressedThisFrame) { if (IsOpen) Close(); else Open(); }
             }
             bool otherModal = !IsOpen && ((overlay && overlay.IsModalOpen) ||
@@ -57,7 +60,7 @@ namespace AstroLab.Gameplay
             strip.SetActive(!IsOpen && !otherModal);
             promptRoot.SetActive(!IsOpen && !otherModal);
             if (!IsOpen) prompt.text = interaction && !string.IsNullOrWhiteSpace(interaction.CurrentPrompt)
-                ? interaction.CurrentPrompt : "Mire em um equipamento para interagir.\n[Tab] Gestão e objetivos   ·   [L] Eclusa";
+                ? interaction.CurrentPrompt : "[Tab] Gestão   ·   [F4] Observatório no hub\n[C] Recarga do traje (1 ação)   ·   [L] Eclusa";
             noticeRoot.SetActive(!IsOpen && !otherModal && Time.unscaledTime < noticeUntil);
             if (Time.unscaledTime >= refreshAt) { refreshAt = Time.unscaledTime + .25f; Refresh(); }
         }
@@ -149,6 +152,8 @@ namespace AstroLab.Gameplay
             int food = next.Food - state.Food;
             int water = next.Water - state.Water;
             int air = next.HabitatAir - state.HabitatAir;
+            if (selected == EquipmentId.SuitCharger)
+                location.text += "\n" + mission.Engine.CanRechargeWithPriority().Message;
             forecast.text = "PRÓXIMO TURNO\nAlimentos " + Signed(food) + "  ·  Água " + Signed(water) + "  ·  Ar " + Signed(air) +
                 "\n" + (state.IsOutside ? "Retorne à base para avançar o turno." : state.Turn == 2 ? "Evento solar simulado incluído na previsão." : "Produção e consumo ocorrem ao avançar.") +
                 "\n\nMETA FINAL\nÁgua ≥ 1  ·  Alimentos ≥ 2  ·  Ar ≥ 30%";
@@ -186,7 +191,7 @@ namespace AstroLab.Gameplay
             location = Text(modal.transform, "Custos", "", 16, Gold, .025f, .15f, .65f, .225f);
             repairButton = Button(modal.transform, "Reparar", Repair, .025f, .085f, .23f, .15f); repairCaption = repairButton.GetComponentInChildren<TMP_Text>();
             powerButton = Button(modal.transform, "Ligar sistema", Power, .245f, .085f, .45f, .15f); powerCaption = powerButton.GetComponentInChildren<TMP_Text>();
-            Button(modal.transform, "Recarregar traje", () => { feedback.text = mission.Recharge().Message; Refresh(); }, .465f, .085f, .65f, .15f);
+            Button(modal.transform, "Recarga [C] · 1 ação", () => { feedback.text = mission.Recharge().Message; Refresh(); }, .465f, .085f, .65f, .15f);
             Button(modal.transform, "Avançar turno", () => { feedback.text = mission.AdvanceTurn().Message; Refresh(); }, .675f, .15f, .975f, .22f);
             Button(modal.transform, "Salvar [F5]", () => mission.SaveGame(), .675f, .085f, .82f, .15f);
             Button(modal.transform, "Carregar [F9]", () => mission.LoadGame(), .83f, .085f, .975f, .15f);

@@ -263,7 +263,7 @@ def torre():
     fim(m, 1.0)
 
     # braco de acesso da tripulacao (corredor coberto) + sala branca
-    b = Malha("Plataforma_BracoAcesso")
+    b = Malha("Plataforma_BracoAcesso"); b.chanfro = 0          # o bevel criava um vertice solto na origem (barra esticada ate o predio)
     bx0, bx1 = x1, ESC_W.x - 4.0
     w = 1.3
     b.caixa_ab((bx0, cy - w, BRACO_Z - 0.35), (bx1, cy + w, BRACO_Z), GRADE)

@@ -16,6 +16,8 @@ namespace AstroLab.Centro
 
         public bool Andando => caminho.Count > 0;
         public bool Falando { get; set; }
+        public bool AndandoAgora { get; private set; }   // andando de fato (nao esperando o jogador)
+        public Vector3 AlvoOlhar { get; private set; }
 
         Transform cabeca, corpo, bE, bD, pE, pD;
         Quaternion qCab, qBE, qBD, qPE, qPD;
@@ -92,6 +94,7 @@ namespace AstroLab.Centro
 
             // ---------------------------------------------------------- animação
             bool anda = caminho.Count > 0 && !esperando;
+            AndandoAgora = anda; AlvoOlhar = alvoOlhar;
             mistura = Mathf.MoveTowards(mistura, anda ? 1f : 0f, dt * 4f);
             fase += dt * Mathf.Lerp(1.2f, velocidade * 4.2f, mistura);
             gesto = Mathf.MoveTowards(gesto, Falando ? 1f : 0f, dt * 3f);

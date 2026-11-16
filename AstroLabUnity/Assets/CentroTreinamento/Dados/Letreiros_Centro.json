@@ -512,6 +512,654 @@
    "tam": 0.25,
    "cor": "CT_Texto_Branco",
    "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_019",
+   "texto": "E",
+   "pos": [
+    33.0,
+    2.15,
+    -0.07
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.28,
+   "cor": "CT_Texto_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_020",
+   "texto": "F P",
+   "pos": [
+    33.0,
+    1.93,
+    -0.07
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.18,
+   "cor": "CT_Texto_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_021",
+   "texto": "T O Z",
+   "pos": [
+    33.0,
+    1.71,
+    -0.07
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.13,
+   "cor": "CT_Texto_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_022",
+   "texto": "L P E D",
+   "pos": [
+    33.0,
+    1.49,
+    -0.07
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.1,
+   "cor": "CT_Texto_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_023",
+   "texto": "P E C F D",
+   "pos": [
+    33.0,
+    1.27,
+    -0.07
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.08,
+   "cor": "CT_Texto_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_024",
+   "texto": "+",
+   "pos": [
+    32.5,
+    2.25,
+    -11.59
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.4,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_025",
+   "texto": "CONTROLE",
+   "pos": [
+    31.55,
+    2.95,
+    -39.5
+   ],
+   "direita": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "tam": 0.32,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_026",
+   "texto": "G",
+   "pos": [
+    46.2,
+    2.9,
+    -35.19
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.8,
+   "cor": "CT_Amarelo",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_027",
+   "texto": "NASA",
+   "pos": [
+    34.1,
+    1.35,
+    -37.0
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.3,
+   "cor": "CT_Azul_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_028",
+   "texto": "ISS",
+   "pos": [
+    -16.0,
+    -3.4,
+    -30.97
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.8,
+   "cor": "CT_Azul_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_029",
+   "texto": "ARGOS",
+   "pos": [
+    -45.5,
+    9.4,
+    -2.65
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.55,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_030",
+   "texto": "EMU · CAMINHADA ESPACIAL",
+   "pos": [
+    -37.0,
+    0.12,
+    -31.31
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.09,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_031",
+   "texto": "TRAJE DE LANÇAMENTO",
+   "pos": [
+    -41.0,
+    0.12,
+    -31.31
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.09,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_032",
+   "texto": "CHECKLIST DO TRAJE",
+   "pos": [
+    -44.6,
+    2.4,
+    -28.64
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.16,
+   "cor": "CT_Texto_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_033",
+   "texto": "1. Roupa de resfriamento",
+   "pos": [
+    -44.6,
+    2.1,
+    -28.64
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.12,
+   "cor": "CT_Texto_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_034",
+   "texto": "2. Calça e torso rígido",
+   "pos": [
+    -44.6,
+    1.85,
+    -28.64
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.12,
+   "cor": "CT_Texto_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_035",
+   "texto": "3. Luvas e capacete",
+   "pos": [
+    -44.6,
+    1.6,
+    -28.64
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.12,
+   "cor": "CT_Texto_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_036",
+   "texto": "4. Teste de pressão",
+   "pos": [
+    -44.6,
+    1.35,
+    -28.64
+   ],
+   "direita": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "tam": 0.12,
+   "cor": "CT_Texto_Escuro",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_037",
+   "texto": "AVALIAÇÃO MÉDICA E PREPARO FÍSICO",
+   "pos": [
+    34.4,
+    3.6,
+    -6.0
+   ],
+   "direita": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "tam": 0.42,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_038",
+   "texto": "CENTRÍFUGA HUMANA",
+   "pos": [
+    53.9,
+    7.6,
+    -36.0
+   ],
+   "direita": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "tam": 0.42,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_039",
+   "texto": "REALIDADE VIRTUAL",
+   "pos": [
+    23.9,
+    4.6,
+    -37.6
+   ],
+   "direita": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "cima": [
+    0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "tam": 0.42,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_040",
+   "texto": "FLUTUABILIDADE NEUTRA",
+   "pos": [
+    -16.0,
+    9.6,
+    -43.9
+   ],
+   "direita": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "tam": 0.42,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_041",
+   "texto": "GRAVIDADE REDUZIDA · ARGOS",
+   "pos": [
+    -58.4,
+    10.6,
+    -13.0
+   ],
+   "direita": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "tam": 0.42,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
+  },
+  {
+   "nome": "TXT_042",
+   "texto": "SALA DE TRAJES",
+   "pos": [
+    -46.5,
+    3.6,
+    -37.5
+   ],
+   "direita": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "cima": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "normal": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "tam": 0.42,
+   "cor": "CT_Texto_Branco",
+   "alinhar": "CENTER"
   }
  ]
 }

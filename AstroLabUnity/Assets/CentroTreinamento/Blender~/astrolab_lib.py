@@ -552,6 +552,10 @@ def exportar_fbx(caminho, objetos):
     for o in objetos:
         o.select_set(True)
     bpy.context.view_layer.objects.active = objetos[0]
+    for o in objetos:                                   # triangula so na exportacao (ngons concavos viravam "self-intersecting" no Unity)
+        if o.type == "MESH" and not any(m.type == "TRIANGULATE" for m in o.modifiers):
+            t = o.modifiers.new("Triangular", "TRIANGULATE")
+            t.quad_method = "BEAUTY"; t.ngon_method = "BEAUTY"; t.keep_custom_normals = True
     bpy.ops.export_scene.fbx(filepath=os.path.abspath(caminho), use_selection=True, object_types={"MESH", "EMPTY"},
                              apply_unit_scale=True, apply_scale_options="FBX_SCALE_NONE",
                              axis_forward="-Z", axis_up="Y", bake_space_transform=False,

@@ -13,6 +13,7 @@ namespace AstroLab.Centro
         public Transform pontoNpc;
         public Interagivel console;
         public Vector3[] rota;                   // caminho da instrutora até pontoNpc (último ponto = pontoNpc)
+        public PortaHex porta;                   // porta hexagonal da sala (abre quando a etapa começa)
     }
 
     // Roteiro do tutorial: a instrutora leva o jogador por todas as estações de treino; em cada uma ela explica,
@@ -42,6 +43,7 @@ namespace AstroLab.Centro
 
         [Header("Passagem secreta (depois da recepção)")]
         public PassagemSecreta passagem;
+        public ElevadorSaida elevadorSaida;      // L4: fim do corredor -> quiosque na superfície
         public int etapaAntesDoElevador = 0;
 
         [Header("Teste")]
@@ -97,7 +99,9 @@ namespace AstroLab.Centro
                 if (passagem && i == etapaAntesDoElevador) yield return passagem.Rodar(this);
             }
             if (passagem && etapas.Length <= etapaAntesDoElevador) yield return passagem.Rodar(this);
-            if (etapas.Length <= 1) yield break;              // (L1: o corredor e as salas chegam nos próximos lotes)
+            if (etapas.Length <= 1) yield break;
+
+            if (elevadorSaida) yield return elevadorSaida.Rodar(this);
 
             // ---------------------------------------------------------- fim do treinamento
             TreinamentoConcluido = true;
@@ -119,9 +123,12 @@ namespace AstroLab.Centro
             hud.Objetivo(Loc.Get("ct.obj.seguir", nome));
             if (e.console) marcador.Colocar(e.console.transform.position + Vector3.up * 1.3f);
 
+            if (e.porta) { e.porta.Status(true); e.porta.Abrir(); }
             bool chegou = false;
             npc.IrPara(e.rota, () => chegou = true);
+            var narra = i > 0 ? StartCoroutine(Narrar($"npc.corredor.{e.id}")) : null;   // história do programa pelo corredor
             yield return new WaitUntil(() => chegou && Distancia(npc.transform) < 6.5f);
+            PararNarracao(narra);
             yield return Falar($"npc.{e.id}");
 
             if (e.console)
@@ -163,6 +170,41 @@ namespace AstroLab.Centro
                 yield return null;
             }
             jogador.enabled = true;
+            npc.Falando = false;
+        }
+
+        // Legenda automática (não para o jogador): a instrutora fala andando. Cada linha fica o tempo de leitura.
+        TMPro.TextMeshProUGUI legenda;
+        public IEnumerator Narrar(string prefixo)
+        {
+            var linhas = CaixaDialogo.Linhas(prefixo);
+            if (linhas == null || linhas.Count == 0 || hud == null || hud.Raiz == null) yield break;
+            if (legenda == null)
+            {
+                legenda = hud.Texto("Legenda_Instrutora", hud.Raiz, 26, Color.white, TMPro.TextAlignmentOptions.Bottom);
+                var rt = legenda.rectTransform;
+                rt.anchorMin = new Vector2(0.15f, 0.06f); rt.anchorMax = new Vector2(0.85f, 0.22f); rt.offsetMin = rt.offsetMax = Vector2.zero;
+                legenda.textWrappingMode = TMPro.TextWrappingModes.Normal;
+                legenda.outlineWidth = 0.2f; legenda.outlineColor = new Color32(10, 12, 40, 255);
+            }
+            yield return new WaitForSeconds(1.2f);
+            foreach (var k in linhas)
+            {
+                if (dialogo && dialogo.Aberto) yield return new WaitUntil(() => !dialogo.Aberto);
+                string txt = Loc.Get(k);
+                legenda.text = $"<color=#FFC23A>{Loc.Get("npc.nome")}:</color> {txt}";
+                npc.Falando = true;
+                yield return new WaitForSeconds(2.2f + txt.Length * 0.055f);
+                npc.Falando = false;
+                legenda.text = "";
+                yield return new WaitForSeconds(0.6f);
+            }
+        }
+
+        public void PararNarracao(Coroutine c)
+        {
+            if (c != null) StopCoroutine(c);
+            if (legenda) legenda.text = "";
             npc.Falando = false;
         }
 

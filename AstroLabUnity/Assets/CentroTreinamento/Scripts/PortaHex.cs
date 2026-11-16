@@ -59,6 +59,7 @@ namespace AstroLab.Centro
         {
             Aberta = abrir;
             if (abrir) Status(true);
+            MostrarLaminas(true);
             som.clip = Clique(); som.volume = 0.7f * GameSettings.SfxVolume; som.Play();
             for (float t = 0; t < duracao; t += Time.deltaTime)
             {
@@ -72,6 +73,12 @@ namespace AstroLab.Centro
             }
             for (int i = 0; i < laminas.Length; i++) laminas[i].localPosition = ini[i] + (abrir ? dir[i] * curso : Vector3.zero);
             if (bloqueio) bloqueio.enabled = !abrir;
+            if (abrir) MostrarLaminas(false);                       // recolhidas na moldura: somem (antes ficavam como cunhas para fora)
+        }
+
+        void MostrarLaminas(bool visiveis)
+        {
+            foreach (var l in laminas) if (l) foreach (var r in l.GetComponentsInChildren<Renderer>()) r.enabled = visiveis;
         }
 
         static AudioClip Clique()

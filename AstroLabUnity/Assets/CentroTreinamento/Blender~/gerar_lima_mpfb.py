@@ -49,8 +49,8 @@ macro.update(gender=0.0, age=0.5, muscle=0.5, weight=0.42, proportions=0.8, heig
 macro["race"] = {"african": 0.45, "caucasian": 0.35, "asian": 0.2}
 h = HumanService.create_human(mask_helpers=True, detailed_helpers=True, feet_on_ground=True, scale=0.1, macro_detail_dict=macro)
 h.name = "Lima_Corpo"
-for alvo, v in (("head-scale-vert-incr", 0.32), ("head-scale-horiz-incr", 0.28), ("head-scale-depth-incr", 0.22),
-                ("l-eye-scale-incr", 0.45), ("r-eye-scale-incr", 0.45), ("neck-scale-horiz-decr", 0.15)):
+for alvo, v in (("l-ear-shape-round", 0.7), ("r-ear-shape-round", 0.7), ("l-ear-scale-decr", 0.15), ("r-ear-scale-decr", 0.15),
+                ("mouth-lowerlip-volume-incr", 0.35), ("mouth-upperlip-volume-incr", 0.3), ("nose-scale-vert-incr", 0.1)):
     try:
         TargetService.set_target_value(h, alvo, v)
     except Exception as e:
@@ -115,12 +115,9 @@ for p in me.polygons:
 
 h.data.materials.append(LABIO)
 i_lab = len(h.data.materials) - 1
-for p in me.polygons:
-    c = h.matrix_world @ p.center
-    if False:                                                       # labios agora sao modelados (pintura ficava serrilhada)
-        p.material_index = i_lab
+_bc = None
 
-Z_GOLA = (rig.matrix_world @ rig.data.bones["neck_01"].head_local).z + 0.012
+Z_GOLA = (rig.matrix_world @ rig.data.bones["neck_01"].head_local).z - 0.006
 for p in me.polygons:
     c = h.matrix_world @ p.center
     if abs(c.x) < 0.14 and c.z < Z_GOLA + 0.05:
@@ -146,7 +143,7 @@ for nome in ("Alisar", "Folga"):
     bpy.ops.object.modifier_apply(modifier=nome)
 h.vertex_groups.remove(h.vertex_groups["uniforme"])   # por nome: a referencia antiga fica invalida apos aplicar modificadores
 gu2 = h.vertex_groups.new(name="so_uniforme"); gu2.add(list(idx_u - borda), 1.0, "REPLACE")
-dec = h.modifiers.new("Decimate", "DECIMATE"); dec.ratio = 0.5; dec.vertex_group = "so_uniforme"   # rosto e maos em resolucao cheia
+dec = h.modifiers.new("Decimate", "DECIMATE"); dec.ratio = 0.45; dec.vertex_group = "so_uniforme"   # rosto e maos em resolucao cheia
 bpy.ops.object.modifier_move_to_index(modifier=dec.name, index=0)
 bpy.ops.object.modifier_apply(modifier=dec.name)
 h.vertex_groups.remove(h.vertex_groups["so_uniforme"])
@@ -178,55 +175,114 @@ def sup_frente(x, z, tol=0.02):
 def lado(y, z, sinal, tol=0.02, xmax=0.35):
     c = [p.x for p in VW if abs(p.y - y) < tol and abs(p.z - z) < tol and 0 < sinal * p.x < xmax]
     return (max(c) if sinal > 0 else min(c)) if c else None
+from mathutils.kdtree import KDTree
+_kd = KDTree(len(me.vertices))
+for _v in me.vertices:
+    _kd.insert(h.matrix_world @ _v.co, _v.index)
+_kd.balance()
+_nomes = {g.index: g.name for g in h.vertex_groups}
+def _pesos(p):
+    _, i_, _ = _kd.find(p)
+    return {_nomes[g.group]: g.weight for g in me.vertices[i_].groups if g.group in _nomes and g.weight > 0.01}
 def peca(m, osso_nome):
     o = m.criar(None, 1.0)
-    o.vertex_groups.new(name=osso_nome).add(list(range(len(o.data.vertices))), 1.0, "REPLACE")
+    vs_ = list(range(len(o.data.vertices)))
+    if osso_nome == OS_CABECA:
+        o.vertex_groups.new(name=osso_nome).add(vs_, 1.0, "REPLACE")
+    else:
+        # pesos copiados da pele embaixo da peca (antes 100% num osso: crachá/bandeira/bolsos descolavam do macacao)
+        cs = [o.matrix_world @ v.co for v in o.data.vertices]
+        bmin = V((min(c.x for c in cs), min(c.y for c in cs), min(c.z for c in cs))); bmax = V((max(c.x for c in cs), max(c.y for c in cs), max(c.z for c in cs)))
+        rigida = (bmax - bmin).length < 0.16
+        centro_ = sum(cs, V()) / len(cs)
+        for vi, c in zip(vs_, cs):
+            for nome_, w in (_pesos(centro_) if rigida else _pesos(c)).items():
+                (o.vertex_groups.get(nome_) or o.vertex_groups.new(name=nome_)).add([vi], w, "REPLACE")
     pecas.append(o)
     return o
 
 # cabelo: calota que contorna o cranio (cortada na testa/rosto) + coque/rabo de cavalo
 c = Malha("Lima_Cabelo"); c.chanfro = 0
-topo = V((cc.x, cc.y + prof * 0.06, cc.z + alt * 0.08))
-c.esfera(topo, 1.0, CABELO, 28, 18, escala=(larg * 0.53, prof * 0.6, alt * 0.52))
-corte = [v for v in c.bm.verts if v.co.y < cc.y - prof * 0.05 and v.co.z < cc.z + alt * 0.34]   # testa livre: as mechas fazem a linha do cabelo
-bmesh.ops.delete(c.bm, geom=corte, context="VERTS")
-corte2 = [v for v in c.bm.verts if v.co.z < cc.z - alt * 0.12 and v.co.y < cc.y + prof * 0.1]
-bmesh.ops.delete(c.bm, geom=corte2, context="VERTS")
-import random as _r
-rr = _r.Random(11)
-# mechas em blocos: franja varrida para um lado + laterais cobrindo a orelha de leve (silhueta irregular)
-for k in range(7):
-    a = -0.9 + k * 0.3
-    pc = V((cc.x + math.sin(a) * larg * 0.42, cc.y - math.cos(a) * prof * 0.28 + prof * 0.05, cc.z + alt * (0.36 - 0.03 * abs(k - 3))))
-    m_ = Matrix.Translation(pc) @ Matrix.Rotation(-a * 0.8, 4, "Z") @ Matrix.Rotation(0.5, 4, "X") @ Matrix.Rotation(rr.uniform(-0.2, 0.2), 4, "Y")
-    c.esfera((0, 0, 0), 1.0, CABELO if k % 2 else CABELO_CL, 12, 8, M=m_ @ Matrix.Diagonal((larg * 0.16, prof * 0.1, alt * 0.2, 1)))
-for s_ in (-1, 1):                                                   # mechas puxadas para tras, por cima da orelha
-    for k in range(4):
-        pc = V((cc.x + s_ * larg * (0.47 - k * 0.04), cc.y + prof * (0.0 + k * 0.15), cc.z + alt * (0.2 - k * 0.02)))
-        m_ = Matrix.Translation(pc) @ Matrix.Rotation(s_ * -0.35, 4, "Z") @ Matrix.Rotation(-0.35, 4, "X")
-        c.esfera((0, 0, 0), 1.0, CABELO if k % 2 else CABELO_CL, 12, 8, M=m_ @ Matrix.Diagonal((larg * 0.06, prof * 0.2, alt * 0.12, 1)))
-for k, (dx, dz) in enumerate(((-0.02, 0.0), (0.0, -0.012), (0.02, 0.0))):          # bico de viuva suave e irregular
-    c.esfera(V((cc.x + dx, cc.y - prof * 0.43, cc.z + alt * 0.4 + dz)), 1.0, CABELO, 10, 6, escala=(larg * 0.12, prof * 0.08, alt * 0.08))
-coque = V((cc.x, cc.y + prof * 0.62, cc.z + alt * 0.06))
-c.esfera(coque, 1.0, CABELO, 16, 12, escala=(larg * 0.2, prof * 0.2, alt * 0.18))
-c.cilindro(coque, coque + V((0, prof * 0.12, -alt * 0.55)), larg * 0.12, CABELO, 16, r2=larg * 0.05)
-for k in range(5):                                                                          # coque em "voltas"
-    a = 2 * PI * k / 5
-    c.esfera(coque + V((math.cos(a) * larg * 0.08, prof * 0.05, math.sin(a) * alt * 0.07)), larg * 0.06, CABELO_CL if k % 2 else CABELO, 10, 6)
-c.torus((0, 0, 0), larg * 0.13, 0.009, VERDE, 20, 6, M=Matrix.Translation(coque - V((0, prof * 0.1, 0))) @ Matrix.Rotation(PI / 2, 4, "X"))   # elastico
+# cabelo = casca que segue o cranio real do MPFB (sem touca achatada): faces da cabeca acima da linha do cabelo,
+# deslocadas pela normal (volume maior no alto), com sulcos que formam 4 mechas largas ate o coque
+def u_cab(p):
+    return V(((p.x - cc.x) / (larg / 2), (p.y - cc.y) / (prof / 2), (p.z - cc.z) / (alt / 2)))
+def limiar(u):
+    s_ = min(1.0, max(0.0, (u.y + 0.45) / 1.0)); s_ = s_ * s_ * (3 - 2 * s_)
+    return (0.68 - 0.55 * max(0.0, abs(u.x) - 0.4)) * (1 - s_) + (-0.62) * s_
+def tem_cabelo(p):
+    u = u_cab(p)
+    if abs(u.x) > 0.72 and u.z < 0.12 and u.y < 0.55:          # orelhas e costeletas descobertas
+        return False
+    return u.z > limiar(u)
+osso_cab = h.vertex_groups[OS_CABECA].index if OS_CABECA in h.vertex_groups else None
+bmh = bmesh.new(); bmh.from_mesh(h.data); bmh.faces.ensure_lookup_table(); bmh.verts.ensure_lookup_table()
+dlh = bmh.verts.layers.deform.active
+def da_cabeca(v):
+    return dlh and osso_cab is not None and v[dlh].get(osso_cab, 0) > 0.5
+sel = [f_ for f_ in bmh.faces if f_.material_index == 0 and all(da_cabeca(v) for v in f_.verts)
+       and tem_cabelo(h.matrix_world @ f_.calc_center_median())]
+vs = {v for f_ in sel for v in f_.verts}
+selset = set(sel)
+def espessura(p):
+    u = u_cab(p)
+    phi = math.atan2(u.x, max(0.05, u.z + 0.6))                     # angulo lateral (mechas convergem para tras)
+    sulco = 0.5 + 0.5 * math.cos(phi * 7.5)                         # 4 mechas: cristas largas, sulcos estreitos
+    alto = max(0.0, u.z) * 0.012 + max(0.0, 0.4 - abs(u.y)) * 0.004
+    borda = min(1.0, max(0.0, (u.z - limiar(u)) / 0.18))           # afina perto da linha do cabelo
+    return (0.004 + alto + 0.005 * sulco ** 0.6) * (0.35 + 0.65 * borda), sulco
+ext, inn = {}, {}
+for v in vs:
+    p = h.matrix_world @ v.co; n = (h.matrix_world.to_3x3() @ v.normal).normalized()
+    e, _ = espessura(p)
+    ext[v] = c.bm.verts.new(p + n * e)
+    inn[v] = c.bm.verts.new(p - n * 0.002)
+i_esc, i_cl = c.mi(CABELO), c.mi(CABELO_CL)
+for f_ in sel:
+    pc_ = h.matrix_world @ f_.calc_center_median()
+    _, sulco = espessura(pc_)
+    nf = c.bm.faces.new([ext[v] for v in f_.verts]); nf.smooth = True
+    nf.material_index = i_cl if (sulco > 0.72 and u_cab(pc_).z > 0.1) else i_esc
+# aba na borda (fecha a casca ate a pele: sem fresta na linha do cabelo)
+for e_ in {e_ for f_ in sel for e_ in f_.edges}:
+    if sum(1 for lf in e_.link_faces if lf in selset) == 1:
+        a_, b_ = e_.verts
+        nf = c.bm.faces.new((ext[a_], ext[b_], inn[b_], inn[a_])); nf.material_index = i_esc; nf.smooth = True
+pts_cab = [h.matrix_world @ v.co for v in vs]
+bordas = {v for e_ in {e_ for f_ in sel for e_ in f_.edges} if sum(1 for lf in e_.link_faces if lf in selset) == 1 for v in e_.verts}
+viz = {v: [w for e_ in v.link_edges for w in e_.verts if w is not v and w in bordas] for v in bordas}
+for _ in range(6):                                                  # linha do cabelo lisa (sem degraus da malha)
+    for tab in (ext, inn):
+        novos = {v: tab[v].co * 0.5 + sum((tab[w].co for w in viz[v]), V()) * (0.5 / max(1, len(viz[v]))) for v in bordas if viz[v]}
+        for v, p_ in novos.items():
+            tab[v].co = p_
+bmh.free()
+c.bm.normal_update()
+centro_cab = sum(pts_cab, V()) / max(1, len(pts_cab))
+for f_ in c.bm.faces:                                               # normais para fora
+    if (f_.calc_center_median() - centro_cab).dot(f_.normal) < 0:
+        f_.normal_flip()
+# coque grande no alto da nuca (legivel de perfil e de costas), com volta de cabelo e elastico verde
+traseira = max(p.y for p in pts_cab if abs(p.z - (cc.z + alt * 0.12)) < 0.02)
+coque = V((cc.x, traseira + prof * 0.12, cc.z + alt * 0.16))
+c.esfera(coque, 1.0, CABELO, 20, 12, escala=(larg * 0.3, prof * 0.22, alt * 0.26))
+Mc = Matrix.Translation(coque + V((0, prof * 0.04, 0))) @ Matrix.Rotation(PI / 2, 4, "X")
+c.torus((0, 0, 0), larg * 0.2, larg * 0.075, CABELO_CL, 20, 10, M=Mc)
+c.torus((0, 0, 0), larg * 0.26, 0.008, VERDE, 20, 6, M=Matrix.Translation(coque - V((0, prof * 0.09, 0))) @ Matrix.Rotation(PI / 2, 4, "X"))
 peca(c, OS_CABECA)
 
 # olhos: esclera + iris + pupila + brilho (um pouco maiores: estilo cartoon realista)
 o = Malha("Lima_Olhos"); o.chanfro = 0
+OLHOS = []
 for oc in (olho_e, olho_d):
-    r = r_olho * 1.05
-    oc = oc + V((0, -r * 0.22, 0))                                  # globo quase na orbita: aparece o branco, a palpebra emoldura
-    r *= 0.93
-    o.esfera(oc, r, BRANCO, 20, 14)
+    r = r_olho * 0.98
+    oc = oc + V((0, -r * 0.14, 0))                                  # um pouco para fora: o branco aparece
+    o.esfera(oc, r, BRANCO, 16, 10)
+    OLHOS.append((oc.copy(), r))
     frente = oc + V((0, -r * 0.84, 0))
-    o.esfera(frente, r * 0.68, OLHO, 18, 12, escala=(1, 0.35, 1))                       # iris maior
-    o.esfera(frente + V((0, -r * 0.12, 0)), r * 0.34, TXT, 14, 8, escala=(1, 0.3, 1))   # pupila
-    o.esfera(frente + V((r * 0.2, -r * 0.24, r * 0.22)), r * 0.14, BRANCO, 8, 6)         # brilho
+    o.esfera(frente, r * 0.5, OLHO, 14, 8, escala=(1, 0.35, 1))                        # iris
+    o.esfera(frente + V((0, -r * 0.12, 0)), r * 0.24, TXT, 10, 6, escala=(1, 0.3, 1))   # pupila
+    o.esfera(frente + V((r * 0.14, -r * 0.2, r * 0.15)), r * 0.08, BRANCO, 6, 4)         # brilho
     s_ = 1 if oc.x > cc.x else -1
     pts_ = []
     for k in range(9):
@@ -247,24 +303,42 @@ for oc in (olho_e, olho_d):
         f_.material_index = o.mi(SOBRANCELHA)
 # labios modelados (superior e inferior), colados na frente da boca
 yb = min(p.y for p in VW if abs(p.x - boca_c.x) < 0.01 and abs(p.z - (boca_c.z - 0.012)) < 0.01)
-o.esfera(V((boca_c.x, yb + 0.001, boca_c.z - 0.008)), 1.0, LABIO, 16, 8, escala=(0.019, 0.006, 0.0042))
-o.esfera(V((boca_c.x, yb + 0.002, boca_c.z - 0.0165)), 1.0, LABIO, 16, 8, escala=(0.016, 0.0065, 0.0055))
+# labios do MPFB pintados (elipse em volta da fenda, so as faces viradas para frente)
+z_lab = boca_c.z - 0.012
+for p in h.data.polygons:
+    c_ = h.matrix_world @ p.center
+    if p.material_index == 0 and p.normal.y < -0.25 and c_.y < yb + 0.01 and ((c_.x - boca_c.x) / 0.023) ** 2 + ((c_.z - z_lab) / 0.0095) ** 2 < 1.0:
+        p.material_index = i_lab
 peca(o, OS_CABECA)
+def marca(o_, nome):
+    o_.vertex_groups.new(name=nome).add(list(range(len(o_.data.vertices))), 1.0, "REPLACE")
+# labio inferior separado (desce com a boca), interior da boca escondido atras dos labios, palpebras escondidas no olho
+bi = Malha("Lima_BocaInt"); bi.chanfro = 0
+BOCA_C = V((boca_c.x, yb + 0.009, boca_c.z - 0.0125))
+bi.esfera(BOCA_C, 1.0, BOCA, 16, 8, escala=(0.013, 0.003, 0.0075))
+marca(peca(bi, OS_CABECA), "SK_boca")
+pl_ = Malha("Lima_Palpebras"); pl_.chanfro = 0
+for oc_, r_ in ([] if os.environ.get('SEM_PALPEBRA') else OLHOS):
+    pl_.esfera(oc_, r_ * 1.07, PELE, 16, 10)
+    bmesh.ops.delete(pl_.bm, geom=[v for v in pl_.bm.verts if v.co.y > oc_.y + r_ * 0.15 and (v.co - oc_).length < r_ * 1.2], context="VERTS")
+if not os.environ.get("SEM_PALPEBRA"):
+    marca(peca(pl_, OS_CABECA), "SK_palpebra")
 
 # uniforme: gola, ziper, cinto com fivela, emblema NASA, cracha "LIMA", bandeira do Brasil no ombro
 torso = [h.matrix_world @ v.co for v in me.vertices if me.polygons and any(ossos.get(g.group, "") in (OS_PEITO, osso("spine_02")) and g.weight > 0.5 for g in v.groups)]
 tc = sum(torso, V()) / max(1, len(torso))
 frente_y = min(p.y for p in torso) if torso else tc.y - 0.12
 u = Malha("Lima_Uniforme"); u.chanfro = 0.004
-u.painel_tex((tc.x + 0.085, frente_y - 0.012, tc.z + 0.07), 0.1, 0.1, (0, -1, 0), LOGO)
-u.caixa((tc.x - 0.085, frente_y - 0.008, tc.z + 0.07), (0.09, 0.01, 0.045), BRANCO)
+def _yf(x, z):
+    y_ = sup_frente(x, z, 0.025)
+    return y_ if y_ is not None else frente_y
+u.painel_tex((tc.x + 0.085, _yf(tc.x + 0.085, tc.z + 0.07) - 0.006, tc.z + 0.07), 0.1, 0.1, (0, -1, 0), LOGO)   # colado na superficie
+u.caixa((tc.x - 0.085, _yf(tc.x - 0.085, tc.z + 0.07) - 0.004, tc.z + 0.07), (0.09, 0.01, 0.045), BRANCO)
 # ziper colado na superficie, do pescoco ao cinto
-zs = [tc.z + 0.22 - k * 0.03 for k in range(16)]
-pz = [V((tc.x, sup_frente(tc.x, z) - 0.004, z)) for z in zs if sup_frente(tc.x, z) is not None]
+zs = [z_ for z_ in (tc.z + 0.22 - k * 0.03 for k in range(16)) if z_ < Z_GOLA - 0.015]   # so abaixo da gola (antes subia pelo pescoco ate o queixo)
+pz = [V((tc.x, sup_frente(tc.x, z) - 0.0015, z)) for z in zs if sup_frente(tc.x, z) is not None]
 for a_, b_ in zip(pz[:-1], pz[1:]):
-    u.cilindro(a_, b_, 0.006, MACACAO_ESC, 8)
-if pz:
-    u.caixa(pz[2] + V((0, -0.006, 0)), (0.014, 0.008, 0.026), METAL)
+    u.cilindro(a_, b_, 0.0035, MACACAO_ESC, 8)
 # bolsos do peito com aba
 for sx in (-1, 1):
     x = tc.x + sx * 0.085; z = tc.z - 0.02
@@ -273,7 +347,7 @@ for sx in (-1, 1):
         u.caixa((x, y - 0.006, z), (0.085, 0.01, 0.09), MACACAO_ESC)
         u.caixa((x, y - 0.012, z + 0.042), (0.09, 0.012, 0.025), MACACAO)
         u.caixa((x, y - 0.019, z + 0.04), (0.012, 0.004, 0.012), METAL)
-u.texto("LIMA", (tc.x - 0.085, frente_y - 0.015, tc.z + 0.07), 0.028, TXT, espessura=0.002, malha=True)
+u.texto("LIMA", (tc.x - 0.085, _yf(tc.x - 0.085, tc.z + 0.07) - 0.0095, tc.z + 0.07), 0.028, TXT, espessura=0.002, malha=True)
 peca(u, OS_PEITO)
 # gola em pe (presa no pescoco/peito)
 pesc = rig.matrix_world @ rig.data.bones[osso("neck_01")].head_local
@@ -281,9 +355,8 @@ anel = [p for p in VW if abs(p.z - Z_GOLA) < 0.012 and abs(p.x) < 0.11 and abs(p
 amin = V((min(p.x for p in anel), min(p.y for p in anel), Z_GOLA)); amax = V((max(p.x for p in anel), max(p.y for p in anel), Z_GOLA))
 ac = (amin + amax) / 2
 g_ = Malha("Lima_Gola"); g_.chanfro = 0
-Mg = Matrix.Translation(ac) @ Matrix.Diagonal(((amax.x - amin.x) / 2 + 0.01, (amax.y - amin.y) / 2 + 0.01, 1.0, 1))
-g_.torus((0, 0, 0), 1.0, 0.011, MACACAO_ESC, 40, 6, M=Mg)
-g_.torus((0, 0, 0.018), 1.04, 0.009, MACACAO, 40, 6, M=Mg)      # gola em pe, rente ao decote
+Mg = Matrix.Translation(ac) @ Matrix.Diagonal(((amax.x - amin.x) / 2 + 0.005, (amax.y - amin.y) / 2 + 0.005, 1.0, 1))
+g_.torus((0, 0, 0), 1.0, 0.0065, MACACAO_ESC, 40, 6, M=Mg)      # gola fina e baixa, rente ao decote
 peca(g_, osso("spine_03"))
 # bolsos das pernas (lado de fora das coxas) e bandeira do Brasil no ombro esquerdo
 for sx, nome_osso in ((1, "thigh_l"), (-1, "thigh_r")):
@@ -319,12 +392,37 @@ for nome_osso in ("hand_l", "hand_r", "foot_l", "foot_r"):
 pecas.remove(pu.criar(None, 1.0)) if False else None
 # cinto: secao real da cintura (vertices do corpo numa faixa de altura, sem os bracos)
 zc_ = (rig.matrix_world @ rig.data.bones[OS_QUADRIL].head_local).z + 0.1
-faixa = [h.matrix_world @ v.co for v in me.vertices if abs((h.matrix_world @ v.co).z - zc_) < 0.025 and abs((h.matrix_world @ v.co).x) < 0.2]
-fmin = V((min(p.x for p in faixa), min(p.y for p in faixa), zc_)); fmax = V((max(p.x for p in faixa), max(p.y for p in faixa), zc_))
-qc = (fmin + fmax) / 2; rx, ry = (fmax.x - fmin.x) / 2 + 0.008, (fmax.y - fmin.y) / 2 + 0.008
+from mathutils.bvhtree import BVHTree
+_dg = bpy.context.evaluated_depsgraph_get()
+_bvh = BVHTree.FromObject(h, _dg)
+_pel = rig.matrix_world @ rig.data.bones[OS_QUADRIL].head_local
+qc = V((_pel.x, _pel.y, zc_))
 b = Malha("Lima_Cinto"); b.chanfro = 0
-b.torus((0, 0, 0), 1.0, 0.016, MACACAO_ESC, 40, 6, M=Matrix.Translation(qc) @ Matrix.Diagonal((rx, ry, 1.0, 1)))
-b.caixa((qc.x, fmin.y - 0.01, zc_), (0.06, 0.012, 0.04), METAL)
+NA = 48
+raios = []
+for k in range(NA):                                                  # raio real da cintura: raio de fora para dentro
+    ph = 2 * PI * k / NA
+    d_ = V((math.cos(ph), math.sin(ph), 0))
+    hit = _bvh.ray_cast(qc + d_ * 0.4, -d_, 0.4)
+    raios.append((hit[0] - qc).length if hit[0] is not None else None)
+med = sum(r_ for r_ in raios if r_) / max(1, sum(1 for r_ in raios if r_))
+raios = [r_ if r_ else med for r_ in raios]
+raios = [max(raios[k - 1], raios[k], raios[(k + 1) % NA]) for k in range(NA)]          # nao afunda nas reentrancias
+raios = [(raios[k - 1] + 2 * raios[k] + raios[(k + 1) % NA]) / 4 for k in range(NA)]
+print("[Lima] cinto: raio", round(min(raios), 3), "a", round(max(raios), 3))
+ani = []
+for k in range(NA):
+    ph = 2 * PI * k / NA; d_ = V((math.cos(ph), math.sin(ph), 0)); r_ = raios[k]
+    ani.append([b.bm.verts.new(qc + d_ * (r_ + dr) + V((0, 0, dz))) for dr, dz in ((-0.002, -0.02), (0.009, -0.02), (0.009, 0.02), (-0.002, 0.02))])
+ib = b.mi(MACACAO_ESC)
+for k in range(NA):
+    r0, r1 = ani[k], ani[(k + 1) % NA]
+    for j in range(4):
+        f_ = b.bm.faces.new((r0[j], r1[j], r1[(j + 1) % 4], r0[(j + 1) % 4])); f_.material_index = ib
+k_f = min(range(NA), key=lambda k: abs(2 * PI * k / NA - 1.5 * PI))                       # frente = -Y
+fy = qc.y - raios[k_f] - 0.012
+b.caixa((qc.x, fy, zc_), (0.06, 0.008, 0.044), METAL)
+b.caixa((qc.x, fy - 0.004, zc_), (0.04, 0.004, 0.026), MACACAO_ESC)
 peca(b, OS_QUADRIL)
 
 # junta tudo num so SkinnedMesh (1 draw call por material)
@@ -345,24 +443,189 @@ rig.name = "Lima_Rig"
 print(f"[Lima] {contar_tris([h])} triangulos, {len(rig.data.bones)} ossos, materiais {[m.name for m in h.data.materials]}")
 print("[Lima] ossos-chave:", [b.name for b in rig.data.bones if b.name.lower() in ("root", "pelvis", "spine_01", "spine_03", "neck_01", "head", "upperarm_l", "lowerarm_l", "hand_l", "thigh_l", "calf_l", "foot_l", "jaw")])
 
+print("[Lima] matriz do corpo:", [round(x, 3) for x in h.matrix_world.to_scale()], [round(x, 3) for x in h.matrix_world.translation])
+# ---------------------------------------------------------------- 4. shape keys (piscar, boca) e animacoes no proprio rig
+from mathutils import Quaternion as Q
+me = h.data
+def grupo(nome):
+    if nome not in h.vertex_groups:
+        return []
+    gi = h.vertex_groups[nome].index
+    return [v.index for v in me.vertices if any(g.group == gi and g.weight > 0.5 for g in v.groups)]
+v_palp, v_boca, v_lab = grupo("SK_palpebra"), grupo("SK_boca"), grupo("SK_labio")
+h.shape_key_add(name="Basis", from_mix=False)
+k_pisca = h.shape_key_add(name="Piscar", from_mix=False)
+k_boca = h.shape_key_add(name="Boca", from_mix=False)
+base = h.data.shape_keys.key_blocks["Basis"]
+olho_de = {}
+for vi in v_palp:                                                 # cada vertice da palpebra pertence ao olho mais proximo
+    p = me.vertices[vi].co
+    olho_de[vi] = min(OLHOS, key=lambda o_: (o_[0] - p).length)
+for vi in v_palp:                                                 # basis: palpebra encolhida dentro do globo (invisivel)
+    oc_, r_ = olho_de[vi]
+    base.data[vi].co = oc_ + (me.vertices[vi].co - oc_) * 0.3
+for vi in v_boca:                                                 # basis: interior da boca achatado atras dos labios
+    p = me.vertices[vi].co
+    base.data[vi].co = V((p.x, p.y, BOCA_C.z + (p.z - BOCA_C.z) * 0.05))
+for kb in (k_pisca, k_boca):                                      # as chaves partem da basis
+    for i, d_ in enumerate(base.data):
+        kb.data[i].co = d_.co.copy()
+for vi in v_palp:
+    k_pisca.data[vi].co = me.vertices[vi].co.copy()               # palpebra fechada = tamanho cheio, cobre o olho
+for vi in v_boca:
+    k_boca.data[vi].co = me.vertices[vi].co.copy() + V((0, 0, -0.003))
+QUEIXO = 0.0065
+for vi in v_lab:
+    k_boca.data[vi].co = base.data[vi].co + V((0, -0.001, -QUEIXO))
+z_fenda = boca_c.z - 0.0125
+for v in me.vertices:                                             # queixo/mandibula descem junto (pele do rosto abaixo da fenda)
+    if v.index in olho_de or v.index in v_boca or v.index in v_lab:
+        continue
+    p = h.matrix_world @ v.co
+    dx = abs(p.x - boca_c.x)
+    if p.z < z_fenda - 0.0005 and p.z > boca_c.z - 0.075 and dx < 0.045 and p.y < boca_c.y + 0.035:
+        w = (1 - (dx / 0.045) ** 2) * min(1.0, (p.z - (boca_c.z - 0.075)) / 0.025) * min(1.0, (boca_c.y + 0.035 - p.y) / 0.02)
+        k_boca.data[v.index].co = base.data[v.index].co + V((0, 0, -QUEIXO * max(0.0, w)))
+for nome in [n_ for n_ in ("SK_palpebra", "SK_boca", "SK_labio") if n_ in h.vertex_groups]:
+    h.vertex_groups.remove(h.vertex_groups[nome])
+# a malha passa a mostrar a basis (palpebra/boca escondidas)
+for i, d_ in enumerate(base.data):
+    me.vertices[i].co = d_.co
+
+k_pisca.value = 0.0; k_boca.value = 0.0                          # Blender 5: chave nova nasce com valor 1
+# animacoes: poses em "deltas de mundo" (espaco do armature em repouso), convertidas para rotacao local de cada osso
+FPS = 30
+bpy.context.scene.render.fps = FPS
+B = {b.name: b for b in rig.data.bones}
+def ob(n):
+    return osso(n)
+def dir_rep(n):
+    b = B[ob(n)]
+    return (b.tail_local - b.head_local).normalized()
+def vec(x, y, z):
+    return V((x, y, z)).normalized()
+def espelho(v):
+    return V((-v.x, v.y, v.z))
+def pose(spec):
+    """spec: osso -> ('dir', vetor) | ('rot', eixo, graus) relativo ao pai | ('mundo', Quaternion). Retorna {osso: quaternion local}."""
+    W, out = {}, {}
+    for b in rig.data.bones:                                       # bones vem em ordem hierarquica
+        wp = W.get(b.parent.name, Q()) if b.parent else Q()
+        sp = spec.get(b.name)
+        if sp is None:
+            w = wp
+        elif sp[0] == "dir":
+            atual = wp @ (b.tail_local - b.head_local).normalized()
+            w = atual.rotation_difference(sp[1]) @ wp
+        elif sp[0] == "rot":
+            w = wp @ Q(V(sp[1]), math.radians(sp[2]))
+        else:
+            w = sp[1]
+        W[b.name] = w
+        Bm = b.matrix_local.to_3x3().to_quaternion()
+        out[b.name] = Bm.inverted() @ (wp.inverted() @ w) @ Bm
+    return out
+def chave(acao, quadro, spec):
+    q = pose(spec)
+    for pb in rig.pose.bones:
+        pb.rotation_mode = "QUATERNION"
+        pb.rotation_quaternion = q[pb.name]
+        pb.keyframe_insert("rotation_quaternion", frame=quadro, group=pb.name)
+BRACO_L = vec(0.16, 0.04, -1)                                     # bracos relaxados ao lado do corpo
+ANTEB_L = vec(0.08, -0.22, -1)
+def base_pose(resp=0.0, cab=(0, 0, 0)):
+    s_ = {ob("upperarm_l"): ("dir", BRACO_L), ob("upperarm_r"): ("dir", espelho(BRACO_L)),
+          ob("lowerarm_l"): ("dir", ANTEB_L), ob("lowerarm_r"): ("dir", espelho(ANTEB_L)),
+          ob("spine_02"): ("rot", (1, 0, 0), resp), ob("spine_03"): ("rot", (1, 0, 0), resp * 0.6)}
+    for lado_, sg in (("l", 1), ("r", -1)):                       # pernas quase paralelas (o repouso do MPFB e em A, abertas)
+        s_[ob(f"thigh_{lado_}")] = ("dir", vec(sg * 0.012, 0.0, -1))
+        s_[ob(f"calf_{lado_}")] = ("dir", vec(sg * 0.01, 0.02, -1))
+        s_[ob(f"foot_{lado_}")] = ("mundo", Q())
+    s_[ob("head")] = ("rot", (1, 0, 0), cab[0])
+    s_[ob("neck_01")] = ("rot", (0, 0, 1), cab[1])
+    return s_
+def nova_acao(nome):
+    a_ = bpy.data.actions.new(nome)
+    a_.use_fake_user = True
+    rig.animation_data_create()
+    rig.animation_data.action = a_
+    return a_
+acoes = []
+# Idle (2 s): respiracao + leve balanco da cabeca
+acoes.append(nova_acao("Idle"))
+for f_ in range(0, 61, 10):
+    t = 2 * PI * f_ / 60
+    chave(acoes[-1], f_, base_pose(resp=1.5 * math.sin(t), cab=(1.5 * math.sin(t + 1), 2.5 * math.sin(t * 0.5), 0)))
+# Walk (1 s por ciclo de 2 passos; 1,6 m/s no Unity -> passada 0,8 m, sem escorregar)
+acoes.append(nova_acao("Walk"))
+for f_ in range(0, 31, 3):
+    ph = 2 * PI * f_ / 30
+    s_ = base_pose()
+    for lado_, sg in (("l", 1), ("r", -1)):
+        a_ = math.radians(24) * sg * math.sin(ph)                 # coxa: + para frente
+        joelho = math.radians(6 + 42 * max(0.0, sg * math.cos(ph)))   # dobra na fase de balanco
+        coxa = vec(0.0, -math.sin(a_), -math.cos(a_))
+        coxa = V((sg * 0.012, coxa.y, coxa.z)).normalized()          # passada estreita (antes herdava a abertura do repouso em A)
+        canela = Q(V((1, 0, 0)), joelho) @ coxa
+        s_[ob(f"thigh_{lado_}")] = ("dir", coxa)
+        s_[ob(f"calf_{lado_}")] = ("dir", canela)
+        s_[ob(f"foot_{lado_}")] = ("mundo", Q(V((1, 0, 0)), math.radians(-10) * max(0.0, -sg * math.sin(ph))))
+        b_ = math.radians(-16) * sg * math.sin(ph)                # bracos: contrarios as pernas
+        braco = Q(V((1, 0, 0)), b_) @ (BRACO_L if lado_ == "l" else espelho(BRACO_L))
+        s_[ob(f"upperarm_{lado_}")] = ("dir", braco)
+        s_[ob(f"lowerarm_{lado_}")] = ("dir", (Q(V((1, 0, 0)), b_ * 1.3 - 0.25) @ (ANTEB_L if lado_ == "l" else espelho(ANTEB_L))).normalized())
+    s_[ob("pelvis")] = ("rot", (0, 0, 1), 4 * math.sin(ph))
+    s_[ob("spine_02")] = ("rot", (0, 0, 1), -6 * math.sin(ph))
+    chave(acoes[-1], f_, s_)
+# Talk (3 s): gestos alternando as maos + acenos de cabeca
+acoes.append(nova_acao("Talk"))
+GESTO = vec(0.25, -1.0, -0.35)
+for f_, (gd, ge, cab) in ((0, (0.0, 0.0, 0)), (12, (1.0, 0.0, 3)), (24, (0.8, 0.2, -2)), (38, (0.2, 0.9, 2)), (52, (0.0, 1.0, -1)),
+                          (66, (0.6, 0.5, 3)), (80, (0.3, 0.0, 0)), (90, (0.0, 0.0, 0))):
+    s_ = base_pose(resp=1.0, cab=(cab, cab * 1.5, 0))
+    for lado_, g_ in (("r", gd), ("l", ge)):
+        alvo = GESTO if lado_ == "l" else espelho(GESTO)
+        rep = ANTEB_L if lado_ == "l" else espelho(ANTEB_L)
+        s_[ob(f"lowerarm_{lado_}")] = ("dir", rep.lerp(alvo, g_).normalized())
+        s_[ob(f"hand_{lado_}")] = ("rot", (0, 1, 0), (-25 if lado_ == "l" else 25) * g_)
+    chave(acoes[-1], f_, s_)
+# Point (1,5 s, segura): braco direito apontando para frente/direita
+acoes.append(nova_acao("Point"))
+for f_, k_ in ((0, 1.0), (22, 1.0), (45, 1.0)):
+    s_ = base_pose(resp=0.8 * math.sin(f_ / 45 * 2 * PI), cab=(2, -6, 0))
+    s_[ob("upperarm_r")] = ("dir", vec(-0.45, -0.88, 0.12))
+    s_[ob("lowerarm_r")] = ("dir", vec(-0.35, -0.94, 0.06))
+    s_[ob("hand_r")] = ("dir", vec(-0.3, -0.95, 0.0))
+    chave(acoes[-1], f_, s_)
+# Wave (1,2 s): braco direito levantado, antebraco balancando
+acoes.append(nova_acao("Wave"))
+for f_ in range(0, 37, 6):
+    ang = math.radians(22) * math.sin(2 * PI * f_ / 18)
+    s_ = base_pose(cab=(0, -4, 0))
+    s_[ob("upperarm_r")] = ("dir", vec(-0.75, -0.25, 0.55))
+    s_[ob("lowerarm_r")] = ("dir", (Q(V((0, 1, 0)), ang) @ vec(-0.15, -0.2, 1.0)).normalized())
+    chave(acoes[-1], f_, s_)
+for a_ in acoes:
+    for fc in (a_.fcurves if hasattr(a_, "fcurves") else []):
+        for kp in fc.keyframe_points:
+            kp.interpolation = "BEZIER"
+rig.animation_data.action = acoes[0]
+print(f"[Lima] animacoes: {[a_.name for a_ in acoes]}; shape keys: {[k.name for k in h.data.shape_keys.key_blocks]}")
+
 prev = arg("--preview")
 if prev:
     os.makedirs(prev, exist_ok=True)
-    preparar_render((480, 540), mundo="#C9D6EA")
+    preparar_render((320, 540), mundo="#C9D6EA")
     sc_ = bpy.context.scene; sc_.render.line_thickness = 0.8
-    rp = PELE.node_tree.nodes.get("Color Ramp") or next((n for n in PELE.node_tree.nodes if n.type == "VALTORGB"), None)
-    if rp and len(rp.color_ramp.elements) == 3:
-        rp.color_ramp.elements.remove(rp.color_ramp.elements[1])      # pele: 2 faixas (sem a do meio)
-        rp.color_ramp.elements[1].position = 0.18
     ls_ = sc_.view_layers[0].freestyle_settings.linesets[0]; ls_.select_crease = False; ls_.select_border = False
-    f1, f2 = os.path.join(prev, "_f.png"), os.path.join(prev, "_p.png")
-    renderizar(f1, (0.0, -3.3, 1.0), (0.0, 0, 0.9), 50)
-    renderizar(f2, (cc.x, cc.y - 0.95, cc.z), (cc.x, cc.y, cc.z - 0.02), 85)        # close do rosto (frente)
+    fs_ = [os.path.join(prev, f"_{k}.png") for k in range(3)]
+    renderizar(fs_[0], (0.0, -4.2, 1.0), (0.0, 0, 0.9), 50)
+    renderizar(fs_[1], (-4.2, 0.0, 1.0), (0.0, 0, 0.9), 50)                          # perfil
+    renderizar(fs_[2], (cc.x - 0.3, cc.y - 0.95, cc.z + 0.02), (cc.x, cc.y + 0.02, cc.z - 0.01), 70)   # close 3/4
     import numpy as np
-    a_, b_ = bpy.data.images.load(f1), bpy.data.images.load(f2)
-    pa = np.array(a_.pixels[:]).reshape(540, 480, 4); pb = np.array(b_.pixels[:]).reshape(540, 480, 4)
-    img = bpy.data.images.new("lado_a_lado", 960, 540); img.pixels = np.concatenate([pa, pb], axis=1).ravel().tolist()
-    img.filepath_raw = os.path.join(prev, "lima_frente_perfil.png"); img.file_format = "PNG"; img.save()
+    ps_ = [np.array(bpy.data.images.load(f_).pixels[:]).reshape(540, 320, 4) for f_ in fs_]
+    img = bpy.data.images.new("lado_a_lado", 960, 540); img.pixels = np.concatenate(ps_, axis=1).ravel().tolist()
+    img.filepath_raw = os.path.join(prev, "lima_v4.png"); img.file_format = "PNG"; img.save()
     remover_preview()
 fbx = arg("--fbx")
 if fbx:

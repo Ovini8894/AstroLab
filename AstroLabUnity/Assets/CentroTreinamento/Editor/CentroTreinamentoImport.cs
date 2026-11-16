@@ -25,6 +25,13 @@ namespace AstroLab.Centro.Editor
             mi.isReadable = false;
             mi.materialImportMode = ModelImporterMaterialImportMode.ImportStandard;
             mi.generateSecondaryUV = false;
+            if (assetPath.EndsWith("/NPC_Lima.fbx"))                     // instrutora MPFB: esqueleto Generic (animações feitas no próprio rig), shape keys
+            {
+                mi.importAnimation = true;
+                mi.importBlendShapes = true;
+                mi.animationType = ModelImporterAnimationType.Generic;
+                mi.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
+            }
         }
 
         void OnPreprocessTexture()

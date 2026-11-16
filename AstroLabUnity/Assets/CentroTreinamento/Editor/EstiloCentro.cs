@@ -37,7 +37,7 @@ namespace AstroLab.Centro.Editor
             { "CT_Madeira", "#C79A6B" }, { "CT_Tapete_Azul", "#5E7FD6" }, { "CT_Verde_Bandeira", "#1E9A4A" },
             { "CT_Texto_Branco", "#FFFFFF" }, { "CT_Texto_Escuro", "#1C1A3D" }, { "CT_Logo_NASA", "#FFFFFF" },
             { "NPC_Macacao", "#2F5BB7" }, { "NPC_Macacao_Escuro", "#22428A" }, { "NPC_Pele", "#C68B63" }, { "NPC_Cabelo", "#3B2A22" },
-            { "NPC_Bota", "#2B2B33" }, { "No Name", "#FFFFFF" },
+            { "NPC_Bota", "#2B2B33" }, { "NPC_Labio", "#9C5446" }, { "NPC_Cabelo_Brilho", "#4A3428" }, { "NPC_Sobrancelha", "#1E140F" }, { "No Name", "#FFFFFF" },
             { "OR_Branco", "#F4F2EC" }, { "OR_Preto", "#2A2C38" }, { "OR_Cinza_RCC", "#5B5F70" }, { "OR_Laranja_ET", "#D9772E" },
             { "OR_Laranja_ET_Escuro", "#B05A22" }, { "OR_SRB", "#EDEBE4" }, { "OR_SRB_Escuro", "#3A3D4A" }, { "OR_Motor", "#7E879A" },
             { "OR_Motor_Interno", "#2E3550" }, { "OR_Vidro_Cabine", "#1E2A44" }, { "OR_Torre", "#B5452F" }, { "OR_Torre_Cinza", "#8E96A8" },

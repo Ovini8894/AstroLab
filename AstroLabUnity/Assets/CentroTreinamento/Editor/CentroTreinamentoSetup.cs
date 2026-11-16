@@ -89,7 +89,17 @@ namespace AstroLab.Centro.Editor
                 }
             });
             // luvas de treino: as luvas do time (mesmo visual da Lua), sem o scanner
-            CriarMaos("Maos_LuvaTreino", raiz => { });
+            CriarMaos("Maos_LuvaTreino", raiz =>
+            {
+                // mesmas cores das luvas do time, mas no shader das mãos (sempre por cima do cenário)
+                foreach (var r in raiz.GetComponentsInChildren<MeshRenderer>(true))
+                    r.sharedMaterials = r.sharedMaterials.Select(o =>
+                    {
+                        if (o == null || o.shader.name == ShaderViewmodel) return o;
+                        var cor = o.HasProperty("_BaseColor") ? o.GetColor("_BaseColor") : o.HasProperty("_Color") ? o.color : Color.white;
+                        return MatViewmodel("MV_Treino_" + o.name, "#" + ColorUtility.ToHtmlStringRGB(cor));
+                    }).ToArray();
+            });
             // luvas do traje completo: brancas com juntas índigo e faixa azul (combinam com o traje da missão)
             CriarMaos("Maos_LuvaTraje", raiz =>
             {
@@ -161,7 +171,9 @@ namespace AstroLab.Centro.Editor
             }
             var centro = Carregar(FbxCentro, "CentroTreinamento");
             Carregar(FbxPlataforma, "PlataformaLancamento");
-            Carregar(FbxOnibus, "OnibusEspacial");
+            var onibus = Carregar(FbxOnibus, "OnibusEspacial");
+            // o FBX do ônibus vem centrado (origem = eixo do tanque no topo da MLP): vai para a plataforma, Blender (44, 290, 13.5)
+            if (onibus) onibus.transform.position = new Vector3(-44f, 13.5f, -290f);
             Transform A(string n) => todos.FirstOrDefault(t => t.name == n);
             foreach (var t in todos.Where(t => (t.name.StartsWith("ANIM_") || t.name.StartsWith("Onibus_Interior")) && t.name.EndsWith("_Transp")).ToList())
             {
@@ -272,9 +284,11 @@ namespace AstroLab.Centro.Editor
             vest.luvasTreino.SetActive(false); vest.luvasTraje.SetActive(false);
 
             // ---------------------------------------------------------- instrutora
-            var npcGo = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(FbxNpc));
+            bool lima = LimaSetup.Existe;                                       // Lima MPFB (Humanoid) quando o FBX aprovado existir
+            var npcGo = lima ? LimaSetup.Instanciar() : (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(FbxNpc));
             npcGo.name = "Instrutora_Lima";
-            npcGo.transform.localScale = Vector3.one * 1.06f;                  // 1,82 m: presença ao lado do jogador
+            npcGo.transform.localScale = Vector3.one * (lima ? 1.0f : 1.06f);   // 1,82 m: presença ao lado do jogador
+            if (lima) EstiloCentro.MateriaisDoModelo(LimaSetup.Fbx);
             var npcInicio = A("NPC_Inicio");
             npcGo.transform.position = npcInicio ? npcInicio.position : Vector3.zero;
             foreach (var t in npcGo.GetComponentsInChildren<Transform>(true)) t.gameObject.layer = 2;   // Ignore Raycast
@@ -361,7 +375,7 @@ namespace AstroLab.Centro.Editor
             for (int i = 0; i < 7; i++)
             {
                 var ponto = A($"EST_{i}_{ids[i]}_NPC");
-                if (ponto == null) continue;                                   // salas do subsolo chegam no L3
+                if (ponto == null || i > 0) continue;                          // estações 1..6: rotas pelo corredor (Salas)
                 var rota = new List<Vector3>();
                 for (int k = faixas[i].a; k <= faixas[i].b; k++) rota.Add(W(k));
                 if (ponto) rota.Add(ponto.position);
@@ -399,6 +413,7 @@ namespace AstroLab.Centro.Editor
                 var mo = new GameObject("Mostrador_Andar").AddComponent<TextMeshPro>();
                 mo.transform.SetParent(cab, false);
                 mo.transform.SetPositionAndRotation(B(10.8f, 23.36f, 2.75f), Quaternion.LookRotation(Vector3.back, Vector3.up));
+                mo.transform.localScale = Vector3.one / Mathf.Max(1e-4f, cab.lossyScale.x);       // a cabine do FBX tem escala 100: sem isso o texto ficava com 93 m
                 mo.font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/MenuInicial/Fontes/Orbitron SDF.asset");
                 mo.fontSize = 2.0f; mo.alignment = TextAlignmentOptions.Center; mo.color = EstiloCentro.Hx("#FFB45C");
                 mo.rectTransform.sizeDelta = new Vector2(0.95f, 0.28f); mo.textWrappingMode = TextWrappingModes.NoWrap;
@@ -411,6 +426,10 @@ namespace AstroLab.Centro.Editor
 
             // ---------------------------------------------------------- letreiros (TextMeshPro 3D: nítido a qualquer distância)
             Letreiros(Raiz + "/Dados/Letreiros_Centro.json");
+            // ---------------------------------------------------------- salas (L3): agrupa cada sala e encaixa na sua porta
+            Salas(portas, tut, A);
+            // ---------------------------------------------------------- L4: elevador do fim do corredor até o quiosque na superfície
+            ElevadorL4(portas, tut, quente);
 
             // ---------------------------------------------------------- plataforma de lançamento e ônibus espacial
             var elevT = A("ANIM_Elevador");
@@ -595,6 +614,7 @@ namespace AstroLab.Centro.Editor
             var cam = JsonUtility.FromJson<Caminho>(File.ReadAllText(JsonCorredor));
             float L = cam.comprimento;
             var pai = new GameObject("Corredor").transform;
+            ModulosCorredor.Clear();
             var orb = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/MenuInicial/Fontes/Orbitron SDF.asset");
             int nLuz = 0;
             foreach (var md in cam.modulos)
@@ -607,6 +627,7 @@ namespace AstroLab.Centro.Editor
                 var go = new GameObject($"Mod_{md.i:00}_{md.tipo}{(string.IsNullOrEmpty(md.sala) ? "" : "_" + md.sala)}");
                 go.transform.SetParent(pai, false);
                 go.transform.SetPositionAndRotation(pos, rot);
+                ModulosCorredor.Add(go.transform);
                 GameObject Copiar(string nome, bool estatico = true)
                 {
                     var src = kit.transform.Find(nome);
@@ -627,17 +648,28 @@ namespace AstroLab.Centro.Editor
                         c.AddComponent<BoxCollider>();
                     }
                 if (md.tipo == "Seg_Janela") { Copiar("Seg_Janela_Vidro"); Copiar("Seg_Janela_CasaMaquinas"); }
+                if (md.tipo == "Seg_Fim")                                                        // L4: poço, cabine e quiosque
+                {
+                    foreach (var n in new[] { "Elevador_Poco", "Quiosque", "Quiosque_Transp" }) Copiar(n);
+                    foreach (var n in new[] { "ANIM_ElevSaida_Cabine", "ANIM_ElevSaida_PortaE", "ANIM_ElevSaida_PortaD" }) Copiar(n, false);
+                    foreach (Transform t in kit.transform)
+                        if (t.name.StartsWith("COL_Poco_") || t.name.StartsWith("COL_Quiosque_") || t.name == "COL_ElevSaida_TopoBloqueio")
+                        {
+                            var c = Copiar(t.name, t.name != "COL_ElevSaida_TopoBloqueio");
+                            c.GetComponent<MeshRenderer>().enabled = false;
+                            c.AddComponent<BoxCollider>();
+                        }
+                }
                 if (md.tipo == "Seg_Porta")
                 {
                     Copiar("Porta_Hex_Moldura");
                     var anel = Copiar("Porta_Hex_Anel", false);
                     var ph = go.AddComponent<PortaHex>();
-                    ph.laminas = Enumerable.Range(0, 6).Select(k => Copiar($"Porta_Hex_Lamina_{k}", false)?.transform).Where(x => x).ToArray();
+                    ph.laminas = new Transform[0];                                                   // decisão do Vinicius: só o portal, sem folhas de porta
                     ph.anel = anel ? anel.GetComponent<Renderer>() : null;
-                    var bl = new GameObject("Bloqueio").AddComponent<BoxCollider>();
-                    bl.transform.SetParent(go.transform, false);
-                    bl.transform.localPosition = new Vector3(-2.6f, 1.85f, -L / 2); bl.size = new Vector3(0.25f, 3.6f, 3.6f);
-                    ph.bloqueio = bl;
+                    var pisoPortal = new GameObject("COL_Portal_Piso").AddComponent<BoxCollider>();   // vão entre o piso do tubo e o piso da sala
+                    pisoPortal.transform.SetParent(go.transform, false);
+                    pisoPortal.transform.localPosition = new Vector3(-3.3f, -0.1f, -L / 2); pisoPortal.size = new Vector3(3.4f, 0.2f, 3.8f);
                     var placa = new GameObject("Placa_Sala").AddComponent<TextMeshPro>();
                     placa.transform.SetParent(go.transform, false);
                     placa.transform.localPosition = new Vector3(-2.40f, 4.3f, -L / 2);
@@ -658,6 +690,198 @@ namespace AstroLab.Centro.Editor
             }
             Debug.Log($"[Centro] Corredor: {cam.modulos.Length} módulos, {portas.Count} portas hexagonais, {nLuz} luzes.");
             return portas;
+        }
+
+        public static readonly List<Transform> ModulosCorredor = new List<Transform>();
+
+        static TextMeshPro Texto(Transform pai, Vector3 local, Vector3 frenteLocal, string chave, float tam, Color cor, Vector2 caixa)
+        {
+            var t = new GameObject("TXT_" + chave).AddComponent<TextMeshPro>();
+            t.transform.SetParent(pai, false);
+            t.transform.localPosition = local;
+            t.transform.rotation = Quaternion.LookRotation(pai.TransformDirection(frenteLocal), Vector3.up);   // "cima" do mundo (o pai pode estar girado -90 em X)
+            t.transform.localScale = Vector3.one / Mathf.Max(1e-4f, pai.lossyScale.x);         // pais vindos do FBX podem ter escala 100
+            t.font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/MenuInicial/Fontes/Orbitron SDF.asset");
+            t.fontSize = tam; t.color = cor; t.alignment = TextAlignmentOptions.Center;
+            t.rectTransform.sizeDelta = caixa; t.textWrappingMode = TextWrappingModes.NoWrap;
+            if (!string.IsNullOrEmpty(chave)) t.gameObject.AddComponent<AstroLab.Localization.LocalizedText>().Key = chave;
+            return t;
+        }
+
+        static void ElevadorL4(Dictionary<string, PortaHex> portas, TutorialCentro tut, Color luzCor)
+        {
+            var fimMod = ModulosCorredor.LastOrDefault();
+            var cab = fimMod ? fimMod.Find("ANIM_ElevSaida_Cabine") : null;
+            if (cab == null || tut == null) { Debug.LogWarning("[Centro] L4: sem cabine no fim do corredor."); return; }
+            var el = new GameObject("ElevadorSaida").AddComponent<ElevadorSaida>();
+            el.transform.SetParent(fimMod, false);
+            el.cabine = cab;
+            el.portaE = fimMod.Find("ANIM_ElevSaida_PortaE"); el.portaD = fimMod.Find("ANIM_ElevSaida_PortaD");
+            foreach (var p in new[] { el.portaE, el.portaD }) if (p) { p.SetParent(cab, true); p.gameObject.AddComponent<BoxCollider>(); }
+            var zona = new GameObject("ZONA_ElevSaida").AddComponent<BoxCollider>();
+            zona.transform.SetPositionAndRotation(fimMod.TransformPoint(0, 1.5f, -1.95f), fimMod.rotation);
+            zona.transform.SetParent(cab, true); zona.isTrigger = true; zona.size = new Vector3(2.9f, 2.8f, 2.6f);
+            zona.gameObject.layer = 2;
+            el.zonaCabine = zona;
+            var topo = new GameObject("WP_Elevador_Saida_Topo").transform;
+            topo.SetParent(fimMod, false); topo.position = cab.position + Vector3.up * 20f;
+            el.topo = topo;
+            var bloq = fimMod.Find("COL_ElevSaida_TopoBloqueio");
+            el.bloqueioQuiosque = bloq ? bloq.GetComponent<Collider>() : null;
+            el.mostrador = Texto(cab, cab.InverseTransformPoint(fimMod.TransformPoint(0, 3.4f, -0.71f)), cab.InverseTransformDirection(fimMod.forward), "ct.elevador.subsolo", 2.0f, EstiloCentro.Hx("#FFB45C"), new Vector2(1.9f, 0.32f));
+            el.mostrador.GetComponent<AstroLab.Localization.LocalizedText>().enabled = false;      // o texto do andar vem do script
+            Texto(fimMod, new Vector3(0, 3.7f, 0.0f), Vector3.back, "ct.elevador.placa", 2.2f, Color.white, new Vector2(2.5f, 0.4f));
+            Texto(fimMod, new Vector3(0, 23.35f, 4.36f), Vector3.back, "ct.quiosque", 2.6f, Color.white, new Vector2(7.0f, 0.45f));
+            var lc = new GameObject("Luz_Cabine_Saida").AddComponent<Light>();
+            lc.transform.SetParent(cab, false); lc.transform.position = cab.position + Vector3.up * 2.9f;
+            lc.type = LightType.Point; lc.color = luzCor; lc.intensity = 1.2f; lc.range = 4.5f; lc.shadows = LightShadows.None;
+            el.pontoNpcCabine = new GameObject("NPC_ElevSaida").transform;
+            el.pontoNpcCabine.SetParent(fimMod, false); el.pontoNpcCabine.localPosition = new Vector3(0.7f, 0f, -2.5f);
+            el.pontoSaidaQuiosque = new GameObject("WP_Quiosque_Saida").transform;
+            el.pontoSaidaQuiosque.SetParent(fimMod, false); el.pontoSaidaQuiosque.localPosition = new Vector3(0f, 20f, 7.0f);
+            // rota: estação de trajes -> entrada da sala -> portal -> corredor até o fim -> frente da cabine
+            var rota = new List<Vector3>();
+            var sala = GameObject.Find("Sala_Trajes");
+            int ini = 0;
+            if (portas.TryGetValue("Trajes", out var pt) && sala)
+            {
+                rota.Add(sala.transform.position + sala.transform.forward * 2.5f);
+                rota.Add(sala.transform.position);
+                rota.Add(pt.transform.TransformPoint(new Vector3(-3.6f, 0, -2f)));
+                ini = ModulosCorredor.IndexOf(pt.transform);
+            }
+            for (int k = Mathf.Max(0, ini); k < ModulosCorredor.Count - 1; k++) rota.Add(ModulosCorredor[k].TransformPoint(new Vector3(0, 0, -2f)));
+            rota.Add(fimMod.TransformPoint(new Vector3(0, 0, 1.6f)));
+            el.rotaAteElevador = rota.ToArray();
+            tut.elevadorSaida = el;
+            // depois do quiosque: atravessa até a estrada e segue para a plataforma
+            var fimEstrada = GameObject.Find("WP_Estrada_Fim");
+            if (fimEstrada == null)
+            {
+                fimEstrada = new GameObject("WP_Estrada_Fim");
+                fimEstrada.transform.position = new Vector3(-44f, 0f, -198f);                 // Blender (44, 198): fim da estrada, pé da plataforma
+                tut.alvoFinal = fimEstrada.transform;
+            }
+            var saida = new List<Vector3> { el.pontoSaidaQuiosque.position, new Vector3(-36f, 0f, el.pontoSaidaQuiosque.position.z - 4f) };
+            if (fimEstrada) saida.Add(fimEstrada.transform.position);
+            tut.rotaSaida = saida.ToArray();
+            Debug.Log($"[Centro] L4: elevador no {fimMod.name}, quiosque em {topo.position:F1}, rota de {rota.Count} pontos.");
+        }
+
+        [System.Serializable] class SalaDef { public string nome; public float[] min, max, entrada, dentro; public float altura; }
+        [System.Serializable] class ListaSalas { public SalaDef[] salas; }
+
+        static readonly string[] NaoMover = { "Poco", "Elevador", "Painel_Secreto", "Subsolo", "Recepcao", "Chao", "NPC_", "WP_", "SPAWN" };
+
+        static void Salas(Dictionary<string, PortaHex> portas, TutorialCentro tut, System.Func<string, Transform> A)
+        {
+            string json = Raiz + "/Dados/Salas.json";
+            if (!File.Exists(json) || ModulosCorredor.Count == 0) { Debug.LogWarning("[Centro] Salas: falta Salas.json ou corredor."); return; }
+            var defs = JsonUtility.FromJson<ListaSalas>(File.ReadAllText(json)).salas;
+            float L = 4f;
+            // candidatos: tudo da cena que veio do modelo + letreiros, menos recepção/elevador/terreno
+            var candidatos = new List<Transform>();
+            foreach (var raizNome in new[] { "CentroTreinamento", "Letreiros" })
+            {
+                var r0 = GameObject.Find(raizNome);
+                if (r0) foreach (Transform t in r0.transform) candidatos.Add(t);
+            }
+            Vector3 Centro(Transform t)
+            {
+                var r = t.GetComponent<Renderer>();
+                return r && r.enabled ? r.bounds.center : (r ? r.bounds.center : t.position);
+            }
+            var raizes = new Dictionary<string, Transform>();
+            foreach (var d in defs)
+            {
+                var mn = new Vector3(Mathf.Min(d.min[0], d.max[0]), -7f, Mathf.Min(d.min[2], d.max[2])) - new Vector3(0.6f, 0, 0.6f);
+                var mx = new Vector3(Mathf.Max(d.min[0], d.max[0]), d.altura + 1f, Mathf.Max(d.min[2], d.max[2])) + new Vector3(0.6f, 0, 0.6f);
+                var b = new Bounds(); b.SetMinMax(mn, mx);
+                var raiz = new GameObject("Sala_" + d.nome).transform;
+                raiz.SetPositionAndRotation(new Vector3(d.entrada[0], d.entrada[1], d.entrada[2]), Quaternion.LookRotation(new Vector3(d.dentro[0], d.dentro[1], d.dentro[2]), Vector3.up));
+                int n = 0;
+                foreach (var t in candidatos.ToList())
+                {
+                    if (t == null || t.parent == null || NaoMover.Any(k => t.name.Contains(k))) continue;
+                    if (t.name.StartsWith("EST_0") || t.name.StartsWith("ZONA_EST_0")) continue;
+                    bool minha = t.name.Contains("Sala_" + d.nome + "_");
+                    if (!minha && defs.Any(o => o.nome != d.nome && t.name.Contains("Sala_" + o.nome + "_"))) continue;   // peça de outra sala (salas vizinhas no Blender)
+                    if (!minha && !b.Contains(Centro(t))) continue;
+                    t.SetParent(raiz, true); candidatos.Remove(t); n++;
+                }
+                raizes[d.nome] = raiz;
+                // encaixe: entrada da sala = fim do portal da porta hexagonal (frente = para dentro da sala)
+                if (portas.TryGetValue(d.nome, out var porta))
+                {
+                    var mod = porta.transform;
+                    raiz.SetPositionAndRotation(mod.TransformPoint(new Vector3(-4.6f, 0f, -L / 2)), mod.rotation * Quaternion.LookRotation(Vector3.left, Vector3.up));
+                    raiz.SetParent(mod.parent, true);
+                }
+                Debug.Log($"[Centro] Sala {d.nome}: {n} objetos encaixados.");
+            }
+            // conflitos (caixa orientada de cada sala, no espaço local da raiz): sala x sala e sala x eixo do corredor
+            var ret = new Dictionary<string, Rect>();
+            foreach (var d in defs)
+            {
+                var D = new Vector3(d.dentro[0], 0, d.dentro[2]).normalized; var R = new Vector3(D.z, 0, -D.x);
+                float x0 = float.MaxValue, x1 = float.MinValue, z0 = float.MaxValue, z1 = float.MinValue;
+                foreach (var X in new[] { d.min[0], d.max[0] }) foreach (var Z in new[] { d.min[2], d.max[2] })
+                {
+                    var v = new Vector3(X - d.entrada[0], 0, Z - d.entrada[2]);
+                    float lat = Vector3.Dot(v, R), dep = Vector3.Dot(v, D);
+                    x0 = Mathf.Min(x0, lat); x1 = Mathf.Max(x1, lat); z0 = Mathf.Min(z0, dep); z1 = Mathf.Max(z1, dep);
+                }
+                ret[d.nome] = Rect.MinMaxRect(x0, z0, x1, z1);
+            }
+            bool Dentro(string sala, Vector3 mundo, float margem)
+            {
+                var l = raizes[sala].InverseTransformPoint(mundo); var r = ret[sala];
+                float dx = Mathf.Max(0, Mathf.Max(r.xMin - l.x, l.x - r.xMax)), dz = Mathf.Max(0, Mathf.Max(r.yMin - l.z, l.z - r.yMax));
+                return dx * dx + dz * dz < margem * margem;                               // distância real ao retângulo (cantos arredondados)
+            }
+            IEnumerable<Vector3> Amostras(string sala)
+            {
+                var r = ret[sala];
+                for (int i = 0; i <= 4; i++) for (int j = 0; j <= 4; j++)
+                        yield return raizes[sala].TransformPoint(new Vector3(Mathf.Lerp(r.xMin, r.xMax, i / 4f), 0, Mathf.Lerp(r.yMin, r.yMax, j / 4f)));
+            }
+            var nomes = raizes.Keys.Where(ret.ContainsKey).ToList();
+            foreach (var a in nomes) foreach (var c in nomes)
+                    if (string.CompareOrdinal(a, c) < 0 && (Amostras(a).Any(p => Dentro(c, p, 0.5f)) || Amostras(c).Any(p => Dentro(a, p, 0.5f))))
+                        Debug.LogWarning($"[Centro] Salas {a} e {c} se sobrepõem.");
+            foreach (var a in nomes)
+            {
+                var bate = ModulosCorredor.FirstOrDefault(m => new[] { 0f, 0.25f, 0.5f, 0.75f }.Any(t => Dentro(a, m.TransformPoint(new Vector3(0, 0, -L * t)), 3.2f)));
+                if (bate) Debug.LogWarning($"[Centro] Sala {a} encosta no corredor em {bate.name}.");
+            }
+            // rotas da instrutora no subsolo: vestíbulo -> módulos do corredor -> portal -> entrada da sala -> ponto da estação
+            if (tut == null) return;
+            int Indice(Transform mod) => int.Parse(mod.name.Substring(4, 2));
+            int anterior = 0; PortaHex portaAnt = null;
+            Vector3 Centro2(Transform mod) => mod.TransformPoint(new Vector3(0, 0, -L / 2));
+            var lista = tut.etapas.ToList();
+            var ids = new[] { "Recepcao", "Medico", "Centrifuga", "RealidadeVirtual", "NBL", "ARGOS", "Trajes" };
+            for (int i = 1; i < 7; i++)
+            {
+                var ponto = A($"EST_{i}_{ids[i]}_NPC");
+                if (ponto == null || !portas.TryGetValue(ids[i], out var porta)) continue;
+                var mod = porta.transform; int idx = Indice(mod);
+                var rota = new List<Vector3>();
+                if (portaAnt != null)                                                          // sai da sala anterior pela porta dela
+                {
+                    rota.Add(raizes[ids[i - 1]].position + raizes[ids[i - 1]].forward * 2.5f);
+                    rota.Add(portaAnt.transform.TransformPoint(new Vector3(-3.6f, 0, -L / 2)));
+                }
+                for (int k = anterior; k <= idx; k++) rota.Add(Centro2(ModulosCorredor[k]));
+                rota.Add(mod.TransformPoint(new Vector3(-3.6f, 0, -L / 2)));
+                rota.Add(raizes[ids[i]].position + raizes[ids[i]].forward * 2.5f);
+                rota.Add(ponto.position);
+                var con = ponto.parent ? ponto.parent.GetComponentsInChildren<Interagivel>(true).FirstOrDefault(x => x.name.StartsWith($"EST_{i}_")) : null;
+                lista.Add(new EtapaTreino { id = $"est{i}", pontoNpc = ponto, console = con, rota = rota.ToArray(), porta = porta });
+                anterior = idx; portaAnt = porta;
+            }
+            tut.etapas = lista.ToArray();
+            Debug.Log($"[Centro] Tutorial: {tut.etapas.Length} etapas com rotas pelo corredor.");
         }
 
         static Mesh Losango()

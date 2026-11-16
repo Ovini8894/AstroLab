@@ -21,6 +21,7 @@ namespace AstroLab.Centro
         public Transform alvoElevador;
         public GameObject interior;           // Onibus_Interior (+ _Transp, luz da cabine)
         public float distanciaInterior = 30f;
+        public string CenaInterior = "NaveInterior";
 
         public static event Action AoSentar;
         public enum Fase { Treinando, IrParaPlataforma, Elevador, Braco, Sentado }
@@ -73,6 +74,16 @@ namespace AstroLab.Centro
             hud.Ocupado = true;
             yield return hud.Fade(1f, 0.9f);
             Atual = Fase.Sentado;
+            // pela escotilha da Sala Branca o jogador entra no interior do ônibus (cena da equipe da nave)
+            if (Application.CanStreamedLevelBeLoaded(CenaInterior))
+            {
+                Debug.Log("[Centro] Escotilha: carregando " + CenaInterior);
+                AoSentar?.Invoke();
+                AstroLab.Nave.SistemasNave.FaseInicial = AstroLab.Nave.FaseNave.Plataforma;
+                UnityEngine.SceneManagement.SceneManager.LoadScene(CenaInterior);
+                yield break;
+            }
+            Debug.LogWarning("[Centro] Cena " + CenaInterior + " fora do Build Settings: usando o assento local.");
             if (interior) interior.SetActive(true);
             assento.Sentar(jogador);
             hud.Objetivo(Loc.Get("ct.obj.sentado"));

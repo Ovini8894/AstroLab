@@ -1,0 +1,132 @@
+{
+ "itens": [
+  {
+   "chave": "nave.master_alarm",
+   "texto": "MASTER ALARM"
+  },
+  {
+   "chave": "nave.meds",
+   "texto": "MEDS displays"
+  },
+  {
+   "chave": "nave.luz_flood",
+   "texto": "Panel floodlights"
+  },
+  {
+   "chave": "nave.luz_dome",
+   "texto": "Cabin dome light"
+  },
+  {
+   "chave": "nave.comm",
+   "texto": "Comm with Houston"
+  },
+  {
+   "chave": "nave.ventilacao",
+   "texto": "Cabin fans"
+  },
+  {
+   "chave": "nave.apu1",
+   "texto": "APU 1 (hydraulic power)"
+  },
+  {
+   "chave": "nave.apu2",
+   "texto": "APU 2 (hydraulic power)"
+  },
+  {
+   "chave": "nave.apu3",
+   "texto": "APU 3 (hydraulic power)"
+  },
+  {
+   "chave": "nave.mn_a",
+   "texto": "Main bus A"
+  },
+  {
+   "chave": "nave.mn_b",
+   "texto": "Main bus B"
+  },
+  {
+   "chave": "nave.mn_c",
+   "texto": "Main bus C"
+  },
+  {
+   "chave": "nave.fuel_cells",
+   "texto": "Fuel cells"
+  },
+  {
+   "chave": "nave.portas_baia",
+   "texto": "Payload bay doors"
+  },
+  {
+   "chave": "nave.radiadores",
+   "texto": "Radiators"
+  },
+  {
+   "chave": "nave.rms",
+   "texto": "Robotic arm (RMS)"
+  },
+  {
+   "chave": "nave.estado.on",
+   "texto": "ON"
+  },
+  {
+   "chave": "nave.estado.off",
+   "texto": "OFF"
+  },
+  {
+   "chave": "nave.prompt",
+   "texto": "click to operate"
+  },
+  {
+   "chave": "nave.check.plataforma",
+   "texto": "Pre-launch checklist"
+  },
+  {
+   "chave": "nave.check.orbita",
+   "texto": "Post-insertion checklist"
+  },
+  {
+   "chave": "nave.check.ok",
+   "texto": "Checklist complete! Good job, astronaut."
+  },
+  {
+   "chave": "nave.comm.plataforma",
+   "texto": "Houston: \"Atlantis, Houston. We read you loud and clear. Systems are go for launch.\""
+  },
+  {
+   "chave": "nave.comm.orbita",
+   "texto": "Houston: \"Welcome to orbit! With the bay doors open, you're go for orbit operations.\""
+  },
+  {
+   "chave": "nave.alarme",
+   "texto": "Alarm acknowledged and silenced."
+  },
+  {
+   "chave": "nave.sem_energia",
+   "texto": "No power: turn on the main buses (MN A/B/C) on panel R1."
+  },
+  {
+   "chave": "nave.posto.cdr",
+   "texto": "Station: commander's seat (CDR)"
+  },
+  {
+   "chave": "nave.posto.plt",
+   "texto": "Station: pilot's seat (PLT)"
+  },
+  {
+   "chave": "nave.posto.re",
+   "texto": "Station: aft flight deck (payload bay and robotic arm)"
+  },
+  {
+   "chave": "nave.saindo",
+   "texto": "Hold M to return to the map..."
+  },
+  {
+   "chave": "nave.sem_retorno",
+   "texto": "Can't return: the map scene isn't in the build."
+  },
+  {
+   "chave": "nave.dica_tab",
+   "texto": "Tab: switch station (CDR, PLT, aft)  -  hold M: back to map  -  Esc: release mouse"
+  }
+ ]
+}

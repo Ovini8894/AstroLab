@@ -17,14 +17,14 @@ def _m(nome):
 
 
 def disjuntor(aberto=False):
-    """circuit breaker: botao preto com chanfro; 'aberto' (disparado) mostra a faixa branca."""
+    """circuit breaker: botao escuro com chanfro; 'aberto' (disparado) mostra a faixa branca."""
     m = _m("DisjuntorAberto" if aberto else "Disjuntor")
-    m.torno([(0.0068, 0.0), (0.0068, 0.0012), (0.0052, 0.0018)], M.metal, segs=12, fechar_base=False, fechar_topo=True)
+    m.torno([(0.0068, 0.0010), (0.0046, 0.0018)], M.metal, segs=8, fechar_base=False, fechar_topo=False)
     z = 0.0018
     if aberto:
-        m.torno([(0.0046, z), (0.0046, z + 0.004)], M.branco, segs=12, fechar_base=False, fechar_topo=False)
+        m.torno([(0.0046, z), (0.0046, z + 0.004)], M.branco, segs=8, fechar_base=False, fechar_topo=False)
         z += 0.004
-    m.torno([(0.0046, z), (0.0046, z + 0.0068), (0.0038, z + 0.0084), (0.0, z + 0.0086)], M.escuro, segs=12,
+    m.torno([(0.0046, z), (0.0042, z + 0.0076), (0.0, z + 0.0087)], M.escuro, segs=8,
             fechar_base=False, fechar_topo=False)
     return m
 
@@ -33,14 +33,14 @@ def chave(pos=1):
     """toggle: porca sextavada, bucha e alavanca conica com ponta esferica. pos: 1 cima, 0 centro, -1 baixo."""
     nome = {1: "ChaveCima", 0: "ChaveCentro", -1: "ChaveBaixo"}[pos]
     m = _m(nome)
-    m.cilindro((0, 0, 0), (0, 0, 0.0032), 0.0064, M.metal, 6)            # porca (6 lados = sextavada)
-    m.cilindro((0, 0, 0.0032), (0, 0, 0.0075), 0.0038, M.metal, 10)
+    m.torno([(0.0064, 0.0), (0.0064, 0.0032), (0.0038, 0.0032), (0.0038, 0.0075)], M.metal, segs=6, fechar_base=False,
+            fechar_topo=True)
     a = math.radians(24) * pos
     d = V((0, math.sin(a), math.cos(a)))
     p0 = V((0, 0, 0.0068))
     p1 = p0 + d * 0.019
-    m.cilindro(p0, p1, 0.0015, M.metal, 8, r2=0.0022)
-    m.esfera(p1 + d * 0.0012, 0.0029, M.metal, 8, 4)
+    m.cilindro(p0, p1, 0.0015, M.metal, 6, r2=0.0022, tampas=False)
+    m.esfera(p1 + d * 0.0012, 0.0029, M.metal, 6, 3)
     return m
 
 
@@ -57,8 +57,8 @@ def alavanca(pos=1):
 
 def base_chave():
     m = _m("BaseChave")
-    m.cilindro((0, 0, 0), (0, 0, 0.0032), 0.0064, M.metal, 6)
-    m.cilindro((0, 0, 0.0032), (0, 0, 0.0075), 0.0038, M.metal, 10)
+    m.torno([(0.0064, 0.0), (0.0064, 0.0032), (0.0038, 0.0032), (0.0038, 0.0075)], M.metal, segs=6, fechar_base=False,
+            fechar_topo=True)
     return m
 
 
@@ -68,8 +68,8 @@ def guarda():
     for s in (-1, 1):
         m.caixa((s * 0.0105, 0, 0.011), (0.0022, 0.026, 0.022), M.metal)
         m.caixa((s * 0.0105, 0, 0.0015), (0.006, 0.03, 0.003), M.metal)
-    m.cilindro((-0.0105, 0.013, 0.021), (0.0105, 0.013, 0.021), 0.0016, M.metal, 8)
-    m.cilindro((-0.0105, -0.013, 0.021), (0.0105, -0.013, 0.021), 0.0016, M.metal, 8)
+    m.cilindro((-0.0105, 0.013, 0.021), (0.0105, 0.013, 0.021), 0.0016, M.metal, 6, tampas=False)
+    m.cilindro((-0.0105, -0.013, 0.021), (0.0105, -0.013, 0.021), 0.0016, M.metal, 6, tampas=False)
     return m
 
 
@@ -114,10 +114,10 @@ def knob(grande=False):
     """knob rotativo: saia com marca branca + corpo recartilhado."""
     m = _m("KnobGrande" if grande else "Knob")
     s = 1.35 if grande else 1.0
-    m.torno([(0.0105 * s, 0.0), (0.0105 * s, 0.0018), (0.0075 * s, 0.0026)], M.escuro, segs=16, fechar_base=False,
+    m.torno([(0.0105 * s, 0.0), (0.0105 * s, 0.0018), (0.0075 * s, 0.0026)], M.escuro, segs=8, fechar_base=False,
             fechar_topo=True)
     m.torno([(0.0066 * s, 0.0026), (0.0066 * s, 0.0135 * s), (0.0056 * s, 0.0152 * s), (0.0, 0.0156 * s)], M.escuro,
-            segs=14, fechar_base=False, fechar_topo=False)
+            segs=8, fechar_base=False, fechar_topo=False)
     m.caixa((0, 0.0086 * s, 0.0023), (0.0014, 0.0045 * s, 0.0008), M.branco)
     m.caixa((0, 0.003 * s, 0.0157 * s), (0.0012, 0.0045 * s, 0.0004), M.branco)
     return m
@@ -126,29 +126,31 @@ def knob(grande=False):
 def seletor():
     """chave rotativa com barra (pointer knob)."""
     m = _m("Seletor")
-    m.torno([(0.011, 0.0), (0.011, 0.002), (0.008, 0.003)], M.escuro, segs=16, fechar_base=False)
+    m.torno([(0.011, 0.0), (0.011, 0.002), (0.008, 0.003)], M.escuro, segs=12, fechar_base=False)
     m.caixa((0, 0.0, 0.009), (0.008, 0.026, 0.012), M.escuro)
     m.caixa((0, 0.0105, 0.0152), (0.0016, 0.005, 0.0006), M.branco)
     return m
 
 
 def anunciador():
-    """moldura de anunciador (a legenda colorida vem do atlas, na malha estatica)."""
+    """moldura de anunciador (a legenda colorida vem do atlas, na malha estatica): anel unico de 24 triangulos."""
     m = _m("Anunciador")
     w, h, e, b = 0.036, 0.0165, 0.0045, 0.0022
-    m.caixa((0, h / 2 - b / 2, e / 2), (w, b, e), M.escuro)
-    m.caixa((0, -h / 2 + b / 2, e / 2), (w, b, e), M.escuro)
-    m.caixa((w / 2 - b / 2, 0, e / 2), (b, h - 2 * b, e), M.escuro)
-    m.caixa((-w / 2 + b / 2, 0, e / 2), (b, h - 2 * b, e), M.escuro)
+    o = [(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2)]
+    i = [(-w / 2 + b, -h / 2 + b), (w / 2 - b, -h / 2 + b), (w / 2 - b, h / 2 - b), (-w / 2 + b, h / 2 - b)]
+    for k in range(4):
+        a0, a1, i0, i1 = o[k], o[(k + 1) % 4], i[k], i[(k + 1) % 4]
+        m.quad((*a0, e), (*a1, e), (*i1, e), (*i0, e), M.escuro)                  # topo
+        m.quad((*a0, 0), (*a1, 0), (*a1, e), (*a0, e), M.escuro)                  # lado de fora
+        m.quad((*i1, 0), (*i0, 0), (*i0, e), (*i1, e), M.escuro)                  # lado de dentro
     return m
 
 
 def parafuso():
     """fixador Dzus de 1/4 de volta (cantos das placas)."""
     m = _m("Parafuso")
-    m.torno([(0.0042, 0.0), (0.0042, 0.0007), (0.0031, 0.0015), (0.0, 0.0018)], M.metal, segs=10, fechar_base=False,
-            fechar_topo=False)
-    m.caixa((0, 0, 0.0017), (0.0046, 0.0008, 0.0006), M.escuro)
+    m.torno([(0.0042, 0.0003), (0.0031, 0.0015), (0.0, 0.0018)], M.metal, segs=6, fechar_base=False, fechar_topo=False)
+    m.quad((-0.0023, -0.0004, 0.00185), (0.0023, -0.0004, 0.00185), (0.0023, 0.0004, 0.00185), (-0.0023, 0.0004, 0.00185), M.escuro)
     return m
 
 
@@ -166,7 +168,9 @@ def medidor():
     m.caixa((0, 0, 0.004), (0.034, 0.072, 0.008), M.escuro)
     m.caixa((0, 0.004, 0.0082), (0.022, 0.054, 0.0008), M.medidor)
     for k in range(9):
-        m.caixa((-0.006, -0.02 + k * 0.006, 0.0088), (0.006 if k % 2 == 0 else 0.0035, 0.0007, 0.0004), M.escuro)
+        lw, y = (0.006 if k % 2 == 0 else 0.0035), -0.02 + k * 0.006
+        m.quad((-0.006 - lw / 2, y - 0.00035, 0.0087), (-0.006 + lw / 2, y - 0.00035, 0.0087), (-0.006 + lw / 2, y + 0.00035, 0.0087),
+               (-0.006 - lw / 2, y + 0.00035, 0.0087), M.escuro)
     m.caixa((0.004, 0.006, 0.009), (0.010, 0.0016, 0.0008), M.vermelho)
     return m
 
@@ -198,6 +202,14 @@ def mdu():
     return m
 
 
+def trava():
+    """trava de 1/4 de volta das portas dos lockers do middeck."""
+    m = _m("Trava")
+    m.caixa((0, 0, 0.0015), (0.034, 0.016, 0.003), M.metal)
+    m.caixa((0, 0, 0.0055), (0.028, 0.008, 0.005), M.escuro)
+    return m
+
+
 def construir():
     """devolve {tipo: Malha}. Os nomes de tipo sao a chave usada no JSON de instancias."""
     return {
@@ -208,8 +220,10 @@ def construir():
         "bot_amb": botao(M.lente_ambar, "BotaoAmbar"), "bot_verm": botao(M.lente_verm, "BotaoVermelho"),
         "bot_br": botao(M.lente_branca, "BotaoBranco"),
         "knob": knob(False), "knob_g": knob(True), "seletor": seletor(),
-        "anun": anunciador(), "paraf": parafuso(), "tecla": tecla(), "medidor": medidor(), "mdu": mdu(),
+        "anun": anunciador(), "trava": trava(), "paraf": parafuso(), "tecla": tecla(), "medidor": medidor(), "mdu": mdu(),
         # partes dos interativos (base fixa + parte movel)
         "base_chave": base_chave(), "alavanca": alavanca(), "base_botao": base_botao(),
         "capa_apag": capa_botao(M.lente_apagada, "CapaApagada"), "capa_verm": capa_botao(M.lente_verm, "CapaVermelha"),
+        "capa_verde": capa_botao(M.lente_verde, "CapaVerde"), "capa_amb": capa_botao(M.lente_ambar, "CapaAmbar"),
+        "capa_br": capa_botao(M.lente_branca, "CapaBranca"),
     }

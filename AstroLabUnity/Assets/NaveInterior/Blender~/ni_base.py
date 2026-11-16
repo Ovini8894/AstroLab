@@ -127,8 +127,8 @@ class _M:
 
 
 M = _M()
-M.painel = material("NI_Painel", "#5B6480")            # placas dos paineis (cinza-indigo, fundo das etiquetas)
-M.moldura = material("NI_Moldura", "#3E4C78")          # molduras e frisos (indigo-ardosia)
+M.painel = material("NI_Painel", "#56627D")            # placas dos paineis (cinza-indigo, fundo das etiquetas)
+M.moldura = material("NI_Moldura", "#2F3954")          # molduras e frisos (indigo-ardosia)
 M.escuro = material("NI_Escuro", "#2A2C3D")            # knobs, disjuntores, glareshield (nunca preto)
 M.tecla = material("NI_Tecla", "#4A5068")
 M.metal = material("NI_Metal", "#C3CEDF")
@@ -175,7 +175,7 @@ M.tela = _mat_tex("NI_Tela", "#FFFFFF", ATLAS_MEDS, emissao=1.5)
 
 # ======================================================================= atlas de etiquetas e legendas
 ATLAS = 2048
-COR_FUNDO_ETQ = "#5B6480"         # = NI_Painel (a etiqueta some na placa)
+COR_FUNDO_ETQ = "#56627D"         # = NI_Painel (a etiqueta some na placa)
 COR_FUNDO_LEG = "#1E2233"
 
 
@@ -264,14 +264,14 @@ def legenda(m, F, u, v, texto, cor="ambar", acesa=False, larg=0.03, z=0.0035):
     m.quad(*p, M.legenda_acesa if acesa else M.legenda, uv=((u0, v0), (u1, v0), (u1, v1), (u0, v1)))
 
 
-def friso(m, F, u0, v0, u1, v1, w=0.0016, z=0.0008):
+def friso(m, F, u0, v0, u1, v1, w=0.0016, z=0.0008, mat=None):
     """contorno branco fino (agrupa chaves, como nos paineis reais)."""
     for a, b in (((u0, v0), (u1, v0)), ((u1, v0), (u1, v1)), ((u1, v1), (u0, v1)), ((u0, v1), (u0, v0))):
         a, b = V((*a, z)), V((*b, z))
         d = (b - a).normalized()
         n = V((-d.y, d.x, 0)) * (w / 2)
         a2, b2 = a - d * (w / 2), b + d * (w / 2)
-        m.quad(F @ (a2 - n), F @ (b2 - n), F @ (b2 + n), F @ (a2 + n), M.linha)
+        m.quad(F @ (a2 - n), F @ (b2 - n), F @ (b2 + n), F @ (a2 + n), mat or M.linha)
 
 
 def tela(m, F, u, v, w, h, pagina, z=0.0):
@@ -295,6 +295,7 @@ def painel(F, w, h, codigo=None, esp=0.03, mold=0.010, grupo="Paineis", parafuso
     m.caixa((0, 0, -esp / 2), (w, h, esp), M.painel, M=F)
     if mold:
         e = 0.004
+        m = st("Molduras")
         m.caixa((0, h / 2 - mold / 2, e / 2), (w, mold, e), M.moldura, M=F)
         m.caixa((0, -h / 2 + mold / 2, e / 2), (w, mold, e), M.moldura, M=F)
         m.caixa((w / 2 - mold / 2, 0, e / 2), (mold, h - 2 * mold, e), M.moldura, M=F)
@@ -307,6 +308,7 @@ def painel(F, w, h, codigo=None, esp=0.03, mold=0.010, grupo="Paineis", parafuso
         if w > 0.5:
             for sv in (-1, 1):
                 KIT.por("paraf", F @ T(0, sv * (h / 2 - k), 0))
+    m = st(grupo, 0.003)
     if codigo:
         etiqueta(m, F, -w / 2 + mold + 0.035, h / 2 - mold - 0.012, codigo, larg=0.05)
     return m
@@ -364,12 +366,19 @@ def para_unity(Mw):
     return [round(Mu[i][j], 5) for i in range(4) for j in range(4)]
 
 
-def gravar_kit_json(caminho):
-    dados = {"tipos": [], "interativos": []}
+def local_unity(Ml):
+    """matriz local (sem a ancora), convertida para o Unity."""
+    Mu = C_UNITY @ Ml @ C_UNITY.inverted()
+    return [round(Mu[i][j], 6) for i in range(4) for j in range(4)]
+
+
+def gravar_kit_json(caminho, malhas=None):
+    dados = {"tipos": [], "interativos": [], "malhas": [{"tipo": k, "nome": v} for k, v in sorted((malhas or {}).items())]}
     for tipo, lst in sorted(KIT.inst.items()):
         dados["tipos"].append({"tipo": tipo, "m": [x for Mw in lst for x in para_unity(Mw)], "n": len(lst)})
     for it in KIT.interativos:
-        d = {k: (para_unity(v) if isinstance(v, Matrix) else v) for k, v in it.items() if k != "M"}
+        d = {k: (para_unity(v) if isinstance(v, Matrix) else v) for k, v in it.items() if k not in ("M", "partes")}
+        d["partes"] = [{"tipo": t, "m": local_unity(Ml)} for t, Ml in it.get("partes", [])]
         d["m"] = para_unity(it["M"])
         dados["interativos"].append(d)
     dados["luzes"] = [dict(p=para_unity(T(*l["pos"]))[3::4][:3], cor=l["cor"], alcance=l["alcance"], intens=l["intens"])

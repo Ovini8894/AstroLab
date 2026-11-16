@@ -1,0 +1,132 @@
+{
+ "itens": [
+  {
+   "chave": "nave.master_alarm",
+   "texto": "MASTER ALARM (alarma general)"
+  },
+  {
+   "chave": "nave.meds",
+   "texto": "Pantallas MEDS"
+  },
+  {
+   "chave": "nave.luz_flood",
+   "texto": "Luz de los paneles (FLOOD)"
+  },
+  {
+   "chave": "nave.luz_dome",
+   "texto": "Luz de la cabina (DOME)"
+  },
+  {
+   "chave": "nave.comm",
+   "texto": "Comunicación con Houston"
+  },
+  {
+   "chave": "nave.ventilacao",
+   "texto": "Ventilación de la cabina"
+  },
+  {
+   "chave": "nave.apu1",
+   "texto": "APU 1 (unidad hidráulica)"
+  },
+  {
+   "chave": "nave.apu2",
+   "texto": "APU 2 (unidad hidráulica)"
+  },
+  {
+   "chave": "nave.apu3",
+   "texto": "APU 3 (unidad hidráulica)"
+  },
+  {
+   "chave": "nave.mn_a",
+   "texto": "Bus principal A"
+  },
+  {
+   "chave": "nave.mn_b",
+   "texto": "Bus principal B"
+  },
+  {
+   "chave": "nave.mn_c",
+   "texto": "Bus principal C"
+  },
+  {
+   "chave": "nave.fuel_cells",
+   "texto": "Celdas de combustible"
+  },
+  {
+   "chave": "nave.portas_baia",
+   "texto": "Puertas de la bahía de carga"
+  },
+  {
+   "chave": "nave.radiadores",
+   "texto": "Radiadores"
+  },
+  {
+   "chave": "nave.rms",
+   "texto": "Brazo robótico (RMS)"
+  },
+  {
+   "chave": "nave.estado.on",
+   "texto": "ENCENDIDO"
+  },
+  {
+   "chave": "nave.estado.off",
+   "texto": "APAGADO"
+  },
+  {
+   "chave": "nave.prompt",
+   "texto": "haz clic para accionar"
+  },
+  {
+   "chave": "nave.check.plataforma",
+   "texto": "Checklist previo al lanzamiento"
+  },
+  {
+   "chave": "nave.check.orbita",
+   "texto": "Checklist tras la inserción orbital"
+  },
+  {
+   "chave": "nave.check.ok",
+   "texto": "¡Checklist completo! Buen trabajo, astronauta."
+  },
+  {
+   "chave": "nave.comm.plataforma",
+   "texto": "Houston: \"Atlantis, aquí Houston. Los recibimos fuerte y claro. Sistemas listos para el lanzamiento.\""
+  },
+  {
+   "chave": "nave.comm.orbita",
+   "texto": "Houston: \"¡Bienvenidos a la órbita! Con las puertas de la bahía abiertas, pueden iniciar las operaciones.\""
+  },
+  {
+   "chave": "nave.alarme",
+   "texto": "Alarma reconocida y silenciada."
+  },
+  {
+   "chave": "nave.sem_energia",
+   "texto": "Sin energía: enciende los buses principales (MN A/B/C) en el panel R1."
+  },
+  {
+   "chave": "nave.posto.cdr",
+   "texto": "Puesto: asiento del comandante (CDR)"
+  },
+  {
+   "chave": "nave.posto.plt",
+   "texto": "Puesto: asiento del piloto (PLT)"
+  },
+  {
+   "chave": "nave.posto.re",
+   "texto": "Puesto: estación de popa (bahía de carga y brazo robótico)"
+  },
+  {
+   "chave": "nave.saindo",
+   "texto": "Mantén M para volver al mapa..."
+  },
+  {
+   "chave": "nave.sem_retorno",
+   "texto": "No se puede volver: la escena del mapa no está en la build."
+  },
+  {
+   "chave": "nave.dica_tab",
+   "texto": "Tab: cambiar de puesto (CDR, PLT, popa)  -  mantén M: volver al mapa  -  Esc: soltar el ratón"
+  }
+ ]
+}

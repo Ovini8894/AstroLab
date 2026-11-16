@@ -1,0 +1,12 @@
+{
+  "files": {
+    "Scripts/LunarLandingController.cs": "2862c97acad4c0d50f401352bf699865e1d6e06ea7197ccb2b11f3a1a549ff30",
+    "Scripts/LunarLandingSpacecraft.cs": "115fc8f5b62e523bdd407405635ae68ffcafd60e3261440e0b7634db9042a043",
+    "Scripts/LunarLandingRCS.cs": "63c4dddd18d22c99ddfb2ddba2f77c1ebb652236e324ec89e6bb3666bd731027",
+    "Scripts/LunarLandingMainEngine.cs": "03cc6d91d40f7be7e40ec50da87c34ca0b2e3464b8603cde2e93d38cc2134ee2",
+    "Scripts/LunarLandingDust.cs": "3abdd5604c89b82f70dcef49f6987220616026eb5c34d85753f5aed720833108",
+    "Scripts/LunarLandingEffects.cs": "960e789686a6adcebeba4b200dc83c3c18be420e26b512c349cb18c6015dda0d",
+    "Scripts/LunarLandingTransition.cs": "c5e83815d927d3d44ab7ea31f32d639f4c44d2a16ef0eb6e445629c6c84bcffd",
+    "Scripts/LunarLandingSceneLink.cs": "f4afe83f11260376fe14a81e9c931d671367e7be46cfbb0d0495073c353fb3f3"
+  }
+}

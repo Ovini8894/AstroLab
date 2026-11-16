@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:AstroLabUnity/Assets/Gameplay/Shaders.meta
 guid: cad5676b4228c5e46aa59c1b1e93ad8a
+========
+guid: d8c54531fea84ed4a9a16668cf19c90b
+>>>>>>>> origin/nicholas:AstroLabUnity/Assets/PousoLunar.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -387,6 +387,98 @@
   {
    "chave": "ct.sala.Trajes",
    "texto": "06 · SALA DE TRAJES"
+  },
+  {
+   "chave": "ct.obj.elevador_saida",
+   "texto": "Siga a instrutora até o elevador no fim do corredor"
+  },
+  {
+   "chave": "ct.elevador.subindo",
+   "texto": "SUBINDO"
+  },
+  {
+   "chave": "ct.elevador.superficie",
+   "texto": "SUPERFÍCIE"
+  },
+  {
+   "chave": "ct.elevador.placa",
+   "texto": "ELEVADOR · SUPERFÍCIE"
+  },
+  {
+   "chave": "ct.quiosque",
+   "texto": "CENTRO DE TREINAMENTO · ACESSO"
+  },
+  {
+   "chave": "npc.saida.1",
+   "texto": "Chegamos ao fim do corredor. Este elevador sobe direto para a superfície, ao lado da estrada da plataforma de lançamento."
+  },
+  {
+   "chave": "npc.saida.2",
+   "texto": "Entre na cabine comigo."
+  },
+  {
+   "chave": "npc.superficie.1",
+   "texto": "De volta à superfície! Aquela é a plataforma de lançamento, com o Ônibus Espacial pronto para você."
+  },
+  {
+   "chave": "npc.superficie.2",
+   "texto": "Siga a estrada até a torre. Sua missão está quase começando!"
+  },
+  {
+   "chave": "npc.corredor.est1.1",
+   "texto": "Este corredor liga todos os laboratórios de treino. Enquanto andamos, vou te contar um pouco da nossa história."
+  },
+  {
+   "chave": "npc.corredor.est1.2",
+   "texto": "Em 1959 a NASA escolheu seus primeiros sete astronautas, os do Projeto Mercury."
+  },
+  {
+   "chave": "npc.corredor.est2.1",
+   "texto": "Eles fizeram testes médicos e físicos muito parecidos com os que você acabou de fazer."
+  },
+  {
+   "chave": "npc.corredor.est2.2",
+   "texto": "Em 1961 Alan Shepard virou o primeiro americano no espaço, num voo de 15 minutos."
+  },
+  {
+   "chave": "npc.corredor.est3.1",
+   "texto": "Depois veio o Projeto Gemini, com dois astronautas por nave: ali a NASA treinou acoplagens e caminhadas espaciais."
+  },
+  {
+   "chave": "npc.corredor.est3.2",
+   "texto": "Em 1969 a Apollo 11 levou Neil Armstrong e Buzz Aldrin até a superfície da Lua."
+  },
+  {
+   "chave": "npc.corredor.est4.1",
+   "texto": "Em 1981 começaram os voos do Ônibus Espacial, uma nave que podia voar várias vezes."
+  },
+  {
+   "chave": "npc.corredor.est4.2",
+   "texto": "Para treinar o trabalho fora da nave, a NASA construiu piscinas enormes, como a que você vai ver agora."
+  },
+  {
+   "chave": "npc.corredor.est5.1",
+   "texto": "Desde o ano 2000 sempre tem gente morando na Estação Espacial Internacional."
+  },
+  {
+   "chave": "npc.corredor.est5.2",
+   "texto": "Agora o programa Artemis quer levar astronautas de volta à Lua, inclusive a primeira mulher."
+  },
+  {
+   "chave": "npc.corredor.est6.1",
+   "texto": "Para andar na Lua de novo, é preciso treinar em gravidade reduzida, como você acabou de fazer."
+  },
+  {
+   "chave": "npc.corredor.est6.2",
+   "texto": "Falta só uma etapa: vestir o traje."
+  },
+  {
+   "chave": "npc.corredor.saida.1",
+   "texto": "O brasileiro Marcos Pontes foi à Estação Espacial em 2006, na Missão Centenário."
+  },
+  {
+   "chave": "npc.corredor.saida.2",
+   "texto": "Quem sabe o próximo nome dessa lista não é o seu?"
   }
  ]
 }

@@ -141,7 +141,7 @@
     -35.0773
    ],
    "rumoBlender": 71.25,
-   "lado": -1,
+   "lado": 1,
    "sala": "Centrifuga"
   },
   {
@@ -302,27 +302,27 @@
   },
   {
    "i": 25,
-   "tipo": "Seg_Porta",
+   "tipo": "Seg_B",
    "pos": [
     -46.7598,
     -20.0,
     -89.351
    ],
    "rumoBlender": 120.0,
-   "lado": -1,
-   "sala": "NBL"
+   "lado": 1,
+   "sala": ""
   },
   {
    "i": 26,
-   "tipo": "Seg_A",
+   "tipo": "Seg_Porta",
    "pos": [
     -44.7598,
     -20.0,
     -92.8151
    ],
    "rumoBlender": 117.0,
-   "lado": 1,
-   "sala": ""
+   "lado": -1,
+   "sala": "NBL"
   },
   {
    "i": 27,
@@ -560,7 +560,7 @@
     -20.0,
     -171.9224
    ],
-   "rumoBlender": 90.0,
+   "rumoBlender": 99.0,
    "lado": 1,
    "sala": ""
   },
@@ -568,11 +568,11 @@
    "i": 47,
    "tipo": "Seg_C",
    "pos": [
-    -39.64,
+    -39.0143,
     -20.0,
-    -175.9224
+    -175.8732
    ],
-   "rumoBlender": 90.0,
+   "rumoBlender": 117.0,
    "lado": 1,
    "sala": ""
   },
@@ -580,23 +580,59 @@
    "i": 48,
    "tipo": "Seg_A",
    "pos": [
-    -39.64,
+    -37.1983,
     -20.0,
-    -179.9224
+    -179.4372
    ],
-   "rumoBlender": 90.0,
+   "rumoBlender": 135.0,
    "lado": 1,
    "sala": ""
   },
   {
    "i": 49,
+   "tipo": "Seg_B",
+   "pos": [
+    -34.3699,
+    -20.0,
+    -182.2656
+   ],
+   "rumoBlender": 153.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 50,
+   "tipo": "Seg_A",
+   "pos": [
+    -30.8058,
+    -20.0,
+    -184.0816
+   ],
+   "rumoBlender": 171.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 51,
+   "tipo": "Seg_C",
+   "pos": [
+    -26.8551,
+    -20.0,
+    -184.7073
+   ],
+   "rumoBlender": 180.0,
+   "lado": 1,
+   "sala": ""
+  },
+  {
+   "i": 52,
    "tipo": "Seg_Fim",
    "pos": [
-    -39.64,
+    -22.8551,
     -20.0,
-    -183.9224
+    -184.7073
    ],
-   "rumoBlender": 90.0,
+   "rumoBlender": 180.0,
    "lado": 1,
    "sala": ""
   }

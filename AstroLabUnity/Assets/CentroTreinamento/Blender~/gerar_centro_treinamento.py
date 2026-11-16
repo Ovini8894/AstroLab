@@ -582,112 +582,95 @@ def recepcao():
 
 # ======================================================================= 4. estacao 1 — medico / preparo fisico
 def estacao_medica():
+    # L3: sala 14 x 12 x 5 (x -34.5..-20.5, y 0..12), entrada no meio da parede leste (x -20.5, y 6)
     m = Malha("Est1_Medico")
-    X0, Y0, X1, Y1 = -50, 2, -21, 21
-    piso_zona(m, X0, Y0, X1, Y1, TAPETE, AMARELO)
-    # esteiras
-    for k, x in enumerate((-46.5, -43.0)):
-        y = 6.0
+    X0, Y0, X1, Y1 = -34.5, 0.0, -20.5, 12.0
+    # piso de borracha da area de condicionamento (lado sul)
+    piso_zona(m, -32.2, 0.75, -25.9, 4.4, BORRACHA, AZUL)
+    # esteiras (corredor olha para +Y, painel na frente)
+    for x in (-31.2, -29.2):
+        y = 2.5
         m.caixa((x, y, 0.15), (0.9, 2.2, 0.3), ESCURO)
         m.caixa((x, y, 0.31), (0.6, 2.0, 0.03), BORRACHA)
         for s in (-1, 1):
-            m.cilindro((x + s * 0.4, y + 0.9, 0.3), (x + s * 0.4, y + 0.9, 1.25), 0.04, METAL, 8)
-            m.cilindro((x + s * 0.4, y + 0.9, 1.0), (x + s * 0.4, y + 0.1, 1.0), 0.03, METAL, 8)
+            m.cilindro((x + s * 0.4, y + 0.9, 0.3), (x + s * 0.4, y + 0.9, 1.25), 0.04, METAL, 12)
+            m.cilindro((x + s * 0.4, y + 0.9, 1.0), (x + s * 0.4, y + 0.1, 1.0), 0.03, METAL, 12)
         m.caixa((x, y + 0.95, 1.35), (0.85, 0.12, 0.35), ESCURO, rx=-0.4)
         m.painel_tex((x, y + 0.87, 1.37), 0.6, 0.22, (0, -0.4, 0.92), TELA)
     # bicicleta ergometrica
-    x, y = -39.0, 6.0
+    x, y = -27.0, 2.5
     m.caixa((x, y, 0.06), (0.5, 1.3, 0.12), ESCURO)
-    m.cilindro((x - 0.06, y + 0.45, 0.42), (x + 0.06, y + 0.45, 0.42), 0.28, ESCURO, 20)
-    m.cilindro((x, y - 0.3, 0.1), (x, y - 0.15, 0.8), 0.05, METAL, 8)
+    m.cilindro((x - 0.06, y + 0.45, 0.42), (x + 0.06, y + 0.45, 0.42), 0.28, ESCURO, 24)
+    m.cilindro((x, y - 0.3, 0.1), (x, y - 0.15, 0.8), 0.05, METAL, 12)
     m.caixa((x, y - 0.12, 0.85), (0.28, 0.4, 0.08), BORRACHA)
-    m.cilindro((x, y + 0.45, 0.1), (x, y + 0.35, 1.1), 0.05, METAL, 8)
-    m.cilindro((x - 0.3, y + 0.32, 1.1), (x + 0.3, y + 0.32, 1.1), 0.03, BORRACHA, 8)
+    m.cilindro((x, y + 0.45, 0.1), (x, y + 0.35, 1.1), 0.05, METAL, 12)
+    m.cilindro((x - 0.3, y + 0.32, 1.1), (x + 0.3, y + 0.32, 1.1), 0.03, BORRACHA, 12)
     m.painel_tex((x, y + 0.42, 1.2), 0.22, 0.14, (0, -0.5, 0.86), TELA_ECG)
-    # maca de exame + monitor de sinais vitais + suporte de soro
-    x, y = -26.0, 17.0
-    for sx in (-1, 1):
-        for sy in (-1, 1):
-            m.cilindro((x + sx * 0.38, y + sy * 0.9, 0), (x + sx * 0.38, y + sy * 0.9, 0.7), 0.035, METAL, 8)
-    m.caixa((x, y, 0.72), (0.85, 2.0, 0.08), METAL)
-    m.caixa((x, y, 0.82), (0.8, 1.95, 0.14), BRANCO)
-    m.caixa((x, y + 0.75, 0.95), (0.6, 0.35, 0.12), BRANCO, rx=0.15)
-    m.caixa((x + 1.2, y + 0.6, 0.5), (0.6, 0.45, 1.0), BRANCO)               # carrinho
-    m.caixa((x + 1.2, y + 0.6, 1.3), (0.6, 0.2, 0.42), ESCURO)
-    m.painel_tex((x + 1.2, y + 0.49, 1.3), 0.52, 0.34, (0, -1, 0), TELA_ECG)
-    m.cilindro((x - 0.7, y + 0.8, 0), (x - 0.7, y + 0.8, 1.9), 0.02, METAL, 6)
-    m.cilindro((x - 0.95, y + 0.8, 1.9), (x - 0.45, y + 0.8, 1.9), 0.015, METAL, 6)
-    m.caixa((x - 0.9, y + 0.8, 1.75), (0.12, 0.05, 0.22), VIDRO)
-    # mesa do medico
-    mesa(m, (-31, 18.5, 0), 1.8, 0.8)
-    monitor(m, (-31, 18.6, 0.76))
-    cadeira(m, (-31, 19.5, 0), rz=PI)
-    # estante de halteres + banco
-    x, y = -47.5, 15.0
+    # estante de halteres encostada na parede sul (perto da entrada)
+    x, y = -24.4, 0.95
     for s in (-1, 1):
         m.caixa((x + s * 1.1, y, 0.5), (0.08, 0.5, 1.0), ESTRUT)
-    for k, z in enumerate((0.25, 0.6, 0.95)):
+    for z in (0.25, 0.6, 0.95):
         m.caixa((x, y, z), (2.3, 0.5, 0.04), ESTRUT)
         for j in range(5):
             xx = x - 0.9 + j * 0.45
             r = 0.06 + 0.012 * j
             for s in (-0.13, 0.13):
-                m.cilindro((xx, y + s - 0.03, z + 0.02 + r), (xx, y + s + 0.03, z + 0.02 + r), r, BORRACHA, 8)
-            m.cilindro((xx, y - 0.13, z + 0.02 + r), (xx, y + 0.13, z + 0.02 + r), 0.015, METAL, 6)
-    m.caixa((-43.5, 15.0, 0.42), (0.35, 1.3, 0.12), TECIDO)
-    for s in (-0.5, 0.5):
-        m.caixa((-43.5, 15.0 + s, 0.2), (0.3, 0.06, 0.4), ESTRUT)
-    # balanca + regua de altura
-    m.caixa((-35.5, 18.8, 0.04), (0.5, 0.5, 0.08), BRANCO)
-    m.cilindro((-35.5, 19.05, 0), (-35.5, 19.05, 2.1), 0.03, METAL, 6)
-    m.caixa((-35.5, 19.0, 1.4), (0.12, 0.04, 0.6), BRANCO)
-    # divisorias baixas com painel informativo
-    for (a, b) in (((X0, Y1), (X1 - 6, Y1)),):
-        m.caixa_ab((a[0], a[1] - 0.1, 0), (b[0], b[1] + 0.1, 1.8), PAREDE_INT)
-        m.caixa_ab((a[0], a[1] - 0.12, 1.8), (b[0], b[1] + 0.12, 1.9), AZUL)
-    # armario de medicamentos (portas de vidro) na parede oeste
-    for k in range(4):
-        y = 4.0 + k * 1.1
-        m.caixa((-49.55, y, 1.0), (0.6, 1.05, 2.0), BRANCO)
-        m.caixa((-49.24, y, 1.35), (0.03, 0.9, 0.9), VIDRO)
-        for z in (1.05, 1.4, 1.75):
-            m.caixa((-49.5, y, z), (0.45, 0.95, 0.03), METAL)
-        m.caixa((-49.22, y + 0.38, 0.75), (0.03, 0.05, 0.2), METAL)
-    m.caixa((-49.6, 6.1, 2.2), (0.4, 0.5, 0.35), VERDE_BR)
-    m.texto("+", (-49.38, 6.1, 2.2), 0.4, TXT_BRANCO, rz=PI / 2, espessura=0.01)
-    # quadro de acuidade visual
-    m.caixa((-49.65, 12.0, 1.7), (0.05, 0.9, 1.3), BRANCO)
+                m.cilindro((xx, y + s - 0.03, z + 0.02 + r), (xx, y + s + 0.03, z + 0.02 + r), r, BORRACHA, 12)
+            m.cilindro((xx, y - 0.13, z + 0.02 + r), (xx, y + 0.13, z + 0.02 + r), 0.015, METAL, 8)
+    # quadro de acuidade visual (parede sul, olhando para +Y)
+    m.caixa((-33.0, 0.03, 1.7), (0.9, 0.05, 1.3), BRANCO)
     for k, (t, tam) in enumerate((("E", 0.28), ("F P", 0.18), ("T O Z", 0.13), ("L P E D", 0.1), ("P E C F D", 0.08))):
-        m.texto(t, (-49.6, 12.0, 2.15 - k * 0.22), tam, TXT_ESCURO, rz=PI / 2, espessura=0.005)
-    # segundo leito com divisoria de cortina
-    x, y = -26.0, 11.5
-    m.caixa((x, y, 0.45), (0.8, 1.95, 0.25), BRANCO)
+        m.texto(t, (-33.0, 0.07, 2.15 - k * 0.22), tam, TXT_ESCURO, rz=PI, espessura=0.005)
+    # balanca + regua de altura (canto sudeste)
+    m.caixa((-22.0, 1.15, 0.04), (0.5, 0.5, 0.08), BRANCO)
+    m.cilindro((-22.0, 0.8, 0), (-22.0, 0.8, 2.1), 0.03, METAL, 12)
+    m.caixa((-22.0, 0.86, 1.4), (0.12, 0.04, 0.6), BRANCO)
+    # armario de medicamentos (portas de vidro) na parede norte
+    for x in (-33.6, -32.5, -31.4):
+        m.caixa((x, 11.7, 1.0), (1.05, 0.6, 2.0), BRANCO)
+        m.caixa((x, 11.39, 1.35), (0.9, 0.03, 0.9), VIDRO)
+        for z in (1.05, 1.4, 1.75):
+            m.caixa((x, 11.75, z), (0.95, 0.45, 0.03), METAL)
+        m.caixa((x + 0.38, 11.38, 0.75), (0.05, 0.03, 0.2), METAL)
+    m.caixa((-32.5, 11.8, 2.25), (0.5, 0.4, 0.35), VERDE_BR)
+    m.texto("+", (-32.5, 11.59, 2.25), 0.4, TXT_BRANCO, espessura=0.01)
+    # mesa do medico (monitor olhando para -Y, medico sentado de frente para ele)
+    mesa(m, (-29.0, 10.9, 0), 1.8, 0.8)
+    monitor(m, (-29.0, 11.0, 0.76))
+    cadeira(m, (-29.0, 10.0, 0), rz=PI)
+    # cortina divisoria entre a mesa e o leito
+    x = -26.7
+    m.cilindro((x, 8.6, 2.2), (x, 11.6, 2.2), 0.02, METAL, 12)
+    for k in range(9):
+        m.caixa((x, 8.75 + k * 0.32, 1.25), (0.05, 0.3, 1.9), TAPETE, rz=0.35 if k % 2 else -0.35)
+    m.cilindro((x, 8.6, 0), (x, 8.6, 2.2), 0.025, METAL, 12)
+    # maca de exame + carrinho com monitor de sinais vitais + suporte de soro
+    x, y = -25.0, 9.9
     for sx in (-1, 1):
         for sy in (-1, 1):
-            m.cilindro((x + sx * 0.36, y + sy * 0.9, 0), (x + sx * 0.36, y + sy * 0.9, 0.35), 0.03, METAL, 6)
-    m.cilindro((x - 1.0, y - 1.4, 2.2), (x - 1.0, y + 1.4, 2.2), 0.02, METAL, 6)
-    for k in range(9):
-        yy = y - 1.3 + k * 0.32
-        m.caixa((x - 1.0, yy, 1.25), (0.05, 0.3, 1.9), TAPETE, rz=0.35 if k % 2 else -0.35)
-    m.cilindro((x - 1.0, y - 1.4, 0), (x - 1.0, y - 1.4, 2.2), 0.025, METAL, 6)
-    m.cilindro((x - 1.0, y + 1.4, 0), (x - 1.0, y + 1.4, 2.2), 0.025, METAL, 6)
-    # painel com coracao + ECG
-    m.caixa((-38, Y1 - 0.12, 1.1), (3.0, 0.05, 1.2), BRANCO)
-    m.painel_tex((-38, Y1 - 0.15, 1.1), 2.8, 1.0, (0, -1, 0), TELA_ECG)
+            m.cilindro((x + sx * 0.38, y + sy * 0.9, 0), (x + sx * 0.38, y + sy * 0.9, 0.7), 0.035, METAL, 12)
+    m.caixa((x, y, 0.72), (0.85, 2.0, 0.08), METAL)
+    m.caixa((x, y, 0.82), (0.8, 1.95, 0.14), BRANCO)
+    m.caixa((x, y + 0.75, 0.95), (0.6, 0.35, 0.12), BRANCO, rx=0.15)
+    m.caixa((x + 1.2, y + 0.5, 0.5), (0.6, 0.45, 1.0), BRANCO)
+    m.caixa((x + 1.2, y + 0.5, 1.3), (0.6, 0.2, 0.42), ESCURO)
+    m.painel_tex((x + 1.2, y + 0.39, 1.3), 0.52, 0.34, (0, -1, 0), TELA_ECG)
+    m.cilindro((x - 0.7, y + 0.8, 0), (x - 0.7, y + 0.8, 1.9), 0.02, METAL, 12)
+    m.cilindro((x - 0.95, y + 0.8, 1.9), (x - 0.45, y + 0.8, 1.9), 0.015, METAL, 8)
+    m.caixa((x - 0.9, y + 0.8, 1.75), (0.12, 0.05, 0.22), VIDRO)
+    # painel com ECG na parede norte, sobre a maca
+    m.caixa((-24.6, Y1 - 0.06, 1.75), (2.4, 0.05, 0.9), BRANCO)
+    m.painel_tex((-24.6, Y1 - 0.09, 1.75), 2.2, 0.7, (0, -1, 0), TELA_ECG)
     fim(m, 1.0)
-    for i, x in enumerate((-46.5, -43.0)):
-        col(f"COL_Esteira_{i}", (x, 6.0, 0.7), (0.95, 2.3, 1.4))
-    col("COL_Bicicleta", (-39, 6, 0.6), (0.6, 1.4, 1.2))
-    col("COL_Maca", (-25.6, 17.2, 0.5), (2.2, 2.2, 1.0))
-    col("COL_Mesa_Medico", (-31, 18.5, 0.4), (1.9, 0.9, 0.8))
-    col("COL_Halteres", (-47.5, 15.0, 0.5), (2.4, 0.6, 1.0))
-    col("COL_Armario_Remedios", (-49.55, 5.65, 1.0), (0.6, 4.4, 2.0))
-    col("COL_Leito_2", (-26.0, 11.5, 0.4), (0.9, 2.0, 0.8))
-    col("COL_Cortina", (-27.0, 11.5, 1.1), (0.15, 2.9, 2.2))
-    col("COL_Divisoria_Medico", ((X0 + X1 - 6) / 2, Y1, 0.95), (X1 - 6 - X0, 0.25, 1.9))
-    faixa = Malha("Est1_Placa")
-    faixa_estacao(faixa, (-34, 11.0, 6.5), 0, 1, "AVALIAÇÃO MÉDICA E PREPARO FÍSICO")
-    fim(faixa)
+    for i, x in enumerate((-31.2, -29.2)):
+        col(f"COL_Esteira_{i}", (x, 2.5, 0.7), (0.95, 2.3, 1.4))
+    col("COL_Bicicleta", (-27.0, 2.5, 0.6), (0.6, 1.4, 1.2))
+    col("COL_Halteres", (-24.4, 0.95, 0.5), (2.4, 0.6, 1.0))
+    col("COL_Armario_Remedios", (-32.5, 11.7, 1.0), (3.3, 0.6, 2.0))
+    col("COL_Mesa_Medico", (-29.0, 10.9, 0.4), (1.9, 0.9, 0.8))
+    col("COL_Cortina", (-26.7, 10.1, 1.1), (0.15, 3.0, 2.2))
+    col("COL_Maca", (-24.6, 9.9, 0.5), (2.3, 2.2, 1.0))
 
 
 # ======================================================================= 5. estacao 2 — centrifuga humana
@@ -789,44 +772,40 @@ def estacao_centrifuga():
 
 # ======================================================================= 6. estacao 3 — realidade virtual
 def estacao_vr():
+    # L3: sala 18 x 14 x 6 (x -24..-6, y 30.6..44.6), entrada no meio da parede sul (x -15, y 30.6)
     m = Malha("Est3_RealidadeVirtual")
-    X0, Y0, X1, Y1 = -26, 31, -4, 49.5
-    piso_zona(m, X0, Y0, X1, Y1, ESCURO, LUZ)
-    # telão curvo na parede norte (5 paineis)
+    X0, Y0, X1, Y1 = -24.0, 30.6, -6.0, 44.6
+    piso_zona(m, X0 + 0.9, Y0 + 0.9, X1 - 0.9, Y1 - 0.9, ESCURO, LUZ)
+    # telao curvo na parede do fundo (5 paineis num arco de raio 16 m)
+    R, cy0 = 16.0, Y1 - 0.3 - 16.0
     for k in range(5):
-        a = math.radians(-24 + k * 12)
-        c = V((-15 + math.sin(a) * 18, 49.2 - (1 - math.cos(a)) * 18 - 0.0, 4.6))
+        a = math.radians(-20 + k * 10)
+        c = V((-15 + math.sin(a) * R, cy0 + math.cos(a) * R, 3.0))
         n = V((-math.sin(a), -math.cos(a), 0))
-        m.caixa(c + n * -0.12, (3.9, 0.2, 4.4), ESCURO, rz=-a)
-        m.painel_tex(c - n * 0.0 + n * 0.01, 3.7, 4.2, n, TELA_VR, uv=((k / 5, 0), ((k + 1) / 5, 0), ((k + 1) / 5, 1), (k / 5, 1)))
-    # 3 estacoes de VR com mesa, monitores, cadeira e oculos
-    for k, x in enumerate((-22.0, -15.0, -8.0)):
-        y = 38.0
+        m.caixa(c - n * 0.12, (2.9, 0.2, 3.6), ESCURO, rz=-a)
+        m.painel_tex(c + n * 0.01, 2.75, 3.45, n, TELA_VR, uv=((k / 5, 0), ((k + 1) / 5, 0), ((k + 1) / 5, 1), (k / 5, 1)))
+    # 3 estacoes de VR: mesa com 2 monitores, cadeira, oculos e quadro de rastreamento sobre a cadeira
+    for x in (-20.0, -15.0, -10.0):
+        y = 37.5
         mesa(m, (x, y, 0), 1.6, 0.8, tampo=BRANCO)
         monitor(m, (x - 0.35, y + 0.1, 0.76), rz=0.15)
         monitor(m, (x + 0.35, y + 0.1, 0.76), rz=-0.15)
         cadeira(m, (x, y - 1.6, 0), rz=0)
-        # oculos VR sobre a mesa
         m.caixa((x + 0.55, y - 0.15, 0.85), (0.2, 0.12, 0.1), ESCURO)
         m.caixa((x + 0.55, y - 0.215, 0.85), (0.17, 0.01, 0.07), TELA)
-        m.torus((x + 0.55, y - 0.07, 0.85), 0.11, 0.012, BORRACHA, 12, 4, M=Matrix.Diagonal((1, 1.3, 1, 1)))
-        # quadro de rastreamento sobre a cadeira
+        m.torus((0, 0, 0), 0.11, 0.012, BORRACHA, 16, 6, M=Matrix.Translation(V((x + 0.55, y - 0.07, 0.85))) @ Matrix.Diagonal((1, 1.3, 1, 1)))
         for sx in (-1, 1):
             for sy in (-1, 1):
-                m.cilindro((x + sx * 1.2, y - 1.6 + sy * 1.2, 0), (x + sx * 1.2, y - 1.6 + sy * 1.2, 2.8), 0.04, ESTRUT, 8)
+                m.cilindro((x + sx * 1.2, y - 1.6 + sy * 1.2, 0), (x + sx * 1.2, y - 1.6 + sy * 1.2, 2.8), 0.04, ESTRUT, 12)
                 m.caixa((x + sx * 1.2, y - 1.6 + sy * 1.2, 2.9), (0.15, 0.15, 0.12), ESCURO)
-                m.cilindro((x + sx * 1.2, y - 1.6 + sy * 1.2, 2.9), (x + sx * 1.05, y - 1.6 + sy * 1.05, 2.82), 0.03, LUZ_VERM, 6)
+                m.cilindro((x + sx * 1.2, y - 1.6 + sy * 1.2, 2.9), (x + sx * 1.05, y - 1.6 + sy * 1.05, 2.82), 0.03, LUZ_VERM, 12)
         for s in (-1, 1):
-            m.cilindro((x - 1.2, y - 1.6 + s * 1.2, 2.8), (x + 1.2, y - 1.6 + s * 1.2, 2.8), 0.035, ESTRUT, 6)
-            m.cilindro((x + s * 1.2, y - 2.8, 2.8), (x + s * 1.2, y - 0.4, 2.8), 0.035, ESTRUT, 6)
-    # simulador SAFER: cadeira com braços de controle
+            m.cilindro((x - 1.2, y - 1.6 + s * 1.2, 2.8), (x + 1.2, y - 1.6 + s * 1.2, 2.8), 0.035, ESTRUT, 12)
+            m.cilindro((x + s * 1.2, y - 2.8, 2.8), (x + s * 1.2, y - 0.4, 2.8), 0.035, ESTRUT, 12)
     fim(m, 1.0)
-    for k, x in enumerate((-22.0, -15.0, -8.0)):
-        col(f"COL_Mesa_VR_{k}", (x, 38.0, 0.45), (1.7, 0.9, 0.9))
-    col("COL_Telao_VR", (-15, 48.6, 4.6), (20, 1.4, 4.4))
-    faixa = Malha("Est3_Placa")
-    faixa_estacao(faixa, (-15, 30.5, 7.0), 0, 3, "LABORATÓRIO DE REALIDADE VIRTUAL")
-    fim(faixa)
+    for k, x in enumerate((-20.0, -15.0, -10.0)):
+        col(f"COL_Mesa_VR_{k}", (x, 37.5, 0.45), (1.7, 0.9, 0.9))
+    col("COL_Telao_VR", (-15.0, Y1 - 0.8, 3.0), (13.6, 1.4, 3.6))
 
 
 # ======================================================================= 7. estacao 4 — flutuabilidade neutra (NBL)
@@ -1016,81 +995,64 @@ def estacao_argos():
 
 # ======================================================================= 9. estacao 6 — sala de trajes
 def estacao_trajes():
+    # L3: sala 14 x 18 x 5 (x 32.6..46.6, y 28.5..46.5), entrada no meio da parede oeste (x 32.6, y 37.5)
     m = Malha("Est6_Trajes")
-    X0, Y0, X1, Y1 = 33.0, 28.0, 59.5, 49.6
-    piso_zona(m, X0, Y0, X1, Y1, BRANCO, AZUL)
-    # paredes de vidro (oeste e sul) com porta a oeste
-    vid = Malha("Est6_Trajes_Vidros")
-    for (a, b) in (((X0, Y0), (X0, 35.0)), ((X0, 40.0), (X0, Y1)), ((X0, Y0), (X1, Y0))):
-        a, b = V((*a, 0)), V((*b, 0))
-        L = (b - a).length
-        d = (b - a).normalized()
-        n = int(L / 2.5) + 1
-        for k in range(n + 1):
-            p = a + d * (L * k / n)
-            m.caixa((p.x, p.y, 1.6), (0.12, 0.12, 3.2), AZUL_ESC)
-        m.caixa(((a + b) / 2).to_tuple()[:2] + (3.25,), (abs(b.x - a.x) + 0.12, abs(b.y - a.y) + 0.12, 0.12), AZUL_ESC)
-        m.caixa(((a + b) / 2).to_tuple()[:2] + (0.06,), (abs(b.x - a.x) + 0.12, abs(b.y - a.y) + 0.12, 0.12), AZUL_ESC)
-        vid.caixa(((a + b) / 2).to_tuple()[:2] + (1.65,), (max(abs(b.x - a.x), 0.03), max(abs(b.y - a.y), 0.03), 3.1), VIDRO)
-    m.texto("SALA DE TRAJES", (X0 + 6.5, Y0 - 0.08, 2.75), 0.38, AZUL_ESC, espessura=0.01)
-    # armarios (parede leste)
+    X0, Y0, X1, Y1 = 32.6, 28.5, 46.6, 46.5
+    piso_zona(m, X0 + 0.9, Y0 + 0.9, X1 - 0.9, Y1 - 0.9, BRANCO, AZUL)
+    # armarios individuais na parede do fundo (leste)
     for k in range(10):
-        y = 31.0 + k * 1.0
+        y = 33.0 + k * 1.0
         m.caixa((X1 - 0.35, y, 1.0), (0.6, 0.95, 2.0), AZUL if k % 2 else TECIDO)
         m.caixa((X1 - 0.66, y + 0.3, 1.1), (0.03, 0.04, 0.25), METAL)
         for z in (1.7, 1.75, 1.8):
             m.caixa((X1 - 0.66, y, z), (0.02, 0.5, 0.02), ESCURO)
         m.caixa((X1 - 0.66, y, 1.45), (0.02, 0.4, 0.12), BRANCO)
-    # bancos
-    banco(m, (50.5, 36.0, 0), rz=PI / 2, comp=4.0)
-    banco(m, (50.5, 42.0, 0), rz=PI / 2, comp=4.0)
-    # suportes de traje (o traje detalhado e colocado no Unity sobre os INT_Traje_Suporte_*)
-    for k, x in enumerate((38.0, 42.0)):
-        y = 31.0
-        m.cilindro((x, y, 0), (x, y, 0.2), 0.7, AZUL_ESC, 24)
-        m.cilindro((x, y, 0.2), (x, y, 0.24), 0.65, AMARELO, 24)
-        m.cilindro((x, y + 0.45, 0.2), (x, y + 0.45, 1.25), 0.05, METAL, 8)
-        m.texto(("EMU · CAMINHADA ESPACIAL", "TRAJE DE LANÇAMENTO")[k], (x, y - 0.71, 0.12), 0.09, TXT_BRANCO, espessura=0.005)
-    # estacao de vestir (moldura na parede)
-    x, y = 46.0, 47.6
+    # bancos em frente aos armarios
+    banco(m, (43.6, 35.5, 0), rz=PI / 2, comp=4.0)
+    banco(m, (43.6, 40.5, 0), rz=PI / 2, comp=4.0)
+    # suportes de traje na parede sul (o traje detalhado e colocado no Unity sobre os INT_Traje_Suporte_*)
+    for k, x in enumerate((37.0, 41.0)):
+        y = 30.6
+        m.cilindro((x, y, 0), (x, y, 0.2), 0.7, AZUL_ESC, 32)
+        m.cilindro((x, y, 0.2), (x, y, 0.24), 0.65, AMARELO, 32)
+        m.cilindro((x, y - 0.45, 0.2), (x, y - 0.45, 1.25), 0.05, METAL, 12)
+        m.texto(("EMU · CAMINHADA ESPACIAL", "TRAJE DE LANÇAMENTO")[k], (x, y + 0.71, 0.12), 0.09, TXT_BRANCO, rz=PI, espessura=0.005)
+    # estacao de vestir (moldura livre perto da parede norte)
+    x, y = 40.0, 45.4
     for s in (-1, 1):
         m.caixa((x + s * 0.9, y, 1.5), (0.12, 0.12, 3.0), METAL)
     m.caixa((x, y, 3.0), (1.92, 0.12, 0.12), METAL)
     m.caixa((x, y - 0.25, 1.3), (1.0, 0.4, 0.1), METAL)
-    m.cilindro((x, y - 0.25, 1.35), (x, y - 0.25, 1.5), 0.45, ESCURO, 16)
-    # prateleira com capacetes, luvas e botas
-    x0 = 49.0
+    m.cilindro((x, y - 0.25, 1.35), (x, y - 0.25, 1.5), 0.45, ESCURO, 32)
+    # prateleira com capacetes, luvas e botas (parede norte)
+    x0 = 34.0
     for z in (0.4, 1.2, 2.0):
         m.caixa((x0 + 2.0, Y1 - 0.4, z), (4.0, 0.6, 0.05), METAL)
     for sx in (0.0, 4.0):
         m.caixa((x0 + sx, Y1 - 0.4, 1.1), (0.06, 0.6, 2.2), METAL)
     for k in range(4):
         cx = x0 + 0.5 + k * 1.0
-        m.esfera((cx, Y1 - 0.4, 2.2), 0.17, BRANCO, 12, 8)
-        m.esfera((cx, Y1 - 0.53, 2.2), 0.13, AMARELO, 10, 6, escala=(1, 0.5, 0.8))
+        m.esfera((cx, Y1 - 0.4, 2.2), 0.17, BRANCO, 20, 12)
+        m.esfera((cx, Y1 - 0.53, 2.2), 0.13, AMARELO, 20, 10, escala=(1, 0.5, 0.8))
         m.caixa((cx - 0.12, Y1 - 0.4, 1.3), (0.12, 0.2, 0.15), BRANCO)
         m.caixa((cx + 0.12, Y1 - 0.4, 1.3), (0.12, 0.2, 0.15), BRANCO)
         m.caixa((cx - 0.12, Y1 - 0.45, 0.5), (0.13, 0.3, 0.14), BRANCO)
         m.caixa((cx + 0.12, Y1 - 0.45, 0.5), (0.13, 0.3, 0.14), BRANCO)
-    # espelho e quadro de checklist
-    m.caixa((37.5, Y1 - 0.1, 1.6), (2.0, 0.05, 2.2), METAL)
-    m.caixa((37.5, Y1 - 0.13, 1.6), (1.85, 0.02, 2.05), VIDRO)
-    m.caixa((55.5, Y1 - 0.1, 1.8), (3.0, 0.05, 1.6), BRANCO)
-    m.texto("CHECKLIST DO TRAJE", (55.5, Y1 - 0.14, 2.4), 0.16, TXT_ESCURO, rz=0, espessura=0.005)
+    # espelho (parede norte) e quadro de checklist (parede sul, olhando para +Y)
+    m.caixa((44.0, Y1 - 0.1, 1.6), (2.0, 0.05, 2.2), METAL)
+    m.caixa((44.0, Y1 - 0.13, 1.6), (1.85, 0.02, 2.05), VIDRO)
+    m.caixa((44.6, Y0 + 0.1, 1.8), (3.0, 0.05, 1.6), BRANCO)
+    m.texto("CHECKLIST DO TRAJE", (44.6, Y0 + 0.14, 2.4), 0.16, TXT_ESCURO, rz=PI, espessura=0.005)
     for k, t in enumerate(("1. Roupa de resfriamento", "2. Calça e torso rígido", "3. Luvas e capacete", "4. Teste de pressão")):
-        m.texto(t, (55.5, Y1 - 0.14, 2.1 - k * 0.25), 0.12, TXT_ESCURO, rz=0, espessura=0.005)
+        m.texto(t, (44.6, Y0 + 0.14, 2.1 - k * 0.25), 0.12, TXT_ESCURO, rz=PI, espessura=0.005)
     fim(m, 1.0)
-    fim(vid)
-    col("COL_Trajes_Vidro_O1", (X0, (Y0 + 35.0) / 2, 1.6), (0.2, 35.0 - Y0, 3.2))
-    col("COL_Trajes_Vidro_O2", (X0, (40.0 + Y1) / 2, 1.6), (0.2, Y1 - 40.0, 3.2))
-    col("COL_Trajes_Vidro_S", ((X0 + X1) / 2, Y0, 1.6), (X1 - X0, 0.2, 3.2))
-    col("COL_Armarios", (X1 - 0.35, 35.5, 1.0), (0.7, 10.0, 2.0))
-    for k, x in enumerate((38.0, 42.0)):
-        col(f"COL_Suporte_Traje_{k}", (x, 31.0, 1.0), (1.4, 1.4, 2.0))
-        emp(f"INT_Traje_Suporte_{k}", (x, 31.0, 0.24), rz=PI)
-    faixa = Malha("Est6_Placa")
-    faixa_estacao(faixa, (46.0, 27.0, 7.2), 0, 6, "SALA DE TRAJES")
-    fim(faixa)
+    col("COL_Armarios", (X1 - 0.35, 37.5, 1.0), (0.7, 10.0, 2.0))
+    col("COL_Bancos_Trajes", (43.6, 38.0, 0.45), (0.7, 9.0, 0.9))
+    col("COL_Prateleira_Trajes", (36.0, Y1 - 0.4, 1.1), (4.1, 0.65, 2.2))
+    col("COL_Estacao_Vestir", (40.0, 45.4, 1.5), (2.0, 0.6, 3.0))
+    for k, x in enumerate((37.0, 41.0)):
+        col(f"COL_Suporte_Traje_{k}", (x, 30.6, 1.0), (1.4, 1.4, 2.0))
+        emp(f"INT_Traje_Suporte_{k}", (x, 30.6, 0.24), rz=0.0)
 
 
 # ======================================================================= 10. exterior: praca, letreiro, bandeiras, foguete
@@ -1229,12 +1191,12 @@ def exterior():
 ESTACOES = [
     # nome, ponto do NPC, console de interacao, centro/tamanho da zona
     ("Recepcao", (3.5, 7.5), (0.0, 9.4), ((0, 7, 2), (24, 14, 4))),
-    ("Medico", (-33.0, 9.5), (-26.5, 17.0), ((-34, 12, 2), (32, 20, 4))),
-    ("Centrifuga", (-30.5, 33.5), (-29.8, 39.0), ((-38, 36, 2), (26, 24, 4))),
-    ("RealidadeVirtual", (-17.5, 34.5), (-15.0, 37.3), ((-15, 40, 2), (22, 18, 4))),
-    ("NBL", (2.5, 28.0), (POOL[0] - 3.0, POOL[3] - 2.0), ((16, 33, 2), (28, 22, 4))),
+    ("Medico", (-26.5, 6.8), (-23.8, 10.0), ((-27.5, 6, 2), (13.6, 11.6, 4))),
+    ("Centrifuga", (-30.5, 33.5), (-29.8, 39.0), ((-39.4, 36, 2), (28.8, 23.6, 4))),
+    ("RealidadeVirtual", (-17.5, 33.6), (-15.0, 37.3), ((-15, 37.6, 2), (17.6, 13.6, 4))),
+    ("NBL", (2.5, 28.0), (POOL[0] - 3.0, POOL[3] - 2.0), ((14.75, 33, 2), (31.1, 21.6, 4))),
     ("ARGOS", (34.8, 10.0), (33.9, 13.0), ((45.5, 13, 2), (25, 22, 4))),
-    ("Trajes", (36.0, 37.5), (46.0, 47.0), ((46, 39, 2), (26, 21, 4))),
+    ("Trajes", (38.0, 40.0), (40.0, 45.0), ((39.6, 37.5, 2), (13.6, 17.6, 4))),
 ]
 def marcadores():
     emp("SPAWN_Player", (0.0, -43.0, -0.08), rz=0.0)
@@ -1463,7 +1425,11 @@ def predio_recepcao():
         w.caixa_ab((a[0], a[1], -0.15), (b[0], b[1], -0.08), CALCADA)                           # calcada atras do predio
     for z in range(int(EV_FUNDO), 0, 3):                                                     # luzes de passagem no poco
         w.caixa((ex1 - 0.02, (ey0 + ey1) / 2, z + 1.5), (0.04, 0.6, 0.12), LUZ_AMBAR)
+    # soleira do terreo: fecha o vao entre o piso da recepcao (parede em RY1) e o piso da cabine
+    w.caixa_ab((ex0 + 0.05, RY1 - 0.15, -0.15), (ex1 - 0.05, ey0 + 0.04, 0.0), METAL)
+    w.caixa_ab((ex0 + 0.05, RY1 - 0.15, 0.0), (ex1 - 0.05, RY1 + 0.05, 0.012), AMARELO)       # faixa de aviso na borda
     fim(w)
+    col("COL_Elevador_Secreto_Soleira", ((ex0 + ex1) / 2, (RY1 - 0.15 + ey0 + 0.04) / 2, -0.08), (ex1 - ex0 - 0.1, ey0 + 0.04 - RY1 + 0.15, 0.16))
     c = Malha("ANIM_Elevador_Secreto", origem=((ex0 + ex1) / 2, (ey0 + ey1) / 2, 0.0))
     c.caixa_ab((ex0 + 0.05, ey0 + 0.05, -0.15), (ex1 - 0.05, ey1 - 0.05, 0.0), GRADE_P)
     for (a, b) in (((ex0 + 0.05, ey0 + 0.05), (ex0 + 0.15, ey1 - 0.05)), ((ex1 - 0.15, ey0 + 0.05), (ex1 - 0.05, ey1 - 0.05)),
@@ -1553,13 +1519,22 @@ def predio_recepcao():
 # ======================================================================= L3: salas de treinamento (casca em volta de cada estacao)
 # (nome, bbox x0, y0, x1, y1, altura, entrada (x, y), direcao para dentro (dx, dy))
 SALAS = [
-    ("Medico", -50.5, 1.5, -20.5, 21.5, 5.0, (-20.5, 6.0), (-1, 0)),
-    ("Centrifuga", -54.0, 24.0, -24.8, 48.0, 9.0, (-24.8, 30.0), (-1, 0)),
-    ("RealidadeVirtual", -26.5, 30.6, -3.5, 50.0, 6.0, (-15.0, 30.6), (0, 1)),
-    ("NBL", -1.0, 19.5, 32.5, 46.5, 11.0, (-1.0, 28.0), (1, 0)),
-    ("ARGOS", 32.6, 1.5, 58.5, 24.5, 12.0, (32.6, 8.0), (1, 0)),
-    ("Trajes", 32.6, 27.5, 60.0, 50.0, 5.0, (32.6, 37.5), (1, 0)),
+    ("Medico", -34.5, 0.0, -20.5, 12.0, 5.0, (-20.5, 6.0), (-1, 0)),             # 14 x 12 x 5
+    ("Centrifuga", -54.0, 24.0, -24.8, 48.0, 9.0, (-24.8, 30.0), (-1, 0)),         # 29 x 24 x 9 (braço de 21 m + cabine)
+    ("RealidadeVirtual", -24.0, 30.6, -6.0, 44.6, 6.0, (-15.0, 30.6), (0, 1)),    # 18 x 14 x 6
+    ("NBL", -1.0, 22.0, 30.5, 44.0, 11.0, (-1.0, 28.0), (1, 0)),                   # 31 x 22 x 11 (piscina 22 x 16)
+    ("ARGOS", 32.6, 1.5, 58.5, 24.5, 12.0, (32.6, 8.0), (1, 0)),                   # 26 x 23 x 12
+    ("Trajes", 32.6, 28.5, 46.6, 46.5, 5.0, (32.6, 37.5), (1, 0)),                 # 14 x 18 x 5
 ]
+# equipamento de apoio de cada sala: ponto na face interna da parede, normal para dentro, armarios, bancada
+KIT = {
+    "Medico": ((-34.5, 6.0), (1, 0), True, True),
+    "Centrifuga": ((-54.0, 36.0), (1, 0), False, False),        # so a placa: o corrimao da centrifuga ocupa as paredes
+    "RealidadeVirtual": ((-24.0, 37.6), (1, 0), True, True),    # parede oeste: o fundo e do telao
+    "NBL": ((16.0, 44.0), (0, -1), True, True),
+    "ARGOS": ((58.5, 13.0), (-1, 0), True, True),
+    "Trajes": ((46.6, 37.5), (-1, 0), False, False),            # os armarios individuais ja estao no fundo
+}
 PORTA_W, PORTA_H = 3.6, 3.4
 TITULOS = {"Medico": "AVALIAÇÃO MÉDICA E PREPARO FÍSICO", "Centrifuga": "CENTRÍFUGA HUMANA", "RealidadeVirtual": "REALIDADE VIRTUAL",
            "NBL": "FLUTUABILIDADE NEUTRA", "ARGOS": "GRAVIDADE REDUZIDA · ARGOS", "Trajes": "SALA DE TRAJES"}
@@ -1629,24 +1604,32 @@ def salas():
         for k in range(int((y1 - y0) // 0.8)):
             for xx in (x0 + 0.6, x1 - 0.6):
                 m.caixa((xx, y0 + 0.4 + k * 0.8, 0.006), (0.12, 0.4, 0.012), AMARELO)
-        # equipamento de apoio na parede oposta a entrada: armarios + bancada com monitor + placa da sala (TMP)
-        e3 = V((*ent, 0)); dv = V((d[0], d[1], 0))
-        fundo = e3 + dv * ((x1 - x0) if d[0] else (y1 - y0)) - dv * 0.45
-        lat = V((-dv.y, dv.x, 0))
-        for k in range(4):
-            q = fundo + lat * (-3.0 + k * 0.9)
-            m.caixa((q.x, q.y, 1.0), (abs(lat.x) * 0.85 + abs(dv.x) * 0.55, abs(lat.y) * 0.85 + abs(dv.y) * 0.55, 2.0), AZUL if k % 2 else TECIDO)
-            m.caixa((q.x - dv.x * 0.29, q.y - dv.y * 0.29, 1.15), (abs(lat.x) * 0.04 + abs(dv.x) * 0.02, abs(lat.y) * 0.04 + abs(dv.y) * 0.02, 0.3), METAL)
-        qb = fundo + lat * 2.4 - dv * 0.1
-        m.caixa((qb.x, qb.y, 0.45), (abs(lat.x) * 2.2 + abs(dv.x) * 0.7, abs(lat.y) * 2.2 + abs(dv.y) * 0.7, 0.9), ESCURO)
-        m.caixa((qb.x, qb.y, 0.92), (abs(lat.x) * 2.3 + abs(dv.x) * 0.75, abs(lat.y) * 2.3 + abs(dv.y) * 0.75, 0.05), METAL)
-        rz_ = math.atan2(-dv.x, dv.y)
-        monitor(m, (qb.x - dv.x * 0.1, qb.y - dv.y * 0.1, 0.95), rz=rz_ + PI)
-        qs = fundo - dv * 0.02
-        m.caixa((qs.x, qs.y, H - 1.4), (abs(lat.x) * 5.0 + abs(dv.x) * 0.08, abs(lat.y) * 5.0 + abs(dv.y) * 0.08, 0.9), AZUL_ESC)
-        m.texto(TITULOS[nome], (qs.x - dv.x * 0.06, qs.y - dv.y * 0.06, H - 1.4), 0.42, TXT_BRANCO, rz=math.atan2(dv.y, dv.x) + PI / 2, espessura=0.01)
-        col(f"COL_Sala_{nome}_Armarios", ((fundo + lat * -1.65).x, (fundo + lat * -1.65).y, 1.0), (abs(lat.x) * 3.6 + abs(dv.x) * 0.6, abs(lat.y) * 3.6 + abs(dv.y) * 0.6, 2.0))
-        col(f"COL_Sala_{nome}_Bancada", (qb.x, qb.y, 0.5), (abs(lat.x) * 2.3 + abs(dv.x) * 0.8, abs(lat.y) * 2.3 + abs(dv.y) * 0.8, 1.0))
+        # equipamento de apoio (armarios + bancada com monitor) e placa da sala (TMP) na parede escolhida em KIT
+        (kx, ky), (nx, ny), com_armarios, com_bancada = KIT[nome]
+        P = V((kx, ky, 0)); N = V((nx, ny, 0)); lat = V((-N.y, N.x, 0))
+        def dim(l, n):                                                 # tamanho alinhado: l ao longo da parede, n para dentro
+            return (abs(lat.x) * l + abs(N.x) * n, abs(lat.y) * l + abs(N.y) * n)
+        rz_n = math.atan2(N.y, N.x) + PI / 2                           # gira o "-Y" do texto/monitor para N
+        fundo = P + N * 0.45
+        if com_armarios:
+            for k in range(4):
+                q = fundo + lat * (-3.0 + k * 0.9)
+                m.caixa((q.x, q.y, 1.0), (*dim(0.85, 0.55), 2.0), AZUL if k % 2 else TECIDO)
+                h = q + N * 0.29
+                m.caixa((h.x, h.y, 1.15), (*dim(0.04, 0.02), 0.3), METAL)
+            c_ = fundo + lat * -1.65
+            col(f"COL_Sala_{nome}_Armarios", (c_.x, c_.y, 1.0), (*dim(3.6, 0.6), 2.0))
+        if com_bancada:
+            qb = fundo + lat * 2.4 + N * 0.1
+            m.caixa((qb.x, qb.y, 0.45), (*dim(2.2, 0.7), 0.9), ESCURO)
+            m.caixa((qb.x, qb.y, 0.92), (*dim(2.3, 0.75), 0.05), METAL)
+            mq = qb - N * 0.15
+            monitor(m, (mq.x, mq.y, 0.95), rz=rz_n)
+            col(f"COL_Sala_{nome}_Bancada", (qb.x, qb.y, 0.5), (*dim(2.3, 0.8), 1.0))
+        qs = P + N * 0.05
+        m.caixa((qs.x, qs.y, H - 1.4), (*dim(5.0, 0.08), 0.9), AZUL_ESC)
+        m.caixa((qs.x, qs.y, H - 0.92), (*dim(5.0, 0.1), 0.06), AMARELO)
+        m.texto(TITULOS[nome], (qs.x + N.x * 0.05, qs.y + N.y * 0.05, H - 1.4), 0.42, TXT_BRANCO, rz=rz_n, espessura=0.01)
         fim(m, 1.0)
         if nome != "NBL":
             col(f"COL_Sala_{nome}_Piso", ((x0 + x1) / 2, (y0 + y1) / 2, -0.25), (x1 - x0, y1 - y0, 0.5))
@@ -1728,6 +1711,11 @@ if PREVIEW:
 if SAIDA_FBX and not SO_PREVIEW:
     exportar_fbx(SAIDA_FBX, OBJS)
     letreiros_json(os.path.join(os.path.dirname(os.path.abspath(SAIDA_FBX)), "..", "Dados", "Letreiros_Centro.json"), "TXT")
+    # caixas das salas para o encaixe no Unity (Blender x, y, z -> Unity -x, z, -y)
+    import json
+    with open(os.path.join(os.path.dirname(os.path.abspath(SAIDA_FBX)), "..", "Dados", "Salas.json"), "w", encoding="utf-8") as f_:
+        json.dump({"salas": [{"nome": n, "min": [-x0, 0, -y0], "max": [-x1, H, -y1], "entrada": [-e[0], 0, -e[1]],
+                              "dentro": [-d[0], 0, -d[1]], "altura": H} for n, x0, y0, x1, y1, H, e, d in SALAS]}, f_, indent=1)
 if SAIDA_BLEND and not SO_PREVIEW:
     os.makedirs(os.path.dirname(os.path.abspath(SAIDA_BLEND)), exist_ok=True)
     bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(SAIDA_BLEND), compress=True)

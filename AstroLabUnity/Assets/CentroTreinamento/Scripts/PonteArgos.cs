@@ -8,18 +8,20 @@ namespace AstroLab.Centro
     {
         public Transform jogador;
         public ZonaGravidade zona;
-        public Vector2 limitesX = new Vector2(-54f, -37f);   // em coordenadas de mundo (Unity)
+        public float meioCurso = 8.5f;                           // metros para cada lado, no espaço local da sala
         Vector3 inicio;
 
-        void Start() => inicio = transform.position;
+        void Start() => inicio = transform.localPosition;
 
         void Update()
         {
+            var pai = transform.parent;
             float alvoX = inicio.x + Mathf.Sin(Time.time * 0.2f) * 3f;
-            if (zona && zona.JogadorDentro && jogador) alvoX = Mathf.Clamp(jogador.position.x, limitesX.x, limitesX.y);
-            var p = transform.position;
+            if (zona && zona.JogadorDentro && jogador && pai)
+                alvoX = Mathf.Clamp(pai.InverseTransformPoint(jogador.position).x, inicio.x - meioCurso, inicio.x + meioCurso);
+            var p = transform.localPosition;
             p.x = Mathf.MoveTowards(p.x, alvoX, Time.deltaTime * 2.2f);
-            transform.position = p;
+            transform.localPosition = p;
         }
     }
 }

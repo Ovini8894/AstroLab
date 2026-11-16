@@ -49,5 +49,80 @@ Shader "AstroLab/MaosCentro"
             }
             ENDHLSL
         }
+
+        // profundidade e normais das mãos (mesma compressão): entram nas texturas de depth/normais da câmera,
+        // então o contorno full-screen desenha a silhueta das mãos em vez das arestas do cenário atrás delas
+        Pass
+        {
+            Name "DepthOnly"
+            Tags { "LightMode"="DepthOnly" }
+            ZWrite On ColorMask R
+            HLSLPROGRAM
+            #pragma vertex VertP
+            #pragma fragment FragD
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            CBUFFER_START(UnityPerMaterial)
+                half4 _BaseColor;
+                half4 _EmissionColor;
+                float _Compressao;
+            CBUFFER_END
+            struct AttrP { float4 positionOS:POSITION; float3 normalOS:NORMAL; };
+            struct VarP { float4 positionCS:SV_POSITION; float3 normalWS:TEXCOORD0; };
+            VarP VertP(AttrP input)
+            {
+                VarP o;
+                o.positionCS = TransformObjectToHClip(input.positionOS.xyz);
+                #if UNITY_REVERSED_Z
+                    o.positionCS.z = lerp(o.positionCS.w, o.positionCS.z, _Compressao);
+                #else
+                    o.positionCS.z = lerp(-o.positionCS.w, o.positionCS.z, _Compressao);
+                #endif
+                o.normalWS = TransformObjectToWorldNormal(input.normalOS);
+                return o;
+            }
+            half FragD(VarP i) : SV_Target { return i.positionCS.z; }
+            ENDHLSL
+        }
+        Pass
+        {
+            Name "DepthNormals"
+            Tags { "LightMode"="DepthNormals" }
+            ZWrite On
+            HLSLPROGRAM
+            #pragma vertex VertP
+            #pragma fragment FragN
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            CBUFFER_START(UnityPerMaterial)
+                half4 _BaseColor;
+                half4 _EmissionColor;
+                float _Compressao;
+            CBUFFER_END
+            struct AttrP { float4 positionOS:POSITION; float3 normalOS:NORMAL; };
+            struct VarP { float4 positionCS:SV_POSITION; float3 normalWS:TEXCOORD0; };
+            VarP VertP(AttrP input)
+            {
+                VarP o;
+                o.positionCS = TransformObjectToHClip(input.positionOS.xyz);
+                #if UNITY_REVERSED_Z
+                    o.positionCS.z = lerp(o.positionCS.w, o.positionCS.z, _Compressao);
+                #else
+                    o.positionCS.z = lerp(-o.positionCS.w, o.positionCS.z, _Compressao);
+                #endif
+                o.normalWS = TransformObjectToWorldNormal(input.normalOS);
+                return o;
+            }
+            #pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
+            half4 FragN(VarP i) : SV_Target
+            {
+                float3 n = normalize(i.normalWS);
+                #if defined(_GBUFFER_NORMALS_OCT)
+                    float2 oct = PackNormalOctQuadEncode(n);
+                    return half4(PackFloat2To888(saturate(oct * 0.5 + 0.5)), 0.0);
+                #else
+                    return half4(n, 0.0);
+                #endif
+            }
+            ENDHLSL
+        }
     }
 }

@@ -1,95 +1,484 @@
 {
-  "itens": [
-    { "chave": "npc.nome", "texto": "Instructor Lima" },
-
-    { "chave": "npc.intro.1", "texto": "Hello! Welcome to the Johnson Space Center in Houston. I'm Instructor Lima." },
-    { "chave": "npc.intro.2", "texto": "Before any mission, every astronaut goes through complete training. This is where it happens." },
-    { "chave": "npc.intro.3", "texto": "Today you'll visit the main training stations. Follow me to the front desk." },
-
-    { "chave": "npc.est0.1", "texto": "This is the front desk of the Astronaut Training Program." },
-    { "chave": "npc.est0.2", "texto": "Candidates train for about two years before being assigned to a flight." },
-    { "chave": "npc.est0.3", "texto": "Pick up your badge at the desk: walk up to it and press [E]." },
-    { "chave": "npc.est0.fim.1", "texto": "Badge registered! First stop: the medical evaluation." },
-
-    { "chave": "npc.est1.1", "texto": "In space, without gravity, muscles and bones get weaker and the heart works differently." },
-    { "chave": "npc.est1.2", "texto": "That's why medical exams and physical training follow an astronaut from day one until after the flight." },
-    { "chave": "npc.est1.3", "texto": "Take your exam at the vital signs monitor, next to the exam bed." },
-    { "chave": "npc.est1.fim.1", "texto": "Blood pressure 120 over 80 and 68 beats per minute. You're fit to continue!" },
-
-    { "chave": "npc.est2.1", "texto": "This is the human centrifuge. The arm spins fast, and the gondola at its tip simulates the g-forces of launch and reentry." },
-    { "chave": "npc.est2.2", "texto": "At liftoff, your body feels about three times its own weight: 3 G." },
-    { "chave": "npc.est2.3", "texto": "Start the simulation from the panel in the control room." },
-    { "chave": "npc.est2.fim.1", "texto": "Well done! Breathing deeply and tensing your legs helps keep blood flowing to your head." },
-
-    { "chave": "npc.est3.1", "texto": "In the virtual reality lab we rehearse spacewalks and the use of SAFER, a small jetpack for emergencies." },
-    { "chave": "npc.est3.2", "texto": "We also train with the robotic arm and how to move around outside the station." },
-    { "chave": "npc.est3.3", "texto": "Sit at one of the stations and put on the VR headset." },
-    { "chave": "npc.est3.fim.1", "texto": "Simulation complete. Making mistakes down here is much cheaper than making them up there!" },
-
-    { "chave": "npc.est4.1", "texto": "This is the neutral buoyancy pool. The real one is 12 meters deep and holds a replica of the International Space Station." },
-    { "chave": "npc.est4.2", "texto": "With weights and floats, the suit neither sinks nor rises. It's the closest we can get to microgravity on Earth." },
-    { "chave": "npc.est4.3", "texto": "Each hour of spacewalk takes several hours of training here. Put on the training suit at the panel and dive in." },
-    { "chave": "npc.est4.fim.1", "texto": "Excellent dive! You can take off the training suit: it stays here at the pool." },
-
-    { "chave": "npc.est5.1", "texto": "This is ARGOS, a system of cables and motors that carries part of your weight to simulate other gravities." },
-    { "chave": "npc.est5.2", "texto": "Here it's set for the Moon, where gravity is only one sixth of Earth's." },
-    { "chave": "npc.est5.3", "texto": "The floor mimics lunar soil, with craters and rocks. Put on the training suit at the panel and make three jumps in the field." },
-    { "chave": "npc.est5.fim.1", "texto": "See how far you go with little effort? On the Moon, walking is almost hopping. Careful not to lose your balance!" },
-
-    { "chave": "npc.est6.1", "texto": "Last stop: the suit room. This is where you put on the full mission suit." },
-    { "chave": "npc.est6.2", "texto": "First the cooling garment, then the lower torso and the hard upper torso, and finally the gloves and helmet." },
-    { "chave": "npc.est6.3", "texto": "Use the donning stand on the back wall." },
-    { "chave": "npc.est6.fim.1", "texto": "Suit checked and pressurized. Congratulations, astronaut: your basic training is complete!" },
-    { "chave": "npc.est6.fim.2", "texto": "You've been assigned to your first field mission: reactivating the Lunar Base." },
-    { "chave": "npc.est6.fim.3", "texto": "The spacecraft is waiting for you on the launch pad. Go out the north door and follow the road. Good luck!" },
-
-    { "chave": "treino.est0.nome", "texto": "Front desk" },
-    { "chave": "treino.est0.acao", "texto": "Pick up badge" },
-    { "chave": "treino.est0.efeito", "texto": "BADGE ISSUED" },
-    { "chave": "treino.est0.efeito.sub", "texto": "Astronaut candidate · Class of 2026" },
-    { "chave": "treino.est1.nome", "texto": "Medical evaluation and fitness" },
-    { "chave": "treino.est1.acao", "texto": "Take the exam" },
-    { "chave": "treino.est1.bpm", "texto": "HEART RATE: {0} bpm" },
-    { "chave": "treino.est1.exame", "texto": "Measuring blood pressure, heart rate and oxygen..." },
-    { "chave": "treino.est1.resultado", "texto": "FIT" },
-    { "chave": "treino.est1.resultado.sub", "texto": "Cleared for training" },
-    { "chave": "treino.est2.nome", "texto": "Human centrifuge" },
-    { "chave": "treino.est2.acao", "texto": "Start the centrifuge" },
-    { "chave": "treino.forcag", "texto": "G-FORCE: {0} G" },
-    { "chave": "treino.est2.dica", "texto": "Breathe deeply and tense your legs" },
-    { "chave": "treino.est3.nome", "texto": "Virtual reality lab" },
-    { "chave": "treino.est3.acao", "texto": "Put on the VR headset" },
-    { "chave": "treino.est3.efeito", "texto": "SIMULATION: SPACEWALK" },
-    { "chave": "treino.est3.efeito.sub", "texto": "Use SAFER to get back to the station" },
-    { "chave": "treino.est4.nome", "texto": "Neutral buoyancy pool" },
-    { "chave": "treino.est4.acao", "texto": "Put on the training suit and dive" },
-    { "chave": "treino.est4.profundidade", "texto": "DEPTH: {0} m" },
-    { "chave": "treino.est4.efeito.sub", "texto": "Neutral buoyancy: neither sinking nor rising" },
-    { "chave": "treino.est5.nome", "texto": "Reduced gravity and lunar field" },
-    { "chave": "treino.est5.acao", "texto": "Put on the training suit" },
-    { "chave": "treino.est6.nome", "texto": "Suit room" },
-    { "chave": "treino.est6.acao", "texto": "Put on the mission suit" },
-    { "chave": "treino.est6.efeito", "texto": "SUIT PRESSURIZED" },
-    { "chave": "treino.est6.efeito.sub", "texto": "All systems checked" },
-
-    { "chave": "ct.obj.falar", "texto": "Talk to Instructor Lima at the entrance" },
-    { "chave": "ct.obj.seguir", "texto": "Follow the instructor: {0}" },
-    { "chave": "ct.obj.interagir", "texto": "{0} [E]" },
-    { "chave": "ct.obj.saltos", "texto": "Make three jumps in the lunar field ({0}/3)" },
-    { "chave": "ct.obj.plataforma", "texto": "Go to the launch pad" },
-    { "chave": "ct.progresso", "texto": "TRAINING · STEP {0}/{1}" },
-    { "chave": "ct.progresso.fim", "texto": "TRAINING COMPLETE" },
-    { "chave": "ct.prompt", "texto": "[E] {0}" },
-    { "chave": "ct.interagir", "texto": "Interact" },
-    { "chave": "ct.continuar", "texto": "[E] continue" },
-
-    { "chave": "ct.obj.elevador", "texto": "Take the service tower elevator up" },
-    { "chave": "treino.elevador.acao", "texto": "Operate the elevator" },
-    { "chave": "ct.obj.braco", "texto": "Cross the access arm to the White Room" },
-    { "chave": "ct.escotilha.acao", "texto": "Board the Space Shuttle" },
-    { "chave": "ct.obj.sentado", "texto": "You're in the commander's seat. Look around the cockpit." },
-    { "chave": "ct.progresso.missao", "texto": "MISSION 1 · LUNAR BASE" },
-    { "chave": "ct.cabine.titulo", "texto": "WELCOME ABOARD, COMMANDER" },
-    { "chave": "ct.cabine.sub", "texto": "Countdown on hold: T-9 minutes" }
-  ]
+ "itens": [
+  {
+   "chave": "npc.nome",
+   "texto": "Instructor Lima"
+  },
+  {
+   "chave": "npc.intro.1",
+   "texto": "Hello! Welcome to the Johnson Space Center in Houston. I'm Instructor Lima."
+  },
+  {
+   "chave": "npc.intro.2",
+   "texto": "Before any mission, every astronaut goes through complete training. This is where it happens."
+  },
+  {
+   "chave": "npc.intro.3",
+   "texto": "Today you'll visit the main training stations. Follow me to the front desk."
+  },
+  {
+   "chave": "npc.est0.1",
+   "texto": "This is the front desk of the Astronaut Training Program."
+  },
+  {
+   "chave": "npc.est0.2",
+   "texto": "Candidates train for about two years before being assigned to a flight."
+  },
+  {
+   "chave": "npc.est0.3",
+   "texto": "Pick up your badge at the desk: walk up to it and press [E]."
+  },
+  {
+   "chave": "npc.est0.fim.1",
+   "texto": "Badge registered! First stop: the medical evaluation."
+  },
+  {
+   "chave": "npc.est1.1",
+   "texto": "In space, without gravity, muscles and bones get weaker and the heart works differently."
+  },
+  {
+   "chave": "npc.est1.2",
+   "texto": "That's why medical exams and physical training follow an astronaut from day one until after the flight."
+  },
+  {
+   "chave": "npc.est1.3",
+   "texto": "Take your exam at the vital signs monitor, next to the exam bed."
+  },
+  {
+   "chave": "npc.est1.fim.1",
+   "texto": "Blood pressure 120 over 80 and 68 beats per minute. You're fit to continue!"
+  },
+  {
+   "chave": "npc.est2.1",
+   "texto": "This is the human centrifuge. The arm spins fast, and the gondola at its tip simulates the g-forces of launch and reentry."
+  },
+  {
+   "chave": "npc.est2.2",
+   "texto": "At liftoff, your body feels about three times its own weight: 3 G."
+  },
+  {
+   "chave": "npc.est2.3",
+   "texto": "Start the simulation from the panel in the control room."
+  },
+  {
+   "chave": "npc.est2.fim.1",
+   "texto": "Well done! Breathing deeply and tensing your legs helps keep blood flowing to your head."
+  },
+  {
+   "chave": "npc.est3.1",
+   "texto": "In the virtual reality lab we rehearse spacewalks and the use of SAFER, a small jetpack for emergencies."
+  },
+  {
+   "chave": "npc.est3.2",
+   "texto": "We also train with the robotic arm and how to move around outside the station."
+  },
+  {
+   "chave": "npc.est3.3",
+   "texto": "Sit at one of the stations and put on the VR headset."
+  },
+  {
+   "chave": "npc.est3.fim.1",
+   "texto": "Simulation complete. Making mistakes down here is much cheaper than making them up there!"
+  },
+  {
+   "chave": "npc.est4.1",
+   "texto": "This is the neutral buoyancy pool. The real one is 12 meters deep and holds a replica of the International Space Station."
+  },
+  {
+   "chave": "npc.est4.2",
+   "texto": "With weights and floats, the suit neither sinks nor rises. It's the closest we can get to microgravity on Earth."
+  },
+  {
+   "chave": "npc.est4.3",
+   "texto": "Each hour of spacewalk takes several hours of training here. Put on the training suit at the panel and dive in."
+  },
+  {
+   "chave": "npc.est4.fim.1",
+   "texto": "Excellent dive! You can take off the training suit: it stays here at the pool."
+  },
+  {
+   "chave": "npc.est5.1",
+   "texto": "This is ARGOS, a system of cables and motors that carries part of your weight to simulate other gravities."
+  },
+  {
+   "chave": "npc.est5.2",
+   "texto": "Here it's set for the Moon, where gravity is only one sixth of Earth's."
+  },
+  {
+   "chave": "npc.est5.3",
+   "texto": "The floor mimics lunar soil, with craters and rocks. Put on the training suit at the panel and make three jumps in the field."
+  },
+  {
+   "chave": "npc.est5.fim.1",
+   "texto": "See how far you go with little effort? On the Moon, walking is almost hopping. Careful not to lose your balance!"
+  },
+  {
+   "chave": "npc.est6.1",
+   "texto": "Last stop: the suit room. This is where you put on the full mission suit."
+  },
+  {
+   "chave": "npc.est6.2",
+   "texto": "First the cooling garment, then the lower torso and the hard upper torso, and finally the gloves and helmet."
+  },
+  {
+   "chave": "npc.est6.3",
+   "texto": "Use the donning stand on the back wall."
+  },
+  {
+   "chave": "npc.est6.fim.1",
+   "texto": "Suit checked and pressurized. Congratulations, astronaut: your basic training is complete!"
+  },
+  {
+   "chave": "npc.est6.fim.2",
+   "texto": "You've been assigned to your first field mission: reactivating the Lunar Base."
+  },
+  {
+   "chave": "npc.est6.fim.3",
+   "texto": "The spacecraft is waiting for you on the launch pad. Go out the north door and follow the road. Good luck!"
+  },
+  {
+   "chave": "treino.est0.nome",
+   "texto": "Front desk"
+  },
+  {
+   "chave": "treino.est0.acao",
+   "texto": "Pick up badge"
+  },
+  {
+   "chave": "treino.est0.efeito",
+   "texto": "BADGE ISSUED"
+  },
+  {
+   "chave": "treino.est0.efeito.sub",
+   "texto": "Astronaut candidate · Class of 2026"
+  },
+  {
+   "chave": "treino.est1.nome",
+   "texto": "Medical evaluation and fitness"
+  },
+  {
+   "chave": "treino.est1.acao",
+   "texto": "Take the exam"
+  },
+  {
+   "chave": "treino.est1.bpm",
+   "texto": "HEART RATE: {0} bpm"
+  },
+  {
+   "chave": "treino.est1.exame",
+   "texto": "Measuring blood pressure, heart rate and oxygen..."
+  },
+  {
+   "chave": "treino.est1.resultado",
+   "texto": "FIT"
+  },
+  {
+   "chave": "treino.est1.resultado.sub",
+   "texto": "Cleared for training"
+  },
+  {
+   "chave": "treino.est2.nome",
+   "texto": "Human centrifuge"
+  },
+  {
+   "chave": "treino.est2.acao",
+   "texto": "Start the centrifuge"
+  },
+  {
+   "chave": "treino.forcag",
+   "texto": "G-FORCE: {0} G"
+  },
+  {
+   "chave": "treino.est2.dica",
+   "texto": "Breathe deeply and tense your legs"
+  },
+  {
+   "chave": "treino.est3.nome",
+   "texto": "Virtual reality lab"
+  },
+  {
+   "chave": "treino.est3.acao",
+   "texto": "Put on the VR headset"
+  },
+  {
+   "chave": "treino.est3.efeito",
+   "texto": "SIMULATION: SPACEWALK"
+  },
+  {
+   "chave": "treino.est3.efeito.sub",
+   "texto": "Use SAFER to get back to the station"
+  },
+  {
+   "chave": "treino.est4.nome",
+   "texto": "Neutral buoyancy pool"
+  },
+  {
+   "chave": "treino.est4.acao",
+   "texto": "Put on the training suit and dive"
+  },
+  {
+   "chave": "treino.est4.profundidade",
+   "texto": "DEPTH: {0} m"
+  },
+  {
+   "chave": "treino.est4.efeito.sub",
+   "texto": "Neutral buoyancy: neither sinking nor rising"
+  },
+  {
+   "chave": "treino.est5.nome",
+   "texto": "Reduced gravity and lunar field"
+  },
+  {
+   "chave": "treino.est5.acao",
+   "texto": "Put on the training suit"
+  },
+  {
+   "chave": "treino.est6.nome",
+   "texto": "Suit room"
+  },
+  {
+   "chave": "treino.est6.acao",
+   "texto": "Put on the mission suit"
+  },
+  {
+   "chave": "treino.est6.efeito",
+   "texto": "SUIT PRESSURIZED"
+  },
+  {
+   "chave": "treino.est6.efeito.sub",
+   "texto": "All systems checked"
+  },
+  {
+   "chave": "ct.obj.falar",
+   "texto": "Talk to Instructor Lima at the entrance"
+  },
+  {
+   "chave": "ct.obj.seguir",
+   "texto": "Follow the instructor: {0}"
+  },
+  {
+   "chave": "ct.obj.interagir",
+   "texto": "{0} [E]"
+  },
+  {
+   "chave": "ct.obj.saltos",
+   "texto": "Make three jumps in the lunar field ({0}/3)"
+  },
+  {
+   "chave": "ct.obj.plataforma",
+   "texto": "Go to the launch pad"
+  },
+  {
+   "chave": "ct.progresso",
+   "texto": "TRAINING · STEP {0}/{1}"
+  },
+  {
+   "chave": "ct.progresso.fim",
+   "texto": "TRAINING COMPLETE"
+  },
+  {
+   "chave": "ct.prompt",
+   "texto": "[E] {0}"
+  },
+  {
+   "chave": "ct.interagir",
+   "texto": "Interact"
+  },
+  {
+   "chave": "ct.continuar",
+   "texto": "[E] continue"
+  },
+  {
+   "chave": "ct.obj.elevador",
+   "texto": "Take the service tower elevator up"
+  },
+  {
+   "chave": "treino.elevador.acao",
+   "texto": "Operate the elevator"
+  },
+  {
+   "chave": "ct.obj.braco",
+   "texto": "Cross the access arm to the White Room"
+  },
+  {
+   "chave": "ct.escotilha.acao",
+   "texto": "Board the Space Shuttle"
+  },
+  {
+   "chave": "ct.obj.sentado",
+   "texto": "You're in the commander's seat. Look around the cockpit."
+  },
+  {
+   "chave": "ct.progresso.missao",
+   "texto": "MISSION 1 · LUNAR BASE"
+  },
+  {
+   "chave": "ct.cabine.titulo",
+   "texto": "WELCOME ABOARD, COMMANDER"
+  },
+  {
+   "chave": "ct.cabine.sub",
+   "texto": "Countdown on hold: T-9 minutes"
+  },
+  {
+   "chave": "npc.secreto.1",
+   "texto": "This panel looks like an ordinary wall, doesn't it? The real training happens down below."
+  },
+  {
+   "chave": "npc.secreto.2",
+   "texto": "Welcome to the program's top-secret corridor. Only accredited candidates come down here."
+  },
+  {
+   "chave": "npc.secreto.3",
+   "texto": "Get in the elevator with me."
+  },
+  {
+   "chave": "npc.subsolo.1",
+   "texto": "Level minus one. Each room in this corridor holds one training, and the doors open in the right order."
+  },
+  {
+   "chave": "npc.subsolo.2",
+   "texto": "Stay close to me. The first room is the medical evaluation."
+  },
+  {
+   "chave": "ct.local.painel",
+   "texto": "Reception panel"
+  },
+  {
+   "chave": "ct.obj.elevador_secreto",
+   "texto": "Get in the elevator with the instructor"
+  },
+  {
+   "chave": "ct.obj.corredor",
+   "texto": "Follow the instructor down the corridor"
+  },
+  {
+   "chave": "ct.elevador.terreo",
+   "texto": "GROUND"
+  },
+  {
+   "chave": "ct.elevador.descendo",
+   "texto": "GOING DOWN"
+  },
+  {
+   "chave": "ct.elevador.subsolo",
+   "texto": "LEVEL -1"
+  },
+  {
+   "chave": "ct.sala.Medico",
+   "texto": "01 · MEDICAL EVALUATION"
+  },
+  {
+   "chave": "ct.sala.Centrifuga",
+   "texto": "02 · HUMAN CENTRIFUGE"
+  },
+  {
+   "chave": "ct.sala.RealidadeVirtual",
+   "texto": "03 · VIRTUAL REALITY"
+  },
+  {
+   "chave": "ct.sala.NBL",
+   "texto": "04 · NEUTRAL BUOYANCY"
+  },
+  {
+   "chave": "ct.sala.ARGOS",
+   "texto": "05 · REDUCED GRAVITY"
+  },
+  {
+   "chave": "ct.sala.Trajes",
+   "texto": "06 · SUIT ROOM"
+  },
+  {
+   "chave": "ct.obj.elevador_saida",
+   "texto": "Follow the instructor to the elevator at the end of the corridor"
+  },
+  {
+   "chave": "ct.elevador.subindo",
+   "texto": "GOING UP"
+  },
+  {
+   "chave": "ct.elevador.superficie",
+   "texto": "SURFACE"
+  },
+  {
+   "chave": "ct.elevador.placa",
+   "texto": "ELEVATOR · SURFACE"
+  },
+  {
+   "chave": "ct.quiosque",
+   "texto": "TRAINING CENTER · ACCESS"
+  },
+  {
+   "chave": "npc.saida.1",
+   "texto": "We've reached the end of the corridor. This elevator goes straight up to the surface, next to the launch pad road."
+  },
+  {
+   "chave": "npc.saida.2",
+   "texto": "Step into the cabin with me."
+  },
+  {
+   "chave": "npc.superficie.1",
+   "texto": "Back on the surface! That's the launch pad, with the Space Shuttle ready for you."
+  },
+  {
+   "chave": "npc.superficie.2",
+   "texto": "Follow the road to the tower. Your mission is about to begin!"
+  },
+  {
+   "chave": "npc.corredor.est1.1",
+   "texto": "This corridor connects every training lab. While we walk, I'll tell you a bit of our history."
+  },
+  {
+   "chave": "npc.corredor.est1.2",
+   "texto": "In 1959 NASA chose its first seven astronauts, the Mercury Seven."
+  },
+  {
+   "chave": "npc.corredor.est2.1",
+   "texto": "They went through medical and fitness tests very similar to the ones you just did."
+  },
+  {
+   "chave": "npc.corredor.est2.2",
+   "texto": "In 1961 Alan Shepard became the first American in space, on a 15-minute flight."
+  },
+  {
+   "chave": "npc.corredor.est3.1",
+   "texto": "Then came Project Gemini, two astronauts per spacecraft: that's where NASA practiced docking and spacewalks."
+  },
+  {
+   "chave": "npc.corredor.est3.2",
+   "texto": "In 1969 Apollo 11 took Neil Armstrong and Buzz Aldrin to the surface of the Moon."
+  },
+  {
+   "chave": "npc.corredor.est4.1",
+   "texto": "In 1981 the Space Shuttle began flying, a spacecraft that could fly again and again."
+  },
+  {
+   "chave": "npc.corredor.est4.2",
+   "texto": "To train for work outside the spacecraft, NASA built huge pools, like the one you're about to see."
+  },
+  {
+   "chave": "npc.corredor.est5.1",
+   "texto": "Since the year 2000 there have always been people living on the International Space Station."
+  },
+  {
+   "chave": "npc.corredor.est5.2",
+   "texto": "Now the Artemis program wants to take astronauts back to the Moon, including the first woman."
+  },
+  {
+   "chave": "npc.corredor.est6.1",
+   "texto": "To walk on the Moon again, you have to train in reduced gravity, just like you did."
+  },
+  {
+   "chave": "npc.corredor.est6.2",
+   "texto": "Just one step left: putting on the suit."
+  },
+  {
+   "chave": "npc.corredor.saida.1",
+   "texto": "Brazilian astronaut Marcos Pontes went to the Space Station in 2006, on the Centenary Mission."
+  },
+  {
+   "chave": "npc.corredor.saida.2",
+   "texto": "Who knows, maybe the next name on that list will be yours?"
+  }
+ ]
 }

@@ -125,7 +125,7 @@ namespace AstroLab.Nicholas
             return Report(result);
         }
         public OperationResult Power(EquipmentId id, bool value) { return Report(Engine.SetPowered(id, value)); }
-        public OperationResult Recharge() { return Report(Engine.RechargeSuit()); }
+        public OperationResult Recharge() { return Report(Engine.RechargeWithPriority()); }
         public OperationResult AdvanceTurn() { return Report(Engine.AdvanceTurn()); }
         public OperationResult RegisterArtifact(ArtifactId id, string answer = null) { return Report(Engine.RegisterArtifact(id, answer)); }
 
@@ -164,7 +164,8 @@ namespace AstroLab.Nicholas
                 float dist = Vector3.Distance(player.position, outerAirlock.position);
                 if (dist > returnRadius)
                 {
-                    int metros = Mathf.RoundToInt(dist);
+                    int metros = Mathf.RoundToInt(AstroLab.Gameplay.LunarWorld.Instance
+                        ? AstroLab.Gameplay.LunarWorld.Instance.Distance(player.position, outerAirlock.position) : dist);
                     string dir = DescribeDirection(viewer, outerAirlock.position);
                     return Report(OperationResult.Fail("A eclusa está a " + metros + " m, " + dir + "."));
                 }
@@ -179,6 +180,8 @@ namespace AstroLab.Nicholas
 
         private static string DescribeDirection(Transform viewer, Vector3 targetPos)
         {
+            if (AstroLab.Gameplay.LunarWorld.Instance)
+                return AstroLab.Gameplay.LunarWorld.Instance.Bearing(viewer, targetPos).ToLowerInvariant();
             Vector3 toTarget = targetPos - viewer.position;
             toTarget.y = 0f;
             if (toTarget.sqrMagnitude < 0.01f) return "bem perto de você";
@@ -256,14 +259,16 @@ namespace AstroLab.Nicholas
         {
             if (!player) return;
             CharacterController cc = player.GetComponent<CharacterController>();
+            bool ccWasEnabled=cc&&cc.enabled;
             if (cc) cc.enabled = false;
             player.position = position;
+            player.rotation=Quaternion.FromToRotation(player.up,AstroLab.Gameplay.LunarWorld.Up(position))*player.rotation;
             if (rotY.HasValue)
             {
                 Vector3 euler = player.eulerAngles;
                 player.eulerAngles = new Vector3(euler.x, rotY.Value, euler.z);
             }
-            if (cc) cc.enabled = true;
+            if (cc) cc.enabled = ccWasEnabled;
         }
 
         public void Configure(Transform playerTransform, Transform internalMarker, Transform externalMarker)
@@ -275,7 +280,7 @@ namespace AstroLab.Nicholas
 
         public void NewGame()
         {
-            if (Engine != null && Engine.State.IsOutside && player && innerAirlock)
+            if (Engine != null && player && innerAirlock && (Engine.State.IsOutside || (AstroLab.Gameplay.LunarWorld.Instance && Vector3.Distance(player.position,innerAirlock.position)>35)))
                 TeleportPlayer(innerAirlock.position + Vector3.up * 1.2f);
             if (Engine != null)
             {
@@ -304,6 +309,10 @@ namespace AstroLab.Nicholas
                     snapshot.PlayerPosY = player.position.y;
                     snapshot.PlayerPosZ = player.position.z;
                     snapshot.PlayerRotY = player.eulerAngles.y;
+                    snapshot.WorldLayoutVersion = AstroLab.Gameplay.LunarWorld.Instance ? 2 : 0;
+                    snapshot.HasPlayerQuaternion=true;
+                    snapshot.PlayerQX=player.rotation.x;snapshot.PlayerQY=player.rotation.y;
+                    snapshot.PlayerQZ=player.rotation.z;snapshot.PlayerQW=player.rotation.w;
                 }
                 string path = SavePath;
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
@@ -330,7 +339,18 @@ namespace AstroLab.Nicholas
                 Engine.EventRecorded += OnRecord;
                 Engine.StateChanged += OnStateChange;
                 if (data != null && data.HasPlayerPose && player)
-                    TeleportPlayer(new Vector3(data.PlayerPosX, data.PlayerPosY, data.PlayerPosZ), data.PlayerRotY);
+                {
+                    Vector3 pose=new Vector3(data.PlayerPosX,data.PlayerPosY,data.PlayerPosZ);
+                    var world=AstroLab.Gameplay.LunarWorld.Instance;
+                    if(world && data.WorldLayoutVersion<2)
+                    {
+                        if(data.IsOutside)pose.y=1.25f;
+                        pose=world.FromPlanar(pose);
+                    }
+                    TeleportPlayer(pose,data.PlayerRotY);
+                    if(data.HasPlayerQuaternion && (!world||data.WorldLayoutVersion>=2))
+                        player.rotation=new Quaternion(data.PlayerQX,data.PlayerQY,data.PlayerQZ,data.PlayerQW);
+                }
                 if (repairEffects) repairEffects.StopAllEffects();
                 SyncVisualBase(false);
                 Updated?.Invoke();

@@ -92,11 +92,12 @@ namespace AstroLab.BaseLunar
         private void AtualizarPassos()
         {
             // Verifica se está em solo
-            bool noChao = characterController ? characterController.isGrounded : true;
+            var radial=GetComponent<AstroLab.Gameplay.RadialCharacterMotor>();
+            bool noChao = radial ? radial.IsGrounded : characterController ? characterController.isGrounded : true;
             if (!noChao) return;
 
             Vector3 delta = transform.position - ultimaPosicaoPasso;
-            delta.y = 0f; // Apenas deslocamento no plano horizontal
+            delta = Vector3.ProjectOnPlane(delta,transform.up);
 
             if (delta.magnitude >= distanciaPorPasso)
             {
@@ -111,12 +112,12 @@ namespace AstroLab.BaseLunar
             float offsetLateral = peDireito ? espacamentoPes : -espacamentoPes;
             peDireito = !peDireito;
 
-            Vector3 origemRaio = transform.position + (transform.right * offsetLateral) + (Vector3.up * 0.5f);
-            if (Physics.Raycast(origemRaio, Vector3.down, out RaycastHit hit, 2.0f, camadasSolo, QueryTriggerInteraction.Ignore))
+            Vector3 origemRaio = transform.position + (transform.right * offsetLateral) + (transform.up * 0.5f);
+            if (Physics.Raycast(origemRaio, -transform.up, out RaycastHit hit, 2.0f, camadasSolo, QueryTriggerInteraction.Ignore))
             {
                 // Não cria pegada sobre o próprio jogador ou se a inclinação for excessiva (ex: parede)
                 if (hit.collider.transform.IsChildOf(transform)) return;
-                if (Vector3.Angle(hit.normal, Vector3.up) > 45f) return;
+                if (Vector3.Angle(hit.normal, transform.up) > 45f) return;
 
                 InstanciarPegada(hit.point, hit.normal, transform.forward);
             }

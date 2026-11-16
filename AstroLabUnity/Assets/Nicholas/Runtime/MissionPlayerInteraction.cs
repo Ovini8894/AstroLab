@@ -47,6 +47,7 @@ namespace AstroLab.Nicholas
 
             MissionEquipmentTarget equipment = null;
             MissionHistoricalTarget history = null;
+            AstroLab.Asteroids.AsteroidObservationStation observation=null;
             Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
             RaycastHit[] hits = Physics.RaycastAll(ray, distance, layers, QueryTriggerInteraction.Ignore);
             System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
@@ -55,6 +56,8 @@ namespace AstroLab.Nicholas
             foreach (RaycastHit hit in hits)
             {
                 if (hit.collider.transform.IsChildOf(transform)) continue;
+                observation=hit.collider.GetComponentInParent<AstroLab.Asteroids.AsteroidObservationStation>();
+                if(observation)break;
                 equipment = hit.collider.GetComponentInParent<MissionEquipmentTarget>();
                 history = hit.collider.GetComponentInParent<MissionHistoricalTarget>();
                 if (equipment && !equipment.isActiveAndEnabled) equipment = null;
@@ -77,7 +80,8 @@ namespace AstroLab.Nicholas
             AimedEquipment = equipment;
             AimedHistory = history;
 
-            if (equipment)
+            if(observation)CurrentPrompt="OBSERVATÓRIO NASA · [E] ou [F4] Abrir câmera e analisar asteroides";
+            else if (equipment)
             {
                 EquipmentDefinition def = MissionRuleSet.Find(equipment.Equipment);
                 if (!MissionController.Instance.Engine.IsRepaired(equipment.Equipment))
@@ -88,7 +92,9 @@ namespace AstroLab.Nicholas
                         : equipment.Label + " · " + availability.Message + " · [E] Detalhes";
                 }
                 else
-                    CurrentPrompt = "[E] INSPECIONAR · " + equipment.Label;
+                    CurrentPrompt = equipment.Equipment == EquipmentId.SuitCharger
+                        ? "ESTAÇÃO DO TRAJE · [C] RECARREGAR O2 + BATERIA (1 ação) · [E] Detalhes"
+                        : "[E] INSPECIONAR · " + equipment.Label;
             }
             else if (history)
                 CurrentPrompt = "Segure [E] ou Clique Esquerdo com o Scanner: " + history.Label;

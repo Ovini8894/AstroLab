@@ -176,6 +176,29 @@ namespace AstroLab.Nicholas.Core
             return OperationResult.Ok("Reservas do traje restauradas.");
         }
 
+        /// <summary>One charging action temporarily prioritises life support and the suit station.
+        /// Production settings are preserved, so the greenhouse is not accidentally left off.</summary>
+        public OperationResult CanRechargeWithPriority()
+        {
+            if(state.Outcome != MissionOutcome.Running)return OperationResult.Fail("A missão terminou.");
+            if(state.IsOutside)return OperationResult.Fail("Entre na base para recarregar.");
+            if(!IsPowered(EquipmentId.LifeSupport))return OperationResult.Fail("Repare e ligue o suporte de vida para fornecer oxigênio.");
+            if(!IsRepaired(EquipmentId.SuitCharger))return OperationResult.Fail("A estação de recarga precisa estar reparada.");
+            if(state.RemainingActionTime<1)return OperationResult.Fail("Falta 1 ação. Confira a previsão e avance o turno.");
+            if(PowerCapacity<MissionRuleSet.Find(EquipmentId.LifeSupport).PowerDemand+MissionRuleSet.Find(EquipmentId.SuitCharger).PowerDemand)
+                return OperationResult.Fail("Repare os painéis solares para alimentar suporte de vida e recarga.");
+            if(state.SuitOxygen>=99.99f && state.SuitBattery>=99.99f)return OperationResult.Fail("Traje já está com oxigênio e bateria completos.");
+            return OperationResult.Ok("Recarga disponível: 1 ação; prioridade elétrica temporária, sem desligar sua produção no próximo turno.");
+        }
+        public OperationResult RechargeWithPriority()
+        {
+            var check=CanRechargeWithPriority();if(!check.Success)return check;
+            state.RemainingActionTime--;state.SuitOxygen=100;state.SuitBattery=100;
+            Record(MissionEventType.Power,"Traje recarregado: O2 e bateria em 100% (-1 ação). Prioridade elétrica temporária; configuração dos sistemas preservada.");
+            NotifyChanged();
+            return OperationResult.Ok("Oxigênio e bateria do traje: 100%. Custo: 1 ação. Distribuição de energia preservada.");
+        }
+
         /// <summary>Consumo por tempo REAL em segundos somente durante EVA; sem atalhos por frame.</summary>
         public void Tick(float deltaSeconds)
         {

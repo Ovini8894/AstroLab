@@ -35,12 +35,21 @@ namespace AstroLab.Asteroids
         private UnityEngine.UI.Slider slider;
         private AsteroidRecord selected;
         private int page;
-        private bool collectionOnly, challenge;
+        private bool collectionOnly, estimateMoved;
+        private AsteroidAnalysis analysis;
+        private int analysisRound;
+        private double estimateMetres;
+        private UnityEngine.UI.Button estimateButton;
+        public AsteroidAnalysis CurrentAnalysis => analysis;
         private float previousTimeScale, nextAlert, alertUntil;
         private CursorLockMode previousCursor;
         private bool previousVisible;
         private Transform skyMarker;
         private string alertedId;
+        private AsteroidObservationStation station;
+        private int alertIndex;
+        public int AlertCount { get; private set; }
+        public AsteroidObservationStation Station => station;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Register()
@@ -52,7 +61,7 @@ namespace AstroLab.Asteroids
         private static void OnScene(Scene scene, LoadSceneMode mode) { Install(scene); }
         private static void Install(Scene scene)
         {
-            if (scene.name != "Lua" && scene.name != "MissaoNicholas") return;
+            if (scene.name != "Lua" && scene.name != "MissaoNicholas" && scene.name != "CapacetePedro" && !FindAnyObjectByType<MissionController>()) return;
             if (FindAnyObjectByType<AsteroidTerminal>()) return;
             new GameObject("RadarDeDescobertas").AddComponent<AsteroidTerminal>();
         }
@@ -72,8 +81,7 @@ namespace AstroLab.Asteroids
         {
             if (!screen) return;
             Camera cam = Camera.main;
-            if (skyMarker && cam) skyMarker.position = cam.transform.position + new Vector3(40, 35, 60);
-            if (skyMarker && cam) skyMarker.rotation = Quaternion.LookRotation(skyMarker.position - cam.transform.position);
+
             if (Keyboard.current != null)
             {
                 if (IsOpen && Keyboard.current.escapeKey.wasPressedThisFrame) { Close(); return; }
@@ -83,20 +91,21 @@ namespace AstroLab.Asteroids
             if (!IsOpen && !OtherModalOpen() && Ready() && Time.unscaledTime >= nextAlert)
             {
                 // One notification per available object, then a substantial quiet interval.
-                var target = Client.Records.FirstOrDefault(r => !r.Historical && !Progress.Contains(r.Id));
-                bool historical = target == null;
-                if (target == null) target = Client.Records.FirstOrDefault(r => !Progress.Contains(r.Id));
+                var available=Client.Records.Where(r=>!Progress.Contains(r.Id)).OrderBy(r=>r.Historical).ToList();
+                if(available.Count==0)available=Client.Records.ToList();
+                var target=available.Count>0?available[alertIndex++%available.Count]:null;
+                bool historical=target!=null&&target.Historical;
                 if (target != null && target.Id != alertedId)
                 {
-                    alertedId = target.Id; alertUntil = Time.unscaledTime + 9;
-                    alert.text = historical ? "ACERVO DISPONÍVEL  ·  " + target.Name + "\n[F4] Analisar no radar" :
+                    alertedId = target.Id; selected=target; analysis=null; AlertCount++; if(station)station.ShowTarget(target); alertUntil = Time.unscaledTime + 9;
+                    alert.text = historical ? "ASTEROIDE NO OBSERVATÓRIO · ACERVO NASA · " + target.Name + "\n[F4] Analisar no radar" :
                         "NOVO ALVO  ·  " + target.Name + "\nAproximação à Terra: " + DateLabel(target.ApproachDate) + "  ·  [F4] Analisar";
                     if (skyMarker) { skyMarker.gameObject.SetActive(true); skyLabel.text = "ALVO DE OBSERVAÇÃO\nIndicação ilustrativa · [F4]"; }
                 }
                 nextAlert = Time.unscaledTime + 90;
             }
             alertRoot.SetActive(!IsOpen && Time.unscaledTime < alertUntil);
-            if (skyMarker && IsOpen) skyMarker.gameObject.SetActive(false);
+
         }
 
         private bool Ready()
@@ -107,7 +116,8 @@ namespace AstroLab.Asteroids
         private bool OtherModalOpen()
         {
             var overlay = FindAnyObjectByType<MissionOverlay>();
-            return overlay && overlay.IsModalOpen || OptionalTeamComponents.IsHelmetModalOpen(OptionalTeamComponents.FindByName("HudCapacete"));
+            var management=FindAnyObjectByType<AstroLab.Gameplay.BaseResourceDashboard>();
+            return (overlay && overlay.IsModalOpen) || (management && management.IsOpen) || OptionalTeamComponents.IsHelmetModalOpen(OptionalTeamComponents.FindByName("HudCapacete"));
         }
         private bool LookingAtTerminal(Camera cam)
         {
@@ -140,7 +150,7 @@ namespace AstroLab.Asteroids
             suspended.Clear(); Cursor.lockState = previousCursor; Cursor.visible = previousVisible;
         }
         private void OnDisable() { if (IsOpen) Close(); }
-        private void OnDestroy() { if (Client) Client.Changed -= Reload; if (skyMarker) Destroy(skyMarker.gameObject); }
+        private void OnDestroy() { if (Client) Client.Changed -= Reload;  }
 
         private void BuildUI()
         {
@@ -180,7 +190,7 @@ namespace AstroLab.Asteroids
             footer.text = "Dados NASA NeoWs · Distâncias em relação à Terra · Análises salvas neste aparelho\n[F4] abre o radar com comunicações operacionais · No terminal, a missão fica pausada.";
             DrawList();
             if (selected == null) selected = Client.Records.FirstOrDefault();
-            if (selected != null) selected = Client.Records.FirstOrDefault(r => r.Id == selected.Id) ?? selected;
+            if (selected != null) selected = analysis != null && !analysis.Completed ? analysis.Record : Client.Records.FirstOrDefault(r => r.Id == selected.Id) ?? selected;
             DrawDetail();
         }
         private List<AsteroidRecord> VisibleRecords() => Client.Records.Where(r => !collectionOnly || Progress.Contains(r.Id)).ToList();
@@ -195,7 +205,7 @@ namespace AstroLab.Asteroids
             {
                 AsteroidRecord r = visible[page * 5 + i];
                 string tag = Progress.Contains(r.Id) ? "ANALISADO" : r.Historical ? "ACERVO" : "RECENTE";
-                Button(list, r.Name + "\n" + tag + " · " + DateLabel(r.ApproachDate), () => { selected = r; challenge = false; Reload(); },
+                Button(list, r.Name + "\n" + tag + " · " + DateLabel(r.ApproachDate), () => { selected = r; analysis = null; Reload(); },
                     .06f, .64f - i * .125f, .94f, .755f - i * .125f, selected != null && selected.Id == r.Id ? Cyan : Cream);
             }
             if (visible.Count == 0) Text(list, "Vazio", "Suas descobertas\naparecerão aqui.", 17, Cream, .08f, .35f, .92f, .65f);
@@ -208,56 +218,114 @@ namespace AstroLab.Asteroids
         {
             Clear(centre); Clear(facts);
             if (selected == null) { Text(centre, "Vazio", "Nenhum alvo disponível.\nTente atualizar a consulta.", 22, Cream, .08f, .3f, .92f, .7f); return; }
-            Text(centre, "Secao", "EXPLORE O TAMANHO", 19, Cream, .06f, .89f, .94f, .98f);
-            var silhouette = new GameObject("AsteroideIlustrativo", typeof(RectTransform), typeof(CanvasRenderer), typeof(AsteroidSilhouette));
-            silhouette.transform.SetParent(centre, false); Anchors((RectTransform)silhouette.transform, .31f, .55f, .69f, .88f);
-            silhouette.GetComponent<AsteroidSilhouette>().color = new Color32(169, 165, 192, 255);
-            Text(centre, "Aviso", "Modelo ilustrativo · formato real não disponível", 12, Cream, .05f, .505f, .95f, .55f).alignment = TextAlignmentOptions.Center;
-            Text(centre, "Referencia", "Módulo de referência: 12 m  |  Astronauta: 1,8 m\nBarras abaixo compartilham a mesma escala.", 14, Cream, .06f, .405f, .94f, .50f);
-            diameterBar = Box(centre, "DiametroEmEscala", Cyan, .08f, .345f, .9f, .37f);
-            float referenceWidth = (float)(12 / Math.Max(12, selected.MaxMetres)) * .82f;
+            bool eligible = AsteroidScience.CanAnalyse(selected);
+            bool estimating = analysis != null && !analysis.SizeAccepted;
+            bool questioning = analysis != null && analysis.SizeAccepted && !analysis.Completed;
+            bool hideDiameter = eligible && (estimating || (!Progress.Contains(selected.Id) && (analysis == null || !analysis.SizeAccepted)));
+            var comparison = analysis ?? (eligible ? new AsteroidAnalysis(selected, 0) : null);
+            if (analysis == null) estimateMetres = 0;
+            Text(centre, "Secao", "TELESCÓPIO + COMPARAÇÃO", 19, Cream, .06f, .89f, .94f, .98f);
+            if(station)
+            {
+                station.ShowTarget(selected);
+                var preview=new GameObject("CameraAoVivo",typeof(RectTransform),typeof(UnityEngine.UI.RawImage));
+                preview.transform.SetParent(centre,false);Anchors((RectTransform)preview.transform,.06f,.56f,.94f,.88f);
+                var image=preview.GetComponent<UnityEngine.UI.RawImage>();image.texture=station.Preview;image.raycastTarget=false;
+            }
+            Text(centre, "Aviso", "Câmera ao vivo · forma e posição ilustrativas", 12, Cream, .05f, .505f, .95f, .55f).alignment = TextAlignmentOptions.Center;
+            Text(centre, "Referencia", "Ciano: alvo aproximado · Amarelo: módulo de 12 m\nBranco: astronauta de 1,8 m · Mesma escala", 14, Cream, .06f, .405f, .94f, .50f);
+            double scale = comparison?.ScaleMaximum ?? 12;
+            double targetMetres = comparison?.RepresentativeMetres ?? 0;
+            Box(centre, "AlvoEmEscala", Cyan, .08f, .345f, .08f + (float)(targetMetres / scale) * .82f, .37f);
+            float referenceWidth = (float)(12 / scale) * .82f;
             Box(centre, "ModuloEmEscala", Gold, .08f, .31f, .08f + referenceWidth, .335f);
-            float humanWidth = (float)(1.8 / Math.Max(12, selected.MaxMetres)) * .82f;
+            float humanWidth = (float)(1.8 / scale) * .82f;
             Box(centre, "AstronautaEmEscala", Cream, .08f, .275f, .08f + humanWidth, .30f);
-            sizeLabel = Text(centre, "Medida", "", 18, Cyan, .06f, .22f, .94f, .275f);
+            diameterBar = Box(centre, "PalpiteEmEscala", Gold, .08f, .25f, .08f, .265f);
+            sizeLabel = Text(centre, "Medida", "", 16, Cyan, .06f, .21f, .94f, .25f);
             slider = MakeSlider(centre, .08f, .15f, .92f, .21f);
-            slider.onValueChanged.AddListener(UpdateSize); UpdateSize(0);
-            Text(centre, "Incerteza", "Arraste para explorar a faixa estimada.\nA NASA não fornece uma medida exata única.", 13, Cream, .06f, .025f, .94f, .14f);
+            slider.SetValueWithoutNotify((float)(estimateMetres / scale));
+            slider.interactable = estimating;
+            slider.onValueChanged.AddListener(UpdateSize); RefreshEstimate();
+            Text(centre, "Incerteza", estimating ? "1 / 2 · Compare as barras e estime o diâmetro.\nModelo didático; qualquer valor na faixa NASA é aceito." :
+                questioning ? "2 / 2 · Estimativa aceita. Interprete os dados na ficha.\nA NASA informa um intervalo, não um diâmetro exato." :
+                "Inicie a análise para estimar o tamanho.\nA resposta aparece depois do seu palpite.", 13, Cream, .06f, .025f, .94f, .14f);
 
             Text(facts, "Secao", "FICHA CIENTÍFICA", 19, Cream, .07f, .89f, .93f, .98f);
             Text(facts, "Nome", selected.Name, 25, Cyan, .07f, .77f, .93f, .89f);
             string distance = Number(selected.DistanceKm, "N0") + " km";
+            string diameter = hideDiameter ? "Oculto até confirmar a estimativa" : Number(selected.MinMetres, "N1") + "–" + Number(selected.MaxMetres, "N1") + " m";
+            if (questioning)
+            {
+                Text(facts, "Dados", "DIÂMETRO ESTIMADO  " + diameter + "\nVELOCIDADE  " + Number(selected.SpeedKmS, "N2") + " km/s\nDISTÂNCIA À TERRA  " + distance,
+                    14, Cream, .07f, .59f, .93f, .76f);
+                feedback = Text(facts, "Pergunta", analysis.Question.Prompt, 17, Gold, .07f, .325f, .93f, .585f);
+                feedback.fontSizeMin = 12;
+                for (int i = 0; i < 3; i++)
+                {
+                    int option = i;
+                    Button(facts, analysis.Question.Options[i], () => Answer(option), .07f, .215f - i * .10f, .93f, .305f - i * .10f);
+                }
+                return;
+            }
             string lunar = selected.DistanceKm >= 0 ? "≈ " + (selected.DistanceKm / AsteroidScience.MeanLunarDistanceKm).ToString("N1", CultureInfo.GetCultureInfo("pt-BR")) + " distâncias médias Terra–Lua" : "Não informado";
-            Text(facts, "Dados", "DIÂMETRO ESTIMADO\n" + Number(selected.MinMetres, "N1") + "–" + Number(selected.MaxMetres, "N1") + " m\n\n" +
+            Text(facts, "Dados", "DIÂMETRO ESTIMADO\n" + diameter + "\n\n" +
                 "VELOCIDADE NA APROXIMAÇÃO\n" + Number(selected.SpeedKmS, "N2") + " km/s\n\n" +
                 "DISTÂNCIA NA APROXIMAÇÃO À TERRA\n" + distance + "\n" + lunar + "\n\nDATA DO ENCONTRO\n" + DateLabel(selected.ApproachDate) + (selected.Historical ? " · registro histórico" : " · período consultado"),
-                16, Cream, .07f, .28f, .93f, .76f);
-            if (!challenge)
+                16, Cream, .07f, analysis != null && analysis.Completed ? .36f : .28f, .93f, .76f);
+            if (!estimating)
             {
-                feedback = Text(facts, "Instrucao", Progress.Contains(selected.Id) ? "Análise registrada na coleção.\nRevisar não aumenta a contagem." : "Explore o tamanho e responda uma pergunta para registrar a descoberta.", 15, Cream, .07f, .14f, .93f, .28f);
-                var button = Button(facts, Progress.Contains(selected.Id) ? "Rever desafio" : "Iniciar análise", () => { challenge = true; DrawDetail(); }, .07f, .035f, .93f, .13f);
-                button.interactable = AsteroidScience.CanAnalyse(selected);
+                feedback = Text(facts, "Instrucao", Progress.Contains(selected.Id) ? "Análise registrada na coleção.\nRevisar não aumenta a contagem." : "Estime o tamanho e interprete os dados para registrar a descoberta.", 15, Cream, .07f, .14f, .93f, analysis != null && analysis.Completed ? .36f : .28f);
+                feedback.fontSizeMin = 12;
+                var button = Button(facts, Progress.Contains(selected.Id) ? "Rever desafio" : "Iniciar análise", BeginAnalysis, .07f, .035f, .93f, .13f);
+                button.interactable = eligible;
             }
             else
             {
-                feedback = Text(facts, "Pergunta", "Na MENOR estimativa, o diâmetro supera o módulo de referência de 12 m?", 15, Gold, .07f, .14f, .93f, .28f);
-                Button(facts, "Sim", () => Answer(true), .07f, .035f, .47f, .13f);
-                Button(facts, "Não", () => Answer(false), .53f, .035f, .93f, .13f);
+                feedback = Text(facts, "Instrucao", "Compare o alvo ciano com as referências. Arraste a régua para registrar seu palpite.", 15, Gold, .07f, .14f, .93f, .28f);
+                estimateButton = Button(facts, "Confirmar estimativa", ConfirmSizeEstimate, .07f, .035f, .93f, .13f);
+                estimateButton.interactable = estimateMoved;
             }
+        }
+
+        public void BeginAnalysis()
+        {
+            if (!AsteroidScience.CanAnalyse(selected)) return;
+            analysis = new AsteroidAnalysis(selected, analysisRound++);
+            estimateMetres = 0; estimateMoved = false;
+            DrawDetail();
         }
 
         private void UpdateSize(float t)
         {
-            if (selected == null || !sizeLabel) return;
-            double metres = selected.MinMetres + (selected.MaxMetres - selected.MinMetres) * t;
-            sizeLabel.text = AsteroidScience.CanAnalyse(selected) ? "Diâmetro explorado: " + Number(metres, "N1") + " m" : "Tamanho não informado";
-            if (diameterBar) diameterBar.anchorMax = new Vector2(.08f + (float)(Math.Max(0, metres) / Math.Max(12, selected.MaxMetres)) * .82f, .37f);
+            if (analysis == null || analysis.SizeAccepted) return;
+            estimateMetres = t * analysis.ScaleMaximum; estimateMoved = true;
+            if (estimateButton) estimateButton.interactable = true;
+            RefreshEstimate();
         }
-        public bool Answer(bool greater)
+        private void RefreshEstimate()
         {
-            if (selected == null || !AsteroidScience.CanAnalyse(selected)) return false;
-            if (greater != (selected.MinMetres > 12))
-            { feedback.text = "Olhe a menor estimativa: " + Number(selected.MinMetres, "N1") + " m. Compare com 12 m e tente novamente."; return false; }
+            if (!sizeLabel) return;
+            sizeLabel.text = analysis == null ? "Estimativa ainda não iniciada" : !estimateMoved ? "Arraste para dar seu palpite" : "Seu palpite: " + Number(estimateMetres, "N1") + " m";
+            if (diameterBar) diameterBar.anchorMax = new Vector2(.08f + (float)(estimateMetres / (analysis?.ScaleMaximum ?? 12)) * .82f, .265f);
+        }
+        public void ConfirmSizeEstimate()
+        {
+            if (analysis == null || !estimateMoved || analysis.SizeAccepted) return;
+            if (!analysis.SubmitEstimate(estimateMetres))
+            {
+                feedback.text = estimateMetres < selected.MinMetres ? "Seu palpite ficou pequeno. Compare a barra ciano com a régua do módulo e tente aumentar." :
+                    "Seu palpite ficou grande. Compare a barra ciano com a régua do módulo e tente diminuir.";
+                return;
+            }
+            DrawDetail();
+        }
+        public bool Answer(int option)
+        {
+            if (analysis == null || !analysis.SizeAccepted || analysis.Completed) return false;
+            if (!analysis.Answer(option))
+            { if (feedback) feedback.text = analysis.Question.Prompt + "\nDica: " + analysis.Question.Hint; return false; }
+            string explanation = analysis.Question.Explanation;
             bool first = Progress.Complete(selected);
             string milestone = "";
             if (first)
@@ -273,8 +341,8 @@ namespace AstroLab.Asteroids
                 }
                 catch { milestone += " Não foi possível salvar; mantenha esta sessão aberta."; }
             }
-            challenge = false; Reload();
-            feedback.text = "Análise concluída! A estimativa mínima é " + Number(selected.MinMetres, "N1") + " m." + milestone;
+            Reload();
+            feedback.text = "Análise concluída! " + explanation + milestone;
             nextAlert = Time.unscaledTime + 35;
             Debug.Log("[AstroLab][Asteroids] Análise concluída. Objetos únicos: " + Progress.Count + ". Nova descoberta: " + first);
             return true;
@@ -282,35 +350,9 @@ namespace AstroLab.Asteroids
 
         private void CreateProp()
         {
-            Camera cam = Camera.main;
-            Transform anchor = MissionController.Instance ? MissionController.Instance.InnerAirlock : null;
-            if (!anchor && cam) anchor = cam.transform;
-            if (!anchor) return;
-            terminalProp = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            terminalProp.name = "Terminal_Radar_Asteroides"; terminalProp.transform.SetParent(transform);
-            Vector3 direction = Vector3.ProjectOnPlane(anchor.forward, Vector3.up).normalized;
-            if (direction.sqrMagnitude < .1f) direction = Vector3.forward;
-            terminalProp.transform.position = anchor.position + direction * 2 + anchor.right * 1.5f + Vector3.up * (cam && anchor == cam.transform ? -.4f : 1.1f);
-            terminalProp.transform.rotation = Quaternion.LookRotation(-direction);
-            terminalProp.transform.localScale = new Vector3(.85f, .65f, .16f);
-            var shader = Shader.Find("Universal Render Pipeline/Lit");
-            if (shader) { var material = new Material(shader); material.color = Panel; terminalProp.GetComponent<Renderer>().material = material; }
-            var label = new GameObject("Rotulo", typeof(TextMeshPro)); label.transform.SetParent(terminalProp.transform, false);
-            label.transform.localPosition = new Vector3(0, 0, -.6f); label.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            var text = label.GetComponent<TextMeshPro>(); text.text = "RADAR\n[E] OBSERVAR\nAtalho: [F4]";
-            text.fontSize = 2.7f; text.alignment = TextAlignmentOptions.Center; text.color = Cyan;
-            text.rectTransform.sizeDelta = new Vector2(1, .8f);
-            var sky = new GameObject("IndicacaoIlustrativaDeAlvo"); skyMarker = sky.transform;
-            var rock = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            rock.name = "AsteroideIlustrativoSemOrbita"; rock.transform.SetParent(skyMarker, false);
-            rock.transform.localPosition = new Vector3(0, 7, 0); rock.transform.localScale = new Vector3(3, 2.4f, 2.7f);
-            Destroy(rock.GetComponent<Collider>());
-            var rockShader = Shader.Find("Universal Render Pipeline/Unlit");
-            if (rockShader) { var material = new Material(rockShader); material.color = new Color32(169, 165, 192, 255); rock.GetComponent<Renderer>().material = material; }
-            skyLabel = new GameObject("Legenda", typeof(TextMeshPro)).GetComponent<TextMeshPro>();
-            skyLabel.transform.SetParent(skyMarker, false); skyLabel.fontSize = 9; skyLabel.color = Gold;
-            skyLabel.alignment = TextAlignmentOptions.Center; skyLabel.rectTransform.sizeDelta = new Vector2(22, 8);
-            sky.SetActive(false);
+            var go=new GameObject("EstacaoDoObservatorio");go.transform.SetParent(transform,false);
+            station=go.AddComponent<AsteroidObservationStation>();station.Configure(this);
+            terminalProp=go;skyMarker=station.SkyTarget;skyLabel=station.SkyLabel;
         }
 
         private static string Number(double n, string format) => n < 0 ? "Não informado" : n.ToString(format, CultureInfo.GetCultureInfo("pt-BR"));

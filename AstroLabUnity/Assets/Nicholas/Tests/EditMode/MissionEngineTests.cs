@@ -264,5 +264,42 @@ namespace AstroLab.Nicholas.Tests
             Assert.AreEqual("Faltam 2 tempos. Termine o turno!", semTempo.Message);
             Assert.AreEqual(semTempo.Message, game.Repair(EquipmentId.RadiationShelter).Message);
         }
+        [Test] public void RecargaPrioritariaFuncionaComProducaoLigadaSemAlterarDistribuicao()
+        {
+            var game=new MissionEngine();game.StartEva();game.Repair(EquipmentId.SolarPanels);game.FinishEva();
+            game.Repair(EquipmentId.LifeSupport);game.Repair(EquipmentId.Greenhouse);
+            game.SetPowered(EquipmentId.LifeSupport,true);game.SetPowered(EquipmentId.Greenhouse,true);game.AdvanceTurn();
+            int before=game.State.RemainingActionTime,power=game.PowerUsed;
+            Assert.IsTrue(game.RechargeWithPriority().Success);
+            Assert.AreEqual(100,game.State.SuitOxygen);Assert.AreEqual(100,game.State.SuitBattery);
+            Assert.AreEqual(before-1,game.State.RemainingActionTime);Assert.AreEqual(power,game.PowerUsed);
+            Assert.IsTrue(game.IsPowered(EquipmentId.Greenhouse));Assert.IsTrue(game.IsPowered(EquipmentId.LifeSupport));
+            Assert.IsFalse(game.IsPowered(EquipmentId.SuitCharger));
+        }
+        [Test] public void RecargaPrioritariaNaoCobraTrajeCheioNemFuncionaForaDaBase()
+        {
+            var game=new MissionEngine();game.StartEva();game.Repair(EquipmentId.SolarPanels);game.FinishEva();
+            game.Repair(EquipmentId.LifeSupport);game.SetPowered(EquipmentId.LifeSupport,true);
+            Assert.IsTrue(game.RechargeWithPriority().Success);
+            int before=game.State.RemainingActionTime;Assert.IsFalse(game.RechargeWithPriority().Success);
+            Assert.AreEqual(before,game.State.RemainingActionTime);
+            game.StartEva();game.Tick(2);Assert.IsFalse(game.RechargeWithPriority().Success);
+            Assert.AreEqual(before,game.State.RemainingActionTime);
+        }
+        [Test] public void RecargaSemSuporteDeVidaMantemRecursos()
+        {
+            var game=new MissionEngine();var before=game.State;
+            Assert.IsFalse(game.RechargeWithPriority().Success);
+            Assert.AreEqual(before.RemainingActionTime,game.State.RemainingActionTime);
+            Assert.AreEqual(before.SuitOxygen,game.State.SuitOxygen);Assert.AreEqual(before.SuitBattery,game.State.SuitBattery);
+        }
+        [Test] public void SavePreservaReferenciaDoMundoEsfericoEOrientacaoCompleta()
+        {
+            var game=new MissionEngine();var snapshot=game.State;snapshot.WorldLayoutVersion=2;snapshot.HasPlayerQuaternion=true;
+            snapshot.PlayerQX=.5f;snapshot.PlayerQY=.5f;snapshot.PlayerQZ=.5f;snapshot.PlayerQW=.5f;
+            var restored=MissionEngine.Restore(snapshot).State;
+            Assert.AreEqual(2,restored.WorldLayoutVersion);Assert.IsTrue(restored.HasPlayerQuaternion);
+            Assert.AreEqual(.5f,restored.PlayerQX);Assert.AreEqual(.5f,restored.PlayerQW);
+        }
     }
 }

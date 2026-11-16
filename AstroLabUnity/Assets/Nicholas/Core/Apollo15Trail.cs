@@ -28,11 +28,11 @@ namespace AstroLab.Nicholas.Core
         {
             new Artifact(ArtifactId.Hammer, "Martelo geológico", "Apollo 15 geology hammer",
                 "David Scott usou um martelo geológico em uma demonstração de queda livre na Lua, em 1971.",
-                "Participei de uma experiência com algo muito mais leve, vindo de uma ave. Quem sou?",
+                "Sou leve e vim de uma ave. Caí junto com este martelo na Lua. Qual é o próximo objeto?",
                 "https://science.nasa.gov/resource/the-apollo-15-hammer-feather-drop/"),
             new Artifact(ArtifactId.Feather, "Pena de falcão", "Apollo 15 hammer feather drop",
                 "Uma pena de falcão e um martelo caíram simultaneamente em quase vácuo, evidenciando a aceleração gravitacional independente da massa.",
-                "Na demonstração, qual chegou primeiro ao chão? [A] Martelo  [B] Pena  [C] Juntos",
+                "Tenho quatro rodas e levei astronautas para explorar a Lua. Que veículo sou eu?",
                 "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_15_feather_drop.html"),
             new Artifact(ArtifactId.Rover, "Veículo Lunar Apollo 15 (LRV)", "Apollo 15 lunar roving vehicle",
                 "O Lunar Roving Vehicle ampliou a distância que os astronautas podiam percorrer durante a exploração científica.",

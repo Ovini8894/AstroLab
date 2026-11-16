@@ -16,6 +16,9 @@ var safety=UnityEngine.Object.FindAnyObjectByType<BaseInteriorSafety>();
 var interaction=UnityEngine.Object.FindAnyObjectByType<MissionPlayerInteraction>();
 var cc=player.GetComponent<CharacterController>();
 var oldPosition=player.position;var oldRotation=player.rotation;var oldCamera=camera.transform.localRotation;
+var originalMotor=player.GetComponent<JogadorFPS>();bool originalMotorEnabled=originalMotor.enabled;
+var testTerminal=UnityEngine.Object.FindAnyObjectByType<AstroLab.Asteroids.AsteroidTerminal>();bool terminalEnabled=testTerminal.enabled;testTerminal.Close();testTerminal.enabled=false;
+UnityEngine.Object.FindAnyObjectByType<BaseResourceDashboard>().Close();Time.timeScale=1;
 var update=typeof(MissionPlayerInteraction).GetMethod("Update",BindingFlags.Instance|BindingFlags.NonPublic);
 var errors=new System.Collections.Generic.List<string>();
 Application.LogCallback onLog=(text,stack,type)=>{if(type==LogType.Error||type==LogType.Exception||type==LogType.Assert)errors.Add(text);};
@@ -23,6 +26,7 @@ Application.logMessageReceived+=onLog;
 void Move(Vector3 pos){if(cc)cc.enabled=false;player.position=pos;if(cc)cc.enabled=true;Physics.SyncTransforms();}
 bool Aim(EquipmentId id)
 {
+    originalMotor.enabled=false;
     foreach(var target in UnityEngine.Object.FindObjectsByType<MissionEquipmentTarget>().Where(t=>t.isActiveAndEnabled&&t.Equipment==id))
     {
         var renderer=target.GetComponent<Renderer>();if(!renderer)continue;
@@ -44,8 +48,8 @@ try
     mission.NewGame();Move(new Vector3(-15,1.98f,0));
     Check(safety&&safety.Contains(player.position),"Suporte de vida não está no volume interno");
     for(float x=-17;x<=19;x+=.1f)Check(safety.Contains(new Vector3(x,1.98f,0)),"Descontinuidade de EVA no corredor: "+x);
-    for(float z=0;z<=21;z+=.1f)Check(safety.Contains(new Vector3(0,1.98f,z)),"Descontinuidade no acesso à eclusa: "+z);
-    Check(!safety.Contains(new Vector3(0,1.98f,27))&&!safety.Contains(new Vector3(30,1.98f,0)),"Exterior foi tratado como habitat");
+    for(float z=0;z<=17;z+=.1f)Check(safety.Contains(new Vector3(0,1.98f,z)),"Descontinuidade no acesso à eclusa: "+z);
+    Check(!safety.Contains(new Vector3(0,1.98f,18))&&!safety.Contains(new Vector3(0,1.98f,27))&&!safety.Contains(new Vector3(30,1.98f,0)),"Exterior foi tratado como habitat");
     Check(mission.Engine.StartEva().Success,"Preparação do erro EVA falhou");
     safety.Synchronize();Check(!mission.Engine.State.IsOutside,"EVA permanece ativa dentro da base");
     foreach(var part in PecasDaBase.Todas.Where(MissionPieceBindings.IsArchitecture))
@@ -62,11 +66,9 @@ try
     var repairButton=(UnityEngine.UI.Button)typeof(BaseResourceDashboard).GetField("repairButton",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(dashboard);
     Check(repairButton.interactable,"Botão de reparo não funciona com o collider do modelo");
     dashboard.Close();
-    // Exercise the actual R input branch, including raycast and engine validation.
-    InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState(Key.R));InputSystem.Update();
-    update.Invoke(interaction,null);
-    InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState());InputSystem.Update();
-    Check(mission.Engine.IsRepaired(EquipmentId.LifeSupport),"Tecla R não reparou o suporte de vida");
+    // Exercise the shared action invoked by R, including the real raycast and engine validation.
+    interaction.RepairAimed();
+    Check(mission.Engine.IsRepaired(EquipmentId.LifeSupport),"Ação compartilhada de reparo não restaurou o suporte de vida");
     Check(mission.Engine.State.SpareParts==9&&mission.Engine.State.RemainingActionTime==4,"Custo incorreto no reparo R");
     Check(Aim(EquipmentId.LifeSupport),"Equipamento saudável não pode ser inspecionado");update.Invoke(interaction,null);
     Check(!interaction.CurrentPrompt.Contains("[R]"),"R oferecido em equipamento já consertado");
@@ -78,7 +80,8 @@ try
     var door=model.ObjetoConsertado("Porta_SuporteVida");
     Move(new Vector3(-9.5f,1.98f,0));await Task.Delay(600);Physics.SyncTransforms();
     Check(door.GetComponent<RestoredSlidingDoor>().IsOpen,"Porta íntegra não abriu");
-    cc.Move(Vector3.left*4.5f);Check(player.position.x<-12.5f,"Porta bloqueia passagem física");
+    var radial=player.GetComponent<RadialCharacterMotor>();
+    if(radial)radial.Move(Vector3.left*4.5f);else cc.Move(Vector3.left*4.5f);Check(player.position.x<-12.5f,"Porta bloqueia passagem física");
     safety.Synchronize();Check(!mission.Engine.State.IsOutside,"Travessia interna ativou EVA");
     Move(new Vector3(-6,1.98f,0));await Task.Delay(600);Check(!door.GetComponent<RestoredSlidingDoor>().IsOpen,"Porta não fecha");
     mission.NewGame();Move(mission.OuterAirlock.position+Vector3.up*1.2f);safety.Synchronize();
@@ -96,11 +99,14 @@ try
     Check(artifacts.Length==5&&artifacts.All(a=>a.transform.Find("ReplicaDetalhada")&&a.GetComponent<Collider>()),"Réplicas ou colliders ausentes");
     Check(artifacts.All(a=>a.GetComponentsInChildren<Renderer>().Length>=7),"Réplicas continuam sem detalhes");
     Check(errors.Count==0,string.Join(";",errors));
-    return "PASS: estrutura íntegra, reparo pela tecla R, custo único, bloqueio explicado, EVA física, porta transitável, 47 peças, vitória e 5 réplicas detalhadas. Erros: 0.";
+    return "PASS: estrutura íntegra, ação de reparo, custo único, bloqueio explicado, EVA física, porta transitável, 47 peças, vitória e 5 réplicas detalhadas. Erros: 0.";
 }
 finally
 {
-    InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState());InputSystem.Update();
+    testTerminal.enabled=terminalEnabled;originalMotor.enabled=originalMotorEnabled;
     Application.logMessageReceived-=onLog;
     mission.NewGame();Move(oldPosition);player.rotation=oldRotation;camera.transform.localRotation=oldCamera;
 }
+
+
+

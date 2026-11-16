@@ -67,7 +67,7 @@ namespace AstroLab.Gameplay.Editor
             Zone("CorredorSuporte",new Vector3(-10.5f,2.4f,0),new Vector3(4,4.8f,2.9f));
             Zone("CorredorEstufa",new Vector3(11,2.4f,0),new Vector3(5,4.8f,2.9f));
             Zone("CorredorEclusa",new Vector3(0,2.4f,10.5f),new Vector3(2.9f,4.8f,4));
-            Zone("Eclusa",new Vector3(0,2.4f,17.3f),new Vector3(5,4.8f,10));
+            Zone("Eclusa",new Vector3(0,2.4f,14.7f),new Vector3(5,4.8f,4.8f));
             Zone("CorredorAbrigo",new Vector3(9.6f,2.4f,-8.1f),new Vector3(2.9f,4.8f,8.8f),-50);
             safety.Configure(zones.ToArray());EditorUtility.SetDirty(safety);
             int artifacts=ApolloReplicaModels.Apply();
@@ -85,3 +85,4 @@ namespace AstroLab.Gameplay.Editor
     }
 }
 #endif
+

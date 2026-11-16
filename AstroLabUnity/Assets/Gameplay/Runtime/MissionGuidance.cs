@@ -21,6 +21,8 @@ namespace AstroLab.Gameplay
             if (s.Outcome != MissionOutcome.Running) return s.OutcomeReason + "\n[Tab] Ver resultado ou reiniciar missão.";
             if (s.IsOutside && (s.SuitOxygen <= 30 || s.SuitBattery <= 30))
                 return "RETORNE À ECLUSA\nSiga a baliza ECLUSA. [L] junto à entrada. Recarregue o traje antes de sair novamente.";
+            if (!s.IsOutside && (s.SuitOxygen < 45 || s.SuitBattery < 45) && e.IsPowered(EquipmentId.LifeSupport))
+                return "RECARREGUE O TRAJE\nUse [C] dentro da base ou a estação no suporte de vida. Custa 1 ação e restaura O2 e bateria a 100%.";
             var focus = Focus(e);
             if (focus.HasValue)
             {

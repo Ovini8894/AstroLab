@@ -81,7 +81,9 @@ namespace AstroLab.PousoLunar.Editor
                         Check(GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(component.gameObject)==0,"sem scripts ausentes",false);
                     foreach (var renderer in root.GetComponentsInChildren<Renderer>(true))
                         foreach (var material in renderer.sharedMaterials)
-                            Check(material && material.name!="Default-Material" && material.shader && material.shader.name=="AstroLab/Toon","material Toon: "+renderer.name,false);
+                            Check(material && material.name!="Default-Material" && material.shader &&
+                                (material.shader.name=="AstroLab/Toon" || renderer is ParticleSystemRenderer && material.shader.name=="AstroLab/PousoLunar/Particle"),
+                                "material Toon/VFX: "+renderer.name,false);
                 }
                 Debug.Log("LANDING_PASS: referências e materiais da demonstração");
                 Debug.Log("LANDING_PIPELINE: " + (GraphicsSettings.currentRenderPipeline ? GraphicsSettings.currentRenderPipeline.name : "Built-in (verificar QualitySettings)"));

@@ -1,227 +1,113 @@
-# Pouso lunar — AstroLab
+﻿# Pouso lunar — câmera elevada e base visual
 
-Sistema cinematográfico determinístico, independente do FBX final. Implementação em `Assets/PousoLunar`, no projeto Unity localizado em `AstroLabUnity/`.
+## Estado e preservação
 
-## Estado da entrega
+A animação e o ritmo já foram aprovados visualmente pelo usuário. Esta melhoria preserva controlador, trajetória, orientação, RCS, motor, poeira, touchdown, desligamento e APIs públicas de transição. O destino continua **world `(24.2, -0.071624, 20.3)`**, na precisão original da cena. O arquivo `preservacao-apresentacao.json` registra os hashes dos scripts protegidos no início desta melhoria.
 
-Os scripts de runtime e Editor compilaram separadamente com Roslyn e as bibliotecas locais do Unity **6000.6.9f1**, sem erros ou avisos. A cena e o prefab já existem. O ajuste do destino foi aplicado pelas APIs do Editor na instância aberta do Unity, sem regenerar a cena. Consulte [VALIDACAO.md](VALIDACAO.md) para distinguir as verificações atuais do bloqueio de licença ocorrido na implementação inicial.
+A branch permanece `nicholas`. As alterações pendentes anteriores foram mantidas. Não houve commit, push, troca de branch, mudança do FBX ou edição de cenas/scripts dos colegas. Toda a implementação está em `Assets/PousoLunar/`.
 
-O gerador abaixo atende novas demonstrações; para a cena existente, use os comandos de ajuste de destino. Não foram escritos arquivos `.unity` manualmente, alteradas cenas de colegas, instalados pacotes Unity ou modificadas as cenas do build.
+Runtime e Editor compilaram com Roslyn e as referências reais do Unity **6000.6.9f1**, sem erros ou avisos. A validação estática verifica referências locais, novos GUIDs, quatro planos elevados, ambiente visual e preservação dos scripts protegidos/waypoints.
 
-## Estrutura
+**A nova composição ainda não recebeu aprovação visual em Play Mode nesta sessão.** Há um Editor aberto, mas ele ainda não importou os novos scripts nem respondeu ao comando local de status. O descritor de conexão do Pipeline está inacessível neste ambiente; não foi aberta outra instância. Isso é diferente da falha de licenciamento registrada na entrega anterior: o log atual informa licença válida. Não há capturas novas desta melhoria. A aprovação anterior do movimento não deve ser confundida com aprovação dos novos enquadramentos.
+
+## Câmera e quatro tomadas
+
+`LunarLandingCamera.cs` continua dirigindo a **mesma CinemachineCamera**, e o Brain continua responsável pela Camera de saída. Não há outro sistema de câmera nem alteração da animação para compensar o enquadramento.
+
+As quatro âncoras existentes acompanham o ponto observado com uma posição orbital elevada. A elevação é o ângulo para baixo em relação ao alvo; a distância é radial, não apenas horizontal. A órbita usa o referencial mundial: 0° no lado +Z, 90° no lado +X. O setor +Z/+X mostra o dorso e a lateral do orbitador e, no pouso, coloca a base atrás da nave.
+
+| Tomada | Distância | Elevação | Órbita | FOV | Transição |
+|---|---:|---:|---:|---:|---:|
+| Approach — `establishing` | 28 m | 32° | 35° | 46° | 2 s |
+| Deceleration — `approach` | 22 m | 30° | 55° | 44° | 2 s |
+| VerticalDescent — `descent` | 19 m | 34° | 40° | 46° | 2 s |
+| Touchdown/final — `final` | 23 m | 30° | 45° | 48° | 2 s |
+
+O nome histórico do campo `approach` corresponde à segunda tomada/desaceleração. As três primeiras miram o `motionRoot`; a última mira `LandingPoint`. Todas usam offset `(0,3.8,0)`, próximo ao centro do orbitador de 8 m.
+
+As transições interpolam posição e ponto observado e só então calculam a direção da câmera. Isso evita perder o sujeito por interpolar duas rotações independentes. O cálculo é determinístico: `Sample()` continua produzindo a mesma pose para o mesmo instante, sem acumular atraso. `smoothing` varia entre transição linear e curva suave de aceleração/desaceleração; não introduz amortecimento dependente de frame rate. A trajetória aprovada já fornece o acompanhamento contínuo.
+
+Para ajustar: selecione `RocketLandingRoot > LandingCameraRig`, abra o componente `LunarLandingCamera` e edite `distance`, `elevation`, `orbitAngle`, `targetOffset`, `fieldOfView`, `blendDuration` e `smoothing` da tomada. `followTarget=true` usa a receita orbital e atualiza a âncora existente; `false` mantém sua posição fixa, editável manualmente. A receita tem prioridade sobre arrastar uma âncora no modo de acompanhamento.
+
+A cena já estava salva com Brain **LateUpdate** e Blend Update **LateUpdate** quando foi inspecionada nesta melhoria. O prefab usa **SmartUpdate**, também automático e compatível. Não foram introduzidas chamadas `ManualUpdate()`. A iluminação/toon existentes foram preservados; o brilho e o enquadramento do dorso precisam da inspeção visual final.
+
+## Base lunar visual reutilizada
+
+A investigação confirmou que `Assets/BaseLunar/Cenas/Lua.unity` e `Assets/Nicholas/Cenas/MissaoNicholas.unity` usam `Assets/BaseLunar/Modelos/BaseLunar.fbx`, GUID `a564f47d55b9d42f8a7b4b43e84134c3`. Não existe um prefab visual independente de base nessas pastas. A raiz GameObject real do FBX tem ID `919132149155446097`, identificado na referência da cena.
+
+O FBX contém o Hub, abrigo, eclusa, estufa, suporte de vida, usina, corredores, tanques, 31 painéis solares e rochas. Ambas as cenas mantêm a raiz na origem, rotação identidade, sem overrides de materiais ou transforms dos filhos. A montagem visual pode assim compartilhar os mesmos meshes/materiais e manter as posições originais.
+
+A cena de pouso e o novo prefab `Prefabs/LunarBaseVisualEnvironment.prefab` possuem uma receita `LunarLandingEnvironment` ligada à raiz GameObject correta do FBX. Ao habilitar, `EnsureBuilt()` cria **somente Transform, MeshFilter e MeshRenderer** dos elementos necessários. As malhas e os materiais são compartilhados por referência; nenhum arquivo grande é copiado. Não instancia os GameObjects originais nem os seus scripts.
+
+São excluídos terreno, helpers `COL_`/`SPAWN_`/`WP_`, céu/Terra e estrelas. As estruturas e painéis ficam nas coordenadas originais; as rochas são limitadas a um raio horizontal de 70 m do pouso, configurável por `nearbyRockRadius`. O único terreno continua sendo `LandingTerrain_ExistingBlenderMesh`. Não são criadas luzes direcionais, câmeras, AudioListeners, HUD, scanners ou sistemas de missão.
 
 ```text
-PousoLunar/
-  Scripts/       runtime, estados, câmera, efeitos e integração
-  Editor/        Inspector, gerador de assets e harness de validação
-  Cenas/         destino de PousoLunar.unity (gerado pelo menu)
-  Prefabs/       destino de RocketLandingRoot.prefab (gerado pelo menu)
-  Blender~/      reservado; nenhum modelo novo foi necessário
-  Modelos/       reservado para FBX de responsabilidade deste sistema
-  Documentacao/  instruções, resultado de validação e compilação local
+PousoLunar.unity
+  RocketLandingRoot
+    RocketMotionRoot / RocketVisualSocket / FinalSpacecraftModel
+    LandingWaypoints
+    LandingCameraRig
+  LandingTerrain_ExistingBlenderMesh       terreno único existente
+  LandingSun / LandingCartoonStyle         iluminação existente
+  LunarBaseVisualEnvironment               origem e escala unitária
+    GeneratedLunarBaseVisuals              apenas transforms/meshes/renderers
 ```
 
-## Arquitetura e responsabilidades
+Os filhos automáticos são transitórios (`DontSaveInEditor`/`DontSaveInBuild`); a receita e as referências ficam persistidas. São remontados ao abrir a cena/entrar em Play e não são recriados por frame. `MatchesTerrain()` compara mesh, posição, rotação e escala do terreno com a origem, além de exigir identidade do ambiente. Não mova a base visual ou o terreno para melhorar a câmera.
 
-| Arquivo | Responsabilidade |
+Opcionalmente, **AstroLab > Pouso Lunar > Ambiente > Recriar prefab visual da base** extrai um snapshot visual de `Lua.unity` em uma PreviewScene de Editor. Esse caminho também preserva três ajustes de shadow casting da cena que a receita direta do FBX não captura. Não altera `Lua`, não carrega gameplay em runtime e não chama `AssetDatabase.SaveAssets()`.
+
+O montador de Editor pode abrir temporariamente a fonte em PreviewScene para ler referências; o Play isolado carrega somente PousoLunar. Não há carregamento aditivo do gameplay na cinemática.
+
+## Erros investigados
+
+| Mensagem | Evidência e correção |
 |---|---|
-| `LunarLandingState.cs` | Estados e tipos de UnityEvent serializáveis. |
-| `LunarLandingController.cs` | Relógio único, trajetória Hermite, descida vertical, alinhamento, contato, assentamento, eventos, reset e configuração do visual. |
-| `LunarLandingCamera.cs` | Quatro planos, interpolação analítica de posição/rotação/FOV e alvos configuráveis; dirige uma CinemachineCamera passiva. |
-| `LunarLandingEffects.cs` | Adapter opcional para partículas, áudio e eventos de intensidade de emissão. |
-| `LunarLandingTransition.cs` | API estática da viagem, fade-out, carga assíncrona e preparação antes do início; reutiliza `AstroLab.Menu.TransicaoPreta` para o fade-in. |
-| `LunarLandingSceneLink.cs` | Handoff opcional para Lua e coordenação de entrada na cena. |
-| `Editor/LunarLandingEditor.cs` | Inspector com comandos de teste e gerador isolado de cena/prefab. |
-| `Editor/LunarLandingValidation.cs` | Harness de trajetória/eventos/material e teste de Play Mode em lote. |
-| `Editor/LunarLandingSiteEditor.cs` | Ajuste mundial do destino, amostragem dos triângulos, alinhamento do terreno local e atualização do prefab existente. |
-| `Editor/LunarLandingSiteValidation.cs` | Compara Lua/demonstração, testa a trajetória contra terreno/ambiente e executa os testes originais em uma cena temporária isolada. |
-| `Documentacao/validar-compilacao.ps1` | Compilação externa de runtime e Editor usando referências locais; não substitui os testes no Unity. |
+| `sourceModel` esperava GameObject, mas recebeu Prefab | Confirmada repetidamente em `Logs/Editor.log`. O prefab usava ID `100100000`, que representa o objeto Prefab do FBX. A cena já havia sido corrigida e foi preservada. O prefab agora aponta ao GameObject real `919132149155446097`. |
+| `InvalidCastException` | O stack do mesmo log aponta `Instantiate<T> → LunarLandingSpacecraft.EnsureBuilt → OnEnable`. A referência incompatível era a causa; corrigir o prefab remove essa causa, sem alterar o sistema de propulsão. A ausência de recorrência precisa do próximo Play. |
+| `CinemachineBrain.ManualUpdate...` | Não encontrada no log atual. A cena já usa LateUpdate; o controlador não chama ManualUpdate. Nenhuma correção especulativa foi aplicada. |
+| Dois AudioListeners | Não encontrada no log atual. A cena isolada tem um listener; o ambiente visual não pode criar outro. Nenhum listener de gameplay foi desabilitado globalmente. |
 
-```text
-RocketLandingRoot [Controller, Effects, SceneLink]
-  RocketMotionRoot                 ← único Transform animado
-    RocketVisualSocket            ← vazio no prefab reutilizável
-    EngineEffectsSocket
-    LandingEffectsSocket
-  LandingCameraRig
-    LandingOutputCamera [Camera, CinemachineBrain, AudioListener]
-    LandingCinemachine [CinemachineCamera sem pipeline procedural]
-    Shot1_Establishing / Shot2_Approach / Shot3_Descent / Shot4_Final
-  LandingWaypoints
-    Approach / Deceleration / VerticalDescent / LandingPoint
-```
+`LunarLandingModelResolver.CaptureModelIdentity()` registra o objeto real obtido por `AssetDatabase.LoadAssetAtPath<GameObject>` e seu GUID/fileID em `identidade-modelo-unity.json` quando o Editor importar os scripts. O ID é gravado como string para não perder precisão de 64 bits em JavaScript. O resolver também atua no processamento da cena para build. O menu **Reparar referências serializadas do modelo** salva somente o prefab e uma cena de pouso elegível, sem descartar cenas sujas e sem SaveAssets.
 
-Não existe dependência de nome, dimensão, pivô ou estrutura do FBX. Nenhuma malha é criada por C# ou por primitivas Unity. Os scripts usam o assembly padrão do projeto; `AstroLab.Menu` e Cinemachine já estão disponíveis como referências automáticas.
+## Como validar no Unity
 
-## Estados e relógio
+1. Use a única sessão aberta do Unity 6000.6.9f1. Preserve/salve seu trabalho antes de sair de Play ou trocar de cena.
+2. Aguarde a importação e compilação dos scripts. Abra **somente** `Assets/PousoLunar/Cenas/PousoLunar.unity`, em modo Single. Não abra MissaoNicholas manualmente para este teste.
+3. Confira a montagem da nave e de `LunarBaseVisualEnvironment`; o ambiente deve mostrar estruturas/painéis sem outro terreno, câmera, listener ou HUD.
+4. Execute **AstroLab > Pouso Lunar > Validar modelo final e VFX em Play isolado**. O teste recusa sessões já em Play ou cenas com trabalho não salvo. O menu **Configurar apresentação e base visual** reaplica o preset dos quatro planos e instala o ambiente em uma cena limpa; não é necessário para o conteúdo já configurado.
+5. O validador observa quadros reais e solicita capturas em 6, 11, 21 e 23,5 s: `play-approach.png`, `play-deceleration.png`, `play-descent.png`, `play-touchdown.png`, em `Documentacao/`.
+6. Confere a Camera de saída contra o estado da Cinemachine, a nave inteira dentro do frustum, câmera elevada, base no frustum final, terreno único/alinhado, ambiente estritamente visual, um listener, ausência de HUD, partículas RCS/motor/poeira, destino exato e desligamento. A checagem de frustum não prova ausência de oclusão nem qualidade artística.
+7. Leia `ULTIMO_TESTE_PLAY.md`, gerado somente ao executar o teste, e inspecione as quatro imagens. Confira cockpit/asas legíveis, transições sem cortes, nave sem oclusão, base ao fundo, plumas e poeira visíveis. A aprovação visual depende dessas capturas reais.
 
-`Idle → TransitionIn → Approach → Deceleration → VerticalDescent → Touchdown → EngineShutdown → Completed`.
+O teste ativa `runInBackground` e solicita atualizações de quadros apenas durante sua execução; restaura o valor anterior ao retornar a Edit Mode. Se ainda existir Brain manual, o harness conserva sua investigação de reprodução antes de persistir qualquer correção. Na configuração atual automática, esse trecho não é necessário.
 
-- `PrepareLanding()` valida e captura os waypoints, reseta efeitos, posiciona o rig e entra em `TransitionIn` sem animar.
-- `BeginLanding()` prepara quando necessário e inicia a aproximação. Retorna `false` se já houver animação em andamento ou a configuração for inválida.
-- Aproximação e desaceleração usam Hermite com velocidades coincidentes na junção. A desaceleração termina com a velocidade inicial da descida vertical.
-- A curva vertical padrão `2t - t²` reduz a velocidade continuamente até zero. A duração vertical padrão é 8 s; com `useDescentVelocity`, o tempo deriva da altura e de `descentVelocity`.
-- No contato, `touchdown` dispara uma vez; um micro rebote fica apenas acima do plano de contato e retorna à posição exata. O pivô do movimento nunca atravessa esse plano.
-- `EngineShutdown` inclui a redução de efeitos durante `engineShutdownDuration` e depois a espera estacionária de `finalCinematicDuration`.
-- `completed` e o evento C# `Completed` disparam somente após a tomada final. O destino final é exatamente a posição/rotação capturada de `LandingPoint`, com `finalRotationOffset` aplicado.
-- `Advance(double)` permite amostrar com deltas controlados. Mesmo um delta longo percorre todos os estados e eventos; durante o jogo, apenas o controller o chama em `Update`, com `Time.unscaledDeltaTime`.
-- `ResetLanding()` interrompe e limpa o estado. `RestartLanding()` reseta e inicia novamente. Desabilitar o controlador cancela a execução.
+O Inspector do controlador mantém os botões de iniciar/reiniciar/resetar e os indicadores de estado/tempo. Os testes individuais de RCS, motor e poeira continuam nos respectivos componentes e no Inspector da nave. O componente `LunarLandingEditorSession` aceita apenas comandos locais tipados de status/configuração/validação, via arquivos em Documentacao, para usar o Editor já aberto quando uma conexão de automação não estiver disponível; não avalia código arbitrário nem inicia um Editor.
 
-Não altere durações ou waypoints durante uma tomada: configure em `Idle` e reinicie. As referências espaciais são capturadas na preparação. Curvas devem ser monotônicas de (0,0) a (1,1); há verificação amostral de configuração. As curvas lineares padrão de aproximação/desaceleração preservam as velocidades nas junções. Personalizar as tangentes das curvas pode alterar essa continuidade.
+## Nave e propulsão preservadas
 
-## Criar e testar no Unity
+Modelo: `Assets/CentroTreinamento/Modelos/OnibusEspacial.fbx`, commit `7df2af4`, GUID `614bef39780f3af439767de6f4943616`. `LunarLandingSpacecraft` mantém apenas o orbitador visível e normaliza sua altura para 8 m, dentro de `RocketVisualSocket`. O antigo preview não retorna. Consulte [INSPECAO_MODELO.md](INSPECAO_MODELO.md).
 
-1. Ative a licença do Unity 6000.6.9f1 e abra **este** projeto (`AstroLabUnity`). Não abra uma segunda instância do mesmo projeto.
-2. Aguarde a compilação. Execute **AstroLab > Pouso Lunar > Criar demonstração isolada**.
-3. O comando cria `Prefabs/RocketLandingRoot.prefab` e `Cenas/PousoLunar.unity`. Usa uma cena aditiva nova, não salva a cena previamente aberta e não chama Save Project nem `AssetDatabase.SaveAssets`.
-4. Abra `Assets/PousoLunar/Cenas/PousoLunar.unity`. Entre em Play Mode. `playOnStart` inicia o pouso.
-5. Selecione `RocketLandingRoot`: o Inspector mostra estado e tempo e oferece **Iniciar pouso**, **Reiniciar pouso**, **Resetar posição** e **Selecionar ponto de pouso**.
-6. Ative Gizmos e selecione o rig: as curvas, waypoints e normal de contato ficam visíveis. Selecione `LandingCameraRig` para ver posições e linhas dos alvos das câmeras.
-7. A demonstração inclui um preview removível de `Assets/MenuInicial/Modelos/Foguete.fbx`, já produzido em Blender. Ele não representa o futuro modelo de pouso. Remova/desative `PREVIEW_ExistingBlenderRocket_RemoveForFinalFBX` para testar sem modelo.
-8. O prefab permanece sem visual. Os efeitos ficam desconectados por padrão; a tomada deve concluir mesmo assim. Observe o evento `completed` no Inspector ou conecte seu listener C#.
-9. Execute **AstroLab > Pouso Lunar > Validar trajetória e eventos** para executar o harness em Edit Mode. Ele deve registrar `LANDING_VALIDATION_PASS`.
+`LunarLandingEffects` encaminha o perfil existente ao motor e à poeira; RCS mede a mudança real de atitude. O motor mantém três bocais, núcleo/expansão/brilho, modulação e shutdown. A poeira mantém emissão pela altura/empuxo, distribuição radial e aceleração de 1,62 m/s². Seus scripts não foram alterados nesta melhoria.
 
-O gerador não sobrescreve uma cena ou prefab já existente. Para ajustar assets gerados, edite e salve explicitamente apenas esses arquivos. O cenário usa somente o mesh `Terreno_Lua` do FBX existente, com material de regolito, preservando seu sistema de coordenadas original. O ponto de contato acompanha a altura real do terreno. Não carrega scripts, jogadores, colliders ou gameplay da Base Lunar.
+A sequência e a API de integração permanecem: viagem externa → fade/load → aproximação → desaceleração/RCS → descida/motor → touchdown/poeira → shutdown/plano final → transição para gameplay, quando habilitada pela configuração existente. Nenhum spawn ou sistema de viagem foi modificado.
 
-## Destino escolhido perto da base
+## Limitações e verificações reproduzíveis
 
-O marcador `PontoPousoEscolhido` foi selecionado com `MissaoNicholas` e `PousoLunar` abertos aditivamente, em **world (24.2, 0, 20.3)**, rotação zero e escala unitária. Ele foi preservado. Sua posição XZ é o destino; Y foi corrigido pela interseção vertical com os triângulos reais, sem offset arbitrário.
+- A composição, a iluminação percebida e a visibilidade da base ainda precisam do novo Play com capturas.
+- A receita direta do ambiente não inclui três overrides de shadow casting específicos de Lua; use o builder de snapshot se esses detalhes forem necessários. Posições e materiais correspondem à origem verificada.
+- O Shuttle original não possui sapatas nem representa um pousador lunar físico. Essa limitação anterior não foi alterada, pois o movimento foi aprovado e deve ser preservado.
+- [CHECAGEM_ROCHA.md](CHECAGEM_ROCHA.md) registra a proximidade de `Rocha_2123`: o topo fica 52,59 mm acima do contato central; há sobreposição conservadora de AABBs, sem prova de colisão entre triângulos. A rocha e o destino foram preservados.
 
-**Contato configurado: aproximadamente world (24.2, -0.071624, 20.3), rotação (0,0,0).** Diferenças inferiores a alguns milionésimos de metro decorrem da aritmética de ponto flutuante da transformação dos vértices.
-
-O gerador antigo tinha deslocado somente o terreno da demonstração em **Y=-0.02471396** para zerar o solo na origem. Isso deixava a superfície em cerca de **-0.096338** no novo destino, incompatível com a instância de `MissaoNicholas`, cujo terreno está em posição zero, rotação aproximadamente X=270.02° e escala 100 (conversão do FBX). O ajuste removeu esse deslocamento apenas na demonstração, copiando o TRS da referência lunar. Não altera a geometria, o asset FBX ou as cenas de gameplay.
-
-Todos os waypoints e anchors de câmera foram transladados em coordenadas mundiais pelo mesmo delta. Os valores aproximados do rig atual são:
-
-| Waypoint | Posição mundial |
-|---|---|
-| Approach | (-35.8, 64.928376, 20.3) |
-| Deceleration | (4.2, 31.928376, 20.3) |
-| VerticalDescent | (24.2, 17.928376, 20.3) |
-| LandingPoint | (24.2, -0.071624, 20.3) |
-
-O enquadramento final mantém altura, distância e FOV, mas posiciona o anchor no lado externo, mirando o foguete com a origem da base ao fundo. Os blends e o controlador de câmera não foram substituídos.
-
-Para reaplicar o destino atual: **AstroLab > Pouso Lunar > Aplicar ponto escolhido (24.2, 20.3)**. Para mudar:
-
-1. Saia do Play Mode e coloque um marcador no novo XZ, usando o Inspector em coordenadas mundiais.
-2. Selecione esse marcador e execute **AstroLab > Pouso Lunar > Aplicar marcador selecionado como destino**.
-3. O comando usa `MissaoNicholas`/`Lua` carregado como referência; se nenhum estiver aberto, consulta `Lua` em uma PreviewScene temporária, sem salvá-la.
-4. A altura é amostrada da malha real. Waypoints/câmeras são deslocados com `Transform.position`, respeitando offsets dos pais. A cena e o prefab de pouso são salvos; outros objetos não são recriados. Alterações já existentes na cena de pouso são preservadas.
-5. Inspecione o apoio das pernas e o enquadramento, e execute **AstroLab > Pouso Lunar > Validar destino e ambiente carregado**, com `MissaoNicholas` carregado para incluir a checagem do ambiente.
-
-Para um ajuste manual, `LandingPoint` e todos os anchors continuam editáveis no Inspector. Preserve o alinhamento vertical de `VerticalDescent`; mover somente `LandingPoint` não desloca automaticamente os demais anchors. O comando de destino evita essa inconsistência e pode ser repetido sem acumular deslocamentos.
-
-As cenas `MissaoNicholas` e `Lua` e o spawn do jogador não são alterados. Para filmar a **base** ao fundo, o ambiente da missão precisa estar carregado: a demonstração standalone contém somente o terreno existente. O ajuste não copia prédios nem gameplay para a cena de pouso.
-
-Validação atual: teste de trajetória/câmera/estados no Editor e tomada completa em Play Mode aprovados; Play Mode registrou conclusão correta e zero erros durante o teste. Na conferência espacial, 2.561 renderers foram consultados sem conflito de volumes com prédios/painéis. Há um aviso conservador para a pequena rocha `Rocha_2123` perto do contato; conferir os apoios com o FBX final. Não foi elevado o ponto de pouso para mascarar essa irregularidade. Consulte o registro e a [captura do plano final](preview-ponto-pouso.png).
-
-Para testar com as duas cenas aditivas, evite renderizar dois terrenos/sols coincidentes: desative temporariamente os objetos equivalentes **da demonstração**, sem salvar essa alteração se a cena também for usada sozinha. O HUD/câmera do gameplay pode aparecer nesse teste aditivo; a captura de validação usa explicitamente `LandingOutputCamera` sem overlay. O Play Mode automatizado foi executado somente com a cena de pouso.
-
-## Configurar posição, orientação e câmeras
-
-- O pivô de `RocketMotionRoot` representa o ponto de contato com o solo, não necessariamente o pivô do FBX.
-- Posicione `LandingPoint` na superfície. Seu Y local define a normal; sua rotação define o alinhamento final.
-- Posicione `VerticalDescent` diretamente acima, ao longo desse Y local. Desalinhamento lateral é rejeitado para evitar correções bruscas.
-- Posicione `Approach` e `Deceleration` no trajeto, fora da hierarquia animada. A rotação de `Approach`, somada a `initialInclination`, define a atitude inicial.
-- Ajuste durações, `approachSpeed`, curvas e `settlingHeight`. O valor padrão do assentamento é 5 cm, apenas para cima.
-- Posicione os quatro anchors da câmera no cenário; configure target, offset, FOV e blend de cada plano. A duração efetiva do blend é limitada pela duração da fase para completar antes da próxima transição.
-- O Brain dirige somente a câmera criada no rig. Nenhuma câmera de outra cena é alterada. Cinemachine 6.6 já está instalado; não houve instalação de pacotes.
-- O controller protege o plano do waypoint, não a malha real do terreno. Verifique inclinação, irregularidades e apoio de todas as pernas ao conectar o modelo final.
-
-## Integrar a viagem Terra–Lua
-
-Inclua a cena de pouso no **Build Profiles > Scene List** do perfil utilizado. O caminho padrão é `Assets/PousoLunar/Cenas/PousoLunar.unity`. O código não altera essa lista automaticamente.
-
-No término da viagem, em um evento único:
-
-```csharp
-using AstroLab.PousoLunar;
-
-bool started = LunarLandingTransition.BeginLanding();
-// false: outra transição está ativa ou a cena não está disponível no build.
-```
-
-Também existe `BeginLanding(string scenePath)` para uma cena configurada pela equipe. O fluxo é fade-out → carga single → `PrepareLanding()` → fade-in → `BeginLanding()`. A API usa tempo não escalado. O objeto de transição persiste somente durante a troca.
-
-Mantenha `LunarLandingSceneLink` junto ao controller na cena de destino: ele desativa o autoplay quando a cena é reivindicada pela transição. Não dispare um segundo fade externo na mesma troca. A viagem Terra–Lua não é implementada aqui.
-
-O fade existente `TransicaoPreta` oferece apenas a revelação após a troca. Por isso, o adapter local adiciona o escurecimento anterior, sem substituir nem modificar o sistema do menu. A revelação existente começa com dois quadros de preparação; o controller é preparado imediatamente após a carga. Essa temporização precisa da validação em Play Mode.
-
-## Integrar Lua e devolver controle
-
-O caminho verificado no repositório é **`Assets/BaseLunar/Cenas/Lua.unity`**, já habilitado em `ProjectSettings/EditorBuildSettings.asset`. Confira também a lista efetiva do perfil de build.
-
-Na demonstração, `LunarLandingSceneLink.loadMoonOnCompletion` fica **desativado** para permitir inspecionar o resultado. Ative para o fluxo completo. Quando `Completed` dispara após a tomada final, o link chama `LunarLandingTransition.LoadMoon()`: fade-out → carga single da Lua → fade-in existente. O gameplay da Lua inicializa normalmente por seus próprios componentes.
-
-Para integração gerenciada por outro sistema, deixe a carga automática desativada e escute `controller.Completed` ou `completed` no Inspector. Desinscreva listeners C# em `OnDestroy`/`OnDisable`. Também existe `ContinueToMoon()` no link, acessível por UnityEvent.
-
-Não há transferência de jogador, inventário ou estado de missão entre cenas. Caso a equipe precise disso, conecte o evento ao gerenciador de sessão existente. Nenhum objeto ou script de `BaseLunar` precisa ser editado.
-
-## Conectar o FBX final
-
-1. Importe o FBX no diretório acordado com o autor; se pertencer a este módulo, use `Modelos/`.
-2. Duplique/instancie o prefab do rig em uma cena de responsabilidade da equipe. Remova apenas o preview da demonstração.
-3. Instancie o FBX sob `RocketVisualSocket`; não mova o controller para dentro do FBX.
-4. Configure materiais existentes compatíveis com `AstroLab/Toon` e o contorno do projeto. Não use materiais padrão ou URP/Lit.
-5. Ajuste posição, escala e rotação **locais do modelo**, fazendo a base das pernas coincidir com a origem de `RocketMotionRoot`. O eixo de subida do movimento é o Y de `LandingPoint`.
-6. Verifique bounds, silhueta, altura da câmera e apoio das pernas. Nenhuma dimensão do modelo está embutida na animação.
-7. Posicione `EngineEffectsSocket` nos motores e conecte os efeitos opcionais. Se houver vários motores, use filhos/efeitos próprios e os eventos de intensidade.
-8. Teste aproximação, contato e tomada final. Não é necessário mudar a lógica C#.
-
-Também pode configurar uma instância por código:
-
-```csharp
-controller.ConfigureVisual(model.transform, localPosition, localEulerAngles, localScale);
-```
-
-O método não destrói o visual anterior: a substituição e a propriedade do asset ficam com o chamador.
-
-## Configurar efeitos e áudio
-
-Todos os campos de `LunarLandingEffects` são opcionais. Conecte ParticleSystems já preparados em `engine`, `dust` e `touchdownBurst`. Configure materiais, cores, lifetime e tamanhos conforme `ArtBible.md`/`PaletaLua`.
-
-- Engine e dust: `playOnAwake` desligado, looping conforme necessário, emission por tempo. O adapter controla `rateOverTime`; remova bursts/rate-over-distance independentes se quiser corte total de emissão.
-- Dust e touchdown: simulação em **World**, para não arrastar partículas com o foguete. O adapter ancora os emissores no ponto de contato capturado.
-- A emissão de dust sobe perto do fim da descida, atinge o máximo no contato e cai no shutdown. O lifetime deve permitir dissipar a poeira antes da tomada final.
-- `engineAudio`: clip já existente, looping, `playOnAwake` desligado e mixer do projeto quando aplicável; o adapter controla volume e Play/Stop. Nenhum clip novo é criado.
-- `engineIntensity` e `dustIntensity` permitem conectar emissão de materiais ou VFX próprios. `stateChanged` sinaliza desaceleração/shutdown e `onTouchdown` dispara feedback de contato.
-- Não conecte o mesmo sistema como engine e dust. Não crie luzes extras para o motor sem necessidade.
-
-## Validação e comandos
-
-Compilação local, na raiz do repositório:
+Da raiz `AstroLabUnity`:
 
 ```powershell
-& ./AstroLabUnity/Assets/PousoLunar/Documentacao/validar-compilacao.ps1
+& Assets/PousoLunar/Documentacao/validar-compilacao.ps1
+node Assets/PousoLunar/Documentacao/validar-configuracao.cjs
 ```
 
-Requer o cache `Library/Bee` e a instalação local do Editor. A saída fica em `%TEMP%/AstroLab-PousoLunar-Compilation`, sem escrever assemblies no projeto. Compila fontes existentes de fade/paleta somente como referências de validação, sem modificá-las.
+A compilação externa não substitui o Unity importando/renderizando os assets. A validação estática compara os hashes protegidos, controlador e waypoints; aceita explicitamente os ajustes da câmera e rejeita `sourceModel` apontando ao Prefab incompatível.
 
-Com o Editor fechado e licenciado, validação em lote:
+Arquivos desta melhoria: câmera existente; novo ambiente runtime, prefab e builder de Editor; configuração de apresentação; diagnóstico da sessão; validador em Play ampliado; resolver/receita de referências corrigidos; cena/prefab e documentação atualizados. Nenhum novo pacote foi instalado.
 
-```text
-Unity.exe -batchmode -nographics -quit -projectPath <CAMINHO>/AstroLabUnity -executeMethod AstroLab.PousoLunar.Editor.LunarLandingValidation.BuildAndValidate -logFile <LOG>
-Unity.exe -batchmode -nographics -projectPath <CAMINHO>/AstroLabUnity -executeMethod AstroLab.PousoLunar.Editor.LunarLandingValidation.StartPlayValidation -logFile <LOG>
-```
-
-Não use `-quit` no segundo comando: o harness sai após conclusão ou timeout. Não rode esses comandos se o mesmo projeto já estiver aberto.
-
-O harness verifica: início e bloqueio de duplicação, todos os estados com delta longo, eventos únicos, precisão do contato, reset/reinício, reprodução com passos distintos, posição/rotação de câmera, continuidade de posição, ausência de penetração no plano e referências/materiais dos assets gerados. O teste de Play Mode verifica conclusão e erros registrados durante a tomada. Fade entre cenas, áudio/VFX conectados e tomada visual devem ser conferidos manualmente no Editor.
-
-## Limitações e decisões de integração
-
-- O bloqueio de licença pertence à implementação inicial; os resultados do ajuste atual estão em `VALIDACAO.md`. Não se deve inferir uma aprovação visual do modelo final a partir do preview.
-- FBX final, efeitos e áudio definitivos dependem dos responsáveis; o preview existente é somente para inspeção da animação.
-- A demonstração reutiliza o mesh de terreno e um sol próprio em uma cena isolada; não adiciona sistemas de gameplay, nem duplica a cena Lua.
-- `IluminacaoCartoon` e os shaders existentes preservam a direção de arte. Não foi criada uma nova família de shaders ou configuração de pós-processamento. O renderer ativo deve manter o recurso de contorno existente.
-- Sem física, colisão dinâmica, correção automática para dimensões do FBX ou armazenamento de estado de missão.
-- Um rig ativo por cena de pouso. O bloqueio de animação é por controller; o bloqueio da transição é global.
-- Não use callbacks de estado para iniciar repetidamente novas sequências; integre conclusão com uma única troca de cena.
-- Build Profiles, ativação da carga automática de Lua e ajuste visual final são configurações manuais deliberadas.
-
-## Referências consultadas
-
-Skill oficial `Unity-Technologies/skills`, `craft-game-floors`, commit `e5956e7e34a125982550de15a9e87f8e66af7d86`: `SKILL.md`, `art-direction.md`, `scene-lighting.md`, `toon-shading.md`, `camera-rigs.md`, `placeholder-assets.md`, `vfx.md`, `visual-scorecard.md`. As escolhas existentes do projeto e as restrições do pedido prevalecem: não foram usados placeholders primitivos, instalados pacotes ou alterados sistemas alheios. A revisão visual da skill permanece pendente pela licença.
-
-APIs conferidas na documentação oficial: [LoadSceneAsync 6000.6](https://docs.unity.com/en-us/engine/6000.6/script-reference/unityengine/scenemanagement/scenemanager/loadsceneasync), [AnimationCurve 6000.6](https://docs.unity.com/en-us/engine/6000.6/script-reference/unityengine/animationcurve), [CinemachineCamera 6.6](https://docs.unity3d.com/Packages/com.unity.cinemachine@6.6/manual/CinemachineCamera.html), [ParticleSystem.EmissionModule 6000.6](https://docs.unity3d.com/6000.6/Documentation/ScriptReference/ParticleSystem.EmissionModule.html). Foi inspecionada também a fonte local do pacote Cinemachine instalado.
+Referências consultadas: `craft-game-floors`, `references/camera-rigs.md`, `references/visual-scorecard.md`, `Assets/ArtBible.md`, fonte instalada do Cinemachine 6.6 e [CinemachineBrain 6.6](https://docs.unity3d.com/Packages/com.unity.cinemachine@6.6/manual/CinemachineBrain.html). Não foi atribuída pontuação visual sem frames reais da nova composição.

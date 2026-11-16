@@ -7,25 +7,28 @@ namespace AstroLab.PedroH
 {
     /// <summary>
     /// Gerencia o HUD simplificado da viagem espacial Terra -> Lua na cena NaveEspacial:
-    /// mantém apenas o essencial (oxigênio em 100% e progresso rumo à Lua), oculta o painel
-    /// permanente de missão ativa e exibe avisos centrais claros e temporários ao desacoplar.
+    /// mantém oxigênio em 100%, progresso rumo à Lua, dica clara de controles e
+    /// avisos centrais temporários (desacoplamento, alerta antecipado de asteroides e chegada).
+    /// Sem qualquer referência à etapa de frenagem orbital nesta cena.
     /// </summary>
     [DisallowMultipleComponent]
     public class HudViagemFoguete : MonoBehaviour
     {
-        [Header("Controlador da Viagem")]
+        [Header("Controlador e Sistemas da Viagem")]
         public ViagemLunarController viagemController;
+        public GerenciadorAsteroidesViagem gerenciadorAsteroides;
 
         [Header("Indicadores Essenciais do HUD")]
         public TMP_Text oxigenioValorTexto;
         public Image oxigenioBarra;
         public TMP_Text progressoLuaValorTexto;
         public Image progressoLuaBarra;
+        public TMP_Text dicaControlesTexto;
 
         [Header("Elementos Ocultos na Fase (HUD Simplificado)")]
         public GameObject[] elementosOcultarNaFase;
 
-        [Header("Aviso Central Temporário (Desacoplamento / Manobras)")]
+        [Header("Aviso Central Temporário (Desacoplamento / Asteroides)")]
         public GameObject painelAvisoCentral;
         public CanvasGroup canvasGroupAviso;
         public TMP_Text tituloAvisoTexto;
@@ -33,16 +36,18 @@ namespace AstroLab.PedroH
 
         [Min(1f)] public float duracaoAvisoDesacoplar = 5.5f;
         [Min(0.4f)] public float duracaoConfirmacaoDesacoplado = 1.25f;
-        [Min(1f)] public float duracaoAvisoFreioLunar = 4.0f;
+        [Min(0.8f)] public float duracaoAlertaAsteroide = 6.0f;
+        [Min(0.8f)] public float duracaoImpactoAsteroide = 1.6f;
         [Min(1f)] public float velocidadeFade = 7f;
 
         private MinigameSeparacaoEstagios estagiosVinculados;
-        private MinigameFreioOrbitalLunar freioVinculado;
+        private GerenciadorAsteroidesViagem asteroidesVinculados;
         private ViagemLunarController controllerEventos;
 
         private bool avisoVisivel;
         private bool avisoDeDesacoplamentoAtivo;
-        private bool avisoDeFreioAtivo;
+        private bool avisoDeAsteroideRotaAtivo;
+        private AsteroideObstaculo ultimoAsteroideAlertadoNoHud;
         private float tempoRestanteAviso;
         private int ultimoPercentualExibido = -1;
 
@@ -82,13 +87,39 @@ namespace AstroLab.PedroH
             if (viagemController != null &&
                 (controllerEventos != viagemController ||
                  (viagemController.minigameEstagios != null && estagiosVinculados != viagemController.minigameEstagios) ||
-                 (viagemController.minigameFreioOrbital != null && freioVinculado != viagemController.minigameFreioOrbital)))
+                 (gerenciadorAsteroides != null && asteroidesVinculados != gerenciadorAsteroides)))
             {
                 VincularEventos();
             }
 
             AtualizarProgressoLua();
+            VerificarAlertaAsteroidePendente();
             AtualizarAvisoTemporario(Time.deltaTime);
+        }
+
+        private void VerificarAlertaAsteroidePendente()
+        {
+            if (avisoDeDesacoplamentoAtivo)
+                return;
+
+            if (avisoDeAsteroideRotaAtivo && gerenciadorAsteroides != null && gerenciadorAsteroides.AsteroideAlertaAtual != null)
+            {
+                if (subtituloAvisoTexto != null)
+                    subtituloAvisoTexto.text = FormatarDicaDesvio(gerenciadorAsteroides.DirecaoSugeridaDesvio);
+                return;
+            }
+
+            if (avisoVisivel)
+                return;
+
+            if (gerenciadorAsteroides != null &&
+                gerenciadorAsteroides.AsteroideAlertaAtual != null &&
+                gerenciadorAsteroides.AsteroideAlertaAtual != ultimoAsteroideAlertadoNoHud)
+            {
+                AoDetectarAsteroideNaRota(
+                    gerenciadorAsteroides.AsteroideAlertaAtual,
+                    gerenciadorAsteroides.DirecaoSugeridaDesvio);
+            }
         }
 
         /// <summary>
@@ -121,7 +152,8 @@ namespace AstroLab.PedroH
         {
             avisoVisivel = false;
             avisoDeDesacoplamentoAtivo = false;
-            avisoDeFreioAtivo = false;
+            avisoDeAsteroideRotaAtivo = false;
+            ultimoAsteroideAlertadoNoHud = null;
             tempoRestanteAviso = 0f;
 
             if (canvasGroupAviso != null)
@@ -138,6 +170,11 @@ namespace AstroLab.PedroH
         {
             if (viagemController == null)
                 viagemController = Object.FindAnyObjectByType<ViagemLunarController>();
+
+            if (gerenciadorAsteroides == null && viagemController != null)
+                gerenciadorAsteroides = viagemController.gerenciadorAsteroides != null
+                    ? viagemController.gerenciadorAsteroides
+                    : viagemController.GetComponent<GerenciadorAsteroidesViagem>();
 
             if (painelAvisoCentral != null && canvasGroupAviso == null)
                 canvasGroupAviso = painelAvisoCentral.GetComponent<CanvasGroup>();
@@ -165,6 +202,9 @@ namespace AstroLab.PedroH
                 oxigenioBarra.fillAmount = 1f;
                 oxigenioBarra.color = TemaCapacete.Ciano;
             }
+
+            if (dicaControlesTexto != null)
+                dicaControlesTexto.text = ControleTrajetoriaJogador.TextoResumoControles;
         }
 
         private void AtualizarProgressoLua()
@@ -198,12 +238,6 @@ namespace AstroLab.PedroH
                 avisoDeDesacoplamentoAtivo = false;
             }
 
-            if (avisoDeFreioAtivo && freioVinculado != null && freioVinculado.OrbitaEstabilizada)
-            {
-                avisoVisivel = false;
-                avisoDeFreioAtivo = false;
-            }
-
             if (avisoVisivel)
             {
                 tempoRestanteAviso -= Mathf.Max(0f, deltaTime);
@@ -211,7 +245,7 @@ namespace AstroLab.PedroH
                 {
                     avisoVisivel = false;
                     avisoDeDesacoplamentoAtivo = false;
-                    avisoDeFreioAtivo = false;
+                    avisoDeAsteroideRotaAtivo = false;
                 }
             }
 
@@ -248,6 +282,7 @@ namespace AstroLab.PedroH
                 return;
 
             controllerEventos = viagemController;
+            controllerEventos.aoIniciarSubidaDaTerra.AddListener(AoIniciarNovaSubida);
             controllerEventos.aoChegarNaLua.AddListener(AoChegarNaLua);
 
             estagiosVinculados = viagemController.minigameEstagios;
@@ -258,11 +293,12 @@ namespace AstroLab.PedroH
                 estagiosVinculados.aoAutoSepararEstagio.AddListener(AoAutoDesacoplarEstagio);
             }
 
-            freioVinculado = viagemController.minigameFreioOrbital;
-            if (freioVinculado != null)
+            asteroidesVinculados = gerenciadorAsteroides;
+            if (asteroidesVinculados != null)
             {
-                freioVinculado.aoIniciarAproximacaoRetroFreio.AddListener(AoIniciarFreioLunar);
-                freioVinculado.aoEstabilizarOrbitaLunar.AddListener(AoEstabilizarOrbita);
+                asteroidesVinculados.aoDetectarAsteroideNaRota.AddListener(AoDetectarAsteroideNaRota);
+                asteroidesVinculados.aoLimparAlertaAsteroide.AddListener(AoLimparAlertaAsteroide);
+                asteroidesVinculados.aoColidirComAsteroide.AddListener(AoColidirComAsteroide);
             }
         }
 
@@ -270,6 +306,7 @@ namespace AstroLab.PedroH
         {
             if (controllerEventos != null)
             {
+                controllerEventos.aoIniciarSubidaDaTerra.RemoveListener(AoIniciarNovaSubida);
                 controllerEventos.aoChegarNaLua.RemoveListener(AoChegarNaLua);
                 controllerEventos = null;
             }
@@ -282,17 +319,18 @@ namespace AstroLab.PedroH
                 estagiosVinculados = null;
             }
 
-            if (freioVinculado != null)
+            if (asteroidesVinculados != null)
             {
-                freioVinculado.aoIniciarAproximacaoRetroFreio.RemoveListener(AoIniciarFreioLunar);
-                freioVinculado.aoEstabilizarOrbitaLunar.RemoveListener(AoEstabilizarOrbita);
-                freioVinculado = null;
+                asteroidesVinculados.aoDetectarAsteroideNaRota.RemoveListener(AoDetectarAsteroideNaRota);
+                asteroidesVinculados.aoLimparAlertaAsteroide.RemoveListener(AoLimparAlertaAsteroide);
+                asteroidesVinculados.aoColidirComAsteroide.RemoveListener(AoColidirComAsteroide);
+                asteroidesVinculados = null;
             }
         }
 
         private void AoLiberarJanelaDesacoplamento(int indice)
         {
-            avisoDeFreioAtivo = false;
+            avisoDeAsteroideRotaAtivo = false;
             avisoDeDesacoplamentoAtivo = true;
             ExibirAvisoTemporario(
                 "HORA DE DESACOPLAR!",
@@ -304,7 +342,7 @@ namespace AstroLab.PedroH
         private void AoDesacoplarManualComSucesso(int indice)
         {
             avisoDeDesacoplamentoAtivo = false;
-            avisoDeFreioAtivo = false;
+            avisoDeAsteroideRotaAtivo = false;
             ExibirAvisoTemporario(
                 "ESTÁGIO DESACOPLADO!",
                 "Impulso extra ativado!",
@@ -322,39 +360,68 @@ namespace AstroLab.PedroH
             tempoRestanteAviso = 0f;
         }
 
-        private void AoIniciarFreioLunar()
+        private void AoDetectarAsteroideNaRota(AsteroideObstaculo asteroide, Vector2 direcaoSugerida)
         {
-            avisoDeDesacoplamentoAtivo = false;
-            avisoDeFreioAtivo = true;
-            ExibirAvisoTemporario(
-                "FREIO ORBITAL LUNAR",
-                "Segure [ESPAÇO] para reduzir a velocidade",
-                TemaCapacete.Ciano,
-                duracaoAvisoFreioLunar);
-        }
-
-        private void AoEstabilizarOrbita()
-        {
-            if (!avisoDeFreioAtivo)
+            if (avisoDeDesacoplamentoAtivo)
                 return;
 
-            avisoDeFreioAtivo = false;
+            avisoDeAsteroideRotaAtivo = true;
+            ultimoAsteroideAlertadoNoHud = asteroide;
+            string dica = FormatarDicaDesvio(direcaoSugerida);
             ExibirAvisoTemporario(
-                "ÓRBITA ESTABILIZADA!",
-                "Preparando chegada na Lua",
-                TemaCapacete.Hex("59FF86"),
-                duracaoConfirmacaoDesacoplado);
+                "ASTEROIDE À FRENTE!",
+                dica,
+                TemaCapacete.Alerta,
+                duracaoAlertaAsteroide);
+        }
+
+        private void AoLimparAlertaAsteroide()
+        {
+            ultimoAsteroideAlertadoNoHud = null;
+            if (!avisoDeAsteroideRotaAtivo)
+                return;
+
+            avisoDeAsteroideRotaAtivo = false;
+            avisoVisivel = false;
+            tempoRestanteAviso = 0f;
+        }
+
+        private void AoIniciarNovaSubida()
+        {
+            if (!avisoDeDesacoplamentoAtivo)
+                OcultarAvisoImediatamente();
+        }
+
+        private void AoColidirComAsteroide(AsteroideObstaculo asteroide)
+        {
+            if (avisoDeDesacoplamentoAtivo)
+                return;
+
+            avisoDeAsteroideRotaAtivo = false;
+            ExibirAvisoTemporario(
+                "ESBARRÃO EM ASTEROIDE!",
+                "Use WASD ou Setas para desviar da rota",
+                TemaCapacete.Alerta,
+                duracaoImpactoAsteroide);
         }
 
         private void AoChegarNaLua()
         {
             avisoDeDesacoplamentoAtivo = false;
-            avisoDeFreioAtivo = false;
+            avisoDeAsteroideRotaAtivo = false;
             ExibirAvisoTemporario(
                 "CHEGAMOS À LUA!",
                 "Viagem concluída com sucesso!",
                 TemaCapacete.Hex("59FF86"),
                 4.5f);
+        }
+
+        private static string FormatarDicaDesvio(Vector2 dir)
+        {
+            if (Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
+                return dir.x >= 0f ? "Desvie para a direita [D / ->]" : "Desvie para a esquerda [A / <-]";
+
+            return dir.y >= 0f ? "Suba para desviar [W / Cima]" : "Desça para desviar [S / Baixo]";
         }
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AstroLab.PedroH
@@ -49,6 +51,13 @@ namespace AstroLab.PedroH
         private Vector3 posicaoBasePontoEncaixe;
         private bool pontoEncaixeDistintoCapturado;
         private bool modeloAtualInstanciadoEmRuntime;
+        private GameObject ultimoModeloSincronizado;
+        private FogueteModeloLogica ultimaLogicaSincronizada;
+        private Transform ultimaCabineSincronizada;
+        private Transform ultimaExaustaoSincronizada;
+        private Transform ultimaCameraSincronizada;
+        private readonly List<Light> ultimasLuzesSincronizadas = new List<Light>();
+        private readonly HashSet<GameObject> modelosCenaDesativadosPeloEncaixe = new HashSet<GameObject>();
 
         /// <summary>
         /// Referência ao script lógico do próprio modelo do foguete (FogueteModeloLogica),
@@ -79,7 +88,8 @@ namespace AstroLab.PedroH
                 pontoEncaixeDistintoCapturado = true;
             }
 
-            SincronizarFogueteModeloLogica();
+            if (FogueteConectado == null || modeloFogueteAtual != ultimoModeloSincronizado)
+                SincronizarFogueteModeloLogica();
         }
 
         /// <summary>
@@ -92,7 +102,6 @@ namespace AstroLab.PedroH
                 return false;
 
             InicializarPontosDeEncaixe();
-            DesconectarModeloAtual();
 
             Transform destino = ObterPontoEncaixeAtual();
             bool foraDaCena = !modeloOuPrefab.scene.IsValid();
@@ -102,6 +111,8 @@ namespace AstroLab.PedroH
             bool ehAssetPersistente = foraDaCena;
 #endif
             bool deveInstanciar = ehAssetPersistente || (instanciarSeForPrefab && foraDaCena);
+
+            DesconectarModeloAtualInterno(deveInstanciar ? null : modeloOuPrefab);
 
             GameObject alvo;
             if (deveInstanciar)
@@ -114,6 +125,8 @@ namespace AstroLab.PedroH
             {
                 alvo = modeloOuPrefab;
                 alvo.transform.SetParent(destino, false);
+                if (modelosCenaDesativadosPeloEncaixe.Remove(alvo) && !alvo.activeSelf)
+                    alvo.SetActive(true);
                 modeloAtualInstanciadoEmRuntime = false;
             }
 
@@ -133,17 +146,42 @@ namespace AstroLab.PedroH
         /// </summary>
         public void DesconectarModeloAtual()
         {
-            if (modeloFogueteAtual != null && modeloAtualInstanciadoEmRuntime)
+            DesconectarModeloAtualInterno(null);
+        }
+
+        private void DesconectarModeloAtualInterno(GameObject modeloPreservado)
+        {
+            GameObject modeloAnterior = modeloFogueteAtual;
+            FogueteModeloLogica logicaAnterior = FogueteConectado != null ? FogueteConectado : ultimaLogicaSincronizada;
+
+            LimparReferenciasDoModelo(modeloAnterior, logicaAnterior);
+
+            if (modeloAnterior != null && modeloAnterior != modeloPreservado)
             {
-                if (Application.isPlaying)
-                    Destroy(modeloFogueteAtual);
-                else
-                    DestroyImmediate(modeloFogueteAtual);
+                if (modeloAtualInstanciadoEmRuntime)
+                {
+                    modelosCenaDesativadosPeloEncaixe.Remove(modeloAnterior);
+                    if (Application.isPlaying)
+                        Destroy(modeloAnterior);
+                    else
+                        DestroyImmediate(modeloAnterior);
+                }
+                else if (modeloAnterior.scene.IsValid() && modeloAnterior.activeSelf)
+                {
+                    modeloAnterior.SetActive(false);
+                    modelosCenaDesativadosPeloEncaixe.Add(modeloAnterior);
+                }
             }
 
             modeloFogueteAtual = null;
             FogueteConectado = null;
             modeloAtualInstanciadoEmRuntime = false;
+            ultimoModeloSincronizado = null;
+            ultimaLogicaSincronizada = null;
+            ultimaCabineSincronizada = null;
+            ultimaExaustaoSincronizada = null;
+            ultimaCameraSincronizada = null;
+            ultimasLuzesSincronizadas.Clear();
         }
 
         /// <summary>
@@ -205,12 +243,47 @@ namespace AstroLab.PedroH
             float tremorExtra01,
             float deltaTime)
         {
+            AplicarEstadoCompletoDaNave(
+                posicaoMundo,
+                rotacaoBaseMundo,
+                entradaControleSuave,
+                Vector2.zero,
+                fatorSubidaAtmosferica,
+                ritmoImpulso,
+                intensidadeMotorPrincipal01,
+                intensidadeRetroFreio01,
+                fatorGiroRetroFreio01,
+                tremorExtra01,
+                deltaTime);
+        }
+
+        /// <summary>
+        /// Aplica posição, orientação, inclinação combinada de comando e inércia, vibração e
+        /// estado completo de propulsores/RCS ao encaixe e ao FogueteModeloLogica acoplado.
+        /// </summary>
+        public void AplicarEstadoCompletoDaNave(
+            Vector3 posicaoMundo,
+            Quaternion rotacaoBaseMundo,
+            Vector2 entradaControleSuave,
+            Vector2 velocidadeCorredorNormalizada,
+            float fatorSubidaAtmosferica,
+            float ritmoImpulso,
+            float intensidadeMotorPrincipal01,
+            float intensidadeRetroFreio01,
+            float fatorGiroRetroFreio01,
+            float tremorExtra01,
+            float deltaTime)
+        {
             InicializarPontosDeEncaixe();
 
+            Vector2 misturaCurva = Vector2.ClampMagnitude(
+                entradaControleSuave * 0.55f + velocidadeCorredorNormalizada * 0.65f,
+                1.15f);
+
             Vector3 inclinacaoAlvo = new Vector3(
-                -entradaControleSuave.y * anguloMaximoArfagemVisual,
-                entradaControleSuave.x * anguloMaximoGuinadaVisual,
-                -entradaControleSuave.x * anguloMaximoInclinacaoLateral);
+                -misturaCurva.y * anguloMaximoArfagemVisual,
+                misturaCurva.x * anguloMaximoGuinadaVisual,
+                -misturaCurva.x * anguloMaximoInclinacaoLateral);
 
             if (deltaTime > 0f)
             {
@@ -257,7 +330,7 @@ namespace AstroLab.PedroH
                 raizNave.SetPositionAndRotation(posComVibracao, rotacaoBaseMundo * rotacaoInclinacaoLocal);
             }
 
-            AtualizarLuzesPropulsores(fatorSubidaAtmosferica, ritmoImpulso);
+            AtualizarLuzesPropulsores(fatorSubidaAtmosferica, ritmoImpulso, intensidadeMotorPrincipal01);
         }
 
         /// <summary>
@@ -282,27 +355,282 @@ namespace AstroLab.PedroH
             return raizNave.position;
         }
 
-        private void SincronizarFogueteModeloLogica()
+        /// <summary>
+        /// Sincroniza FogueteConectado, referências de pontos opcionais, estágios e luzes dos propulsores
+        /// com o modelo atual, limpando referências quebradas ou pertencentes a modelos desconectados.
+        /// </summary>
+        public void SincronizarFogueteModeloLogica()
         {
-            if (FogueteConectado == null && modeloFogueteAtual != null)
-                FogueteConectado = modeloFogueteAtual.GetComponentInChildren<FogueteModeloLogica>(true);
+            FogueteModeloLogica logicaEncontrada = ResolverLogicaModeloAtual();
+            GameObject modeloAnterior = ultimoModeloSincronizado;
+            FogueteModeloLogica logicaAnterior = ultimaLogicaSincronizada;
+            bool trocouDeModelo = logicaAnterior != null && logicaAnterior != logicaEncontrada;
 
-            if (FogueteConectado == null && pontoEncaixeModelo != null)
-                FogueteConectado = pontoEncaixeModelo.GetComponentInChildren<FogueteModeloLogica>(true);
+            FogueteConectado = logicaEncontrada;
 
             if (FogueteConectado == null)
+            {
+                LimparReferenciasDoModelo(modeloAnterior, logicaAnterior);
+                ultimoModeloSincronizado = null;
+                ultimaLogicaSincronizada = null;
+                ultimaCabineSincronizada = null;
+                ultimaExaustaoSincronizada = null;
+                ultimaCameraSincronizada = null;
+                ultimasLuzesSincronizadas.Clear();
                 return;
+            }
 
+            if (modeloFogueteAtual == null)
+                modeloFogueteAtual = FogueteConectado.gameObject;
+
+            if (trocouDeModelo)
+                LimparReferenciasDoModelo(modeloAnterior, logicaAnterior);
+
+            // Garante que pivô e estados iniciais de estágios (inclusive alterados via código) sejam sincronizados
             FogueteConectado.InicializarReferenciaModelo();
 
-            if (pontoCabineOpcional == null && FogueteConectado.pontoCabine != null)
-                pontoCabineOpcional = FogueteConectado.pontoCabine;
+            pontoCabineOpcional = SincronizarPontoOpcional(
+                pontoCabineOpcional,
+                FogueteConectado.pontoCabine,
+                ref ultimaCabineSincronizada,
+                trocouDeModelo);
 
-            if (pontoExaustaoPropulsorOpcional == null && FogueteConectado.pontoExaustaoPrincipal != null)
-                pontoExaustaoPropulsorOpcional = FogueteConectado.pontoExaustaoPrincipal;
+            pontoExaustaoPropulsorOpcional = SincronizarPontoOpcional(
+                pontoExaustaoPropulsorOpcional,
+                FogueteConectado.pontoExaustaoPrincipal,
+                ref ultimaExaustaoSincronizada,
+                trocouDeModelo);
 
-            if (pontoCameraExternaOpcional == null && FogueteConectado.pontoCameraExterna != null)
-                pontoCameraExternaOpcional = FogueteConectado.pontoCameraExterna;
+            pontoCameraExternaOpcional = SincronizarPontoOpcional(
+                pontoCameraExternaOpcional,
+                FogueteConectado.pontoCameraExterna,
+                ref ultimaCameraSincronizada,
+                trocouDeModelo);
+
+            SincronizarLuzesPropulsores(FogueteConectado);
+
+            ultimoModeloSincronizado = modeloFogueteAtual != null ? modeloFogueteAtual : FogueteConectado.gameObject;
+            ultimaLogicaSincronizada = FogueteConectado;
+        }
+
+        private FogueteModeloLogica ResolverLogicaModeloAtual()
+        {
+            if (modeloFogueteAtual != null)
+                return modeloFogueteAtual.GetComponentInChildren<FogueteModeloLogica>(true);
+
+            if (pontoEncaixeModelo != null)
+            {
+                FogueteModeloLogica ativo = pontoEncaixeModelo.GetComponentInChildren<FogueteModeloLogica>(false);
+                if (ativo != null)
+                    return ativo;
+
+                return pontoEncaixeModelo.GetComponentInChildren<FogueteModeloLogica>(true);
+            }
+
+            return null;
+        }
+
+        private Transform SincronizarPontoOpcional(
+            Transform atual,
+            Transform pontoDoModelo,
+            ref Transform ultimoSincronizado,
+            bool trocouDeModelo)
+        {
+            if (atual == null)
+            {
+                ultimoSincronizado = pontoDoModelo;
+                return pontoDoModelo;
+            }
+
+            bool veioDoSincronizador = ultimoSincronizado != null && atual == ultimoSincronizado;
+            bool pertenceAoModeloAtual = PertenceAoModelo(atual, modeloFogueteAtual, FogueteConectado);
+            bool referenciaDeOutroModelo = EhReferenciaDeOutroModelo(atual, FogueteConectado);
+
+            if (veioDoSincronizador || referenciaDeOutroModelo || (trocouDeModelo && !pertenceAoModeloAtual && pontoDoModelo != null))
+            {
+                ultimoSincronizado = pontoDoModelo;
+                return pontoDoModelo;
+            }
+
+            if (atual == pontoDoModelo)
+                ultimoSincronizado = pontoDoModelo;
+
+            return atual;
+        }
+
+        private void SincronizarLuzesPropulsores(FogueteModeloLogica logica)
+        {
+            var resultado = new List<Light>();
+            var novasSincronizadas = new List<Light>();
+
+            if (luzesPropulsoresOpcionais != null)
+            {
+                for (int i = 0; i < luzesPropulsoresOpcionais.Length; i++)
+                {
+                    Light luz = luzesPropulsoresOpcionais[i];
+                    if (luz == null)
+                        continue;
+
+                    if (ultimasLuzesSincronizadas.Contains(luz))
+                        continue;
+
+                    if (EhReferenciaDeOutroModelo(luz.transform, logica))
+                        continue;
+
+                    if (!resultado.Contains(luz))
+                        resultado.Add(luz);
+                }
+            }
+
+            if (logica != null && logica.luzesMotorPrincipal != null)
+            {
+                for (int i = 0; i < logica.luzesMotorPrincipal.Length; i++)
+                {
+                    Light luz = logica.luzesMotorPrincipal[i];
+                    if (luz == null)
+                        continue;
+
+                    if (!novasSincronizadas.Contains(luz))
+                        novasSincronizadas.Add(luz);
+
+                    if (!resultado.Contains(luz))
+                        resultado.Add(luz);
+                }
+            }
+
+            ultimasLuzesSincronizadas.Clear();
+            ultimasLuzesSincronizadas.AddRange(novasSincronizadas);
+
+            if (!ArraysIguais(luzesPropulsoresOpcionais, resultado))
+                luzesPropulsoresOpcionais = resultado.ToArray();
+        }
+
+        private void LimparReferenciasDoModelo(GameObject modeloAnterior, FogueteModeloLogica logicaAnterior)
+        {
+            if (DeveLimparPonto(pontoCabineOpcional, modeloAnterior, logicaAnterior, logicaAnterior != null ? logicaAnterior.pontoCabine : null, ultimaCabineSincronizada))
+                pontoCabineOpcional = null;
+
+            if (DeveLimparPonto(pontoExaustaoPropulsorOpcional, modeloAnterior, logicaAnterior, logicaAnterior != null ? logicaAnterior.pontoExaustaoPrincipal : null, ultimaExaustaoSincronizada))
+                pontoExaustaoPropulsorOpcional = null;
+
+            if (DeveLimparPonto(pontoCameraExternaOpcional, modeloAnterior, logicaAnterior, logicaAnterior != null ? logicaAnterior.pontoCameraExterna : null, ultimaCameraSincronizada))
+                pontoCameraExternaOpcional = null;
+
+            if (luzesPropulsoresOpcionais == null || luzesPropulsoresOpcionais.Length == 0)
+                return;
+
+            bool precisaFiltrar = false;
+            for (int i = 0; i < luzesPropulsoresOpcionais.Length; i++)
+            {
+                if (DeveLimparLuz(luzesPropulsoresOpcionais[i], modeloAnterior, logicaAnterior))
+                {
+                    precisaFiltrar = true;
+                    break;
+                }
+            }
+
+            if (!precisaFiltrar)
+                return;
+
+            var filtradas = new List<Light>(luzesPropulsoresOpcionais.Length);
+            for (int i = 0; i < luzesPropulsoresOpcionais.Length; i++)
+            {
+                Light luz = luzesPropulsoresOpcionais[i];
+                if (!DeveLimparLuz(luz, modeloAnterior, logicaAnterior) && !filtradas.Contains(luz))
+                    filtradas.Add(luz);
+            }
+
+            luzesPropulsoresOpcionais = filtradas.Count > 0 ? filtradas.ToArray() : Array.Empty<Light>();
+        }
+
+        private bool DeveLimparPonto(
+            Transform ponto,
+            GameObject modeloAnterior,
+            FogueteModeloLogica logicaAnterior,
+            Transform pontoDaLogicaAnterior,
+            Transform ultimoSincronizado)
+        {
+            if (ponto == null)
+                return true;
+
+            if (ponto == pontoDaLogicaAnterior || ponto == ultimoSincronizado)
+                return true;
+
+            return PertenceAoModelo(ponto, modeloAnterior, logicaAnterior);
+        }
+
+        private bool DeveLimparLuz(Light luz, GameObject modeloAnterior, FogueteModeloLogica logicaAnterior)
+        {
+            if (luz == null)
+                return true;
+
+            if (ultimasLuzesSincronizadas.Contains(luz))
+                return true;
+
+            if (logicaAnterior != null && ContemLuz(logicaAnterior.luzesMotorPrincipal, luz))
+                return true;
+
+            return PertenceAoModelo(luz.transform, modeloAnterior, logicaAnterior);
+        }
+
+        private bool EhReferenciaDeOutroModelo(Transform alvo, FogueteModeloLogica logicaAtual)
+        {
+            if (alvo == null)
+                return false;
+
+            FogueteModeloLogica logicaDoAlvo = alvo.GetComponentInParent<FogueteModeloLogica>(true);
+            if (logicaDoAlvo != null && logicaDoAlvo != logicaAtual)
+                return true;
+
+            if (pontoEncaixeModelo != null && pontoEncaixeModelo != raizNave && alvo.IsChildOf(pontoEncaixeModelo))
+                return !PertenceAoModelo(alvo, modeloFogueteAtual, logicaAtual);
+
+            return false;
+        }
+
+        private static bool PertenceAoModelo(Transform alvo, GameObject modelo, FogueteModeloLogica logica)
+        {
+            if (alvo == null)
+                return false;
+
+            if (modelo != null && alvo.IsChildOf(modelo.transform))
+                return true;
+
+            if (logica != null && alvo.IsChildOf(logica.transform))
+                return true;
+
+            return false;
+        }
+
+        private static bool ContemLuz(Light[] lista, Light alvo)
+        {
+            if (lista == null || alvo == null)
+                return false;
+
+            for (int i = 0; i < lista.Length; i++)
+            {
+                if (lista[i] == alvo)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private static bool ArraysIguais(Light[] atual, List<Light> esperado)
+        {
+            if (atual == null)
+                return esperado.Count == 0;
+
+            if (atual.Length != esperado.Count)
+                return false;
+
+            for (int i = 0; i < atual.Length; i++)
+            {
+                if (atual[i] != esperado[i])
+                    return false;
+            }
+
+            return true;
         }
 
         private Vector3 CalcularVibracaoLocal(float fatorSubidaAtmosferica, float ritmoImpulso, float tremorExtra01)
@@ -319,14 +647,17 @@ namespace AstroLab.PedroH
             return new Vector3(dx, dy, dz);
         }
 
-        private void AtualizarLuzesPropulsores(float fatorSubidaAtmosferica, float ritmoImpulso)
+        private void AtualizarLuzesPropulsores(float fatorSubidaAtmosferica, float ritmoImpulso, float intensidadeMotorPrincipal01)
         {
             if (luzesPropulsoresOpcionais == null || luzesPropulsoresOpcionais.Length == 0)
                 return;
 
+            float fatorMotor = Mathf.Clamp01(intensidadeMotorPrincipal01);
             float boostPositivo = Mathf.Max(0f, ritmoImpulso);
-            float intensidade = intensidadeBaseLuzPropulsor * Mathf.Lerp(0.75f, 1.35f, fatorSubidaAtmosferica)
-                                + boostPositivo * intensidadeExtraLuzImpulso;
+            float intensidade = fatorMotor <= 0.01f
+                ? 0f
+                : (intensidadeBaseLuzPropulsor * Mathf.Lerp(0.75f, 1.35f, fatorSubidaAtmosferica) * fatorMotor)
+                  + boostPositivo * intensidadeExtraLuzImpulso;
 
             for (int i = 0; i < luzesPropulsoresOpcionais.Length; i++)
             {

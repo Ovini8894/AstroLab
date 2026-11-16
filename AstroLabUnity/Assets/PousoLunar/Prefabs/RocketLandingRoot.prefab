@@ -43,6 +43,10 @@ GameObject:
   - component: {fileID: 1619621590695254221}
   - component: {fileID: 2156786465595849739}
   - component: {fileID: 4928038644951230136}
+  - component: {fileID: 790000001}
+  - component: {fileID: 790000002}
+  - component: {fileID: 790000003}
+  - component: {fileID: 790000004}
   m_Layer: 0
   m_Name: RocketLandingRoot
   m_TagString: Untagged
@@ -250,6 +254,9 @@ MonoBehaviour:
   onTouchdown:
     m_PersistentCalls:
       m_Calls: []
+  mainEngine: {fileID: 790000002}
+  rcs: {fileID: 790000003}
+  lunarDust: {fileID: 790000004}
 --- !u!1 &1682732698171305839
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,26 +702,46 @@ MonoBehaviour:
   establishing:
     anchor: {fileID: 3144838063855646773}
     target: {fileID: 4553462078675703322}
-    targetOffset: {x: 0, y: 3, z: 0}
-    fieldOfView: 48
+    targetOffset: {x: 0, y: 3.8, z: 0}
+    followTarget: 1
+    distance: 28
+    elevation: 32
+    orbitAngle: 35
+    smoothing: 1
+    fieldOfView: 46
     blendDuration: 2
   approach:
     anchor: {fileID: 4181292393683781538}
     target: {fileID: 4553462078675703322}
-    targetOffset: {x: 0, y: 3, z: 0}
-    fieldOfView: 48
+    targetOffset: {x: 0, y: 3.8, z: 0}
+    followTarget: 1
+    distance: 22
+    elevation: 30
+    orbitAngle: 55
+    smoothing: 1
+    fieldOfView: 44
     blendDuration: 2
   descent:
     anchor: {fileID: 2210631367980979300}
     target: {fileID: 4553462078675703322}
-    targetOffset: {x: 0, y: 3, z: 0}
-    fieldOfView: 48
+    targetOffset: {x: 0, y: 3.8, z: 0}
+    followTarget: 1
+    distance: 19
+    elevation: 34
+    orbitAngle: 40
+    smoothing: 1
+    fieldOfView: 46
     blendDuration: 2
   final:
     anchor: {fileID: 318069867362894470}
     target: {fileID: 1657357174774658982}
-    targetOffset: {x: 0, y: 3, z: 0}
-    fieldOfView: 42
+    targetOffset: {x: 0, y: 3.8, z: 0}
+    followTarget: 1
+    distance: 23
+    elevation: 30
+    orbitAngle: 45
+    smoothing: 1
+    fieldOfView: 48
     blendDuration: 2
 --- !u!1 &4933555076569313678
 GameObject:
@@ -949,3 +976,93 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1869018863274333119}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &790000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099315085834143158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cfaf54dcae6af0118cf24e56679cc5, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.PousoLunar.LunarLandingSpacecraft
+  controller: {fileID: 1619621590695254221}
+  sourceModel: {fileID: 919132149155446097, guid: 614bef39780f3af439767de6f4943616, type: 3}
+  plumeMaterial: {fileID: 2100000, guid: 33ade693f9e9c8b52d6918d06d32e4e8, type: 2}
+  gasMaterial: {fileID: 2100000, guid: 89cc748381e9350532e217ac95cccbaa, type: 2}
+  dustMaterial: {fileID: 2100000, guid: 7f20683ece7d00f16bc4ec4e70ea552d, type: 2}
+  modelHeight: 8
+  visualOffset: {x: 0, y: 0, z: 0}
+  visualEuler: {x: 0, y: 0, z: 0}
+  mainEngine: {fileID: 790000002}
+  rcs: {fileID: 790000003}
+  lunarDust: {fileID: 790000004}
+--- !u!114 &790000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099315085834143158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2cd62cd088343e58339ebcd47a65125, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.PousoLunar.LunarLandingMainEngine
+  controller: {fileID: 1619621590695254221}
+  nozzles: []
+  responseSpeed: 2.5
+  plumeLength: 3
+  plumeWidth: 0.65
+  coreEmissionRate: 150
+  outerEmissionRate: 90
+  glowEmissionRate: 35
+  flickerAmount: 0.035
+  previewIntensity: 0.65
+  previewDuration: 3
+--- !u!114 &790000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099315085834143158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63889e81f7cd476b9ea0a9c064a2cfba, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.PousoLunar.LunarLandingRCS
+  controller: {fileID: 1619621590695254221}
+  localCenterOfMass: {x: 0, y: 4, z: 0}
+  thrusters: []
+  burstDuration: 0.11
+  repeatInterval: 0.28
+  accelerationDeadZone: 0.12
+  fullThrustAcceleration: 4
+  stabilizationIntensity: 0.35
+  manualThrusterIndex: 0
+  manualIntensity: 0.7
+--- !u!114 &790000004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099315085834143158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e033dd2b403dd81130278f1d9a3c6364, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AstroLab.PousoLunar.LunarLandingDust
+  controller: {fileID: 1619621590695254221}
+  mainEngine: {fileID: 790000002}
+  grains: {fileID: 0}
+  touchdownGrains: {fileID: 0}
+  interactionHeight: 5
+  particlesPerSecond: 180
+  outwardVelocity: 4
+  lifetime: 0.8
+  upwardSpread: 0.12
+  touchdownCount: 65

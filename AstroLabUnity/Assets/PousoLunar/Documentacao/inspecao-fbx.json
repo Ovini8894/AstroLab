@@ -1,0 +1,7120 @@
+{
+  "version": 7400,
+  "settings": {
+    "name": "GlobalSettings",
+    "props": [],
+    "children": [
+      {
+        "name": "Version",
+        "props": [
+          1000
+        ],
+        "children": []
+      },
+      {
+        "name": "Properties70",
+        "props": [],
+        "children": [
+          {
+            "name": "P",
+            "props": [
+              "UpAxis",
+              "int",
+              "Integer",
+              "",
+              1
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "UpAxisSign",
+              "int",
+              "Integer",
+              "",
+              1
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "FrontAxis",
+              "int",
+              "Integer",
+              "",
+              2
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "FrontAxisSign",
+              "int",
+              "Integer",
+              "",
+              1
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "CoordAxis",
+              "int",
+              "Integer",
+              "",
+              0
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "CoordAxisSign",
+              "int",
+              "Integer",
+              "",
+              1
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "OriginalUpAxis",
+              "int",
+              "Integer",
+              "",
+              -1
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "OriginalUpAxisSign",
+              "int",
+              "Integer",
+              "",
+              1
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "UnitScaleFactor",
+              "double",
+              "Number",
+              "",
+              1
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "OriginalUnitScaleFactor",
+              "double",
+              "Number",
+              "",
+              1
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "AmbientColor",
+              "ColorRGB",
+              "Color",
+              "",
+              0,
+              0,
+              0
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "DefaultCamera",
+              "KString",
+              "",
+              "",
+              "Producer Perspective"
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "TimeMode",
+              "enum",
+              "",
+              "",
+              11
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "TimeSpanStart",
+              "KTime",
+              "Time",
+              "",
+              "0"
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "TimeSpanStop",
+              "KTime",
+              "Time",
+              "",
+              "46186158000"
+            ],
+            "children": []
+          },
+          {
+            "name": "P",
+            "props": [
+              "CustomFrameRate",
+              "double",
+              "Number",
+              "",
+              24
+            ],
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "connections": {
+    "name": "Connections",
+    "props": [],
+    "children": [
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "510876625",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "431673293",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "804024620",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "697936833",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "273365493",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "980692595",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "403107622",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "910626982",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "235709979",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "583905853",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "686864895",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "328623935",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "433068658",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "793148013",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "920767400",
+          "0"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "348239439",
+          "510876625"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "737028391",
+          "431673293"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "750428054",
+          "804024620"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "2321024",
+          "697936833"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "258259260",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "629536748",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "808398034",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "519521813",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "470841054",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "432923725",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "932340257",
+          "686864895"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "233680249",
+          "328623935"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "366357705",
+          "433068658"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "538298853",
+          "793148013"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "961898502",
+          "920767400"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "687814710",
+          "431673293"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "434106142",
+          "431673293"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "431673293"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "687814710",
+          "804024620"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "434106142",
+          "804024620"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "804024620"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "687814710",
+          "697936833"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "434106142",
+          "697936833"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "697936833"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "692844574",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "445928255",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "426866264",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "952196873",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "383881729",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "164842955",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "988233495",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "850585129",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "623043792",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "868525775",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "812482105",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "123377275",
+          "273365493"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "692844574",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "445928255",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "426866264",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "952196873",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "383881729",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "164842955",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "988233495",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "850585129",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "623043792",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "868525775",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "812482105",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "123377275",
+          "980692595"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "167158270",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "491075803",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "416688769",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "812482105",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "904241723",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "732417447",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "658374691",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "60212760",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "17290890",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "435051393",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "403107622"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "167158270",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "491075803",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "416688769",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "812482105",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "904241723",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "732417447",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "658374691",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "60212760",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "17290890",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "435051393",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "910626982"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "167158270",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "491075803",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "416688769",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "812482105",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "904241723",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "732417447",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "658374691",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "60212760",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "17290890",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "435051393",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "235709979"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "167158270",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "491075803",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "416688769",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "812482105",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "904241723",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "732417447",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "658374691",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "60212760",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "17290890",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "435051393",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "583905853"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "638764756",
+          "686864895"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "671378502",
+          "686864895"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "686864895"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "638764756",
+          "328623935"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "671378502",
+          "328623935"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "328623935"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "638764756",
+          "433068658"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "671378502",
+          "433068658"
+        ],
+        "children": []
+      },
+      {
+        "name": "C",
+        "props": [
+          "OO",
+          "226362881",
+          "433068658"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "objects": [
+    {
+      "type": "NodeAttribute",
+      "id": "348239439",
+      "name": "NAVE_ANCORA_INTERIOR\u0000\u0001NodeAttribute",
+      "kind": "Null"
+    },
+    {
+      "type": "NodeAttribute",
+      "id": "538298853",
+      "name": "SEAT_CDR_Olho\u0000\u0001NodeAttribute",
+      "kind": "Null"
+    },
+    {
+      "type": "NodeAttribute",
+      "id": "961898502",
+      "name": "SEAT_PLT_Olho\u0000\u0001NodeAttribute",
+      "kind": "Null"
+    },
+    {
+      "type": "Geometry",
+      "id": "737028391",
+      "name": "Onibus_Boosters.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 9250,
+      "min": [
+        34.85222625732422,
+        287.4022216796875,
+        14
+      ],
+      "max": [
+        53.14777374267578,
+        292.5977783203125,
+        59.5
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "750428054",
+      "name": "Onibus_Boosters_L1.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 3778,
+      "min": [
+        34.85320281982422,
+        287.40478515625,
+        14
+      ],
+      "max": [
+        53.14501953125,
+        292.5971984863281,
+        59.5
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "2321024",
+      "name": "Onibus_Boosters_L2.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 958,
+      "min": [
+        34.85310745239258,
+        287.4059753417969,
+        13.998053550720215
+      ],
+      "max": [
+        53.1436653137207,
+        292.63525390625,
+        59.5
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "258259260",
+      "name": "Onibus_Interior.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 20752,
+      "min": [
+        41.52436065673828,
+        278.6504211425781,
+        46.29999923706055
+      ],
+      "max": [
+        46.47563934326172,
+        284.15997314453125,
+        53.70000076293945
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "629536748",
+      "name": "Onibus_Interior_Transp.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 8,
+      "min": [
+        43.07500076293945,
+        279.3999938964844,
+        46.33000183105469
+      ],
+      "max": [
+        44.92499923706055,
+        279.8999938964844,
+        46.33000183105469
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "808398034",
+      "name": "Onibus_Orbitador.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 15257,
+      "min": [
+        32.04999923706055,
+        269.0999755859375,
+        16.5
+      ],
+      "max": [
+        55.95000076293945,
+        287.04998779296875,
+        56.70000076293945
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "519521813",
+      "name": "Onibus_Orbitador_L1.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 6390,
+      "min": [
+        32.050113677978516,
+        269.10015869140625,
+        16.5
+      ],
+      "max": [
+        55.94990158081055,
+        287.0498046875,
+        56.70001983642578
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "470841054",
+      "name": "Onibus_Orbitador_L2.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 1797,
+      "min": [
+        32.050113677978516,
+        269.10015869140625,
+        16.49919891357422
+      ],
+      "max": [
+        55.94990158081055,
+        287.0498046875,
+        56.6999626159668
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "432923725",
+      "name": "Onibus_Orbitador_Transp.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 168,
+      "min": [
+        41.096458435058594,
+        278.64984130859375,
+        27.799999237060547
+      ],
+      "max": [
+        52.5,
+        283.1954345703125,
+        52.75
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "932340257",
+      "name": "Onibus_TanqueExterno.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 4426,
+      "min": [
+        39.63999938964844,
+        284.1983947753906,
+        20.649999618530273
+      ],
+      "max": [
+        48.36000061035156,
+        294.3599853515625,
+        68.55000305175781
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "233680249",
+      "name": "Onibus_TanqueExterno_L1.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 1807,
+      "min": [
+        39.64320755004883,
+        284.19732666015625,
+        20.6519718170166
+      ],
+      "max": [
+        48.35660934448242,
+        294.3567810058594,
+        68.55000305175781
+      ]
+    },
+    {
+      "type": "Geometry",
+      "id": "366357705",
+      "name": "Onibus_TanqueExterno_L2.001\u0000\u0001Geometry",
+      "kind": "Mesh",
+      "vertices": 498,
+      "min": [
+        39.64480209350586,
+        284.1784362792969,
+        20.63626480102539
+      ],
+      "max": [
+        48.355201721191406,
+        294.282958984375,
+        68.54374694824219
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "510876625",
+      "name": "NAVE_ANCORA_INTERIOR\u0000\u0001Model",
+      "kind": "Null",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                0,
+                3600,
+                630.0018310546875
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                0.000002504478472598665,
+                0,
+                90.00000933466734
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "431673293",
+      "name": "Onibus_Boosters\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "804024620",
+      "name": "Onibus_Boosters_L1\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "697936833",
+      "name": "Onibus_Boosters_L2\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "273365493",
+      "name": "Onibus_Interior\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "980692595",
+      "name": "Onibus_Interior_Transp\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "403107622",
+      "name": "Onibus_Orbitador\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "910626982",
+      "name": "Onibus_Orbitador_L1\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "235709979",
+      "name": "Onibus_Orbitador_L2\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "583905853",
+      "name": "Onibus_Orbitador_Transp\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "686864895",
+      "name": "Onibus_TanqueExterno\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "328623935",
+      "name": "Onibus_TanqueExterno_L1\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "433068658",
+      "name": "Onibus_TanqueExterno_L2\u0000\u0001Model",
+      "kind": "Mesh",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -4400,
+                -1350,
+                29000
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "793148013",
+      "name": "SEAT_CDR_Olho\u0000\u0001Model",
+      "kind": "Null",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                -61.99989318847656,
+                3700,
+                993.0023193359375
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Model",
+      "id": "920767400",
+      "name": "SEAT_PLT_Olho\u0000\u0001Model",
+      "kind": "Null",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            232
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "Lcl Translation",
+                "Lcl Translation",
+                "",
+                "A",
+                61.99989318847656,
+                3700,
+                993.0023193359375
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Rotation",
+                "Lcl Rotation",
+                "",
+                "A",
+                -90.00000933466734,
+                0,
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Lcl Scaling",
+                "Lcl Scaling",
+                "",
+                "A",
+                100,
+                100,
+                100
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "DefaultAttributeIndex",
+                "int",
+                "Integer",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "InheritType",
+                "enum",
+                "",
+                "",
+                1
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiTake",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Shading",
+          "props": [
+            1
+          ],
+          "children": []
+        },
+        {
+          "name": "Culling",
+          "props": [
+            "CullingOff"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "687814710",
+      "name": "OR_SRB_Escuro\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.0423114113509655,
+                0.04666508734226227,
+                0.06847816705703735
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.0423114113509655,
+                0.04666508734226227,
+                0.06847816705703735
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.0423114113509655,
+                0.04666508734226227,
+                0.06847816705703735
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "434106142",
+      "name": "OR_SRB\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.8468732237815857,
+                0.8307698965072632,
+                0.7758222222328186
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.8468732237815857,
+                0.8307698965072632,
+                0.7758222222328186
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.8468732237815857,
+                0.8307698965072632,
+                0.7758222222328186
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "226362881",
+      "name": "CT_Metal\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.4564110338687897,
+                0.5394794940948486,
+                0.6938717365264893
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.4564110338687897,
+                0.5394794940948486,
+                0.6938717365264893
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.4564110338687897,
+                0.5394794940948486,
+                0.6938717365264893
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "692844574",
+      "name": "OR_Interior\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.5840784311294556,
+                0.6038273572921753,
+                0.6444796919822693
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.5840784311294556,
+                0.6038273572921753,
+                0.6444796919822693
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.5840784311294556,
+                0.6038273572921753,
+                0.6444796919822693
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "445928255",
+      "name": "OR_Piso_Cabine\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.109461709856987,
+                0.13286831974983215,
+                0.1946178376674652
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.109461709856987,
+                0.13286831974983215,
+                0.1946178376674652
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.109461709856987,
+                0.13286831974983215,
+                0.1946178376674652
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "426866264",
+      "name": "OR_Painel\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.04373503103852272,
+                0.05448027700185776,
+                0.09305896610021591
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.04373503103852272,
+                0.05448027700185776,
+                0.09305896610021591
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.04373503103852272,
+                0.05448027700185776,
+                0.09305896610021591
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "952196873",
+      "name": "OR_Assento\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.07618538290262222,
+                0.10461648553609848,
+                0.18782077729701996
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.07618538290262222,
+                0.10461648553609848,
+                0.18782077729701996
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.07618538290262222,
+                0.10461648553609848,
+                0.18782077729701996
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "383881729",
+      "name": "OR_Painel_Claro\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.1946178376674652,
+                0.23074005544185638,
+                0.32314321398735046
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.1946178376674652,
+                0.23074005544185638,
+                0.32314321398735046
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.1946178376674652,
+                0.23074005544185638,
+                0.32314321398735046
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "164842955",
+      "name": "OR_Cinto\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.5840784311294556,
+                0.38132601976394653,
+                0.06847816705703735
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.5840784311294556,
+                0.38132601976394653,
+                0.06847816705703735
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.5840784311294556,
+                0.38132601976394653,
+                0.06847816705703735
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "988233495",
+      "name": "CT_Console\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.027320891618728638,
+                0.03560131415724754,
+                0.0802198201417923
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.027320891618728638,
+                0.03560131415724754,
+                0.0802198201417923
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.027320891618728638,
+                0.03560131415724754,
+                0.0802198201417923
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "850585129",
+      "name": "OR_Tela_MFD\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.06301001459360123,
+                0.7912979125976562,
+                1
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.06301001459360123,
+                0.7912979125976562,
+                1
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.06301001459360123,
+                0.7912979125976562,
+                1
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "623043792",
+      "name": "CT_Luz_Verde\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.09989872574806213,
+                1,
+                0.23839756846427917
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.09989872574806213,
+                1,
+                0.23839756846427917
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.09989872574806213,
+                1,
+                0.23839756846427917
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "868525775",
+      "name": "CT_Luz_Ambar\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                1,
+                0.4564110338687897,
+                0.10702310502529144
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                1,
+                0.4564110338687897,
+                0.10702310502529144
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                1,
+                0.4564110338687897,
+                0.10702310502529144
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "812482105",
+      "name": "OR_Vidro_Cabine\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.012983032502233982,
+                0.023153366521000862,
+                0.05780543014407158
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.012983032502233982,
+                0.023153366521000862,
+                0.05780543014407158
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.012983032502233982,
+                0.023153366521000862,
+                0.05780543014407158
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "123377275",
+      "name": "CT_Luz\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                1,
+                0.9046611785888672,
+                0.7304607629776001
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                1,
+                0.9046611785888672,
+                0.7304607629776001
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                1,
+                0.9046611785888672,
+                0.7304607629776001
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "167158270",
+      "name": "OR_Branco\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.9046611785888672,
+                0.8879231214523315,
+                0.838798999786377
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.9046611785888672,
+                0.8879231214523315,
+                0.838798999786377
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.9046611785888672,
+                0.8879231214523315,
+                0.838798999786377
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "491075803",
+      "name": "OR_Preto\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.023153366521000862,
+                0.02518685907125473,
+                0.039546236395835876
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.023153366521000862,
+                0.02518685907125473,
+                0.039546236395835876
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.023153366521000862,
+                0.02518685907125473,
+                0.039546236395835876
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "416688769",
+      "name": "OR_Cinza_RCC\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.10461648553609848,
+                0.11443537473678589,
+                0.16202937066555023
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.10461648553609848,
+                0.11443537473678589,
+                0.16202937066555023
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.10461648553609848,
+                0.11443537473678589,
+                0.16202937066555023
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "904241723",
+      "name": "OR_Motor\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.20863686501979828,
+                0.24228112399578094,
+                0.32314321398735046
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.20863686501979828,
+                0.24228112399578094,
+                0.32314321398735046
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.20863686501979828,
+                0.24228112399578094,
+                0.32314321398735046
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "732417447",
+      "name": "CT_Vermelho_NASA\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.7454041838645935,
+                0.045186202973127365,
+                0.023153366521000862
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.7454041838645935,
+                0.045186202973127365,
+                0.023153366521000862
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.7454041838645935,
+                0.045186202973127365,
+                0.023153366521000862
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "658374691",
+      "name": "CT_Branco\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.9386857151985168,
+                0.9130986332893372,
+                0.8549926280975342
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.9386857151985168,
+                0.9130986332893372,
+                0.8549926280975342
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.9386857151985168,
+                0.9130986332893372,
+                0.8549926280975342
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "60212760",
+      "name": "CT_Azul_Escuro\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.008568125776946545,
+                0.02955683507025242,
+                0.15592646598815918
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.008568125776946545,
+                0.02955683507025242,
+                0.15592646598815918
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.008568125776946545,
+                0.02955683507025242,
+                0.15592646598815918
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "17290890",
+      "name": "CT_Logo_NASA\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                1,
+                1,
+                1
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                1,
+                1,
+                1
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                1,
+                1,
+                1
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "435051393",
+      "name": "OR_Motor_Interno\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.027320891618728638,
+                0.03560131415724754,
+                0.0802198201417923
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.027320891618728638,
+                0.03560131415724754,
+                0.0802198201417923
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.027320891618728638,
+                0.03560131415724754,
+                0.0802198201417923
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "638764756",
+      "name": "OR_Laranja_ET\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.6938717365264893,
+                0.18447498977184296,
+                0.027320891618728638
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.6938717365264893,
+                0.18447498977184296,
+                0.027320891618728638
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.6938717365264893,
+                0.18447498977184296,
+                0.027320891618728638
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Material",
+      "id": "671378502",
+      "name": "OR_Laranja_ET_Escuro\u0000\u0001Material",
+      "kind": "",
+      "children": [
+        {
+          "name": "Version",
+          "props": [
+            102
+          ],
+          "children": []
+        },
+        {
+          "name": "ShadingModel",
+          "props": [
+            "Phong"
+          ],
+          "children": []
+        },
+        {
+          "name": "MultiLayer",
+          "props": [
+            0
+          ],
+          "children": []
+        },
+        {
+          "name": "Properties70",
+          "props": [],
+          "children": [
+            {
+              "name": "P",
+              "props": [
+                "DiffuseColor",
+                "Color",
+                "",
+                "A",
+                0.43415364623069763,
+                0.10224173218011856,
+                0.01599629409611225
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientColor",
+                "Color",
+                "",
+                "A",
+                0.05087608844041824,
+                0.05087608844041824,
+                0.05087608844041824
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "AmbientFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "BumpFactor",
+                "double",
+                "Number",
+                "",
+                0
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularColor",
+                "Color",
+                "",
+                "A",
+                0.43415364623069763,
+                0.10224173218011856,
+                0.01599629409611225
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "SpecularFactor",
+                "Number",
+                "",
+                "A",
+                0.25
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "Shininess",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ShininessExponent",
+                "Number",
+                "",
+                "A",
+                35.99999928474426
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionColor",
+                "Color",
+                "",
+                "A",
+                0.43415364623069763,
+                0.10224173218011856,
+                0.01599629409611225
+              ],
+              "children": []
+            },
+            {
+              "name": "P",
+              "props": [
+                "ReflectionFactor",
+                "Number",
+                "",
+                "A",
+                0
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

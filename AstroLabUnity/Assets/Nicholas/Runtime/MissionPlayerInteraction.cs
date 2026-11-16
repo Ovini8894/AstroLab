@@ -57,6 +57,8 @@ namespace AstroLab.Nicholas
                 if (hit.collider.transform.IsChildOf(transform)) continue;
                 equipment = hit.collider.GetComponentInParent<MissionEquipmentTarget>();
                 history = hit.collider.GetComponentInParent<MissionHistoricalTarget>();
+                if (equipment && !equipment.isActiveAndEnabled) equipment = null;
+                if (history && !history.isActiveAndEnabled) history = null;
                 if (equipment || history) break;
                 // Uma superfície sólida deve bloquear a interação com máquinas atrás dela.
                 break;
@@ -79,7 +81,12 @@ namespace AstroLab.Nicholas
             {
                 EquipmentDefinition def = MissionRuleSet.Find(equipment.Equipment);
                 if (!MissionController.Instance.Engine.IsRepaired(equipment.Equipment))
-                    CurrentPrompt = "[E] INSPECIONAR · [R] REPARAR (" + def.RepairParts + " peças, " + def.RepairTime + " tempos) · " + equipment.Label;
+                {
+                    var availability = MissionController.Instance.Engine.CanRepair(equipment.Equipment);
+                    CurrentPrompt = availability.Success
+                        ? equipment.Label + " · [R] REPARAR (" + def.RepairParts + " peças, " + def.RepairTime + " ações) · [E] Detalhes"
+                        : equipment.Label + " · " + availability.Message + " · [E] Detalhes";
+                }
                 else
                     CurrentPrompt = "[E] INSPECIONAR · " + equipment.Label;
             }
@@ -96,11 +103,18 @@ namespace AstroLab.Nicholas
             if (Keyboard.current == null) return;
             if (equipment && Keyboard.current.rKey.wasPressedThisFrame)
             {
-                MissionController.Instance.Repair(equipment.Equipment);
+                RepairAimed();
                 return;
             }
             if (equipment && Keyboard.current.eKey.wasPressedThisFrame)
                 overlay.OpenEquipment(equipment.Equipment, true);
+        }
+
+        public OperationResult RepairAimed()
+        {
+            if (!AimedEquipment || !AimedEquipment.isActiveAndEnabled)
+                return OperationResult.Fail("Mire em um equipamento próximo.");
+            return MissionController.Instance.Repair(AimedEquipment.Equipment);
         }
 
         private void CreateTutorialTerminal()

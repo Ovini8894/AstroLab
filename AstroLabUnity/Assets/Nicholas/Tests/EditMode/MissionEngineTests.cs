@@ -5,6 +5,36 @@ namespace AstroLab.Nicholas.Tests
 {
     public sealed class MissionEngineTests
     {
+        [Test] public void PrevisaoDoTurnoIncluiEventoSolarSemAlterarPartida()
+        {
+            MissionEngine game = new MissionEngine();
+            Assert.IsTrue(game.AdvanceTurn().Success);
+            int originalAir = game.State.HabitatAir;
+            int eventsBefore = game.State.History.Count;
+            MissionSnapshot preview = game.PreviewNextTurn();
+            Assert.AreEqual(originalAir - 30, preview.HabitatAir);
+            Assert.AreEqual(originalAir, game.State.HabitatAir);
+            Assert.AreEqual(eventsBefore, game.State.History.Count);
+            Assert.IsTrue(game.AdvanceTurn().Success);
+            Assert.AreEqual(preview.HabitatAir, game.State.HabitatAir);
+            Assert.AreEqual(preview.Food, game.State.Food);
+            Assert.AreEqual(preview.Water, game.State.Water);
+        }
+
+        [Test] public void PrevisaoRespeitaLimitesDeEstoqueEConsumoReal()
+        {
+            MissionEngine game = new MissionEngine();
+            game.StartEva(); game.Repair(EquipmentId.SolarPanels); game.FinishEva();
+            game.Repair(EquipmentId.LifeSupport); game.Repair(EquipmentId.Greenhouse);
+            game.SetPowered(EquipmentId.LifeSupport, true); game.SetPowered(EquipmentId.Greenhouse, true);
+            MissionSnapshot state = game.State; state.Food = 20; state.HabitatAir = 99;
+            game = MissionEngine.Restore(state);
+            var preview = game.PreviewNextTurn();
+            Assert.AreEqual(20, preview.Food);
+            Assert.AreEqual(100, preview.HabitatAir);
+            Assert.AreEqual(99, game.State.HabitatAir);
+        }
+
         [Test] public void ComecaComTresPontosDeEnergiaEComunicacaoLigada()
         {
             MissionEngine game = new MissionEngine();

@@ -50,11 +50,23 @@ namespace AstroLab.Capacete
                     new Vector2(.82f, .995f), new Vector2(.5f, 1), new Vector2(.18f, .995f),
                     new Vector2(.064f, .973f), new Vector2(.016f, .91f), new Vector2(0, .80f)
                 };
-                Path(vh, edge, 12, TemaCapacete.Alpha(TemaCapacete.Fundo, .28f), r, true);
-                Path(vh, edge, 1.2f, TemaCapacete.Alpha(color, .16f), r, true);
-                Line(vh, new Vector2(.26f, .979f), new Vector2(.41f, .964f), 1.2f, TemaCapacete.Alpha(color, .30f), r);
-                Line(vh, new Vector2(.59f, .964f), new Vector2(.74f, .979f), 1.2f, TemaCapacete.Alpha(color, .30f), r);
-                Line(vh, new Vector2(.49f, .976f), new Vector2(.51f, .976f), 1.8f, TemaCapacete.Alpha(color, .40f), r);
+                // A dark peripheral ring frames a smaller aperture; instruments remain inside it.
+                int ring=vh.currentVertCount;
+                for(int i=0;i<edge.Length;i++)
+                {
+                    var outer=P(i<=3?new Vector2(0,0):i==4?new Vector2(.5f,0):i<=8?new Vector2(1,0):i<=12?new Vector2(1,1):i==13?new Vector2(.5f,1):new Vector2(0,1),r);
+                    var inner=P(new Vector2(.045f+edge[i].x*.91f,.075f+edge[i].y*.85f),r);
+                    vh.AddVert(outer,TemaCapacete.Alpha(TemaCapacete.Fundo,.96f),Vector2.zero);
+                    vh.AddVert(inner,TemaCapacete.Alpha(TemaCapacete.Fundo,.90f),Vector2.zero);
+                }
+                for(int i=0;i<edge.Length;i++)
+                {
+                    int a=ring+i*2,b=ring+((i+1)%edge.Length)*2;
+                    vh.AddTriangle(a,b,a+1);vh.AddTriangle(a+1,b,b+1);
+                }
+                var aperture=new Vector2[edge.Length];
+                for(int i=0;i<edge.Length;i++)aperture[i]=new Vector2(.045f+edge[i].x*.91f,.075f+edge[i].y*.85f);
+                Path(vh,aperture,4,TemaCapacete.Alpha(color,.55f),r,true);
                 return;
             }
             if (forma == Forma.Mira)

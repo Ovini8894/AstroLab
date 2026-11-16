@@ -221,6 +221,14 @@ namespace AstroLab.Nicholas.Core
             return OperationResult.Ok(expected.ClueToNext);
         }
 
+        /// <summary>Calcula a previsão com as mesmas regras do turno, sem alterar a partida nem emitir seus eventos.</summary>
+        public MissionSnapshot PreviewNextTurn()
+        {
+            MissionEngine preview = new MissionEngine(State);
+            preview.AdvanceTurn();
+            return preview.State;
+        }
+
         public OperationResult AdvanceTurn()
         {
             if (state.Outcome != MissionOutcome.Running) return OperationResult.Fail("Missão encerrada.");

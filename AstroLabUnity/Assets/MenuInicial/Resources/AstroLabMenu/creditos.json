@@ -1,0 +1,47 @@
+{
+  "secoes": [
+    {
+      "titulo": "creditos.equipe",
+      "pessoas": [
+        {
+          "nome": "Vinicius Candido",
+          "funcao": "creditos.funcao.dev_modelador"
+        },
+        {
+          "nome": "Pedro Scalon",
+          "funcao": "creditos.funcao.dev"
+        },
+        {
+          "nome": "Pedro Henrique Gonçalves",
+          "funcao": "creditos.funcao.dev"
+        },
+        {
+          "nome": "Nicholas Prado",
+          "funcao": "creditos.funcao.dev"
+        }
+      ]
+    },
+    {
+      "titulo": "creditos.agradecimentos",
+      "pessoas": [
+        {
+          "nome": "Prof. Matheus Valente",
+          "funcao": "creditos.funcao.professor"
+        }
+      ]
+    },
+    {
+      "titulo": "creditos.recursos",
+      "pessoas": [
+        {
+          "nome": "NASA Visible Earth",
+          "funcao": "creditos.funcao.nasa"
+        },
+        {
+          "nome": "Google Fonts",
+          "funcao": "creditos.funcao.fontes"
+        }
+      ]
+    }
+  ]
+}

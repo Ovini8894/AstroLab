@@ -1,0 +1,236 @@
+{
+  "itens": [
+    {
+      "chave": "menu.subtitulo",
+      "texto": "Missão Base Lunar"
+    },
+    {
+      "chave": "menu.iniciar",
+      "texto": "Iniciar"
+    },
+    {
+      "chave": "menu.opcoes",
+      "texto": "Opções"
+    },
+    {
+      "chave": "menu.creditos",
+      "texto": "Créditos"
+    },
+    {
+      "chave": "menu.sair",
+      "texto": "Sair"
+    },
+    {
+      "chave": "menu.voltar",
+      "texto": "Voltar"
+    },
+    {
+      "chave": "menu.dica_voltar",
+      "texto": "[Esc] Voltar"
+    },
+    {
+      "chave": "menu.lancando",
+      "texto": "Lançamento iniciado..."
+    },
+    {
+      "chave": "menu.cena_ausente",
+      "texto": "A cena do jogo ainda não está pronta."
+    },
+    {
+      "chave": "menu.versao",
+      "texto": "Versão {0}"
+    },
+    {
+      "chave": "opcoes.titulo",
+      "texto": "Opções"
+    },
+    {
+      "chave": "opcoes.aba.graficos",
+      "texto": "Gráficos"
+    },
+    {
+      "chave": "opcoes.aba.audio",
+      "texto": "Áudio"
+    },
+    {
+      "chave": "opcoes.aba.controles",
+      "texto": "Controles"
+    },
+    {
+      "chave": "opcoes.aba.jogo",
+      "texto": "Jogo"
+    },
+    {
+      "chave": "opcoes.modo_tela",
+      "texto": "Modo de tela"
+    },
+    {
+      "chave": "opcoes.tela.cheia",
+      "texto": "Tela cheia"
+    },
+    {
+      "chave": "opcoes.tela.exclusiva",
+      "texto": "Tela cheia exclusiva"
+    },
+    {
+      "chave": "opcoes.tela.janela",
+      "texto": "Janela"
+    },
+    {
+      "chave": "opcoes.resolucao",
+      "texto": "Resolução"
+    },
+    {
+      "chave": "opcoes.resolucao.nativa",
+      "texto": "Nativa ({0})"
+    },
+    {
+      "chave": "opcoes.qualidade",
+      "texto": "Qualidade gráfica"
+    },
+    {
+      "chave": "qualidade.Mobile",
+      "texto": "Desempenho"
+    },
+    {
+      "chave": "qualidade.PC",
+      "texto": "Alta"
+    },
+    {
+      "chave": "opcoes.vsync",
+      "texto": "Sincronização vertical (VSync)"
+    },
+    {
+      "chave": "opcoes.limite_fps",
+      "texto": "Limite de FPS"
+    },
+    {
+      "chave": "opcoes.sem_limite",
+      "texto": "Sem limite"
+    },
+    {
+      "chave": "opcoes.antialiasing",
+      "texto": "Suavização de bordas"
+    },
+    {
+      "chave": "opcoes.brilho",
+      "texto": "Brilho"
+    },
+    {
+      "chave": "opcoes.desligado",
+      "texto": "Desligado"
+    },
+    {
+      "chave": "opcoes.ligado",
+      "texto": "Ligado"
+    },
+    {
+      "chave": "opcoes.volume_geral",
+      "texto": "Volume geral"
+    },
+    {
+      "chave": "opcoes.volume_musica",
+      "texto": "Música"
+    },
+    {
+      "chave": "opcoes.volume_efeitos",
+      "texto": "Efeitos sonoros"
+    },
+    {
+      "chave": "opcoes.sensibilidade",
+      "texto": "Sensibilidade do mouse"
+    },
+    {
+      "chave": "opcoes.inverter_y",
+      "texto": "Inverter eixo Y"
+    },
+    {
+      "chave": "opcoes.fov",
+      "texto": "Campo de visão"
+    },
+    {
+      "chave": "opcoes.teclas",
+      "texto": "Teclas"
+    },
+    {
+      "chave": "opcoes.idioma",
+      "texto": "Idioma"
+    },
+    {
+      "chave": "opcoes.mostrar_fps",
+      "texto": "Mostrar FPS"
+    },
+    {
+      "chave": "opcoes.restaurar",
+      "texto": "Restaurar padrão"
+    },
+    {
+      "chave": "tecla.mover",
+      "texto": "Mover"
+    },
+    {
+      "chave": "tecla.olhar",
+      "texto": "Olhar"
+    },
+    {
+      "chave": "tecla.correr",
+      "texto": "Correr"
+    },
+    {
+      "chave": "tecla.pular",
+      "texto": "Pular"
+    },
+    {
+      "chave": "tecla.interagir",
+      "texto": "Interagir"
+    },
+    {
+      "chave": "tecla.pausa",
+      "texto": "Pausar / menu"
+    },
+    {
+      "chave": "tecla.espaco",
+      "texto": "Espaço"
+    },
+    {
+      "chave": "tecla.mouse",
+      "texto": "Mouse"
+    },
+    {
+      "chave": "creditos.titulo",
+      "texto": "Créditos"
+    },
+    {
+      "chave": "creditos.equipe",
+      "texto": "Equipe"
+    },
+    {
+      "chave": "creditos.agradecimentos",
+      "texto": "Agradecimento especial"
+    },
+    {
+      "chave": "creditos.recursos",
+      "texto": "Recursos de terceiros"
+    },
+    {
+      "chave": "creditos.funcao.dev_modelador",
+      "texto": "Desenvolvedor e Modelador 3D"
+    },
+    {
+      "chave": "creditos.funcao.dev",
+      "texto": "Desenvolvedor"
+    },
+    {
+      "chave": "creditos.funcao.professor",
+      "texto": "Professor — Uniube"
+    },
+    {
+      "chave": "creditos.funcao.fontes",
+      "texto": "Fontes Orbitron e Exo 2 (SIL Open Font License)"
+    },
+    {
+      "chave": "creditos.funcao.nasa",
+      "texto": "Mapa da Terra baseado no NASA Blue Marble"
+    }
+  ]
+}

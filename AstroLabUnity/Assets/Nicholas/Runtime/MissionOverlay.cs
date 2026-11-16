@@ -273,9 +273,9 @@ namespace AstroLab.Nicholas
             MissionSnapshot s = mission.Engine.State;
             // O HUD do colega já mostra O2, bateria e objetivo. Evite desenhar tudo por cima.
             if (!teamHelmet || !teamHelmet.isActiveAndEnabled) DrawStatus(s);
-            if (Time.unscaledTime < feedbackTimeout)
+            if (!teamHelmet && Time.unscaledTime < feedbackTimeout)
                 GUI.Box(new Rect(340, 12, 595, 42), feedbackMessage);
-            DrawTutorialHud(s);
+            if (!teamHelmet) DrawTutorialHud(s);
             if (!IsModalOpen)
             {
                 // Se o HUD do capacete estiver ativo, ele já renderiza a interação na uGUI
@@ -624,6 +624,15 @@ namespace AstroLab.Nicholas
             EquipmentDefinition definition = MissionRuleSet.Find(id);
             GUILayout.Label(definition.DisplayName, heading);
             GUILayout.Label("Condição: " + (mission.Engine.IsRepaired(id) ? "REPARADO" : "AVARIADO"), body);
+            var knowledge = AstroLab.Gameplay.BaseKnowledgeCatalog.Find(id);
+            if (knowledge != null)
+            {
+                GUILayout.Label(knowledge.description, body);
+                GUILayout.Label("Diagnóstico inicial: " + knowledge.fault, subtitle);
+                GUILayout.Label("Manutenção: " + knowledge.repair, body);
+                GUILayout.Label("Depois da restauração: " + knowledge.benefit, subtitle);
+                GUILayout.Space(8);
+            }
             if (!repairInspectionFromWorld && !mission.Engine.IsRepaired(id))
                 GUILayout.Label("Consulta apenas informativa. Aproxime-se do equipamento (alvo identificado) e pressione E para habilitar o reparo.", subtitle);
             GUILayout.Label("Custo do reparo: " + definition.RepairParts + " peças (disponível: " + s.SpareParts + "), " +
@@ -725,8 +734,10 @@ namespace AstroLab.Nicholas
         private void DrawArtifact(MissionSnapshot s, ArtifactId id)
         {
             Apollo15Trail.Artifact item = Apollo15Trail.Find(id);
+            var catalog = AstroLab.Gameplay.BaseKnowledgeCatalog.Data;
+            var knowledge = catalog != null ? System.Array.Find(catalog.artifacts, a => a.id == id.ToString()) : null;
             GUILayout.Label(item.Name, heading);
-            GUILayout.Label(item.History, body);
+            GUILayout.Label(knowledge != null ? knowledge.description : item.History, body);
             GUILayout.Space(10);
             GUILayout.Label("Fonte histórica oficial: " + item.OfficialSource, subtitle);
             if (nasaRecord != null)

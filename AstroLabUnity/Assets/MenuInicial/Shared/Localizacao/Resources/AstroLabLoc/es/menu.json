@@ -1,0 +1,236 @@
+{
+  "itens": [
+    {
+      "chave": "menu.subtitulo",
+      "texto": "Misión Base Lunar"
+    },
+    {
+      "chave": "menu.iniciar",
+      "texto": "Iniciar"
+    },
+    {
+      "chave": "menu.opcoes",
+      "texto": "Opciones"
+    },
+    {
+      "chave": "menu.creditos",
+      "texto": "Créditos"
+    },
+    {
+      "chave": "menu.sair",
+      "texto": "Salir"
+    },
+    {
+      "chave": "menu.voltar",
+      "texto": "Volver"
+    },
+    {
+      "chave": "menu.dica_voltar",
+      "texto": "[Esc] Volver"
+    },
+    {
+      "chave": "menu.lancando",
+      "texto": "Lanzamiento iniciado..."
+    },
+    {
+      "chave": "menu.cena_ausente",
+      "texto": "La escena del juego aún no está lista."
+    },
+    {
+      "chave": "menu.versao",
+      "texto": "Versión {0}"
+    },
+    {
+      "chave": "opcoes.titulo",
+      "texto": "Opciones"
+    },
+    {
+      "chave": "opcoes.aba.graficos",
+      "texto": "Gráficos"
+    },
+    {
+      "chave": "opcoes.aba.audio",
+      "texto": "Audio"
+    },
+    {
+      "chave": "opcoes.aba.controles",
+      "texto": "Controles"
+    },
+    {
+      "chave": "opcoes.aba.jogo",
+      "texto": "Juego"
+    },
+    {
+      "chave": "opcoes.modo_tela",
+      "texto": "Modo de pantalla"
+    },
+    {
+      "chave": "opcoes.tela.cheia",
+      "texto": "Pantalla completa"
+    },
+    {
+      "chave": "opcoes.tela.exclusiva",
+      "texto": "Pantalla completa exclusiva"
+    },
+    {
+      "chave": "opcoes.tela.janela",
+      "texto": "Ventana"
+    },
+    {
+      "chave": "opcoes.resolucao",
+      "texto": "Resolución"
+    },
+    {
+      "chave": "opcoes.resolucao.nativa",
+      "texto": "Nativa ({0})"
+    },
+    {
+      "chave": "opcoes.qualidade",
+      "texto": "Calidad gráfica"
+    },
+    {
+      "chave": "qualidade.Mobile",
+      "texto": "Rendimiento"
+    },
+    {
+      "chave": "qualidade.PC",
+      "texto": "Alta"
+    },
+    {
+      "chave": "opcoes.vsync",
+      "texto": "Sincronización vertical (VSync)"
+    },
+    {
+      "chave": "opcoes.limite_fps",
+      "texto": "Límite de FPS"
+    },
+    {
+      "chave": "opcoes.sem_limite",
+      "texto": "Sin límite"
+    },
+    {
+      "chave": "opcoes.antialiasing",
+      "texto": "Suavizado de bordes"
+    },
+    {
+      "chave": "opcoes.brilho",
+      "texto": "Brillo"
+    },
+    {
+      "chave": "opcoes.desligado",
+      "texto": "Desactivado"
+    },
+    {
+      "chave": "opcoes.ligado",
+      "texto": "Activado"
+    },
+    {
+      "chave": "opcoes.volume_geral",
+      "texto": "Volumen general"
+    },
+    {
+      "chave": "opcoes.volume_musica",
+      "texto": "Música"
+    },
+    {
+      "chave": "opcoes.volume_efeitos",
+      "texto": "Efectos de sonido"
+    },
+    {
+      "chave": "opcoes.sensibilidade",
+      "texto": "Sensibilidad del ratón"
+    },
+    {
+      "chave": "opcoes.inverter_y",
+      "texto": "Invertir eje Y"
+    },
+    {
+      "chave": "opcoes.fov",
+      "texto": "Campo de visión"
+    },
+    {
+      "chave": "opcoes.teclas",
+      "texto": "Teclas"
+    },
+    {
+      "chave": "opcoes.idioma",
+      "texto": "Idioma"
+    },
+    {
+      "chave": "opcoes.mostrar_fps",
+      "texto": "Mostrar FPS"
+    },
+    {
+      "chave": "opcoes.restaurar",
+      "texto": "Restablecer"
+    },
+    {
+      "chave": "tecla.mover",
+      "texto": "Moverse"
+    },
+    {
+      "chave": "tecla.olhar",
+      "texto": "Mirar"
+    },
+    {
+      "chave": "tecla.correr",
+      "texto": "Correr"
+    },
+    {
+      "chave": "tecla.pular",
+      "texto": "Saltar"
+    },
+    {
+      "chave": "tecla.interagir",
+      "texto": "Interactuar"
+    },
+    {
+      "chave": "tecla.pausa",
+      "texto": "Pausa / menú"
+    },
+    {
+      "chave": "tecla.espaco",
+      "texto": "Espacio"
+    },
+    {
+      "chave": "tecla.mouse",
+      "texto": "Ratón"
+    },
+    {
+      "chave": "creditos.titulo",
+      "texto": "Créditos"
+    },
+    {
+      "chave": "creditos.equipe",
+      "texto": "Equipo"
+    },
+    {
+      "chave": "creditos.agradecimentos",
+      "texto": "Agradecimiento especial"
+    },
+    {
+      "chave": "creditos.recursos",
+      "texto": "Recursos de terceros"
+    },
+    {
+      "chave": "creditos.funcao.dev_modelador",
+      "texto": "Desarrollador y Modelador 3D"
+    },
+    {
+      "chave": "creditos.funcao.dev",
+      "texto": "Desarrollador"
+    },
+    {
+      "chave": "creditos.funcao.professor",
+      "texto": "Profesor — Uniube"
+    },
+    {
+      "chave": "creditos.funcao.fontes",
+      "texto": "Fuentes Orbitron y Exo 2 (SIL Open Font License)"
+    },
+    {
+      "chave": "creditos.funcao.nasa",
+      "texto": "Mapa de la Tierra basado en NASA Blue Marble"
+    }
+  ]
+}

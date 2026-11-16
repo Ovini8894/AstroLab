@@ -52,35 +52,56 @@ namespace AstroLab.PedroH
         [Range(0.10f, 0.40f)] public float proporcaoCurvaAproximacaoLua = 0.25f;
 
         [Header("Duração da Viagem (~2 Minutos)")]
-        [Tooltip("Duração alvo completa da viagem Terra -> Lua em segundos (120s = 2 minutos).")]
-        [Min(30f)] public float duracaoAlvoSegundos = 120f;
+        [Tooltip("Duração alvo completa da viagem Terra -> Lua em segundos.")]
+        [Min(30f)] public float duracaoAlvoSegundos = 105f;
 
-        [Tooltip("Limita variações de impulso para que a viagem dure aproximadamente 2 minutos.")]
-        public bool manterDuracaoAproximadaDoisMinutos = true;
+        [Tooltip("Limita variações de impulso para manter uma duração previsível perto do alvo.")]
+        public bool manterDuracaoAproximadaDoisMinutos = false;
 
-        [Range(0.6f, 1.0f)] public float multiplicadorMinimoRitmo = 0.88f;
-        [Range(1.0f, 1.5f)] public float multiplicadorMaximoRitmo = 1.14f;
+        [Range(0.6f, 1.0f)] public float multiplicadorMinimoRitmo = 0.85f;
+        [Range(1.0f, 1.8f)] public float multiplicadorMaximoRitmo = 1.55f;
 
-        [Header("Controle de Trajetória no Corredor Espacial")]
+        [Tooltip("Velocidade de rampa de aceleração longitudinal ao pressionar impulso.")]
+        [Range(0.5f, 8f)] public float velocidadeAceleracaoImpulso = 2.6f;
+
+        [Tooltip("Velocidade de desaceleração longitudinal por inércia ao soltar o impulso.")]
+        [Range(0.5f, 8f)] public float velocidadeDesaceleracaoImpulso = 1.3f;
+
+        [Header("Controle de Trajetória com Aceleração e Inércia")]
         [Tooltip("Amplitude lateral máxima (esquerda/direita) em metros no corredor de voo.")]
-        [Min(1f)] public float raioCorredorLateral = 28f;
+        [Min(1f)] public float raioCorredorLateral = 26f;
 
         [Tooltip("Amplitude vertical máxima (subir/descer na rota) em metros no corredor de voo.")]
-        [Min(1f)] public float raioCorredorVertical = 16f;
+        [Min(1f)] public float raioCorredorVertical = 14f;
 
-        [Tooltip("Velocidade de manobra lateral e vertical da nave ao mover os controles.")]
-        [Min(1f)] public float velocidadeManobraCorredor = 22f;
+        [Tooltip("Aceleração lateral da nave (m/s²) ao acionar esquerda/direita.")]
+        [Min(5f)] public float aceleracaoLateral = 54f;
 
-        [Tooltip("Retorna suavemente ao centro da rota quando a criança solta os controles.")]
-        public bool autoCentralizarSemEntrada = true;
+        [Tooltip("Aceleração vertical da nave (m/s²) ao acionar subir/descer.")]
+        [Min(5f)] public float aceleracaoVertical = 38f;
 
-        [Range(0f, 5f)] public float velocidadeRetornoAoCentro = 1.35f;
+        [Tooltip("Velocidade lateral máxima (m/s) dentro do corredor.")]
+        [Min(2f)] public float velocidadeMaximaLateral = 28f;
+
+        [Tooltip("Velocidade vertical máxima (m/s) dentro do corredor.")]
+        [Min(2f)] public float velocidadeMaximaVertical = 18f;
+
+        [Tooltip("Amortecimento por inércia espacial quando o jogador solta os comandos (menor = desliza mais).")]
+        [Range(0.5f, 8f)] public float amortecimentoSemEntrada = 2.4f;
+
+        [Tooltip("Amortecimento leve enquanto manobra, ajudando em curvas suaves e responsivas.")]
+        [Range(0.2f, 6f)] public float amortecimentoComEntrada = 1.5f;
+
+        [Tooltip("Retorna continuamente ao centro da rota mesmo sem entrada (desligado preserva o desvio feito pelo jogador).")]
+        public bool autoCentralizarSemEntrada = false;
+
+        [Range(0f, 5f)] public float velocidadeRetornoAoCentro = 0.8f;
 
         [Tooltip("Progresso normalizado em que o controle direcional começa a atuar após deixar a Terra.")]
-        [Range(0.02f, 0.20f)] public float inicioControleAposDecolagem = 0.06f;
+        [Range(0.01f, 0.15f)] public float inicioControleAposDecolagem = 0.03f;
 
         [Tooltip("Progresso normalizado em que a nave começa a se alinhar suavemente para chegar à Lua.")]
-        [Range(0.70f, 0.96f)] public float inicioAlinhamentoLunar = 0.84f;
+        [Range(0.75f, 0.96f)] public float inicioAlinhamentoLunar = 0.85f;
 
         [Header("Telemetria Real Terra-Lua (Somente Leitura)")]
         public float distanciaTerraLuaKm = 384400f;
@@ -90,7 +111,9 @@ namespace AstroLab.PedroH
         public float TempoRestanteEstimadoSegundos => Mathf.Max(0f, duracaoAlvoSegundos - TempoDecorridoSegundos);
         public float VelocidadeEscalarAtual { get; private set; }
         public float MultiplicadorRitmoAtual { get; private set; } = 1f;
+        public float FatorImpulsoAtual { get; private set; }
         public Vector2 DesvioCorredorMetros { get; private set; }
+        public Vector2 VelocidadeCorredorMetrosPorSeg { get; private set; }
         public Vector3 PosicaoAtualMundo { get; private set; }
         public Quaternion OrientacaoBaseMundo { get; private set; } = Quaternion.identity;
         public FaseViagemEspacial FaseAtual { get; private set; } = FaseViagemEspacial.ProntaNaTerra;
@@ -133,12 +156,25 @@ namespace AstroLab.PedroH
             TempoDecorridoSegundos = 0f;
             VelocidadeEscalarAtual = 0f;
             MultiplicadorRitmoAtual = 1f;
+            FatorImpulsoAtual = 0f;
             DesvioCorredorMetros = Vector2.zero;
+            VelocidadeCorredorMetrosPorSeg = Vector2.zero;
             FaseAtual = FaseViagemEspacial.ProntaNaTerra;
 
             AtualizarPontosControleCurva();
             PosicaoAtualMundo = pontoP0;
             OrientacaoBaseMundo = CalcularOrientacaoEstavelNaTrajetoria(0f, Vector2.zero);
+        }
+
+        /// <summary>
+        /// Aplica um impulso externo na velocidade lateral/vertical da nave (ex.: leve recuo ao encostar em asteroide).
+        /// </summary>
+        public void AplicarImpulsoExternoCorredor(Vector2 impulsoVel)
+        {
+            VelocidadeCorredorMetrosPorSeg += impulsoVel;
+            VelocidadeCorredorMetrosPorSeg = new Vector2(
+                Mathf.Clamp(VelocidadeCorredorMetrosPorSeg.x, -velocidadeMaximaLateral * 1.35f, velocidadeMaximaLateral * 1.35f),
+                Mathf.Clamp(VelocidadeCorredorMetrosPorSeg.y, -velocidadeMaximaVertical * 1.35f, velocidadeMaximaVertical * 1.35f));
         }
 
         /// <summary>
@@ -171,8 +207,8 @@ namespace AstroLab.PedroH
             AtualizarDesvioNaTrajetoria(entradaDirecao, Progresso01, deltaTime);
 
             PosicaoAtualMundo = AvaliarPosicaoNaCurvaComDesvio(Progresso01, DesvioCorredorMetros);
-            OrientacaoBaseMundo = CalcularOrientacaoEstavelNaTrajetoria(Progresso01, DesvioCorredorMetros);
             VelocidadeEscalarAtual = (PosicaoAtualMundo - posicaoAnterior).magnitude / deltaTime;
+            OrientacaoBaseMundo = CalcularOrientacaoEstavelNaTrajetoria(Progresso01, DesvioCorredorMetros);
 
             FaseAtual = AvaliarFasePorProgresso(Progresso01);
 
@@ -180,6 +216,8 @@ namespace AstroLab.PedroH
             {
                 Progresso01 = 1f;
                 DesvioCorredorMetros = Vector2.zero;
+                VelocidadeCorredorMetrosPorSeg = Vector2.zero;
+                FatorImpulsoAtual = 0f;
                 PosicaoAtualMundo = pontoP3;
                 EmViagem = false;
                 FaseAtual = FaseViagemEspacial.ChegouNaLua;
@@ -212,12 +250,12 @@ namespace AstroLab.PedroH
 
         /// <summary>
         /// Calcula o envelope [0..1] do corredor de manobra: zero na saída da Terra e na chegada à Lua,
-        /// liberado com amplitude total no trecho intermediário da viagem.
+        /// liberado rapidamente após a decolagem para resposta clara ao jogador.
         /// </summary>
         public float CalcularEnvelopeCorredor(float t)
         {
-            float inicio = Mathf.Clamp(inicioControleAposDecolagem, 0.01f, 0.30f);
-            float fimInicio = Mathf.Min(inicio + 0.12f, 0.45f);
+            float inicio = Mathf.Clamp(inicioControleAposDecolagem, 0.01f, 0.20f);
+            float fimInicio = Mathf.Min(inicio + 0.06f, 0.30f);
             float entrada = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(inicio, fimInicio, t));
 
             float alinhamento = Mathf.Clamp(inicioAlinhamentoLunar, 0.55f, 0.98f);
@@ -244,13 +282,13 @@ namespace AstroLab.PedroH
         }
 
         /// <summary>
-        /// Calcula uma rotação contínua e sem travamentos de eixo (gimbal) desde a subida vertical
-        /// na Terra até a aproximação horizontal/orbital da Lua.
+        /// Calcula uma rotação contínua e sem travamentos de eixo (gimbal) acompanhando tanto a
+        /// curvatura da rota quanto a direção real do vetor de velocidade lateral/vertical.
         /// </summary>
         public Quaternion CalcularOrientacaoEstavelNaTrajetoria(float t, Vector2 desvioMetros)
         {
             t = Mathf.Clamp01(t);
-            Vector3 direcao;
+            Vector3 direcaoBase;
 
             if (t < 0.975f)
             {
@@ -259,20 +297,33 @@ namespace AstroLab.PedroH
                 Vector3 posFrente = AvaliarPosicaoNaCurvaComDesvio(tFrente, desvioMetros);
                 Vector3 delta = posFrente - posAtual;
 
-                direcao = delta.sqrMagnitude > 0.0001f
+                direcaoBase = delta.sqrMagnitude > 0.0001f
                     ? delta.normalized
                     : AvaliarTangenteBezierCubica(pontoP0, pontoP1, pontoP2, pontoP3, t);
             }
             else
             {
-                direcao = AvaliarTangenteBezierCubica(pontoP0, pontoP1, pontoP2, pontoP3, t);
+                direcaoBase = AvaliarTangenteBezierCubica(pontoP0, pontoP1, pontoP2, pontoP3, t);
             }
 
-            if (direcao.sqrMagnitude < 0.0001f)
-                direcao = ObterDirecaoSubidaInicial();
+            if (direcaoBase.sqrMagnitude < 0.0001f)
+                direcaoBase = ObterDirecaoSubidaInicial();
 
-            CalcularBaseOrtonormal(direcao, out _, out Vector3 cimaEstavel);
-            return Quaternion.LookRotation(direcao.normalized, cimaEstavel);
+            CalcularBaseOrtonormal(direcaoBase, out Vector3 direitaEstavel, out Vector3 cimaEstavel);
+
+            // Soma a velocidade real do corredor espacial para apontar o nariz na direção efetiva do voo
+            float velFrenteRef = Mathf.Max(14f, VelocidadeEscalarAtual * 2.2f);
+            float envelope = CalcularEnvelopeCorredor(t);
+            Vector3 vetorVelocidadeReal = direcaoBase.normalized * velFrenteRef
+                                        + direitaEstavel * (VelocidadeCorredorMetrosPorSeg.x * envelope * 0.42f)
+                                        + cimaEstavel * (VelocidadeCorredorMetrosPorSeg.y * envelope * 0.42f);
+
+            Vector3 direcaoFinal = vetorVelocidadeReal.sqrMagnitude > 0.001f
+                ? vetorVelocidadeReal.normalized
+                : direcaoBase.normalized;
+
+            CalcularBaseOrtonormal(direcaoFinal, out _, out Vector3 cimaFinal);
+            return Quaternion.LookRotation(direcaoFinal, cimaFinal);
         }
 
         private float CalcularPassoProgresso(float ajusteRitmo, float deltaTime)
@@ -280,22 +331,28 @@ namespace AstroLab.PedroH
             float duracaoSegura = Mathf.Max(30f, duracaoAlvoSegundos);
             float taxaBase = 1f / duracaoSegura;
 
-            float mult = 1f;
-            if (ajusteRitmo > 0.01f)
-                mult = Mathf.Lerp(1f, multiplicadorMaximoRitmo, Mathf.Clamp01(ajusteRitmo));
-            else if (ajusteRitmo < -0.01f)
-                mult = Mathf.Lerp(1f, multiplicadorMinimoRitmo, Mathf.Clamp01(-ajusteRitmo));
+            float alvoImpulso = Mathf.Clamp(ajusteRitmo, -1f, 1f);
+            float taxaRampa = alvoImpulso > FatorImpulsoAtual
+                ? velocidadeAceleracaoImpulso
+                : velocidadeDesaceleracaoImpulso;
+            FatorImpulsoAtual = Mathf.MoveTowards(FatorImpulsoAtual, alvoImpulso, taxaRampa * deltaTime);
 
-            // Regulador gentil na reta final para encerrar fielmente por volta dos 2 minutos (120s)
-            if (manterDuracaoAproximadaDoisMinutos && Progresso01 > 0.80f && Progresso01 < 1f)
+            float mult = 1f;
+            if (FatorImpulsoAtual > 0.005f)
+                mult = Mathf.Lerp(1f, multiplicadorMaximoRitmo, Mathf.Clamp01(FatorImpulsoAtual));
+            else if (FatorImpulsoAtual < -0.005f)
+                mult = Mathf.Lerp(1f, multiplicadorMinimoRitmo, Mathf.Clamp01(-FatorImpulsoAtual));
+
+            // Regulador gentil opcional na reta final
+            if (manterDuracaoAproximadaDoisMinutos && Progresso01 > 0.85f && Progresso01 < 1f)
             {
                 float restanteAlvo = duracaoSegura - (TempoDecorridoSegundos - deltaTime);
                 if (restanteAlvo > 0.5f)
                 {
                     float taxaRegulada = (1f - Progresso01) / restanteAlvo;
-                    float multRegulado = Mathf.Clamp(taxaRegulada / taxaBase, 0.78f, 1.25f);
-                    float pesoConvergencia = Mathf.InverseLerp(0.80f, 0.95f, Progresso01);
-                    mult = Mathf.Lerp(mult, multRegulado, pesoConvergencia * 0.75f);
+                    float multRegulado = Mathf.Clamp(taxaRegulada / taxaBase, 0.82f, 1.35f);
+                    float pesoConvergencia = Mathf.InverseLerp(0.85f, 0.96f, Progresso01);
+                    mult = Mathf.Lerp(mult, multRegulado, pesoConvergencia * 0.65f);
                 }
             }
 
@@ -375,34 +432,58 @@ namespace AstroLab.PedroH
             float envelope = CalcularEnvelopeCorredor(t);
             if (envelope <= 0.001f)
             {
-                DesvioCorredorMetros = Vector2.MoveTowards(DesvioCorredorMetros, Vector2.zero, velocidadeManobraCorredor * deltaTime);
+                VelocidadeCorredorMetrosPorSeg = Vector2.Lerp(VelocidadeCorredorMetrosPorSeg, Vector2.zero, Mathf.Min(1f, deltaTime * 4f));
+                DesvioCorredorMetros = Vector2.MoveTowards(DesvioCorredorMetros, Vector2.zero, velocidadeMaximaLateral * deltaTime);
                 return;
             }
 
-            Vector2 atualizado = DesvioCorredorMetros + entrada * (velocidadeManobraCorredor * deltaTime);
+            Vector2 vel = VelocidadeCorredorMetrosPorSeg;
 
-            // Retorno gentil ao centro quando a criança solta os comandos naquele eixo
+            // Aceleração nos eixos X (lateral) e Y (vertical) baseada em massa/empuxo RCS
+            vel.x += entrada.x * aceleracaoLateral * deltaTime;
+            vel.y += entrada.y * aceleracaoVertical * deltaTime;
+
+            // Amortecimento espacial diferenciado: suave ao soltar para preservar inércia, levemente mais firme ao manobrar
+            float taxaArrastoX = Mathf.Abs(entrada.x) > 0.05f ? amortecimentoComEntrada : amortecimentoSemEntrada;
+            float taxaArrastoY = Mathf.Abs(entrada.y) > 0.05f ? amortecimentoComEntrada : amortecimentoSemEntrada;
+
+            vel.x *= Mathf.Exp(-taxaArrastoX * deltaTime);
+            vel.y *= Mathf.Exp(-taxaArrastoY * deltaTime);
+
             if (autoCentralizarSemEntrada)
             {
                 if (Mathf.Abs(entrada.x) < 0.05f)
-                    atualizado.x = Mathf.MoveTowards(atualizado.x, 0f, velocidadeRetornoAoCentro * velocidadeManobraCorredor * 0.25f * deltaTime);
-
+                    vel.x -= DesvioCorredorMetros.x * velocidadeRetornoAoCentro * 0.35f * deltaTime;
                 if (Mathf.Abs(entrada.y) < 0.05f)
-                    atualizado.y = Mathf.MoveTowards(atualizado.y, 0f, velocidadeRetornoAoCentro * velocidadeManobraCorredor * 0.25f * deltaTime);
+                    vel.y -= DesvioCorredorMetros.y * velocidadeRetornoAoCentro * 0.35f * deltaTime;
             }
 
-            // Limita dentro de uma elipse suave para evitar travar em cantos quadrados
-            Vector2 normalizado = new Vector2(
-                atualizado.x / Mathf.Max(0.1f, raioCorredorLateral),
-                atualizado.y / Mathf.Max(0.1f, raioCorredorVertical));
+            vel.x = Mathf.Clamp(vel.x, -velocidadeMaximaLateral, velocidadeMaximaLateral);
+            vel.y = Mathf.Clamp(vel.y, -velocidadeMaximaVertical, velocidadeMaximaVertical);
+
+            if (Mathf.Abs(entrada.x) < 0.02f && Mathf.Abs(vel.x) < 0.05f) vel.x = 0f;
+            if (Mathf.Abs(entrada.y) < 0.02f && Mathf.Abs(vel.y) < 0.05f) vel.y = 0f;
+
+            Vector2 atualizado = DesvioCorredorMetros + vel * deltaTime;
+
+            // Limita dentro da elipse do corredor zerando suavemente a componente radial de saída (sem rebote brusco)
+            float invLat = 1f / Mathf.Max(0.1f, raioCorredorLateral);
+            float invVert = 1f / Mathf.Max(0.1f, raioCorredorVertical);
+            Vector2 normalizado = new Vector2(atualizado.x * invLat, atualizado.y * invVert);
 
             if (normalizado.sqrMagnitude > 1f)
             {
                 normalizado.Normalize();
                 atualizado.x = normalizado.x * raioCorredorLateral;
                 atualizado.y = normalizado.y * raioCorredorVertical;
+
+                Vector2 normEspaco = new Vector2(normalizado.x * invLat, normalizado.y * invVert).normalized;
+                float projFora = Vector2.Dot(vel, normEspaco);
+                if (projFora > 0f)
+                    vel -= normEspaco * projFora;
             }
 
+            VelocidadeCorredorMetrosPorSeg = vel;
             DesvioCorredorMetros = atualizado;
         }
 

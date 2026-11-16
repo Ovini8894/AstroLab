@@ -4,42 +4,49 @@ using UnityEngine.InputSystem;
 namespace AstroLab.PedroH
 {
     /// <summary>
-    /// Lê e suaviza os controles de voo para que crianças conduzam a trajetória da nave
-    /// com conforto (teclado WASD/Setas, controle ou InputActionAsset do projeto).
+    /// Lê e suaviza os controles de voo para que a navegação espacial seja clara,
+    /// responsiva e intuitiva (WASD/Setas para conduzir, Shift/Espaço para impulso,
+    /// E/F para separação de estágios). Sem lógica de frenagem nesta cena.
     /// </summary>
     [DisallowMultipleComponent]
     public class ControleTrajetoriaJogador : MonoBehaviour
     {
+        public const string TextoResumoControles = "WASD / Setas: Navegar   •   Shift / Espaço: Impulso   •   E: Desacoplar estágio";
+
         [Header("Entrada do Projeto (Opcional)")]
         [Tooltip("InputActionAsset opcional (ex.: Assets/InputSystem_Actions.inputactions). Se vazio, lê teclado e controle diretamente.")]
         public InputActionAsset acoesInput;
 
-        [Header("Acessibilidade e Suavização Infantil")]
-        [Tooltip("Suaviza movimentos bruscos das teclas/analógico para curvas agradáveis.")]
-        [Range(1f, 20f)] public float suavizacaoEntrada = 6.5f;
+        [Header("Responsividade e Suavização")]
+        [Tooltip("Quão rápido o comando responde ao pressionar as teclas/analógico.")]
+        [Range(2f, 25f)] public float suavizacaoEntrada = 11f;
+
+        [Tooltip("Quão rápido a leitura de comando retorna a zero ao soltar (a inércia física fica na trajetória).")]
+        [Range(2f, 25f)] public float suavizacaoRetornoEntrada = 8.5f;
 
         [Tooltip("Zona morta para evitar desvios acidentais em controles analógicos.")]
         [Range(0f, 0.4f)] public float zonaMorta = 0.08f;
 
-        [Tooltip("Se true, W / Seta para cima sobe a nave (mais natural para o público infantil).")]
+        [Tooltip("Se verdadeiro, W / Seta para cima sobe a nave.")]
         public bool direcaoVerticalIntuitiva = true;
 
-        [Tooltip("Permite acelerar levemente com Espaço/Shift dentro do limite de duração de ~2 minutos.")]
+        [Tooltip("Permite acelerar o voo com Shift ou Espaço.")]
         public bool permitirImpulsoSuave = true;
 
         public Vector2 DirecaoBruta { get; private set; }
         public Vector2 DirecaoSuave { get; private set; }
         public float RitmoImpulsoSuave { get; private set; }
+        public bool ImpulsoAtivo { get; private set; }
         public bool TemEntradaDirecional { get; private set; }
         public bool AcaoSeparacaoPressionada { get; private set; }
-        public bool RetroFreioPressionado { get; private set; }
 
         private InputAction acaoMover;
         private InputAction acaoImpulso;
         private InputAction acaoInteragir;
+        private InputAction acaoPular;
         private Vector2 direcaoExterna;
         private bool separacaoExternaSolicitada;
-        private bool retroFreioExternoPressionado;
+        private bool impulsoExternoSolicitado;
 
         private void Awake()
         {
@@ -52,6 +59,7 @@ namespace AstroLab.PedroH
             acaoMover?.Enable();
             acaoImpulso?.Enable();
             acaoInteragir?.Enable();
+            acaoPular?.Enable();
         }
 
         private void OnDisable()
@@ -59,6 +67,7 @@ namespace AstroLab.PedroH
             acaoMover?.Disable();
             acaoImpulso?.Disable();
             acaoInteragir?.Disable();
+            acaoPular?.Disable();
             ZerarControles();
         }
 
@@ -80,14 +89,23 @@ namespace AstroLab.PedroH
             acaoMover = acoesInput.FindAction("Player/Move", false);
             acaoImpulso = acoesInput.FindAction("Player/Sprint", false);
             acaoInteragir = acoesInput.FindAction("Player/Interact", false);
+            acaoPular = acoesInput.FindAction("Player/Jump", false);
         }
 
         /// <summary>
-        /// Permite direcionar a nave via botões virtuais ou UI futura mantendo a mesma suavização infantil.
+        /// Permite direcionar a nave via botões virtuais ou UI futura mantendo a mesma suavização.
         /// </summary>
         public void DefinirDirecaoExterna(Vector2 direcao)
         {
             direcaoExterna = Vector2.ClampMagnitude(direcao, 1f);
+        }
+
+        /// <summary>
+        /// Permite acionar o impulso espacial por UI ou script externo.
+        /// </summary>
+        public void DefinirImpulsoExterno(bool ativo)
+        {
+            impulsoExternoSolicitado = ativo;
         }
 
         /// <summary>
@@ -99,15 +117,7 @@ namespace AstroLab.PedroH
         }
 
         /// <summary>
-        /// Controla o retro-freio lunar via botão segurável de UI ou comando externo.
-        /// </summary>
-        public void DefinirRetroFreioExterno(bool ativo)
-        {
-            retroFreioExternoPressionado = ativo;
-        }
-
-        /// <summary>
-        /// Atualiza leitura e suavização dos comandos direcionais, impulso, separação (Ideia 1) e retro-freio (Ideia 5).
+        /// Atualiza leitura e suavização dos comandos direcionais, impulso e separação de estágios.
         /// </summary>
         public void AtualizarLeituraControles(float deltaTime, bool controleHabilitado)
         {
@@ -117,8 +127,10 @@ namespace AstroLab.PedroH
             if (!controleHabilitado)
             {
                 AcaoSeparacaoPressionada = false;
-                RetroFreioPressionado = false;
+                ImpulsoAtivo = false;
                 separacaoExternaSolicitada = false;
+                impulsoExternoSolicitado = false;
+                direcaoExterna = Vector2.zero;
                 SuavizarParaZero(deltaTime);
                 return;
             }
@@ -133,36 +145,40 @@ namespace AstroLab.PedroH
             DirecaoBruta = entrada;
             TemEntradaDirecional = entrada.sqrMagnitude > 0.0001f;
 
-            float impulsoAlvo = LerAjusteRitmoBruto();
-            float fator = 1f - Mathf.Exp(-suavizacaoEntrada * deltaTime);
+            float taxaSuavizacao = TemEntradaDirecional ? suavizacaoEntrada : suavizacaoRetornoEntrada;
+            float fator = 1f - Mathf.Exp(-taxaSuavizacao * deltaTime);
 
             DirecaoSuave = Vector2.Lerp(DirecaoSuave, entrada, fator);
             if (!TemEntradaDirecional && DirecaoSuave.sqrMagnitude < 0.0001f)
                 DirecaoSuave = Vector2.zero;
 
-            RitmoImpulsoSuave = Mathf.Lerp(RitmoImpulsoSuave, impulsoAlvo, fator);
-            if (Mathf.Approximately(impulsoAlvo, 0f) && Mathf.Abs(RitmoImpulsoSuave) < 0.01f)
+            float impulsoAlvo = LerImpulsoBruto();
+            ImpulsoAtivo = impulsoAlvo > 0.5f;
+            float taxaImpulso = ImpulsoAtivo ? suavizacaoEntrada * 0.65f : suavizacaoRetornoEntrada * 0.5f;
+            float fatorImpulso = 1f - Mathf.Exp(-taxaImpulso * deltaTime);
+
+            RitmoImpulsoSuave = Mathf.Lerp(RitmoImpulsoSuave, impulsoAlvo, fatorImpulso);
+            if (!ImpulsoAtivo && Mathf.Abs(RitmoImpulsoSuave) < 0.005f)
                 RitmoImpulsoSuave = 0f;
 
             AcaoSeparacaoPressionada = LerAcaoSeparacaoNoFrame();
             separacaoExternaSolicitada = false;
-            RetroFreioPressionado = LerRetroFreioSegurado();
         }
 
         /// <summary>
-        /// Zera imediatamente todos os eixos, impulsos e comandos de minigames.
+        /// Zera imediatamente todos os eixos, impulso e comandos de estágio.
         /// </summary>
         public void ZerarControles()
         {
             DirecaoBruta = Vector2.zero;
             DirecaoSuave = Vector2.zero;
             RitmoImpulsoSuave = 0f;
+            ImpulsoAtivo = false;
             TemEntradaDirecional = false;
             AcaoSeparacaoPressionada = false;
-            RetroFreioPressionado = false;
             direcaoExterna = Vector2.zero;
             separacaoExternaSolicitada = false;
-            retroFreioExternoPressionado = false;
+            impulsoExternoSolicitado = false;
         }
 
         private void SuavizarParaZero(float deltaTime)
@@ -170,7 +186,7 @@ namespace AstroLab.PedroH
             DirecaoBruta = Vector2.zero;
             TemEntradaDirecional = false;
 
-            float fator = 1f - Mathf.Exp(-suavizacaoEntrada * deltaTime);
+            float fator = 1f - Mathf.Exp(-suavizacaoRetornoEntrada * deltaTime);
             DirecaoSuave = Vector2.Lerp(DirecaoSuave, Vector2.zero, fator);
             RitmoImpulsoSuave = Mathf.Lerp(RitmoImpulsoSuave, 0f, fator);
         }
@@ -213,28 +229,29 @@ namespace AstroLab.PedroH
             return Vector2.ClampMagnitude(leitura, 1f);
         }
 
-        private float LerAjusteRitmoBruto()
+        private float LerImpulsoBruto()
         {
             if (!permitirImpulsoSuave)
                 return 0f;
 
-            bool acelerar = acaoImpulso != null && acaoImpulso.IsPressed();
+            if (impulsoExternoSolicitado)
+                return 1f;
 
-            var kb = Keyboard.current;
-            if (kb != null)
+            if ((acaoImpulso != null && acaoImpulso.IsPressed()) ||
+                (acaoPular != null && acaoPular.IsPressed()))
             {
-                if (kb.leftShiftKey.isPressed)
-                    acelerar = true;
-
-                if (!acelerar && (kb.leftCtrlKey.isPressed || kb.cKey.isPressed))
-                    return -1f;
+                return 1f;
             }
 
-            var gamepad = Gamepad.current;
-            if (gamepad != null && gamepad.rightTrigger.isPressed)
-                acelerar = true;
+            var kb = Keyboard.current;
+            if (kb != null && (kb.leftShiftKey.isPressed || kb.rightShiftKey.isPressed || kb.spaceKey.isPressed))
+                return 1f;
 
-            return acelerar ? 1f : 0f;
+            var gamepad = Gamepad.current;
+            if (gamepad != null && (gamepad.rightTrigger.isPressed || gamepad.buttonSouth.isPressed))
+                return 1f;
+
+            return 0f;
         }
 
         private bool LerAcaoSeparacaoNoFrame()
@@ -251,22 +268,6 @@ namespace AstroLab.PedroH
 
             var gamepad = Gamepad.current;
             if (gamepad != null && gamepad.buttonNorth.wasPressedThisFrame)
-                return true;
-
-            return false;
-        }
-
-        private bool LerRetroFreioSegurado()
-        {
-            if (retroFreioExternoPressionado)
-                return true;
-
-            var kb = Keyboard.current;
-            if (kb != null && (kb.spaceKey.isPressed || kb.leftCtrlKey.isPressed || kb.cKey.isPressed))
-                return true;
-
-            var gamepad = Gamepad.current;
-            if (gamepad != null && (gamepad.leftTrigger.isPressed || gamepad.buttonSouth.isPressed))
                 return true;
 
             return false;

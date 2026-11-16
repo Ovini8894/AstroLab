@@ -13,14 +13,130 @@ namespace AstroLab.PedroH
         [Tooltip("Subobjeto 3D do estágio dentro do modelo do foguete (opcional até o modelo ficar pronto).")]
         public GameObject objetoEstagio;
 
+        [Tooltip("Subobjetos extras associados ao estágio (ex.: irmãos LOD _L1/_L2) ocultados na separação e restaurados conforme seu estado ativo inicial.")]
+        public GameObject[] objetosAdicionaisEstagio;
+
         [Tooltip("Direção local em que o estágio descartado se afasta ao ser separado.")]
         public Vector3 direcaoDescarteLocal = Vector3.back;
+
+        [Tooltip("Quando verdadeiro, interpreta direcaoDescarteLocal no referencial da nave (pivotVisualFoguete/raiz) em vez do Transform interno rotacionado do FBX.")]
+        public bool usarEspacoDaNaveParaDescarte = true;
 
         [Min(0.5f)] public float velocidadeAfastamento = 6f;
         [Range(0f, 120f)] public float velocidadeGiroDescarte = 22f;
         [Min(1f)] public float tempoVidaEstagioSolto = 8f;
 
         [HideInInspector] public bool jaSeparado;
+
+        [NonSerialized] private GameObject objetoEstagioCapturado;
+        [NonSerialized] private bool objetoEstagioAtivoInicial = true;
+        [NonSerialized] private GameObject[] adicionaisCapturadosRefs;
+        [NonSerialized] private bool[] adicionaisAtivosIniciais;
+
+        /// <summary>
+        /// Captura o estado ativo inicial de objetoEstagio e objetosAdicionaisEstagio na primeira
+        /// vez em que cada referência é vista, preservando irmãos LOD _L1/_L2 que iniciam desativados.
+        /// </summary>
+        public void CapturarEstadosIniciaisSeNecessario()
+        {
+            if (objetoEstagio != null && objetoEstagioCapturado != objetoEstagio)
+            {
+                objetoEstagioCapturado = objetoEstagio;
+                objetoEstagioAtivoInicial = objetoEstagio.activeSelf;
+            }
+            else if (objetoEstagio == null)
+            {
+                objetoEstagioCapturado = null;
+                objetoEstagioAtivoInicial = true;
+            }
+
+            if (objetosAdicionaisEstagio == null || objetosAdicionaisEstagio.Length == 0)
+            {
+                adicionaisCapturadosRefs = null;
+                adicionaisAtivosIniciais = null;
+                return;
+            }
+
+            int quantidade = objetosAdicionaisEstagio.Length;
+            if (adicionaisCapturadosRefs == null || adicionaisCapturadosRefs.Length != quantidade)
+            {
+                var novasRefs = new GameObject[quantidade];
+                var novosEstados = new bool[quantidade];
+                for (int i = 0; i < quantidade; i++)
+                {
+                    GameObject item = objetosAdicionaisEstagio[i];
+                    novasRefs[i] = item;
+                    int indiceAnterior = adicionaisCapturadosRefs != null && item != null
+                        ? Array.IndexOf(adicionaisCapturadosRefs, item)
+                        : -1;
+                    novosEstados[i] = indiceAnterior >= 0
+                        ? adicionaisAtivosIniciais[indiceAnterior]
+                        : (item != null && item.activeSelf);
+                }
+
+                adicionaisCapturadosRefs = novasRefs;
+                adicionaisAtivosIniciais = novosEstados;
+                return;
+            }
+
+            for (int i = 0; i < quantidade; i++)
+            {
+                GameObject item = objetosAdicionaisEstagio[i];
+                if (item != null && adicionaisCapturadosRefs[i] != item)
+                {
+                    adicionaisCapturadosRefs[i] = item;
+                    adicionaisAtivosIniciais[i] = item.activeSelf;
+                }
+                else if (item == null)
+                {
+                    adicionaisCapturadosRefs[i] = null;
+                    adicionaisAtivosIniciais[i] = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Restaura objetoEstagio e objetosAdicionaisEstagio de acordo com o estado ativo inicial capturado.
+        /// </summary>
+        public void RestaurarEstadosIniciais()
+        {
+            CapturarEstadosIniciaisSeNecessario();
+
+            if (objetoEstagio != null && objetoEstagio.activeSelf != objetoEstagioAtivoInicial)
+                objetoEstagio.SetActive(objetoEstagioAtivoInicial);
+
+            if (objetosAdicionaisEstagio == null)
+                return;
+
+            for (int i = 0; i < objetosAdicionaisEstagio.Length; i++)
+            {
+                GameObject item = objetosAdicionaisEstagio[i];
+                if (item == null) continue;
+
+                bool estadoAlvo = adicionaisAtivosIniciais != null && i < adicionaisAtivosIniciais.Length
+                    ? adicionaisAtivosIniciais[i]
+                    : item.activeSelf;
+
+                if (item.activeSelf != estadoAlvo)
+                    item.SetActive(estadoAlvo);
+            }
+        }
+
+        /// <summary>
+        /// Oculta os objetos adicionais configurados (ex.: irmãos LOD _L1/_L2) durante o desacoplamento.
+        /// </summary>
+        public void OcultarObjetosAdicionais()
+        {
+            if (objetosAdicionaisEstagio == null)
+                return;
+
+            for (int i = 0; i < objetosAdicionaisEstagio.Length; i++)
+            {
+                GameObject item = objetosAdicionaisEstagio[i];
+                if (item != null && item.activeSelf)
+                    item.SetActive(false);
+            }
+        }
     }
 
     [Serializable]
@@ -136,6 +252,8 @@ namespace AstroLab.PedroH
         {
             if (pivotVisualFoguete == null)
                 pivotVisualFoguete = transform;
+
+            CapturarEstadosIniciaisEstagios();
         }
 
         /// <summary>
@@ -152,8 +270,7 @@ namespace AstroLab.PedroH
                 {
                     if (estagios[i] == null) continue;
                     estagios[i].jaSeparado = false;
-                    if (estagios[i].objetoEstagio != null)
-                        estagios[i].objetoEstagio.SetActive(true);
+                    estagios[i].RestaurarEstadosIniciais();
                 }
             }
 
@@ -271,36 +388,112 @@ namespace AstroLab.PedroH
             }
         }
 
-        private void ExecutarDesacoplamentoVisualSeguro(EstagioFogueteConfig config)
+        private void CapturarEstadosIniciaisEstagios()
         {
-            if (config.objetoEstagio == null)
+            if (estagios == null)
                 return;
 
-            // Preserva o objeto original desativado dentro do prefab para que ReiniciarViagemDaTerra restaure sem perdas
+            for (int i = 0; i < estagios.Count; i++)
+            {
+                if (estagios[i] != null)
+                    estagios[i].CapturarEstadosIniciaisSeNecessario();
+            }
+        }
+
+        private Transform ObterReferencialDescarte(EstagioFogueteConfig config, Transform transformEstagio)
+        {
+            if (config != null && config.usarEspacoDaNaveParaDescarte)
+                return pivotVisualFoguete != null ? pivotVisualFoguete : transform;
+
+            return transformEstagio != null ? transformEstagio : transform;
+        }
+
+        private static Vector3 CalcularCentroVisualMundo(Transform raizEstagio)
+        {
+            if (raizEstagio == null)
+                return Vector3.zero;
+
+            Renderer[] renderers = raizEstagio.GetComponentsInChildren<Renderer>(true);
+            bool possuiBounds = false;
+            Bounds boundsCombinado = default;
+
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                Renderer r = renderers[i];
+                if (r == null || !r.enabled || !r.gameObject.activeInHierarchy || r is ParticleSystemRenderer)
+                    continue;
+
+                Bounds b = r.bounds;
+                if (b.size.sqrMagnitude <= 0.000001f)
+                    continue;
+
+                if (!possuiBounds)
+                {
+                    boundsCombinado = b;
+                    possuiBounds = true;
+                }
+                else
+                {
+                    boundsCombinado.Encapsulate(b);
+                }
+            }
+
+            return possuiBounds ? boundsCombinado.center : raizEstagio.position;
+        }
+
+        private void ExecutarDesacoplamentoVisualSeguro(EstagioFogueteConfig config)
+        {
+            if (config == null)
+                return;
+
+            InicializarReferenciaModelo();
+            config.CapturarEstadosIniciaisSeNecessario();
+
+            if (config.objetoEstagio == null)
+            {
+                config.OcultarObjetosAdicionais();
+                return;
+            }
+
+            Transform t = config.objetoEstagio.transform;
+
+            // Calcula o centro visual antes de desativar para que Renderer.bounds reflita a malha ativa no mundo
+            Vector3 centroVisual = CalcularCentroVisualMundo(t);
+
+            // Preserva o objeto original e seus irmãos LOD desativados dentro do prefab para restauração limpa
             config.objetoEstagio.SetActive(false);
+            config.OcultarObjetosAdicionais();
 
             if (!Application.isPlaying)
                 return;
 
-            Transform t = config.objetoEstagio.transform;
-            Vector3 direcaoMundo = t.TransformDirection(
-                config.direcaoDescarteLocal.sqrMagnitude > 0.001f
-                    ? config.direcaoDescarteLocal.normalized
-                    : Vector3.back);
+            Transform referencialDescarte = ObterReferencialDescarte(config, t);
+            Vector3 dirLocalSegura = config.direcaoDescarteLocal.sqrMagnitude > 0.001f
+                ? config.direcaoDescarteLocal.normalized
+                : Vector3.back;
+            Vector3 direcaoMundo = referencialDescarte.TransformDirection(dirLocalSegura);
 
-            GameObject copia = Instantiate(config.objetoEstagio, t.position, t.rotation);
-            copia.name = config.objetoEstagio.name + "_Separado";
-            LimparComponentesBloqueantesDaCopia(copia);
-            copia.SetActive(true);
+            // Pivô no centro visual real evita giro excêntrico em peças FBX cujo Transform fica distante da malha
+            GameObject pivotDeriva = new GameObject(config.objetoEstagio.name + "_Separado");
+            pivotDeriva.transform.SetPositionAndRotation(centroVisual, referencialDescarte.rotation);
 
-            var deriva = copia.AddComponent<EstagioDescartadoDeriva>();
+            GameObject copiaVisual = Instantiate(config.objetoEstagio, t.position, t.rotation);
+            copiaVisual.name = config.objetoEstagio.name + "_Visual";
+            // Preserva a escala mundial exata antes de parentear ao pivô (ex.: lossyScale = 25 em nó FBX 100 sob nave 0.25)
+            copiaVisual.transform.localScale = t.lossyScale;
+            copiaVisual.transform.SetParent(pivotDeriva.transform, true);
+
+            LimparComponentesBloqueantesDaCopia(copiaVisual);
+            copiaVisual.SetActive(true);
+
+            var deriva = pivotDeriva.AddComponent<EstagioDescartadoDeriva>();
             deriva.IniciarDeriva(direcaoMundo, config.velocidadeAfastamento, config.velocidadeGiroDescarte, config.tempoVidaEstagioSolto);
-            copiasEstagiosAtivas.Add(copia);
+            copiasEstagiosAtivas.Add(pivotDeriva);
         }
 
         private static void LimparComponentesBloqueantesDaCopia(GameObject copia)
         {
-            // Evita duplicar câmera, AudioListener ou controladores caso a arte tenha componentes extras
+            // Evita duplicar câmera, AudioListener, controladores, colisores ou luzes no estágio em deriva
             Camera[] cameras = copia.GetComponentsInChildren<Camera>(true);
             for (int i = 0; i < cameras.Length; i++)
                 Destroy(cameras[i]);
@@ -312,6 +505,14 @@ namespace AstroLab.PedroH
             FogueteModeloLogica[] logicas = copia.GetComponentsInChildren<FogueteModeloLogica>(true);
             for (int i = 0; i < logicas.Length; i++)
                 Destroy(logicas[i]);
+
+            Collider[] colisores = copia.GetComponentsInChildren<Collider>(true);
+            for (int i = 0; i < colisores.Length; i++)
+                Destroy(colisores[i]);
+
+            Light[] luzes = copia.GetComponentsInChildren<Light>(true);
+            for (int i = 0; i < luzes.Length; i++)
+                Destroy(luzes[i]);
         }
 
         private void LimparCopiasEstagiosEmDeriva()

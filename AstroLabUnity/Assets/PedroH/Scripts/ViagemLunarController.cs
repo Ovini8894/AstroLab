@@ -7,9 +7,8 @@ namespace AstroLab.PedroH
 {
     /// <summary>
     /// Controlador principal da lógica de gameplay da viagem espacial Terra -> Lua (~2 minutos).
-    /// Coordena entrada infantil, trajetória até a Lua, encaixe preparado para o futuro modelo 3D
-    /// do foguete (FogueteModeloLogica), os 3 minigames espaciais escolhidos (Estágios, RCS e
-    /// Retro-Freio Orbital) e oxigênio sempre em 100%, sem criar UI, modelos 3D ou cenas.
+    /// Coordena controles responsivos, trajetória com aceleração e inércia, encaixe do foguete,
+    /// separação de estágios, correções/asteroides na rota e oxigênio sempre em 100%.
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(TrajetoriaViagemLunar))]
@@ -23,12 +22,13 @@ namespace AstroLab.PedroH
         public TrajetoriaViagemLunar trajetoria;
         public ControleTrajetoriaJogador controleJogador;
         public EncaixeModeloFoguete encaixeFoguete;
+        public GerenciadorAsteroidesViagem gerenciadorAsteroides;
+        public CameraViagemEspacial cameraViagem;
 
-        [Header("Minigames Lógicos Integrados (Ideias 1, 3 e 5)")]
+        [Header("Minigames Lógicos Integrados (Estágios e RCS)")]
         public bool habilitarMinigamesLogicos = true;
         public MinigameSeparacaoEstagios minigameEstagios;
         public MinigameCorrecaoRcs minigameRcs;
-        public MinigameFreioOrbitalLunar minigameFreioOrbital;
 
         [Header("Fluxo da Subida e Viagem")]
         [Tooltip("Se verdadeiro, inicia a subida a partir da Terra automaticamente ao entrar em Play Mode.")]
@@ -67,6 +67,7 @@ namespace AstroLab.PedroH
 
         private bool viagemIniciada;
         private bool viagemConcluida;
+        private float tremorImpactoAsteroide01;
         private FaseViagemEspacial ultimaFaseNotificada = FaseViagemEspacial.ProntaNaTerra;
 
         private void Awake()
@@ -98,8 +99,8 @@ namespace AstroLab.PedroH
         }
 
         /// <summary>
-        /// Localiza todos os módulos de gameplay (incluindo os 3 minigames) e um HudCapacete
-        /// já existente na cena, sem criar UI, cenas ou modelos 3D.
+        /// Localiza os módulos de gameplay da viagem (trajetória, entrada, encaixe, estágios, RCS,
+        /// asteroides, câmera e HUD) sem adicionar lógica de frenagem.
         /// </summary>
         public void AutoVincularReferencias()
         {
@@ -116,15 +117,28 @@ namespace AstroLab.PedroH
             {
                 minigameEstagios = ResolverComponenteLocal(minigameEstagios, criarEmRuntime);
                 minigameRcs = ResolverComponenteLocal(minigameRcs, criarEmRuntime);
-                minigameFreioOrbital = ResolverComponenteLocal(minigameFreioOrbital, criarEmRuntime);
             }
+
+            if (gerenciadorAsteroides == null)
+                gerenciadorAsteroides = GetComponent<GerenciadorAsteroidesViagem>();
+
+            if (cameraViagem == null)
+                cameraViagem = GetComponentInChildren<CameraViagemEspacial>(true);
 
             if (hudCapaceteExistente == null && sincronizarHudExistente)
                 hudCapaceteExistente = UnityEngine.Object.FindAnyObjectByType<HudCapacete>();
         }
 
         /// <summary>
-        /// Prepara a nave parada no ponto inicial da Terra (0%), reinicia os 3 minigames e fixa O2 em 100%.
+        /// Dispara um curto tremor na nave quando ocorre um esbarrão leve em asteroide.
+        /// </summary>
+        public void NotificarImpactoAsteroideLeve()
+        {
+            tremorImpactoAsteroide01 = 1f;
+        }
+
+        /// <summary>
+        /// Prepara a nave parada no ponto inicial da Terra (0%), reinicia os minigames ativos e fixa O2 em 100%.
         /// </summary>
         public void PrepararNaTerra()
         {
@@ -132,6 +146,7 @@ namespace AstroLab.PedroH
 
             viagemIniciada = false;
             viagemConcluida = false;
+            tremorImpactoAsteroide01 = 0f;
             ultimaFaseNotificada = FaseViagemEspacial.ProntaNaTerra;
 
             if (controleJogador != null)
@@ -142,6 +157,9 @@ namespace AstroLab.PedroH
 
             ReiniciarTodosMinigames();
 
+            if (gerenciadorAsteroides != null)
+                gerenciadorAsteroides.ReiniciarAsteroides();
+
             if (trajetoria != null)
             {
                 trajetoria.PrepararInicioNaTerra();
@@ -150,6 +168,7 @@ namespace AstroLab.PedroH
                     encaixeFoguete.AplicarEstadoCompletoDaNave(
                         trajetoria.PosicaoAtualMundo,
                         trajetoria.OrientacaoBaseMundo,
+                        Vector2.zero,
                         Vector2.zero,
                         1f,
                         0f,
@@ -161,12 +180,15 @@ namespace AstroLab.PedroH
                 }
             }
 
+            if (cameraViagem != null)
+                cameraViagem.ResetarImediatamente();
+
             ManterOxigenioSempreCheio();
             AtualizarHudCapaceteExistente();
         }
 
         /// <summary>
-        /// Inicia a subida da nave a partir da Terra rumo à Lua com duração alvo aproximada de 2 minutos.
+        /// Inicia a subida da nave a partir da Terra rumo à Lua com duração aproximada de 2 minutos.
         /// </summary>
         public void IniciarViagem()
         {
@@ -174,6 +196,7 @@ namespace AstroLab.PedroH
 
             viagemIniciada = true;
             viagemConcluida = false;
+            tremorImpactoAsteroide01 = 0f;
 
             if (controleJogador != null)
                 controleJogador.ZerarControles();
@@ -183,6 +206,9 @@ namespace AstroLab.PedroH
 
             ReiniciarTodosMinigames();
 
+            if (gerenciadorAsteroides != null)
+                gerenciadorAsteroides.ReiniciarAsteroides();
+
             if (trajetoria != null)
             {
                 trajetoria.IniciarSubida();
@@ -191,6 +217,7 @@ namespace AstroLab.PedroH
                     encaixeFoguete.AplicarEstadoCompletoDaNave(
                         trajetoria.PosicaoAtualMundo,
                         trajetoria.OrientacaoBaseMundo,
+                        Vector2.zero,
                         Vector2.zero,
                         1f,
                         0f,
@@ -205,13 +232,16 @@ namespace AstroLab.PedroH
                 NotificarMudancaDeFase(FaseViagemEspacial.SubindoDaTerra);
             }
 
+            if (cameraViagem != null)
+                cameraViagem.ResetarImediatamente();
+
             ManterOxigenioSempreCheio();
             AtualizarHudCapaceteExistente();
         }
 
         /// <summary>
-        /// Executa um passo completo da viagem: leitura de controles, trajetória (~2 min),
-        /// atualização dos minigames 1/3/5, envio de estado para o modelo do foguete e oxigênio em 100%.
+        /// Executa um passo completo da viagem: leitura de controles, trajetória com inércia,
+        /// minigames de estágios e RCS, atualização dos asteroides e oxigênio sempre em 100%.
         /// </summary>
         public void PassoDeAtualizacao(float deltaTime)
         {
@@ -221,7 +251,6 @@ namespace AstroLab.PedroH
             Vector2 direcao = Vector2.zero;
             float impulso = 0f;
             bool acaoSeparacao = false;
-            bool retroFreioPressionado = false;
 
             if (controleJogador != null)
             {
@@ -230,35 +259,53 @@ namespace AstroLab.PedroH
                 direcao = controleJogador.DirecaoSuave;
                 impulso = controleJogador.RitmoImpulsoSuave;
                 acaoSeparacao = controleJogador.AcaoSeparacaoPressionada;
-                retroFreioPressionado = controleJogador.RetroFreioPressionado;
             }
 
             float bonusEstagio = minigameEstagios != null ? minigameEstagios.ImpulsoBonusAtual01 : 0f;
-            float freioOrbitalAtual = minigameFreioOrbital != null ? minigameFreioOrbital.IntensidadeRetroFreioAtual01 : 0f;
-            float ritmoCombinado = Mathf.Clamp(impulso + bonusEstagio - freioOrbitalAtual * 0.25f, -1f, 1f);
+            float ritmoCombinado = Mathf.Clamp(impulso + bonusEstagio, -1f, 1f);
 
             FaseViagemEspacial faseAtualizada = trajetoria.AvancarTrajetoria(direcao, ritmoCombinado, deltaTime);
 
             if (habilitarMinigamesLogicos)
-                AtualizarMinigamesDaFase(deltaTime, acaoSeparacao, retroFreioPressionado);
+                AtualizarMinigamesDaFase(deltaTime, acaoSeparacao);
+
+            if (gerenciadorAsteroides != null)
+            {
+                int colisoesAntes = gerenciadorAsteroides.TotalColisoesNaViagem;
+                gerenciadorAsteroides.AtualizarAsteroides(
+                    trajetoria.Progresso01,
+                    trajetoria.PosicaoAtualMundo,
+                    trajetoria.OrientacaoBaseMundo,
+                    deltaTime);
+
+                if (gerenciadorAsteroides.TotalColisoesNaViagem > colisoesAntes)
+                    NotificarImpactoAsteroideLeve();
+            }
+
+            tremorImpactoAsteroide01 = Mathf.MoveTowards(tremorImpactoAsteroide01, 0f, deltaTime * 1.4f);
+
+            float ritmoVisual = Mathf.Max(trajetoria.FatorImpulsoAtual, bonusEstagio * 0.7f);
 
             CalcularEstadoPropulsaoParaModelo(
                 faseAtualizada,
-                impulso + bonusEstagio,
+                ritmoVisual,
                 out float motorPrincipal01,
-                out float retroFreio01,
-                out float fatorGiroRetro01,
                 out float tremorExtra01);
+
+            Vector2 velNorm = new Vector2(
+                trajetoria.VelocidadeCorredorMetrosPorSeg.x / Mathf.Max(1f, trajetoria.velocidadeMaximaLateral),
+                trajetoria.VelocidadeCorredorMetrosPorSeg.y / Mathf.Max(1f, trajetoria.velocidadeMaximaVertical));
 
             encaixeFoguete.AplicarEstadoCompletoDaNave(
                 trajetoria.PosicaoAtualMundo,
                 trajetoria.OrientacaoBaseMundo,
                 direcao,
+                velNorm,
                 trajetoria.FatorSubidaAtmosferica,
-                ritmoCombinado,
+                ritmoVisual,
                 motorPrincipal01,
-                retroFreio01,
-                fatorGiroRetro01,
+                0f,
+                0f,
                 tremorExtra01,
                 deltaTime);
 
@@ -300,15 +347,12 @@ namespace AstroLab.PedroH
         }
 
         /// <summary>
-        /// Fachada para futuros botões seguráveis de UI acionarem o retro-freio lunar (Ideia 5).
+        /// Fachada para futuros botões de UI acionarem o impulso espacial.
         /// </summary>
-        public void DefinirRetroFreioPressionado(bool ativo)
+        public void DefinirImpulsoPressionado(bool ativo)
         {
             if (controleJogador != null)
-                controleJogador.DefinirRetroFreioExterno(ativo);
-
-            if (minigameFreioOrbital != null)
-                minigameFreioOrbital.DefinirFreioPressionadoExterno(ativo);
+                controleJogador.DefinirImpulsoExterno(ativo);
         }
 
         /// <summary>
@@ -345,12 +389,9 @@ namespace AstroLab.PedroH
 
             if (minigameRcs != null)
                 minigameRcs.ReiniciarMinigame();
-
-            if (minigameFreioOrbital != null)
-                minigameFreioOrbital.ReiniciarMinigame();
         }
 
-        private void AtualizarMinigamesDaFase(float deltaTime, bool acaoSeparacao, bool retroFreioPressionado)
+        private void AtualizarMinigamesDaFase(float deltaTime, bool acaoSeparacao)
         {
             FaseViagemEspacial fase = trajetoria.FaseAtual;
             float progresso = trajetoria.Progresso01;
@@ -374,28 +415,16 @@ namespace AstroLab.PedroH
                     trajetoria.DesvioCorredorMetros,
                     deltaTime);
             }
-
-            if (minigameFreioOrbital != null)
-            {
-                minigameFreioOrbital.AtualizarMinigame(
-                    fase,
-                    progresso,
-                    retroFreioPressionado,
-                    deltaTime);
-            }
         }
 
         private void CalcularEstadoPropulsaoParaModelo(
             FaseViagemEspacial fase,
             float impulsoCombinado,
             out float motorPrincipal01,
-            out float retroFreio01,
-            out float fatorGiroRetro01,
             out float tremorExtra01)
         {
-            retroFreio01 = minigameFreioOrbital != null ? minigameFreioOrbital.IntensidadeRetroFreioAtual01 : 0f;
-            fatorGiroRetro01 = minigameFreioOrbital != null ? minigameFreioOrbital.FatorGiroAtitudeRetro01 : 0f;
-            tremorExtra01 = minigameRcs != null ? minigameRcs.TremorImpactoAtual01 : 0f;
+            float tremorRcs = minigameRcs != null ? minigameRcs.TremorImpactoAtual01 : 0f;
+            tremorExtra01 = Mathf.Max(tremorRcs, tremorImpactoAsteroide01);
 
             switch (fase)
             {
@@ -403,10 +432,10 @@ namespace AstroLab.PedroH
                     motorPrincipal01 = Mathf.Clamp01(0.90f + Mathf.Max(0f, impulsoCombinado) * 0.15f);
                     break;
                 case FaseViagemEspacial.CruzeiroEspacial:
-                    motorPrincipal01 = Mathf.Clamp01(0.45f + Mathf.Max(0f, impulsoCombinado) * 0.40f);
+                    motorPrincipal01 = Mathf.Clamp01(0.45f + Mathf.Max(0f, impulsoCombinado) * 0.45f);
                     break;
                 case FaseViagemEspacial.AproximandoDaLua:
-                    motorPrincipal01 = Mathf.Clamp01(Mathf.Max((1f - fatorGiroRetro01) * 0.35f, retroFreio01));
+                    motorPrincipal01 = Mathf.Clamp01(0.45f + Mathf.Max(0f, impulsoCombinado) * 0.25f);
                     break;
                 default:
                     motorPrincipal01 = 0f;
@@ -469,9 +498,6 @@ namespace AstroLab.PedroH
 
             if (minigameRcs != null && minigameRcs.EstaAtivo && !string.IsNullOrEmpty(minigameRcs.InstrucaoAtual))
                 return minigameRcs.InstrucaoAtual;
-
-            if (minigameFreioOrbital != null && minigameFreioOrbital.EstaAtivo && !string.IsNullOrEmpty(minigameFreioOrbital.InstrucaoAtual))
-                return minigameFreioOrbital.InstrucaoAtual;
 
             switch (trajetoria.FaseAtual)
             {
